@@ -1,4 +1,4 @@
-package com.onlineShop.models;
+package com.onlineShop.models.Product;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,11 +6,11 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
 
 @Entity
-@Table(name="category")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Category {
     @Id
     @NonNull

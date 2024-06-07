@@ -1,5 +1,6 @@
-package com.onlineShop.models;
+package com.onlineShop.models.Product;
 
+import com.onlineShop.models.Feedback.Feedback;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -8,7 +9,6 @@ import org.springframework.lang.NonNull;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,9 +26,9 @@ public class Product {
     List<Feedback> feedbacks;
 
     @NonNull
-    @Column(name = "name_subcategory")
+    @Column(name = "name_category")
     @Length(min = 3, max = 100)
-    private String nameSubcategory;
+    private String nameCategory;
 
     @NonNull
     @Column(name = "title")

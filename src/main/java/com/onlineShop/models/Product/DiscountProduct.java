@@ -1,4 +1,4 @@
-package com.onlineShop.models;
+package com.onlineShop.models.Product;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -8,7 +8,6 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name="discount_product")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,6 +21,7 @@ public class DiscountProduct {
 
     @NonNull
     @ManyToOne(optional = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @Min(value = 1, message = "Minimal discount is 1%")
