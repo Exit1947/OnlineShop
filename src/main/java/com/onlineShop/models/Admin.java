@@ -23,4 +23,15 @@ public class Admin extends Person{
     @Column(name="phone")
     @Length(min = 10, max = 20, message = "Phone number must be between 10 and 20 characters")
     private String phoneNumber;
+
+    public Admin(@org.springframework.lang.NonNull String id, Role role,
+                 @org.springframework.lang.NonNull @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters") String login,
+                 @org.springframework.lang.NonNull String password, String firstName, String lastName,
+                 @NonNull String phoneNumber) {
+        super(id, role, login, password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+
 }

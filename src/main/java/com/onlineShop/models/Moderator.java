@@ -33,4 +33,18 @@ public class Moderator extends Person{
     @Column(name="street")
     @Length(min = 3, max = 100, message = "Street must be between 3 and 100 characters")
     private String street;
+
+    public Moderator(@org.springframework.lang.NonNull String id, Role role,
+                     @org.springframework.lang.NonNull @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters") String login,
+                     @org.springframework.lang.NonNull String password, String firstName, String lastName,
+                     @NonNull String phoneNumber,
+                     @NonNull String cityShop,
+                     @NonNull String street) {
+        super(id, role, login, password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.cityShop = cityShop;
+        this.street = street;
+    }
 }
