@@ -10,7 +10,6 @@ import org.springframework.lang.NonNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Category {
     @Id
     @NonNull
