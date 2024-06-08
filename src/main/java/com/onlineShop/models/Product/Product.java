@@ -38,4 +38,8 @@ public class Product {
     @Column(name = "discount")
     private boolean discount;
 
+    @NonNull
+    @Column(name = "thumbnail_name")
+    private String thumbnailName;
+
 }
