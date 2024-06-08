@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,5 +41,13 @@ public class Person {
     @NonNull
     @Column(name = "creation_date")
     private Date creationDate;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "person_privilege",
+            joinColumns = {@JoinColumn(name = "id_person")},
+            inverseJoinColumns = {@JoinColumn(name="id_privilege")}
+    )
+    private List<Privilege> privileges = new ArrayList<>();
 
 }

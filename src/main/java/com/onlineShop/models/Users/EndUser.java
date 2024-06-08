@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,8 +33,8 @@ public class EndUser extends Person {
 
     public EndUser(@NonNull String id, Role role,
                    @NonNull @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters") String login,
-                   @NonNull String password, String avatar, Date creationDate, String firstName, String lastName, String phoneNumber) {
-        super(id, role, login, password, avatar, creationDate);
+                   @NonNull String password, String avatar, Date creationDate, List<Privilege> privileges, String firstName, String lastName, String phoneNumber) {
+        super(id, role, login, password, avatar, creationDate, privileges);
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;

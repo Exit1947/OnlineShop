@@ -1,5 +1,6 @@
 package com.onlineShop.models.Users.Staff;
 
+import com.onlineShop.models.Users.Privilege;
 import com.onlineShop.models.Users.Role;
 import com.onlineShop.models.Users.Person;
 import jakarta.persistence.Column;
@@ -8,6 +9,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,9 +36,9 @@ public class Admin extends Person {
 
     public Admin(@org.springframework.lang.NonNull String id, Role role,
                  @org.springframework.lang.NonNull @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters") String login,
-                 @org.springframework.lang.NonNull String password, String avatar, Date creationDate, String firstName, String lastName,
+                 @org.springframework.lang.NonNull String password, String avatar, Date creationDate, List<Privilege> privileges, String firstName, String lastName,
                  @NonNull String phoneNumber) {
-        super(id, role, login, password, avatar, creationDate);
+        super(id, role, login, password, avatar, creationDate, privileges);
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
