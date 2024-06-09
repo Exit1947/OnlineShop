@@ -1,6 +1,5 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Users.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

@@ -5,9 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter

@@ -1,6 +1,5 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Users.Person;
 import jakarta.persistence.*;
 import lombok.*;
 

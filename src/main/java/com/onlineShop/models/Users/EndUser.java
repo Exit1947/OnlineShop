@@ -4,10 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.lang.NonNull;
-
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
