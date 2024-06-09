@@ -50,12 +50,4 @@ public class Person {
     @Column(name = "creation_date", nullable = false)
     private Date creationDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "person_privilege",
-            joinColumns = {@JoinColumn(name = "id_person")},
-            inverseJoinColumns = {@JoinColumn(name="id_privilege")}
-    )
-    private List<Privilege> privileges = new ArrayList<>();
-
 }

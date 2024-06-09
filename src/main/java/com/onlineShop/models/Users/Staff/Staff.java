@@ -1,12 +1,13 @@
 package com.onlineShop.models.Users.Staff;
 
 import com.onlineShop.models.Users.Person;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import com.onlineShop.models.Users.Privilege;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,5 +23,13 @@ public class Staff extends Person {
     @Column(name="last_name", nullable = false)
     @Length(min = 3, max = 50, message = "Lastname must be between 3 and 50 characters")
     private String lastName;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "person_privilege",
+            joinColumns = {@JoinColumn(name = "id_person")},
+            inverseJoinColumns = {@JoinColumn(name="id_privilege")}
+    )
+    private List<Privilege> privileges = new ArrayList<>();
 
 }
