@@ -13,7 +13,6 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class SalesRep extends Person {
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
