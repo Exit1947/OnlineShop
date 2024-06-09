@@ -1,5 +1,6 @@
-package com.onlineShop.models.Users;
+package com.onlineShop.models.Users.Staff;
 
+import com.onlineShop.models.Users.Person;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,6 @@ public class Privilege {
     private String textPrivilege;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "privileges")
-    private List<Person> persons = new ArrayList<>();
+    private List<Staff> staff = new ArrayList<>();
 
 }
