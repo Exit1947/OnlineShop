@@ -1,7 +1,5 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Users.Privilege;
-import com.onlineShop.models.Users.Role;
 import com.onlineShop.models.Users.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,15 +8,12 @@ import jakarta.persistence.ManyToOne;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Moderator extends Person {
+public class Moderator extends Staff {
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;

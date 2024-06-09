@@ -1,6 +1,5 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Users.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -13,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SalesRep extends Person {
+public class SalesRep extends Staff {
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;
