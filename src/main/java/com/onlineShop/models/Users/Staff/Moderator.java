@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Moderator extends Person {
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
@@ -50,17 +51,4 @@ public class Moderator extends Person {
     @JoinColumn(name = "id_admin")
     private Admin admin;
 
-    public Moderator(@org.springframework.lang.NonNull String id, Role role,
-                     @org.springframework.lang.NonNull @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters") String login,
-                     @org.springframework.lang.NonNull String password, String avatar, Date creationDate, List<Privilege> privileges, String firstName, String lastName,
-                     @NonNull String phoneNumber,
-                     @NonNull String cityShop,
-                     @NonNull String street) {
-        super(id, role, login, password, avatar, creationDate, privileges);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.cityShop = cityShop;
-        this.street = street;
-    }
 }

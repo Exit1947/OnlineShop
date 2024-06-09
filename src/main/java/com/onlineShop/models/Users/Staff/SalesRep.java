@@ -1,8 +1,6 @@
 package com.onlineShop.models.Users.Staff;
 
 import com.onlineShop.models.Users.Person;
-import com.onlineShop.models.Users.Privilege;
-import com.onlineShop.models.Users.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -51,4 +49,5 @@ public class SalesRep extends Person {
     @ManyToOne
     @JoinColumn(name = "id_admin")
     private Admin admin;
+
 }
