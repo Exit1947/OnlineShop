@@ -21,4 +21,7 @@ public class Category {
     @Length(min = 3, max = 100, message = "Name of category is either too short or exceeds the limit of 3 to 100 characters")
     private String name;
 
+    @NonNull
+    @Column(name="photo")
+    private String photo;
 }
