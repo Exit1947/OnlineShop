@@ -1,5 +1,6 @@
 package com.onlineShop.models.Users.Staff;
 
+import com.onlineShop.models.Company.Company;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -23,9 +24,9 @@ public class SalesRep extends Staff {
     @Length(min = 3, max = 100, message = "Street must be between 3 and 100 characters")
     private String street;
 
-    @Column(name="company", nullable = false)
-    @Length(min = 2, max = 50, message = "Company name must be between 3 and 50 characters")
-    private String companyName;
+    @ManyToOne
+    @JoinColumn(name="id_company", nullable = false)
+    private Company company;
 
     @ManyToOne
     @JoinColumn(name = "id_admin", nullable = false)
