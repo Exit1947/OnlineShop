@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +20,4 @@ public class Role {
     @Column(name="type")
     @Length(max = 50)
     private String type;
-
 }
