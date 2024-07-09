@@ -15,7 +15,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NonNull
     @Column(name="type")
     @Length(max = 50)
     private String type;

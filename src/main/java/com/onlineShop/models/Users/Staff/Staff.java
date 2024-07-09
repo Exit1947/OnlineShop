@@ -23,12 +23,4 @@ public class Staff extends Person {
     @Length(min = 3, max = 50, message = "Lastname must be between 3 and 50 characters")
     private String lastName;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "staff_privilege",
-            joinColumns = {@JoinColumn(name = "id_staff")},
-            inverseJoinColumns = {@JoinColumn(name="id_privilege")}
-    )
-    private List<Privilege> privileges = new ArrayList<>();
-
 }
