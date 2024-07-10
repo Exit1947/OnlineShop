@@ -1,6 +1,6 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Users.Person;
+import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.models.Shop.Shop;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Staff extends Person {
+public class Staff extends UserEntity {
     @NotBlank(message = "Firstname can't be empty")
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")

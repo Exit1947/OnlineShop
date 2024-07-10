@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person {
+public class UserEntity {
     @Id
     @NotBlank
     @Column(name = "id")

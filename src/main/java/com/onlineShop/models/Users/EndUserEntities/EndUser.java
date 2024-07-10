@@ -1,6 +1,6 @@
 package com.onlineShop.models.Users.EndUserEntities;
 
-import com.onlineShop.models.Users.Person;
+import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.models.Users.EndUserEntities.shoppingOrder.ShoppingOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EndUser extends Person {
+public class EndUser extends UserEntity {
     @NotBlank(message = "First name can't be empty")
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
