@@ -39,17 +39,17 @@ public class Feedback {
     @Max(value = 5, message = "Maximum count of stars is 5")
     private byte stars;
 
-    @NotBlank
+    @NotBlank(message = "Main comment can't be empty")
     @Column(name = "main_text")
     @Length(min = 3, max = 250, message = "Main comment must be between 3 and 250 characters")
     private String mainText;
 
-    @NotBlank
+    @NotBlank(message = "Advantages comment can't be empty")
     @Column(name = "advantages")
     @Length(min = 3, max = 100, message = "Advantages comment must be between 3 and 100 characters")
     private String advantages;
 
-    @NotBlank
+    @NotBlank(message = "Disadvantages comment can't be empty")
     @Column(name = "disadvantages")
     @Length(min = 3, max = 100, message = "Disadvantages comment must be between 3 and 100 characters")
     private String disadvantages;

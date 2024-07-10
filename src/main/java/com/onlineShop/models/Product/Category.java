@@ -15,9 +15,9 @@ public class Category {
     @Id
     @NotBlank
     @Column(name = "id")
-    private String id;
+    private long id;
 
-    @NotBlank
+    @NotBlank(message = "Name of category can't be empty")
     @Column(name="name")
     @Length(min = 3, max = 100, message = "Name of category is either too short or exceeds the limit of 3 to 100 characters")
     private String name;

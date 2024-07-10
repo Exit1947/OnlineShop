@@ -15,12 +15,12 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Moderator extends Staff {
-    @NotBlank
+    @NotBlank(message = "City of shop can't be empty")
     @Column(name="city_shop")
     @Length(min = 3, max = 100, message = "City shop must be between 3 and 100 characters")
     private String cityShop;
 
-    @NotBlank
+    @NotBlank(message = "Street can't be empty")
     @Column(name="street")
     @Length(min = 3, max = 100, message = "Street must be between 3 and 100 characters")
     private String street;

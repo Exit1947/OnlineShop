@@ -7,5 +7,4 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Admin extends Staff {}

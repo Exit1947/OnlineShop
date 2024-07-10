@@ -3,10 +3,7 @@ package com.onlineShop.models.Shop.Company;
 import com.onlineShop.models.Users.Staff.SalesRep;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,17 +15,19 @@ import java.util.List;
 @NoArgsConstructor
 public class Company {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "Name of company can't be empty")
     @Column(name = "name")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Image of company can't be empty")
     @Column(name = "image")
     private String image;
 
+    @NonNull
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private List<SalesRep> salesRepList = new ArrayList<>();
 }

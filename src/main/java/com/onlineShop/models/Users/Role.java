@@ -13,10 +13,10 @@ import org.hibernate.validator.constraints.Length;
 public class Role {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "Role type can't be empty")
     @Column(name = "type")
     @Length(max = 50)
     private String type;

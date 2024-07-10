@@ -19,4 +19,8 @@ public class Media {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name="id_product")
     private Product product;
+
+    @NotBlank
+    @Column(name="mediaName")
+    private String mediaName;
 }

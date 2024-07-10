@@ -13,16 +13,16 @@ import org.springframework.lang.NonNull;
 @NoArgsConstructor
 public class Sub_Subcategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "Name of sub_subcategory can't be empty")
     @Column(name="name_subcategory")
     @Length(max = 100)
     private String nameSubcategory;
 
-    @NotBlank
+    @NotBlank(message = "Name of subsubsubcategory can't be empty")
     @Column(name="name_subsubcategory")
     @Length(max = 100)
     private String nameSubSubcategory;

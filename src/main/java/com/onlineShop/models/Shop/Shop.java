@@ -19,14 +19,14 @@ import java.util.List;
 public class Shop {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    @NotBlank
+    @NotBlank(message = "City of shop can't be empty")
     @Column(name = "city")
     private String city;
 
-    @NotBlank
+    @NotBlank(message = "Street of shop can't be empty")
     @Column(name = "street")
     private String street;
 

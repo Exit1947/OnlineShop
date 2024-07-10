@@ -17,12 +17,12 @@ import java.util.List;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Staff extends Person {
-    @NotBlank
+    @NotBlank(message = "Firstname can't be empty")
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "Lastname can't be empty")
     @Column(name="last_name")
     @Length(min = 3, max = 50, message = "Lastname must be between 3 and 50 characters")
     private String lastName;

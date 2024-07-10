@@ -13,17 +13,17 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SalesRep extends Staff {
-    @NotBlank
+    @NotBlank(message = "City can't be empty")
     @Column(name="city_shop")
     @Length(min = 3, max = 100, message = "City shop must be between 3 and 100 characters")
     private String cityShop;
 
-    @NotBlank
+    @NotBlank(message = "Street can't be empty")
     @Column(name="street")
     @Length(min = 3, max = 100, message = "Street must be between 3 and 100 characters")
     private String street;
 
-    @NotNull
+    @NotNull(message = "Company can't be empty")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_company")
     private Company company;
