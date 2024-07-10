@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Company {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotBlank
