@@ -4,6 +4,8 @@ import com.onlineShop.models.Users.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
@@ -19,7 +21,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class Feedback {
     @Id
-    @NonNull
+    @NotBlank
     @Column(name = "id")
     private String id;
 
@@ -37,17 +39,17 @@ public class Feedback {
     @Max(value = 5, message = "Maximum count of stars is 5")
     private int stars;
 
-    @NonNull
+    @NotBlank
     @Column(name = "main_text")
     @Length(min = 3, max = 250, message = "Main comment must be between 3 and 250 characters")
     private String mainText;
 
-    @NonNull
+    @NotBlank
     @Column(name = "advantages")
     @Length(min = 3, max = 100, message = "Advantages comment must be between 3 and 100 characters")
     private String advantages;
 
-    @NonNull
+    @NotBlank
     @Column(name = "disadvantages")
     @Length(min = 3, max = 100, message = "Disadvantages comment must be between 3 and 100 characters")
     private String disadvantages;
