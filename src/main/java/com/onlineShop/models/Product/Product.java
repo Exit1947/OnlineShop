@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
     @Id
