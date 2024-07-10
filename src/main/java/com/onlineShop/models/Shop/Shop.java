@@ -1,4 +1,4 @@
-package com.onlineShop.models.shop;
+package com.onlineShop.models.Shop;
 
 import com.onlineShop.models.Users.Staff.Staff;
 import jakarta.persistence.*;
@@ -19,11 +19,15 @@ import java.util.List;
 public class Shop {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @NotBlank
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @NotBlank(message = "City of shop can't be empty")
+    @Column(name = "city")
     private String city;
-    @NotBlank
+
+    @NotBlank(message = "Street of shop can't be empty")
+    @Column(name = "street")
     private String street;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "shops")

@@ -1,7 +1,7 @@
-package com.onlineShop.models.Users.endUserEntities;
+package com.onlineShop.models.Users.EndUserEntities;
 
 import com.onlineShop.models.Users.Person;
-import com.onlineShop.models.Users.endUserEntities.shoppingOrder.ShoppingOrder;
+import com.onlineShop.models.Users.EndUserEntities.shoppingOrder.ShoppingOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EndUser extends Person {
-    @NotBlank
+    @NotBlank(message = "First name can't be empty")
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;

@@ -1,8 +1,9 @@
 package com.onlineShop.models.Users.Staff;
 
 import com.onlineShop.models.Users.Person;
-import com.onlineShop.models.shop.Shop;
+import com.onlineShop.models.Shop.Shop;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -16,11 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Staff extends Person {
-    @Column(name="first_name", nullable = false)
+    @NotBlank(message = "Firstname can't be empty")
+    @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;
 
-    @Column(name="last_name", nullable = false)
+    @NotBlank(message = "Lastname can't be empty")
+    @Column(name="last_name")
     @Length(min = 3, max = 50, message = "Lastname must be between 3 and 50 characters")
     private String lastName;
 

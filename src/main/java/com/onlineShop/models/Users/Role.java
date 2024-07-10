@@ -1,6 +1,7 @@
 package com.onlineShop.models.Users;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -12,11 +13,11 @@ import org.hibernate.validator.constraints.Length;
 public class Role {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    @NonNull
-    @Column(name="type")
+    @NotBlank(message = "Role type can't be empty")
+    @Column(name = "type")
     @Length(max = 50)
     private String type;
 

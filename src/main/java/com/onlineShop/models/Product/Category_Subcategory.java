@@ -1,6 +1,7 @@
 package com.onlineShop.models.Product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -12,14 +13,15 @@ import org.hibernate.validator.constraints.Length;
 public class Category_Subcategory {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
+    @NonNull
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_category")
     private Category category;
 
-    @NonNull
+    @NotBlank
     @Column(name="name_subcategory")
     @Length(max = 100)
     private String nameSubcategory;
