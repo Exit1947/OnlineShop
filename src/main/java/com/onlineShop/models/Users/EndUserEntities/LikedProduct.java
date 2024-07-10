@@ -1,4 +1,4 @@
-package com.onlineShop.models.Users.endUserEntities;
+package com.onlineShop.models.Users.EndUserEntities;
 
 import com.onlineShop.models.Product.Product;
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.onlineShop.models.shop;
+package com.onlineShop.models.Shop;
 
 import com.onlineShop.models.Users.Staff.Staff;
 import jakarta.persistence.*;

@@ -1,7 +1,7 @@
 package com.onlineShop.models.Users.Staff;
 
 import com.onlineShop.models.Users.Person;
-import com.onlineShop.models.shop.Shop;
+import com.onlineShop.models.Shop.Shop;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;

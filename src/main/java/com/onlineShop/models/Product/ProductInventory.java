@@ -1,6 +1,6 @@
 package com.onlineShop.models.Product;
 
-import com.onlineShop.models.shop.Shop;
+import com.onlineShop.models.Shop.Shop;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;

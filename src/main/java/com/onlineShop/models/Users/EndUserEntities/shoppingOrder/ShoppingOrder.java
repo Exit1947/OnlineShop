@@ -1,6 +1,6 @@
-package com.onlineShop.models.Users.endUserEntities.shoppingOrder;
+package com.onlineShop.models.Users.EndUserEntities.shoppingOrder;
 
-import com.onlineShop.models.Users.endUserEntities.EndUser;
+import com.onlineShop.models.Users.EndUserEntities.EndUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
