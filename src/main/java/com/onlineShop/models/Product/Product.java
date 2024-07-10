@@ -22,7 +22,6 @@ public class Product {
     @Column(name = "id")
     private String id;
 
-
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_product")
     List<Feedback> feedbacks;
@@ -42,6 +41,6 @@ public class Product {
 
     @NotBlank
     @Column(name = "thumbnail_name")
-    private String thumbnailName;
+    private String thumbnailImage;
 
 }
