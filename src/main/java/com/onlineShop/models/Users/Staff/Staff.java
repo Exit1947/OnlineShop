@@ -1,6 +1,7 @@
 package com.onlineShop.models.Users.Staff;
 
 import com.onlineShop.models.Users.Person;
+import com.onlineShop.models.shop.Shop;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -31,4 +32,11 @@ public class Staff extends Person {
     )
     private List<Privilege> privileges = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "staff_list",
+            joinColumns = {@JoinColumn(name = "id_staff")},
+            inverseJoinColumns = {@JoinColumn(name = "id_shop")}
+    )
+    private List<Shop> shops = new ArrayList<>();
 }
