@@ -21,9 +21,13 @@ public class Shop {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @NotBlank
+    @Column(name = "city")
     private String city;
+
     @NotBlank
+    @Column(name = "street")
     private String street;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "shops")
