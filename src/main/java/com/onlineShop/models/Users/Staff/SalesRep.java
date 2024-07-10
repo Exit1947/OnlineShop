@@ -1,10 +1,7 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Company.Company;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.onlineShop.models.shop.company.Company;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -24,11 +21,11 @@ public class SalesRep extends Staff {
     @Length(min = 3, max = 100, message = "Street must be between 3 and 100 characters")
     private String street;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_company", nullable = false)
     private Company company;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_admin", nullable = false)
     private Admin admin;
 
