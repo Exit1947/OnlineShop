@@ -1,10 +1,7 @@
 package com.onlineShop.models.shop;
 
 import com.onlineShop.models.Users.Staff.Staff;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Shop {
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank
     private String city;
