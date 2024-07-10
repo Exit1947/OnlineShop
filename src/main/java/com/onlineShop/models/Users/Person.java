@@ -1,6 +1,8 @@
 package com.onlineShop.models.Users;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
@@ -12,39 +14,42 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
-    @NonNull
+    @NotBlank
     @Column(name = "id")
     private String id;
 
+    @NotNull
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_role", nullable = false)
+    @JoinColumn(name = "id_role")
     private Role role;
 
-    @NonNull
-    @Column(name = "login", nullable = false)
+    @NotNull
+    @Column(name = "login")
     @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters")
     private String login;
 
-    @Column(name="email", nullable = false)
+    @NotBlank
+    @Column(name="email", unique = true)
     @Length(min = 3, max = 50, message = "Email number must be between 10 and 20 characters")
     private String email;
 
-    @Column(name="phone", nullable = false)
+    @NotBlank
+    @Column(name="phone")
     @Length(min = 3, max = 50, message = "Phone number must be between 10 and 20 characters")
     private String phoneNumber;
 
-    @NonNull
-    @Column(name = "password", nullable = false)
+    @NotBlank
+    @Column(name = "password")
     private String password;
 
+    @NotBlank
     @Column(name = "avatar")
     private String avatar;
 
-    @NonNull
+    @NotNull
     @Column(name = "creation_date", nullable = false)
     private Date creationDate;
 
