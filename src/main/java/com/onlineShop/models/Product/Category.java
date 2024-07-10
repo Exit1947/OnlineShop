@@ -1,6 +1,7 @@
 package com.onlineShop.models.Product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
@@ -12,16 +13,16 @@ import org.springframework.lang.NonNull;
 @NoArgsConstructor
 public class Category {
     @Id
-    @NonNull
+    @NotBlank
     @Column(name = "id")
     private String id;
 
-    @NonNull
+    @NotBlank
     @Column(name="name")
     @Length(min = 3, max = 100, message = "Name of category is either too short or exceeds the limit of 3 to 100 characters")
     private String name;
 
-    @NonNull
-    @Column(name="photo")
-    private String photo;
+    @NotBlank
+    @Column(name="image")
+    private String image;
 }
