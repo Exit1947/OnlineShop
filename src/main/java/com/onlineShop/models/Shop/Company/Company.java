@@ -18,10 +18,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Company {
     @Id
-    private int id;
+    private long id;
+
     @NotBlank
+    @Column(name = "name")
     private String name;
+
     @NotBlank
+    @Column(name = "image")
     private String image;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
