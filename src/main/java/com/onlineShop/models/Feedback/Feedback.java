@@ -37,7 +37,7 @@ public class Feedback {
     @Column(name = "stars")
     @Min(value = 0, message = "Minimal count of stars is 0")
     @Max(value = 5, message = "Maximum count of stars is 5")
-    private int stars;
+    private byte stars;
 
     @NotBlank
     @Column(name = "main_text")

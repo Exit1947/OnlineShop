@@ -17,11 +17,11 @@ public class DiscountProduct {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @NonNull
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "id_product")
     private Product product;
 
     @Min(value = 1, message = "Minimal discount is 1%")

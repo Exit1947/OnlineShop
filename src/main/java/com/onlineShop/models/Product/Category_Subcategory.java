@@ -14,7 +14,7 @@ public class Category_Subcategory {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @NonNull
     @ManyToOne(optional = false)
