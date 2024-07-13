@@ -23,7 +23,7 @@ public class Role {
     private int id;
 
     @Column(name = "type")
-//    @Length(max = 50)
+    @Length(max = 50)
     @Enumerated(EnumType.STRING)
     private RoleType type;
 }
