@@ -12,11 +12,10 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
+
     @Id
     @Column(name = "id")
     private String id;
@@ -52,4 +51,6 @@ public class Person {
     )
     private List<Privilege> privileges = new ArrayList<>();
 
+    public Person() {
+    }
 }

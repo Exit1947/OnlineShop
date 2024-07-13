@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EndUser extends Person {
+
     @Column(name="first_name", nullable = false)
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;
@@ -18,5 +19,4 @@ public class EndUser extends Person {
     @Column(name="last_name")
     @Length(min = 3, max = 50, message = "Lastname must be between 3 and 50 characters")
     private String lastName;
-
 }

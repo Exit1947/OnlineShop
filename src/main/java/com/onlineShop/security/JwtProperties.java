@@ -10,10 +10,13 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Configuration
 public class JwtProperties {
+
     @Value("${jwt.secret}")
     private String secret;
+
     @Value("${jwt.expiration-days-of-token}")
     private int expirationDaysOfToken;
+
     @Value("${service.name}")
     private String serviceName;
 }

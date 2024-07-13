@@ -17,12 +17,14 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class JwtIssuer {
+
     private final JwtProperties prop;
+
         public String issue(String userId, String email, Role role, List<? extends GrantedAuthority> authorities){
             return JWT.create()
                     .withSubject(userId)
                         .withClaim("email", email)
-                        .withClaim("role", role.getType())
+                        .withClaim("role", role.getType().name())
                         .withArrayClaim("authorities", authorities.stream().map(GrantedAuthority::getAuthority).toArray(String[]::new))
                     .withIssuedAt(new Date())
                     .withExpiresAt(Instant.now().plus(Duration.of(prop.getExpirationDaysOfToken(), ChronoUnit.DAYS)))

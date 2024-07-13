@@ -16,6 +16,7 @@ import java.util.List;
 @EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
+
     @Id
     @NonNull
     @Column(name = "id")
@@ -42,5 +43,4 @@ public class Product {
     @NonNull
     @Column(name = "thumbnail_name")
     private String thumbnailName;
-
 }

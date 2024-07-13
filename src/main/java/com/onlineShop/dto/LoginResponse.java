@@ -1,12 +1,15 @@
 package com.onlineShop.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-public class LoginResponse {
+public final class LoginResponse {
+
     private final String accessToken;
+
+    public LoginResponse(final String accessToken) {
+        this.accessToken = accessToken;
+    }
 }

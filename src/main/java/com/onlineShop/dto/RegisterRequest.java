@@ -12,6 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class RegisterRequest {
+
     @NotBlank(message = "Email is required option")
     @Length(min = 3, max = 50, message = "Email number must be between 10 and 20 characters")
     private String email;
@@ -31,6 +32,8 @@ public class RegisterRequest {
     @NotBlank(message = "Password field is required")
     @Column(name = "password")
     private String password;
+
+    @JsonIgnore
     private String avatar;
 
     @JsonIgnore

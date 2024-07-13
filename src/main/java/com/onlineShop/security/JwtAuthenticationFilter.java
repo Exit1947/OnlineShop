@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,12 +19,20 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
     private final JwtDecoder jwtDecoder;
     private final JwtToPrincipalConverter jwtToPrincipalConverter;
+
+    @Autowired
+    public JwtAuthenticationFilter(final JwtDecoder jwtDecoder, final JwtToPrincipalConverter jwtToPrincipalConverter) {
+        this.jwtDecoder = jwtDecoder;
+        this.jwtToPrincipalConverter = jwtToPrincipalConverter;
+    }
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
+                                    final FilterChain filterChain) throws ServletException, IOException {
         extractTokenFromRequest(request)
                 .map(jwtDecoder::decode)
                 .map(jwtToPrincipalConverter::convert)
@@ -34,10 +43,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
     }
 
-    private Optional<String> extractTokenFromRequest(HttpServletRequest request){
-        var token = request.getHeader("Authorization");
-        if(StringUtils.hasText(token) && token.startsWith("Bearer "))
+    private Optional<String> extractTokenFromRequest(final HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        if(token.startsWith("Bearer ") && StringUtils.hasText(token)) {
             return Optional.of(token.substring(7));
+        }
         return Optional.empty();
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.lang.NonNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LikedProduct {
+
     @Id
     @NonNull
     @Column(name = "id")

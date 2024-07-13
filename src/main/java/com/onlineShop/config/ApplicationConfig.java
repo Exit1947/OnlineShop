@@ -6,24 +6,31 @@ import com.onlineShop.repository.PrivilegeRepository;
 import com.onlineShop.service.PrivilegeService;
 import com.onlineShop.service.RoleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
 @Configuration
-@RequiredArgsConstructor
 public class ApplicationConfig {
+
     private final RoleService roleService;
     private final PrivilegeService privilegeService;
 
+    @Autowired
+    public ApplicationConfig(final RoleService roleService, final PrivilegeService privilegeService) {
+        this.roleService = roleService;
+        this.privilegeService = privilegeService;
+    }
+
     @Bean
-    public List<Role> roles(){
+    public List<Role> roles() {
         return roleService.getAll();
     }
 
     @Bean
-    public List<Privilege> privileges(){
+    public List<Privilege> privileges() {
         return privilegeService.getAll();
     }
 

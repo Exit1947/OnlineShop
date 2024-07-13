@@ -4,13 +4,15 @@ import com.onlineShop.dto.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
 import com.onlineShop.models.Users.Person;
 import com.onlineShop.security.UserPrincipal;
-import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@Component
 public class AuthConverter {
-    public EndUser requestToEndUser(RegisterRequest request){
+
+    private AuthConverter() {
+    }
+
+    public static EndUser toEndUser(final RegisterRequest request){
         EndUser endUser = new EndUser();
         endUser.setId(UUID.randomUUID().toString());
         endUser.setEmail(request.getEmail());
@@ -23,7 +25,7 @@ public class AuthConverter {
         return endUser;
     }
 
-    public UserPrincipal personToUserPrincipal(Person person){
+    public static UserPrincipal personToUserPrincipal(final Person person){
         return UserPrincipal.builder()
                 .userId(person.getId())
                 .email(person.getEmail())
