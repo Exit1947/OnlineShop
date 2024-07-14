@@ -33,9 +33,9 @@ public class RegisterRequest {
     @Column(name = "password")
     private String password;
 
-    @JsonIgnore
     private String avatar;
 
     @JsonIgnore
-    private final Date creationDate = new Date();
+    private Date creationDate = new Date();
+
 }

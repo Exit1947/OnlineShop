@@ -1,12 +1,10 @@
 package com.onlineShop.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.onlineShop.models.Users.Role;
+import com.onlineShop.models.Users.RolePrivilege.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -66,4 +64,5 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

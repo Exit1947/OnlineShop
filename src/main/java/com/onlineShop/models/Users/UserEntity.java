@@ -1,5 +1,7 @@
 package com.onlineShop.models.Users;
 
+import com.onlineShop.models.Users.RolePrivilege.Privilege;
+import com.onlineShop.models.Users.RolePrivilege.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -14,7 +16,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person {
+public class UserEntity {
 
     @Id
     @Column(name = "id")
@@ -51,6 +53,6 @@ public class Person {
     )
     private List<Privilege> privileges = new ArrayList<>();
 
-    public Person() {
+    public UserEntity() {
     }
 }

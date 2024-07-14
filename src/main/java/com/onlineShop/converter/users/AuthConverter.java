@@ -2,15 +2,12 @@ package com.onlineShop.converter.users;
 
 import com.onlineShop.dto.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
-import com.onlineShop.models.Users.Person;
+import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.security.UserPrincipal;
 
 import java.util.UUID;
 
 public class AuthConverter {
-
-    private AuthConverter() {
-    }
 
     public static EndUser toEndUser(final RegisterRequest request){
         EndUser endUser = new EndUser();
@@ -25,7 +22,7 @@ public class AuthConverter {
         return endUser;
     }
 
-    public static UserPrincipal personToUserPrincipal(final Person person){
+    public static UserPrincipal personToUserPrincipal(final UserEntity person){
         return UserPrincipal.builder()
                 .userId(person.getId())
                 .email(person.getEmail())
@@ -34,4 +31,5 @@ public class AuthConverter {
                 .password(person.getPassword())
                 .build();
     }
+
 }

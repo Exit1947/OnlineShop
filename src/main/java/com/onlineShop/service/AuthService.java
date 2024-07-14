@@ -5,10 +5,8 @@ import com.onlineShop.dto.LoginRequest;
 import com.onlineShop.dto.LoginResponse;
 import com.onlineShop.dto.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
-import com.onlineShop.models.Users.Role;
-import com.onlineShop.preload.PrivilegeRolePreload;
+import com.onlineShop.models.Users.RolePrivilege.RolePrivilegeConfig;
 import com.onlineShop.security.JwtIssuer;
-import com.onlineShop.security.RoleType;
 import com.onlineShop.security.UserPrincipal;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +22,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
+    private final RolePrivilegeConfig rolePrivilegeConfig;
     private final PersonService personService;
     private final PasswordEncoder passwordEncoder;
-    private final PrivilegeRolePreload privilegeRolePreload;
     private final AuthenticationManager authenticationManager;
     private final JwtIssuer jwtIssuer;
 
@@ -36,8 +34,8 @@ public class AuthService {
             EndUser endUser = AuthConverter.toEndUser(request);
 
             endUser.setPassword(passwordEncoder.encode(request.getPassword()));
-            endUser.setRole(new Role(RoleType.USER));
-            endUser.setPrivileges(privilegeRolePreload.getBasePrivilegesForRegistration());
+            endUser.setRole(rolePrivilegeConfig.END_USER);
+            endUser.setPrivileges(rolePrivilegeConfig.baseRegisterPrivilege);
 
             personService.save(endUser);
 
@@ -54,4 +52,5 @@ public class AuthService {
         String issue = jwtIssuer.issue(user.getUserId(), user.getEmail(), user.getRole(), user.getAuthorities());
         return ResponseEntity.ok(new LoginResponse(issue));
     }
+
 }

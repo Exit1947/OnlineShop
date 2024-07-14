@@ -1,8 +1,9 @@
-package com.onlineShop.models.Users;
+package com.onlineShop.models.Users.RolePrivilege;
 
-import com.onlineShop.models.Users.Staff.Staff;
+import com.onlineShop.models.Users.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
@@ -20,14 +21,16 @@ public class Privilege implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "privilege_text")
-    private String textPrivilege;
+    @Column(name = "type", unique = true)
+    @Enumerated(EnumType.STRING)
+    private PrivilegeType type;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "privileges")
-    private List<Person> users = new ArrayList<>();
+    private List<UserEntity> users = new ArrayList<>();
 
     @Override
     public String getAuthority() {
-        return textPrivilege;
+        return type.name();
     }
+
 }

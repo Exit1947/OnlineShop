@@ -1,9 +1,8 @@
 package com.onlineShop.service;
 
-import com.onlineShop.models.Users.Role;
+import com.onlineShop.models.Users.RolePrivilege.Role;
 import com.onlineShop.repository.RoleRepository;
-import com.onlineShop.security.RoleType;
-import lombok.RequiredArgsConstructor;
+import com.onlineShop.models.Users.RolePrivilege.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +30,5 @@ public class RoleService {
     public List<Role> getAll() {
         return roleRepository.findAll();
     }
+
 }

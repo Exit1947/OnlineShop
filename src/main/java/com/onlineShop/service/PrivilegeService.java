@@ -1,8 +1,7 @@
 package com.onlineShop.service;
 
-import com.onlineShop.models.Users.Privilege;
+import com.onlineShop.models.Users.RolePrivilege.Privilege;
 import com.onlineShop.repository.PrivilegeRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +22,12 @@ public class PrivilegeService {
         return privilegeRepository.findById(id);
     }
 
-    public Optional<Privilege> findByText(final String textPrivilege) {
-        return privilegeRepository.findByTextPrivilege(textPrivilege);
+    public Optional<Privilege> findByText(final String type) {
+        return privilegeRepository.findByType(type);
     }
 
     public List<Privilege> getAll(){
         return privilegeRepository.findAll();
     }
+
 }

@@ -2,7 +2,6 @@ package com.onlineShop.dto;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -18,4 +17,5 @@ public class LoginRequest {
     @NotBlank(message = "Password is required option")
     @Column(name = "password")
     public String password;
+
 }

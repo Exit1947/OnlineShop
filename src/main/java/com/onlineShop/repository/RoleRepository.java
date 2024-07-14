@@ -1,7 +1,7 @@
 package com.onlineShop.repository;
 
-import com.onlineShop.models.Users.Role;
-import com.onlineShop.security.RoleType;
+import com.onlineShop.models.Users.RolePrivilege.Role;
+import com.onlineShop.models.Users.RolePrivilege.RoleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,7 @@
 package com.onlineShop.service;
 
-import com.onlineShop.models.Users.Person;
+import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.repository.PersonRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +17,20 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Optional<Person> findById(final String id) {
+    public Optional<UserEntity> findById(final String id) {
         return personRepository.findById(id);
     }
 
-    public Optional<Person> findByEmail(final String email) {
+    public Optional<UserEntity> findByEmail(final String email) {
         return personRepository.findByEmail(email);
     }
 
-    public void save(final Person person) {
-        personRepository.save(person);
+    public void save(final UserEntity userEntity) {
+        personRepository.save(userEntity);
     }
 
     public boolean existsByEmail(String email) {
         return personRepository.existsByEmail(email);
     }
+
 }

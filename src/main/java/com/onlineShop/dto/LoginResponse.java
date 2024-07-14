@@ -12,4 +12,5 @@ public final class LoginResponse {
     public LoginResponse(final String accessToken) {
         this.accessToken = accessToken;
     }
+
 }

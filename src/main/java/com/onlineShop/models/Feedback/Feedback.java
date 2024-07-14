@@ -1,6 +1,6 @@
 package com.onlineShop.models.Feedback;
 
-import com.onlineShop.models.Users.Person;
+import com.onlineShop.models.Users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -26,7 +26,7 @@ public class Feedback {
     @NonNull
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_user")
-    private Person person;
+    private UserEntity userEntity;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_parent_comment")

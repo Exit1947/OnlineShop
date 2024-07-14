@@ -1,6 +1,5 @@
-package com.onlineShop.models.Users;
+package com.onlineShop.models.Users.RolePrivilege;
 
-import com.onlineShop.security.RoleType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -22,8 +21,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "type")
-    @Length(max = 50)
+    @Column(name = "type", unique = true)
     @Enumerated(EnumType.STRING)
     private RoleType type;
+
 }

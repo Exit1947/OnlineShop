@@ -1,12 +1,9 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Users.Person;
+import com.onlineShop.models.Users.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -14,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Staff extends Person {
+public class Staff extends UserEntity {
     @Column(name="first_name", nullable = false)
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;
