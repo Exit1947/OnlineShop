@@ -1,4 +1,4 @@
-package com.onlineShop.models.Users;
+package com.onlineShop.models.Users.RolePrivilege;
 
 import jakarta.persistence.*;
 import lombok.*;

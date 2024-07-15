@@ -1,5 +1,6 @@
-package com.onlineShop.models.Users;
+package com.onlineShop.models.Users.RolePrivilege;
 
+import com.onlineShop.models.Users.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
