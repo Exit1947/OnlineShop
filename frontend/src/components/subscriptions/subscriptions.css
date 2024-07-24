@@ -1,0 +1,113 @@
+.subscriptions-wrapper {
+    width: 1430px; /* Ширина блоку */
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+  
+  .subscriptions-header {
+    display: flex;
+    justify-content: flex-start; /* Вирівнювання вліво */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .subscriptions-header h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: 40px; /* Відстань між заголовком і категоріями */
+  }
+  
+  .subscriptions-categories {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+  }
+  
+  .subscriptions-categories span {
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .subscriptions-categories span:hover {
+    color: lightgray; 
+  }
+  
+  .subscriptions-container {
+    display: flex;
+    justify-content: center; /* Центрування блоків підписок */
+    gap: 20px; 
+  }
+  
+  .subscription-item {
+    width: 400px; 
+    height: 250px; 
+    border-radius: 15px; /* Заокруглені кути */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subscription-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px; /* Заокруглені кути */
+  }
+  
+  .subscription-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+  }
+  
+  .subscription-icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .subscription-icon img {
+    width: 90px;
+    height: 37px;
+    object-fit: cover;
+    margin-top: 5px; /* Відстань між іконкою та текстом */
+  }
+  
+  .subscription-content p {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  .subscription-duration {
+    font-weight: bold;
+  }
+  
+  .subscription-duration span {
+    color: #f39c12;
+  }
+  
+  .subscription-button {
+    background: transparent;
+    border: 2px solid #f39c12;
+    color: #f39c12;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    align-self: flex-end;
+  }
+  
+  .subscription-button:hover {
+    background: #f39c12;
+    color: black;
+  }
+  
