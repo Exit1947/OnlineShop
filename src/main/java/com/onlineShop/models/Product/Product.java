@@ -3,9 +3,11 @@ package com.onlineShop.models.Product;
 import com.onlineShop.models.Feedback.Feedback;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.lang.NonNull;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
+
     @Id
     @NotBlank
     @Column(name = "id")

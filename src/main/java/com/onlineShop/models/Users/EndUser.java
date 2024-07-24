@@ -1,10 +1,12 @@
-package com.onlineShop.models.Users.EndUserEntities;
+package com.onlineShop.models.Users;
 
-import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.models.Users.EndUserEntities.shoppingOrder.ShoppingOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EndUser extends UserEntity {
+
     @NotBlank(message = "First name can't be empty")
     @Column(name="first_name")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
@@ -28,4 +31,5 @@ public class EndUser extends UserEntity {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_end_user")
     private List<ShoppingOrder> shoppingOrders = new ArrayList<>();
+
 }

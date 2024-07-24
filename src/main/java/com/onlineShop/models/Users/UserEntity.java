@@ -1,13 +1,20 @@
 package com.onlineShop.models.Users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.onlineShop.models.Users.RolePrivilege.Privilege;
+import com.onlineShop.models.Users.RolePrivilege.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,6 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UserEntity {
+
     @Id
     @NotBlank
     @Column(name = "id")
@@ -26,10 +34,9 @@ public class UserEntity {
     @JoinColumn(name = "id_role")
     private Role role;
 
-    @NotNull
-    @Column(name = "login")
+    @Column(name = "login", unique = true)
     @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters")
-    private String login;
+    private String login = "login";
 
     @NotBlank
     @Column(name="email", unique = true)
@@ -53,5 +60,13 @@ public class UserEntity {
     @NotNull
     @Column(name = "creation_date", nullable = false)
     private Date creationDate;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "person_privilege",
+            joinColumns = {@JoinColumn(name = "id_person")},
+            inverseJoinColumns = {@JoinColumn(name="id_privilege")}
+    )
+    private List<Privilege> privileges = new ArrayList<>();
 
 }

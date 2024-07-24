@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Feedback {
+
     @Id
     @NotBlank
     @Column(name = "id")
@@ -28,6 +29,7 @@ public class Feedback {
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_user")
     private UserEntity user;
+
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_parent_comment")
