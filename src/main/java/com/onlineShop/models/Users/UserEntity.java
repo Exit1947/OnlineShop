@@ -36,7 +36,7 @@ public class UserEntity {
 
     @Column(name = "login", unique = true)
     @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters")
-    private String login = "login";
+    private String login;
 
     @NotBlank
     @Column(name="email", unique = true)
