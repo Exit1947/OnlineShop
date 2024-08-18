@@ -1,3 +1,4 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Aftermenu from "./components/aftermenu/Aftermenu.jsx";
 import Header from "./components/header/Header.jsx";
 import Dropdown from "./components/dropmenu/Dropdown.jsx";
@@ -11,6 +12,26 @@ import Banner from "./components/banner/Banner.jsx";
 import SingleRowProductList from './components/singlerowproductlist/SingleRowProductList.jsx'
 import Subscriptions from './components/subscriptions/Subscriptions.jsx'
 import Footer from './components/footer/Footer.jsx'
+import HomePage from './pages/HomePage.tsx';
+import Login from './components/auth/Login.tsx';
+import AuthPage from './pages/AuthPage.tsx';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <HomePage />
+    },
+    {
+        path: '/auth',
+        element: <AuthPage />,
+        children: [
+            {
+                path: 'login',
+                element: <Login />
+            }
+        ]
+    }
+]);
 
 function App() {
   const project = '';
@@ -18,24 +39,24 @@ function App() {
   return (
     <div className="App">
      <h1>{project}</h1>
-     <Header/>
-     <Aftermenu/> 
-     <Dropdown/>
-     <LanguageDropdown/>
-     <CurrencyDropdown/>
-     <PosterSlider/>
-     <Carousel/>
-     <CustomPoster/>
-   <ProductList/>
-   <Banner/>
-   <SingleRowProductList/>
-   <Subscriptions/>
-   <Footer/>
 
-    
+        <RouterProvider router={router} />
+
+        <Header/>
+        <Aftermenu/>
+        <Dropdown/>
+        <LanguageDropdown/>
+        <CurrencyDropdown/>
+        <PosterSlider/>
+        <Carousel/>
+        <CustomPoster/>
+        <ProductList/>
+        <Banner/>
+        <SingleRowProductList/>
+        <Subscriptions/>
+        <Footer/>
     </div>
   );
-  
 }
 
 export default App;
