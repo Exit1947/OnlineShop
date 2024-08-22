@@ -1,0 +1,163 @@
+.form-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    width: 25%;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    position: relative;
+}
+
+.sidebar h2 {
+    margin-bottom: 10px;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    position: relative;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+    cursor: pointer;
+    color: black;
+}
+
+.sidebar ul li.active {
+    font-weight: bold;
+}
+
+.highlight {
+    width: 3px;
+    height: 30px;
+    background-color: orange;
+    position: absolute;
+    margin-top: 100px;
+    left: -1px;
+    top: 0;
+    transition: top 0.2s ease;
+}
+
+.content {
+    width: 75%;
+    padding: 20px;
+    position: relative;
+}
+
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    position: relative;
+}
+
+.user-profile-header {
+    margin-right: 20px;
+    flex-grow: 1;
+}
+
+.progress-bar {
+    width: 366px;
+    height: 8px;
+    background-color: #ddd;
+    position: relative;
+    border-radius: 4px;
+}
+
+.progress {
+    height: 100%;
+    background-color: orange;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-percentage {
+    color: black;
+    font-weight: bold;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-input {
+    width: 320px;
+    height: 40px;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:hover,
+.form-input:focus {
+    border-color: orange;
+}
+
+.date-of-birth,
+.address {
+    display: flex;
+    gap: 10px;
+}
+
+.date-of-birth:hover .form-input,
+.date-of-birth.focused .form-input,
+.address:hover .form-input,
+.address.focused .form-input {
+    border-color: orange; /* Всі поля разом світяться при наведенні та фокусі */
+}
+
+.small-input {
+    width: 100px;
+    height: 38px;
+}
+
+.next-button,
+.back-button {
+    width: 141px;
+    height: 51px;
+    background-color: orange;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+.back-button {
+    background-color: white;
+    border: 1px solid orange;
+}
+
+.profile-image-container {
+    position: absolute;
+    right: 0;
+    top: 20px;
+}
+
+.profile-image-container img {
+    width: 500px;
+    height: 500px;
+}
+
+.select-input {
+    appearance: none;
+    background: url('./../../img/chevron_right.png') no-repeat right 10px center;
+    background-size: 12px 12px;
+    padding-right: 20px;
+}
