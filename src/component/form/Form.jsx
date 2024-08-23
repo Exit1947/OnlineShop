@@ -9,22 +9,29 @@ const Form = () => {
     const [activeStep, setActiveStep] = useState(1);
     const [progress, setProgress] = useState(0);
 
+    const updateProgress = (step) => {
+        const newProgress = (step - 1) * 33;
+        setProgress(Math.min(newProgress, 100)); // Максимум 100%
+    };
+
     const handleStepClick = (step) => {
         setActiveStep(step);
-        setProgress((step - 1) * 33);
+        updateProgress(step);
     };
 
     const handleNextClick = () => {
         if (activeStep < 4) {
-            setActiveStep(activeStep + 1);
-            setProgress(Math.min((activeStep + 1) * 33, 100)); 
+            const nextStep = activeStep + 1;
+            setActiveStep(nextStep);
+            updateProgress(nextStep);
         }
     };
 
     const handleBackClick = () => {
         if (activeStep > 1) {
-            setActiveStep(activeStep - 1);
-            setProgress(Math.max((activeStep - 1) * 33, 0)); 
+            const prevStep = activeStep - 1;
+            setActiveStep(prevStep);
+            updateProgress(prevStep);
         }
     };
 
@@ -39,7 +46,7 @@ const Form = () => {
                     <li onClick={() => handleStepClick(3)} className={activeStep === 3 ? 'active' : ''}>Bank Information</li>
                     <li onClick={() => handleStepClick(4)} className={activeStep === 4 ? 'active' : ''}>Finish</li>
                 </ul>
-                <div className="highlight" style={{ top: `${(activeStep - 1) * 50}px` }}></div> {}
+                <div className="highlight" style={{ top: `${(activeStep - 1) * 50}px` }}></div>
             </div>
             <div className="content">
                 <div className="progress-bar-container">
@@ -47,72 +54,74 @@ const Form = () => {
                     <div className="progress-bar">
                         <div className="progress" style={{ width: `${progress}%` }}></div>
                     </div>
-                    <span className="progress-percentage">{Math.round(progress)}%</span> {}
+                    <span className="progress-percentage">{Math.round(progress)}%</span>
                 </div>
                 {activeStep === 1 && (
                     <div className="form-fields">
+                        <label className="form-label">Full name</label>
                         <input
                             type="text"
-                            placeholder="Full name"
                             className="form-input"
                             onFocus={(e) => e.target.classList.add('focused')}
                             onBlur={(e) => e.target.classList.remove('focused')}
                         />
+                        <label className="form-label">Email</label>
                         <input
                             type="email"
-                            placeholder="Email"
                             className="form-input"
                             onFocus={(e) => e.target.classList.add('focused')}
                             onBlur={(e) => e.target.classList.remove('focused')}
                         />
+                        <label className="form-label">Phone Number</label>
                         <input
                             type="text"
-                            placeholder="Phone Number"
                             className="form-input"
                             onFocus={(e) => e.target.classList.add('focused')}
                             onBlur={(e) => e.target.classList.remove('focused')}
                         />
+                        <label className="form-label">Date of Birth</label>
                         <div className="date-of-birth" onFocus={(e) => e.currentTarget.classList.add('focused')} onBlur={(e) => e.currentTarget.classList.remove('focused')}>
                             <select className="form-input small-input select-input">
                                 <option value="">Day</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
-                                {/* Інші дні */}
                             </select>
                             <select className="form-input small-input select-input">
                                 <option value="">Month</option>
                                 <option value="1">January</option>
                                 <option value="2">February</option>
-                                {/* Інші місяці */}
                             </select>
                             <select className="form-input small-input select-input">
                                 <option value="">Year</option>
                                 <option value="2000">2000</option>
                                 <option value="2001">2001</option>
-                                {/* Інші роки */}
                             </select>
                         </div>
-                        <button className="next-button" onClick={handleNextClick}>Next</button>
+                        <div className="buttons-container">
+                            <button className="next-button" onClick={handleNextClick}>Next</button>
+                        </div>
                     </div>
                 )}
                 {activeStep === 2 && (
                     <div className="form-fields">
+                        <label className="form-label">Country</label>
                         <select className="form-input select-input">
                             <option value="">Country</option>
                             <option value="US">United States</option>
                             <option value="UK">United Kingdom</option>
                             <option value="UA">Ukraine</option>
                         </select>
+                        <label className="form-label">Region</label>
                         <input
                             type="text"
-                            placeholder="Region"
                             className="form-input"
                         />
+                        <label className="form-label">Settlement</label>
                         <input
                             type="text"
-                            placeholder="Settlement"
                             className="form-input"
                         />
+                        <label className="form-label">Address</label>
                         <div className="address" onFocus={(e) => e.currentTarget.classList.add('focused')} onBlur={(e) => e.currentTarget.classList.remove('focused')}>
                             <select className="form-input small-input select-input">
                                 <option value="">Street</option>

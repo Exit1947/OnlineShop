@@ -46,7 +46,7 @@
     margin-top: 100px;
     left: -1px;
     top: 0;
-    transition: top 0.2s ease;
+    transition: top 0.3s ease;
 }
 
 .content {
@@ -93,13 +93,19 @@
 .form-fields {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+}
+
+.form-label {
+    margin-bottom: 5px;
+    color: #888888; 
+    font-weight: normal; 
 }
 
 .form-input {
     width: 320px;
     height: 40px;
-    border-radius: 0;
+    border-radius: 20px; 
     border: 1px solid #ddd;
     padding: 10px;
     outline: none;
@@ -121,12 +127,19 @@
 .date-of-birth.focused .form-input,
 .address:hover .form-input,
 .address.focused .form-input {
-    border-color: orange; /* Всі поля разом світяться при наведенні та фокусі */
+    border-color: orange; 
 }
 
 .small-input {
     width: 100px;
     height: 38px;
+    border-radius: 20px; 
+}
+
+.buttons-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .next-button,
@@ -136,6 +149,7 @@
     background-color: orange;
     color: black;
     border: none;
+    border-radius: 0; 
     cursor: pointer;
 }
 
@@ -160,4 +174,5 @@
     background: url('./../../img/chevron_right.png') no-repeat right 10px center;
     background-size: 12px 12px;
     padding-right: 20px;
+    border-radius: 20px; 
 }
