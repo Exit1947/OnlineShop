@@ -1,0 +1,353 @@
+.main-container {
+    width: 1396px;
+    height: 584px;
+    display: flex;
+    
+}
+
+.sidepanel {
+ width: 343px;
+ height: 584px;
+ border: 2px solid gray;
+ 
+}
+
+
+
+.between {
+    width: 3px;
+    height: 584px;
+}
+
+.top-side {
+    width: 294px;
+    height: 66px;
+    margin-top: 9px;
+    margin-left: 24.5px;  
+    border-bottom: 2px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    width: 236px;
+    height: 227px;
+    background-color: coral;
+}
+
+.name-side {
+    font-style: SF Pro Text;     
+    width: 166px;
+    height: 26px;    
+    font-size: 22px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spusok {
+    
+    margin-left: 14px;
+    margin-top: 24px;
+    line-height: 60px;
+    text-align: justify;    
+    padding-left: 64px;
+
+}
+
+.line-vertical {
+    display: flex;
+    margin-top: 20px;
+}
+
+
+.line-vertical1  {
+    display: flex;
+    border-left: 3px solid rgb(255, 166, 0);
+    height: 65px;
+    margin-left: 24px;
+    
+}
+.line-vertical2  {
+    display: flex;
+    border-left: 2px solid gray;
+    height: 65px;
+    margin-left: 24px;
+}
+.line-vertical3  {
+    display: flex;
+    border-left: 2px solid gray;
+    height: 65px;
+    margin-left: 24px;
+}
+.line-vertical4  {
+    display: flex;
+    border-left: 2px solid gray;
+    height: 65px;
+    margin-left: 24px;
+}
+
+.main-panel {
+    width: 1041px;
+    height: 584px;
+    border: 2px solid gray;
+  
+    
+    
+}
+
+.main-top {
+    font-style: SF Pro Text;
+    font-size: 22px; 
+   border: 1px solid gray;
+    width: 350px;
+    height: 26px;
+    margin-left: 20px;
+    margin-top: 18px;
+}
+.top-top {
+    width: 973px;
+    height: 68px;
+    margin-top: 9px;
+    margin-left: 34px;  
+    border-bottom: 2px solid gray;
+    display: flex;   
+    justify-content: space-between;
+    
+}
+
+
+
+.gorizontal-line {
+    
+        display: flex;
+        margin-left: 190px;
+    
+    
+    
+}
+
+.canvas {
+    width: 200px;
+    height: 1px;  
+    margin-top: 40px;     
+    border: 1px solid rgb(255, 166, 0);
+    background-color: rgb(255, 166, 0);
+   
+}
+.canvas1 {
+    width: 200px;
+    height: 1px;  
+    margin-top: 40px;     
+    border: 1px solid gray;
+    background-color: gray;
+   
+}
+.canvas2 {
+    width: 200px;
+    height: 1px;  
+    margin-top: 40px;     
+    border: 1px solid gray;
+    background-color: gray;
+   
+}
+.point {
+    width: 6px;
+    height: 6px;
+    margin-top: 39px; 
+    background-color: rgb(255, 166, 0);
+    border-radius: 2px;
+    
+}
+.point1 {
+    width: 6px;
+    height: 6px;
+    margin-top: 39px; 
+    background-color: gray;
+    border-radius: 2px;
+    
+}
+.point2 {
+    width: 6px;
+    height: 6px;
+    margin-top: 39px; 
+    background-color: gray;
+    border-radius: 2px;
+    
+}
+.point3 {
+    width: 6px;
+    height: 6px;
+    margin-top: 39px; 
+    background-color: gray;
+    border-radius: 2px;
+    
+}
+
+.filldate {
+    width: 320px;
+    height: 327px;
+    
+    margin-left: 34px;
+    margin-top: 40px;
+}
+
+
+.paint {
+    width: 500px;
+    height: 500px;
+   
+    margin-left: 154px;
+}
+.main-center {
+
+    display: flex;
+
+}
+
+.input-date-birth {
+    display: flex;
+}
+.input-date {
+    width: 100px;
+    height: 38px;
+    border-radius: 8px;
+    
+   
+}
+
+.input-month {
+    width: 100px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-year {
+    width: 100px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-name {
+    width: 310px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-email {
+    width: 310px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-phone {
+    width: 310px;
+    height: 38px;
+    border-radius: 5px;
+}
+
+.label {
+    font-style: SF Pro Text;
+    font-size: 18px;
+    gap: 10px;  
+    display: flex;
+    align-items: start;
+    margin-top: 10px;
+}
+
+.btn-confirm {
+    height: 51px;
+    width: 141px;   
+    background-color: rgb(255, 166, 0);
+    border: 2px solid rgb(255, 166, 0);
+    border-radius: 5px;
+    margin-left: 177px;
+    margin-top: 60px;
+
+    
+}
+
+.btn-confirm1 {
+    height: 51px;
+    width: 141px;      
+    border: 2px solid rgb(255, 166, 0);
+    border-radius: 5px;
+    
+    
+
+}
+.btn-confirm2 {
+    height: 51px;
+    width: 141px; 
+    background-color: rgb(255, 166, 0);     
+    border: 2px solid rgb(255, 166, 0);
+    border-radius: 5px;
+    
+
+}
+
+.dosbutton {
+   width: 320px; 
+   height: 51px; 
+   margin-top: 50px;
+    gap: 45px;
+
+   display: flex;
+   
+}
+
+.filldatesecond {
+    width: 320px;
+    height: 325px;
+    margin-left: 34px;
+    margin-top: 40px;
+
+}
+
+.input-date-adress {
+    display: flex;
+}
+
+.input-number {
+    width: 100px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-index {
+    width: 100px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-region {
+    width: 310px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-settlement {
+    width: 310px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.input-address {
+    width: 310px;
+    height: 38px;
+    border-radius: 5px;
+}
+
+.input-street {
+    width: 100px;
+    height: 38px;
+    border-radius: 8px;
+    
+   
+}
+
+

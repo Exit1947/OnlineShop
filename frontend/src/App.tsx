@@ -15,7 +15,7 @@ import Footer from './components/footer/Footer.js'
 import HomePage from './pages/HomePage.tsx';
 import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
-import Form from "./components/form/Form.tsx";
+import Form from "./components/form/registration/RegistrationForm.tsx";
 
 const router = createBrowserRouter([
     {
