@@ -1,14 +1,18 @@
 .form-container {
     display: flex;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
+    padding: 20px;
+    flex-wrap: wrap;
 }
 
 .sidebar {
-    width: 25%;
+    width: 100%;
     padding: 20px;
     border-right: 1px solid #ddd;
     position: relative;
+    max-width: 300px; /* Ширина sidebar */
+    margin-bottom: 20px;
 }
 
 .sidebar h2 {
@@ -50,8 +54,9 @@
 }
 
 .content {
-    width: 75%;
+    width: 100%;
     padding: 20px;
+    flex: 1;
     position: relative;
 }
 
@@ -83,6 +88,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.sidebar {
+    width: 25%; 
 }
 
 .progress-percentage {
