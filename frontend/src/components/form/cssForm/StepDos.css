@@ -5,21 +5,21 @@
     
 }
 
-.sidepanel {
+/* .sidepanel {
  width: 343px;
  height: 584px;
  border: 2px solid gray;
  
-}
+} */
 
 
 
-.between {
+/* .between {
     width: 3px;
     height: 584px;
-}
+} */
 
-.top-side {
+/* .top-side {
     width: 294px;
     height: 66px;
     margin-top: 9px;
@@ -29,17 +29,17 @@
     justify-content: center;
     align-items: center;
 
-}
+} */
 
-.left-side {
+/* .left-side {
     display: flex;
     flex-direction: row;
     width: 236px;
     height: 227px;
     background-color: coral;
-}
+} */
 
-.name-side {
+/* .name-side {
     font-style: SF Pro Text;     
     width: 166px;
     height: 26px;    
@@ -47,9 +47,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.spusok {
+/* .spusok {
     
     margin-left: 14px;
     margin-top: 24px;
@@ -57,28 +57,28 @@
     text-align: justify;    
     padding-left: 64px;
 
-}
+} */
 
-.line-vertical {
+/* .line-vertical {
     display: flex;
     margin-top: 20px;
-}
+} */
 
 
-.line-vertical1  {
-    display: flex;
-    border-left: 3px solid rgb(255, 166, 0);
-    height: 65px;
-    margin-left: 24px;
-    
-}
-.line-vertical2  {
+.line-vertical6  {
     display: flex;
     border-left: 2px solid gray;
     height: 65px;
     margin-left: 24px;
+    
 }
-.line-vertical3  {
+.line-vertical5  {
+    display: flex;    
+    height: 25%;
+    margin-left: 24px;
+    border-left: 3px solid rgb(255, 166, 0);
+}
+/* .line-vertical3  {
     display: flex;
     border-left: 2px solid gray;
     height: 65px;
@@ -89,18 +89,18 @@
     border-left: 2px solid gray;
     height: 65px;
     margin-left: 24px;
-}
+} */
 
-.main-panel {
+/* .main-panel {
     width: 1041px;
     height: 584px;
     border: 2px solid gray;
   
     
     
-}
+} */
 
-.main-top {
+/* .main-top {
     font-style: SF Pro Text;
     font-size: 22px; 
    border: 1px solid gray;
@@ -108,8 +108,8 @@
     height: 26px;
     margin-left: 20px;
     margin-top: 18px;
-}
-.top-top {
+} */
+/* .top-top {
     width: 973px;
     height: 68px;
     margin-top: 9px;
@@ -118,7 +118,7 @@
     display: flex;   
     justify-content: space-between;
     
-}
+} */
 
 
 

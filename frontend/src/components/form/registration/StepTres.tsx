@@ -19,9 +19,9 @@ const StepTres= (props) =>{
                     
                         <div className="line-vertical">
                            <div  >
-                            <div className="line-vertical1"></div>
-                            <div className="line-vertical2"></div>
-                            <div className="line-vertical3"></div>
+                            <div className="line-vertical6"></div>
+                            <div className="line-vertical7"></div>
+                            <div className="line-vertical8"></div>
                             <div className="line-vertical4"></div>
                            </div>
 
