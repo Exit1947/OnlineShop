@@ -34,6 +34,7 @@ const FormFields = ({ activeStep, handleNextClick, handleBackClick }) => {
                     </div>
                 </>
             )}
+
             {activeStep === 2 && (
                 <>
                     <label className="form-label">Country</label>
@@ -47,10 +48,30 @@ const FormFields = ({ activeStep, handleNextClick, handleBackClick }) => {
                     <input type="text" className="form-input" />
                     <label className="form-label">Settlement</label>
                     <input type="text" className="form-input" />
+                    <label className="form-label">Address</label>
+                    <div className="date-of-birth">
+                        <select className="form-input small-input select-input">
+                            <option value="">Street</option>
+                            <option value="1">Howard</option>
+                            <option value="2">High</option>
+                        </select>
+                        <select className="form-input small-input select-input">
+                            <option value="">Number</option>
+                            <option value="1">12</option>
+                            <option value="2">25</option>
+                        </select>
+                        <select className="form-input small-input select-input">
+                            <option value="">Index</option>
+                            <option value="2000">98648</option>
+                            <option value="2001">80123</option>
+                        </select>
+                    </div>
                     <div className="buttons-container">
                         <button className="back-button" onClick={handleBackClick}>Back</button>
                         <button className="next-button" onClick={handleNextClick}>Next</button>
                     </div>
+                    
+                    
                 </>
             )}
         </div>

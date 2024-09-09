@@ -7,6 +7,8 @@ import FormFields from './FormFields.jsx';
 import {backendUrl} from "../../environments";
 import axios from "axios";
 import toast from "react-hot-toast";
+import profileImage from './../../img/Questions-rafiki 1.png';
+import addressImage from './../../img/House searching-rafiki 1.png';
 
 type FormValues = {
     email: string,
@@ -44,7 +46,7 @@ const Form = () => {
 
     const updateProgress = (step) => {
         const newProgress = (step - 1) * 33;
-        setProgress(Math.min(newProgress, 100)); 
+        setProgress(Math.min(newProgress, 100));
     };
 
     const handleStepClick = (step) => {
@@ -69,8 +71,14 @@ const Form = () => {
     return (
         <div className="form-container">
             <Sidebar activeStep={activeStep} handleStepClick={handleStepClick} />
-            <ProgressBar progress={progress} activeStep={activeStep} />
-            <FormFields activeStep={activeStep} handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
+            <div className="profile-image-container">
+                {activeStep === 1 && <img src={profileImage} alt="Profile" />}
+                {activeStep === 2 && <img src={addressImage} alt="Address" />}
+            </div>
+            <div className="content">
+                <ProgressBar progress={progress} activeStep={activeStep} />
+                <FormFields activeStep={activeStep} handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
+            </div>
         </div>
     );
 };

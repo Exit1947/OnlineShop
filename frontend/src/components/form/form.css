@@ -1,18 +1,16 @@
+
 .form-container {
     display: flex;
-    max-width: 100%;
+    max-width: 1200px; 
     margin: 0 auto;
-    padding: 20px;
-    flex-wrap: wrap;
 }
 
+
 .sidebar {
-    width: 100%;
+    width: 25%;
     padding: 20px;
     border-right: 1px solid #ddd;
     position: relative;
-    max-width: 300px; /* Ширина sidebar */
-    margin-bottom: 20px;
 }
 
 .sidebar h2 {
@@ -47,18 +45,19 @@
     height: 30px;
     background-color: orange;
     position: absolute;
-    margin-top: 100px;
     left: -1px;
     top: 0;
     transition: top 0.3s ease;
+    margin-top: 100px;
 }
 
+
 .content {
-    width: 100%;
+    width: 75%;
     padding: 20px;
-    flex: 1;
     position: relative;
 }
+
 
 .progress-bar-container {
     display: flex;
@@ -89,9 +88,6 @@
     align-items: center;
     justify-content: center;
 }
-.sidebar {
-    width: 25%; 
-}
 
 .progress-percentage {
     color: black;
@@ -106,14 +102,14 @@
 
 .form-label {
     margin-bottom: 5px;
-    color: #888888; 
-    font-weight: normal; 
+    color: #888888;
+    font-weight: normal;
 }
 
 .form-input {
     width: 320px;
     height: 40px;
-    border-radius: 20px; 
+    border-radius: 20px;
     border: 1px solid #ddd;
     padding: 10px;
     outline: none;
@@ -135,14 +131,16 @@
 .date-of-birth.focused .form-input,
 .address:hover .form-input,
 .address.focused .form-input {
-    border-color: orange; 
+    border-color: orange;
 }
+
 
 .small-input {
     width: 100px;
     height: 38px;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
+
 
 .buttons-container {
     display: flex;
@@ -157,7 +155,7 @@
     background-color: orange;
     color: black;
     border: none;
-    border-radius: 0; 
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -166,10 +164,11 @@
     border: 1px solid orange;
 }
 
+
 .profile-image-container {
     position: absolute;
     right: 0;
-    top: 200px;
+    top: 100px;
 }
 
 .profile-image-container img {
@@ -177,10 +176,11 @@
     height: 500px;
 }
 
+
 .select-input {
     appearance: none;
     background: url('./../../img/chevron_right.png') no-repeat right 10px center;
     background-size: 12px 12px;
     padding-right: 20px;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
