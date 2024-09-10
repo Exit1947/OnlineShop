@@ -48,8 +48,8 @@ const StepDos= (props) => {
                       
                  <div className="gorizontal-line"> 
                  <div className="point" ></div>
-                <div className="canvas"></div>
-                <div className="point1">33%</div>
+                <div className="canvas4"></div>
+                <div className="point4">33%</div>
                 <div className="canvas1"></div>
                 <div className="point2"></div>
                 <div className="canvas2"></div>

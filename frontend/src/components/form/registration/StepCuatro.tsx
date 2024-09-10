@@ -47,7 +47,7 @@ const StepCuatro= (props) => {
                  <div className="main-top"> Finish </div>
                       
                  <div className="gorizontal-line"> 
-                 <div className="point" >0%</div>
+                 <div className="point" ></div>
                 <div className="canvas"></div>
                 <div className="point1"></div>
                 <div className="canvas1"></div>

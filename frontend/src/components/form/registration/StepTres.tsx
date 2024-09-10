@@ -48,27 +48,26 @@ const StepTres= (props) =>{
 
             <div className="main-panel">
                
-                <div className="top-main">
-                <h1 className="nazvabank"><span>Bank Information</span></h1>
-                <div className="line-main">
-                <div className="point" ></div>
-                <div className="canvas"></div>
-                <div className="point1"></div>
-                <div className="canvas1"></div>
-                <div className="point2"> 66%</div>
+                <div className="top-top">
+                 <div className="main-top"> Bank Information </div>
+                      
+                 <div className="gorizontal-line"> 
+                 <div className="point" ></div>
+                <div className="canvas4"></div>
+                <div className="point4"></div>
+                <div className="canvas5"></div>
+                <div className="point5">66%</div>
                 <div className="canvas2"></div>
                 <div className="point3"></div>
-                </div>                            
-                </div>
+                 </div> 
+                 </div>
 
 
-                <div className="middle-line">
-                 <div  className="line-top"></div>
-                </div>
+               
 
                 <div className="main-card"> 
 
-                   <div className="card">
+                   <div className="filldate1">
                     <div className="onescard">
                         <img src={CreditCard} alt="" />
                     </div>
@@ -87,7 +86,7 @@ const StepTres= (props) =>{
                       </div>
                     </div>
                     <div className="confirmcard" >
-                        <button className="btn-confirm1" onClick={prev}><b>Back</b></button>
+                        <button className="btn-confirm1" onClick={prev}><strong>Back</strong></button>
                         <button className="btn-confirm2" onClick={next}><b>Finish</b></button>
                     </div>
                     <div></div>

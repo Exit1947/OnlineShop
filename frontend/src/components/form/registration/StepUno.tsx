@@ -47,15 +47,17 @@ const StepUno=(props) =>{
 
                  <div className="top-top">
                  <div className="main-top">  User Profile </div>
-                      
-                 <div className="gorizontal-line"> 
-                 <div className="point" >0%</div>
+                
+                 
+                 <div className="gorizontal-line">                              
+                <div className="point" >0%</div>
                 <div className="canvas"></div>
                 <div className="point1"></div>
                 <div className="canvas1"></div>
                 <div className="point2"></div>
                 <div className="canvas2"></div>
                 <div className="point3"></div>
+               
                  </div> 
                  </div>
 
@@ -74,7 +76,7 @@ const StepUno=(props) =>{
                         <input type="month" className="input-month" placeholder="Month"/>
                         <input type="number" className="input-year" placeholder="Year"/>                        
                         </div>
-                        <div>
+                        <div className='dosbutton1'>
                         <button className="btn-confirm" onClick={next} ><b>Next</b></button>
                         </div>                       
 
