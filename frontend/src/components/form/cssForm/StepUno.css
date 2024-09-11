@@ -1,6 +1,6 @@
 .main-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     border: 2px solid gray;
     
@@ -10,11 +10,10 @@
 .sidepanel {
  width: 25%;
  height: 100%;
+ border: 2px solid red;
 
  
 }
-
-
 
 .between {
     width: 0.5%;
@@ -94,6 +93,7 @@
 .main-panel {
     width: 75%;
     height: 100%;
+    border: 2px solid yellowgreen;
    
    
   
@@ -128,7 +128,7 @@
 
 .gorizontal-line {
     
-       
+        display: flex;
         width: 75%;
         height: 90%;
       
@@ -198,7 +198,7 @@
 .filldate {
     width: 35%;
     height: 95%;
-   
+    border: 3px solid red;
     margin-left: 5%;
     margin-top: 5%;
 }
@@ -207,14 +207,21 @@
 .paint {
     width: 60%;
     height: 93%;
-     margin-left: 10%;
+   
+     border: 1px solid red;
      
+}
+.firstimage {
+    width: 100%;
+    height: 100%;
+    border: 1px solid blue;
 }
 .main-center {
 
     display: flex;
     width: 100%;
     height: 86%;
+    border: 1px solid green;
     
 }
 

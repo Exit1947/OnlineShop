@@ -81,7 +81,7 @@ const StepDos= (props) => {
                         </div>
 
                     <div className="paint">
-                        <img src={housesearch} alt="" className="secondimage"/>
+                        <img src={housesearch} alt="" className="firstimage"/>
                     </div>
                  </div>
                 </div>

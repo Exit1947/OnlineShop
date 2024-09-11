@@ -16,6 +16,7 @@ const StepUno=(props) =>{
         
         return (
             <div className="main-container">
+
                 <div className="sidepanel">
                      <div className="top-side"> 
                         <div className="name-side">Create account</div>                      
@@ -56,8 +57,7 @@ const StepUno=(props) =>{
                 <div className="canvas1"></div>
                 <div className="point2"></div>
                 <div className="canvas2"></div>
-                <div className="point3"></div>
-               
+                <div className="point3"></div>               
                  </div> 
                  </div>
 

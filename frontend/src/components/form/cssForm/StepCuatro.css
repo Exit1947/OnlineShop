@@ -1,9 +1,4 @@
-.main-container {
-    width: 1396px;
-    height: 584px;
-    display: flex;
-    
-}
+
 
 /* .sidepanel {
  width: 343px;
@@ -31,13 +26,13 @@
 
 } */
 
-.left-side {
+/* .left-side {
     display: flex;
     flex-direction: row;
     width: 236px;
     height: 227px;
     background-color: coral;
-}
+} */
 
 /* .name-side {
     font-style: SF Pro Text;     
@@ -84,6 +79,7 @@
     height: 65px;
     margin-left: 24px;
 } */
+
 .line-vertical9  {
     display: flex;
     border-left: 3px solid rgb(255, 166, 0);
@@ -122,14 +118,14 @@
 
 
 
-.gorizontal-line {
+/* .gorizontal-line {
     
         display: flex;
        
     
     
     
-}
+} */
 
 /* .canvas {
     width: 200px;
@@ -203,11 +199,11 @@
    
     margin-left: 154px;
 } */
-.main-center {
+/* .main-center {
 
     display: flex;
 
-}
+} */
 
 
 /* .btn-confirm2 {
@@ -218,11 +214,26 @@
     border-radius: 5px;
 
 } */
-.confirmcard {
+/* .confirmcard {
     width: 320px;
     height: 51px;
     margin-left: 34px;
     margin-top: 40px;
     
    
+} */
+
+.card {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.onescard1 {
+    width: 100%;
+    height: 100%;
+   
+   
+
 }

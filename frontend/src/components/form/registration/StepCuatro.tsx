@@ -47,13 +47,13 @@ const StepCuatro= (props) => {
                  <div className="main-top"> Finish </div>
                       
                  <div className="gorizontal-line"> 
-                 <div className="point" ></div>
-                <div className="canvas"></div>
-                <div className="point1"></div>
-                <div className="canvas1"></div>
-                <div className="point2"></div>
-                <div className="canvas2"></div>
-                <div className="point3"></div>
+                 <div className="point4" ></div>
+                <div className="canvas4"></div>
+                <div className="point5"></div>
+                <div className="canvas5"></div>
+                <div className="point5"></div>
+                <div className="canvas5"></div>
+                <div className="point4">100%</div>
                  </div> 
                  </div>
 
@@ -65,8 +65,8 @@ const StepCuatro= (props) => {
                          
                          
                     <div className="card">
-                    <div className="onescard">
-                        <img src={Registri} alt="" />
+                    <div className="onescard1">
+                        <img src={Registri} alt=""  />
                     </div>
                     </div>
                     <div className="confirmcard" >                       
@@ -75,7 +75,7 @@ const StepCuatro= (props) => {
                         </div>
 
                     <div className="paint">
-                        <img src={Finish} alt="" />
+                        <img src={Finish} alt="" className='firstimage' />
                     </div>
                  </div>
                 </div>

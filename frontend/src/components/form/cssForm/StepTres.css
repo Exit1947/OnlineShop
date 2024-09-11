@@ -1,18 +1,8 @@
-.conteiner{
-    height: 584px;
-    width: 1396px;
-    display: flex; 
-    border: 1px solid gray;
-
-}
 
 
 
-.side-panel {
-    width: 343px;   
-    height: 584px;   
-   
-}
+
+
 /* .sidepanel {
     width: 343px;
     height: 584px;
@@ -31,13 +21,7 @@
 
 } */
 
-.left-side {
-    display: flex;
-    flex-direction: row;
-    width: 236px;
-    height: 227px;
-    background-color: coral;
-}
+
 
 /* .name-side {
     font-style: SF Pro Text;     
@@ -57,20 +41,20 @@
 .line-vertical6  {
     display: flex;
     border-left: 2px solid gray;
-    height: 65px;
+    height: 25%;
     margin-left: 24px;
     
 }
 .line-vertical7  {
     display: flex;
     border-left: 2px solid gray;
-    height: 65px;
+    height: 25%;
     margin-left: 24px;
 }
 .line-vertical8  {
     display: flex;
     border-left: 3px solid rgb(255, 166, 0);
-    height: 65px;
+    height: 25%;
     margin-left: 24px;
 }
 /* .line-vertical4  {
@@ -120,7 +104,7 @@
     margin-left: 20px; 
 } */
 
-.uno{
+/* .uno{
     width: 236px;
     height: 40px;
     padding: 10px 10px 10px 54px;
@@ -160,9 +144,9 @@
     margin-left: 89px;
     font-size: 22px;
     font-weight: 600;
-} 
+}  */
 
-.nazvabank {    
+/* .nazvabank {    
     font-style: SF Pro Text;     
     width: 210px;
     height: 26px;
@@ -180,9 +164,9 @@
     
 
     
-}
+} */
 
-.list-side-panel {
+/* .list-side-panel {
     list-style-type: none;
     padding: 0;
     margin-left: 30px ;
@@ -207,7 +191,7 @@
     
 
 
-}
+} */
 
 /* .canvas {
     width: 200px;
@@ -218,9 +202,9 @@
    
 } */
 .canvas5 {
-    width: 200px;
+    width: 33%;
     height: 1px;  
-    margin-top: 40px;     
+    margin-top: 5.3%;     
     border: 1px solid rgb(255, 166, 0);
     background-color: rgb(255, 166, 0);
    
@@ -236,7 +220,7 @@
 .point5 {
     width: 6px;
     height: 6px;
-    margin-top: 39px; 
+    margin-top: 5%; 
     background-color: rgb(255, 166, 0);
     border-radius: 2px;
     
@@ -266,12 +250,12 @@
     
 } */
 
-.line-main {
+/* .line-main {
     display: flex;
     margin-left: 60px;
-}
+} */
 
-.line-top{
+/* .line-top{
     width: 970px;
     height: 1px;
     background-color: gray;
@@ -282,29 +266,29 @@
    width: 100%;
    height: 80%;
    display: flex;
-  
-   margin-top: 1%;
+   border: 3px solid gray;
+   
    
    
 
-}
+} */
 
-.card {
+/* .card {
     width: 50%;
     height: 100%;
   
   
-}
+} */
 
-.cool-draw {
+/* .cool-draw {
     width: 50%;
     height: 100%;
    
     
    
-}
+} */
 
-.payment {
+/* .payment {
 
     width: 500px;
     height: 500px; 
@@ -312,10 +296,9 @@
 }
 
 .onescard {
-    width: 65%;
-    height: 40%;
-   margin-left: 5%;
-   margin-top: 5%;
+    width: 100%;
+    height: 100%;
+   
    
 
 }
@@ -325,15 +308,10 @@
     height: 40%;
    
    
-}
-.filldate1 {
-    width: 55%;
-    height: 5%;
-   
-    
-}
+} */
 
-.unoinput {
+
+/* .unoinput {
     width: 50%;
     height: 50%;
 }
@@ -345,23 +323,25 @@
     display: flex; 
    border: 1px solid gray;
     color: gray;
-}
+} */
 .card-number {
     width: 415px;
     height: 30px;
     border: 1px solid gray;
     border-radius: 5px;
 }
-.nazvacard {
+/* .nazvacard {
     color: gray;  
     margin-left: 5px;
-}
+} */
+
 .datainput{
   width: 200px;
   height: 30px;
   border: 1px solid gray;
   border-radius: 5px;
 }
+
 .cvvinput{
     width: 200px;
     height: 30px;
@@ -371,14 +351,7 @@
    
 }
 
-.confirmcard {
-    width: 321px;
-    height: 51px;
-    margin-left: 34px;
-    margin-top: 40px;
-    justify-content: space-between;
-   
-}
+
 
 /* .btn-confirm1 {
   height: 45px;

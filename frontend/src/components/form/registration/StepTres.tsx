@@ -9,7 +9,7 @@ const StepTres= (props) =>{
     
     const { next, prev } = useSteps();
         return (
-            <div className="conteiner">
+            <div className="main-container">
 
 <div className="sidepanel">
                      <div className="top-side"> 
@@ -65,36 +65,41 @@ const StepTres= (props) =>{
 
                
 
-                <div className="main-card"> 
+                <div className="main-center"> 
 
-                   <div className="filldate1">
+                   <div className="filldate">
+
                     <div className="onescard">
-                        <img src={CreditCard} alt="" />
+                        <img src={CreditCard} alt="" />                    
                     </div>
+                    
                     <div className="infocard">
-                      <div className="unoinput">
-                        <p className="nazvacard">Card Number</p>
+                      
+                        <p className="label">Card Number</p>
                         <input type="text" placeholder="" className="card-number" />
-                        </div>      
+                           
                       <div className="dosinput">
+
                         <div className="nazva">
                         <p>Exp.Date</p> 
                         <p> CVV</p>
-                        </div>                        
+                        </div> 
+
                           <input type="Date" placeholder=""  className="datainput"/>                          
                           <input type="text" placeholder=""  className="cvvinput"/>
                       </div>
-                    </div>
-                    <div className="confirmcard" >
+                      </div>
+                   
+                    <div className="dosbutton" >
                         <button className="btn-confirm1" onClick={prev}><strong>Back</strong></button>
-                        <button className="btn-confirm2" onClick={next}><b>Finish</b></button>
+                        <button className="btn-confirm2" onClick={next}><strong>Finish</strong></button>
                     </div>
-                    <div></div>
+                    
 
                    </div>
 
-                   <div className="cool-draw">
-                      <div className="payment"><img src={Payment} alt="" /></div>
+                   <div className="paint">
+                      <img src={Payment} alt="" className="firstimage"/>
                    </div>
 
 
