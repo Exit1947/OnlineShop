@@ -45,7 +45,11 @@ const StepCuatro= (props) => {
 
                  <div className="top-top">
                  <div className="main-top"> Finish </div>
-                      
+
+                    <div className='line-sign'>
+                    <div className='number-percent'>
+                        <div className='percent100'>100%</div>
+                    </div>  
                  <div className="gorizontal-line"> 
                  <div className="point4" ></div>
                 <div className="canvas4"></div>
@@ -53,8 +57,9 @@ const StepCuatro= (props) => {
                 <div className="canvas5"></div>
                 <div className="point5"></div>
                 <div className="canvas5"></div>
-                <div className="point4">100%</div>
+                <div className="point4"></div>
                  </div> 
+                 </div>
                  </div>
 
                  <div className="main-center">
@@ -64,19 +69,24 @@ const StepCuatro= (props) => {
                     <div className="filldatesecond">
                          
                          
-                    <div className="card">
+                    
+
                     <div className="onescard1">
                         <img src={Registri} alt=""  />
                     </div>
+                    
+                   
+
+                    <div className="dosbutton" >                       
+                        <button className='btn-confirm3' value="text" onClick={prev} ><strong>Return to shoping</strong></button>
                     </div>
-                    <div className="confirmcard" >                       
-                        <button className='btn-confirm2' value="text" onClick={prev} ><strong>Return to shoping</strong></button>
-                    </div>
+
                         </div>
 
                     <div className="paint">
                         <img src={Finish} alt="" className='firstimage' />
                     </div>
+
                  </div>
                 </div>
             </div>

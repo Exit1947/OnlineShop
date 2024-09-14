@@ -50,15 +50,21 @@ const StepTres= (props) =>{
                
                 <div className="top-top">
                  <div className="main-top"> Bank Information </div>
-                      
+
+
+                    <div className='line-sign'>
+                    <div className='number-percent'>
+                        <div className='percent66'>66%</div>
+                    </div>  
                  <div className="gorizontal-line"> 
                  <div className="point" ></div>
                 <div className="canvas4"></div>
                 <div className="point4"></div>
                 <div className="canvas5"></div>
-                <div className="point5">66%</div>
+                <div className="point5"></div>
                 <div className="canvas2"></div>
                 <div className="point3"></div>
+                </div>
                  </div> 
                  </div>
 
@@ -70,30 +76,33 @@ const StepTres= (props) =>{
                    <div className="filldate">
 
                     <div className="onescard">
-                        <img src={CreditCard} alt="" />                    
+                        <img src={CreditCard} alt="" className='card' />                    
                     </div>
                     
                     <div className="infocard">
                       
-                        <p className="label">Card Number</p>
+                        <label className="label">Card Number</label>
                         <input type="text" placeholder="" className="card-number" />
                            
                       <div className="dosinput">
 
                         <div className="nazva">
-                        <p>Exp.Date</p> 
-                        <p> CVV</p>
+                        <label>Exp.Date</label> 
+                        <label> CVV</label>
+                        
                         </div> 
 
                           <input type="Date" placeholder=""  className="datainput"/>                          
                           <input type="text" placeholder=""  className="cvvinput"/>
                       </div>
-                      </div>
-                   
-                    <div className="dosbutton" >
+
+                      <div className="dosbutton2" >
                         <button className="btn-confirm1" onClick={prev}><strong>Back</strong></button>
                         <button className="btn-confirm2" onClick={next}><strong>Finish</strong></button>
                     </div>
+                      </div>
+                   
+                    
                     
 
                    </div>

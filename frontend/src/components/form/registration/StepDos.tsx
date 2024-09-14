@@ -45,15 +45,20 @@ const StepDos= (props) => {
 
                  <div className="top-top">
                  <div className="main-top"> Residential Address </div>
-                      
+
+                   <div className='line-sign'>
+                    <div className='number-percent'>
+                        <div className='percent33'>33%</div>
+                    </div>   
                  <div className="gorizontal-line"> 
                  <div className="point" ></div>
                 <div className="canvas4"></div>
-                <div className="point4">33%</div>
+                <div className="point4"></div>
                 <div className="canvas1"></div>
                 <div className="point2"></div>
                 <div className="canvas2"></div>
                 <div className="point3"></div>
+                </div>
                  </div> 
                  </div>
 
