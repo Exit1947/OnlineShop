@@ -11,8 +11,8 @@ const LoginPage =()=>{
              
             <div className='logo-box'>
 
-                <div className='box-image'>
-                <img src={logoPage} alt="" className='paint'></img>
+                <div className='box-image'  >
+                <img src={logoPage} alt="" className='paint' ></img>
                 </div>
 
 
@@ -20,7 +20,7 @@ const LoginPage =()=>{
 
 
                 <div className='box-title'>            
-                <h4>Sign in</h4>
+                <h1>Sign in</h1>
                  </div>
 
             <div className='box-input'>            
