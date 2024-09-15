@@ -16,12 +16,15 @@ import HomePage from './pages/HomePage.tsx';
 import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
+import LoginPage from './components/logInPage/LogPage.tsx';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage />
     },
+
+    
     {
         path: '/auth',
         element: <AuthPage />,
@@ -33,7 +36,12 @@ const router = createBrowserRouter([
             {
                 path: 'registration',
                 element: <Form />
-            }
+            },
+            
+            {
+                path: 'loginpage',
+                element:<LoginPage/>
+            },
         ]
     }
 ]);
