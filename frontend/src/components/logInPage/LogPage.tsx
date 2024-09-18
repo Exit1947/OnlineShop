@@ -26,19 +26,19 @@ const LoginPage =()=>{
 
 
                 <div className='box-title'>            
-                <div className='sign'>Sign in</div>
+                <div className='sign'><strong>Sign in</strong></div>
                  </div>
 
             <div className='box-input'>            
-            <form>
+            <form action="" method="get" >
                 <label><strong>Email or mobile phone number</strong></label>
                 <input type="text" placeholder="" className="input-number"/>
                 <div className='between'></div>
-                <label>P a s s w o r d</label>
+                <label><strong>Password</strong></label>
                 <input type="password" placeholder="" className="input-password"/>
                 <div className='between'></div>                
                 
-                <button type="submit" className="btn-confirm">L o g i n</button>
+                <button type="submit" className="btn-confirm"><strong>Login</strong></button>
             </form>
             </div>
 
@@ -50,7 +50,7 @@ const LoginPage =()=>{
                 <hr className='line-after'></hr>
             </div>
 
-            <button type="submit" className="btn-create-account">Create your Omnify account</button>
+            <button type="submit" className="btn-create-account"><strong>Create your Omnify account</strong></button>
             </div>
             </div>
         </div>
