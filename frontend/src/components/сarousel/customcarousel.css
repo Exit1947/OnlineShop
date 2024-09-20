@@ -1,15 +1,10 @@
-.custom-carousel-container {
-  text-align: center;
-  margin: 20px auto;
-  width: 1410px; 
-  margin-bottom: 60px; 
-}
-
 .custom-carousel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  padding: 0 20px;
+  margin-top: 30px;
 }
 
 .custom-carousel-title {
@@ -19,13 +14,15 @@
 
 .custom-carousel-title h2 {
   font-weight: bold;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .custom-all-categories {
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin-left: auto;
+  padding-right: 40px; 
 }
 
 .custom-all-categories span {
@@ -45,55 +42,32 @@
 .custom-carousel {
   position: relative;
   width: 100%;
+  overflow: hidden;
 }
 
 .custom-carousel-images {
   display: flex;
-  overflow: hidden;
-  width: 100%;
-  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .custom-carousel-item {
   width: 134px;
   height: 195px;
   text-align: center;
-  margin: 0 20px; 
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.custom-carousel-item:hover {
-  background-color: rgba(0, 0, 0, 0.05); 
-  transform: scale(1.05); 
-}
-
-.custom-carousel-item img {
-  width: 100%;
-  height: auto;
-}
-
-.custom-carousel-item-line {
-  width: 100%;
-  height: 2px;
-  background-color: rgba(0, 0, 0, 0.1); 
-  margin: 10px 0;
-}
-
-.custom-carousel-item p {
-  margin: 0;
-  color: black; 
-  font-weight: bold;
-  font-size: 14px;
+  margin: 0 20px;
 }
 
 .custom-arrows {
   display: flex;
-  gap: 5px; 
+  gap: 10px;
+  margin-right: 40px; 
 }
 
 .custom-arrow {
-  width: 31px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-color: white;
   border: none;
   display: flex;
@@ -112,11 +86,39 @@
   background-color: orange;
 }
 
-.custom-arrow svg {
-  color: black; 
+
+@media (max-width: 1024px) {
+  .custom-carousel-header {
+    padding: 0 10px;
+  }
+
+  .custom-carousel-title h2 {
+    font-size: 18px;
+  }
+
+  .custom-all-categories span {
+    font-size: 12px;
+  }
+
+  .custom-carousel-images {
+    gap: 15px;
+  }
 }
 
-  
-  
-  
-  
+@media (max-width: 768px) {
+  .custom-carousel-header {
+    padding: 0 5px;
+  }
+
+  .custom-carousel-title h2 {
+    font-size: 16px;
+  }
+
+  .custom-all-categories span {
+    font-size: 10px;
+  }
+
+  .custom-carousel-images {
+    gap: 10px;
+  }
+}

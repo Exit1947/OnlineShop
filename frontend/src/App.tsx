@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Aftermenu from "./components/aftermenu/Aftermenu.js";
-import Header from "./components/header/Header.js";
+import Header from "./components/header/Header.tsx";
 import Dropdown from "./components/dropmenu/Dropdown.js";
 import LanguageDropdown from './components/languagedrop/LanguageDropdown.js'
 import CurrencyDropdown from './components/currencydropdown/CurrencyDropdown.js'
@@ -27,13 +27,14 @@ const router = createBrowserRouter([
         element: <AuthPage />,
         children: [
             {
-                path: 'login',
-                element: <Login />
+                path: 'heder',
+                element: < Header/>
             },
             {
                 path: 'registration',
                 element: <Form />
             }
+            
         ]
     }
 ]);
