@@ -11,7 +11,7 @@ import ProductList from "./components/productlist/ProductList.js";
 import Banner from "./components/banner/Banner.js";
 import SingleRowProductList from './components/singlerowproductlist/SingleRowProductList.js'
 import Subscriptions from './components/subscriptions/Subscriptions.js'
-import Footer from './components/footer/Footer.js'
+import Footer from './components/footer/Footer.tsx'
 import HomePage from './pages/HomePage.tsx';
 import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
@@ -37,7 +37,6 @@ const router = createBrowserRouter([
                 path: 'registration',
                 element: <Form />
             },
-            
             {
                 path: 'loginpage',
                 element:<LoginPage/>
@@ -54,7 +53,6 @@ function App() {
      <h1>{project}</h1>
 
         <RouterProvider router={router} />
-
     </div>
   );
 }
