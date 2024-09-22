@@ -16,6 +16,7 @@ import HomePage from './pages/HomePage.tsx';
 import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
+import ProductPage from './components/productpage/productpage.tsx';
 
 const router = createBrowserRouter([
     {
@@ -33,7 +34,13 @@ const router = createBrowserRouter([
             {
                 path: 'registration',
                 element: <Form />
+            },
+            {
+                path: 'product',
+                element:<ProductPage/>
             }
+
+        
         ]
     }
 ]);
