@@ -10,6 +10,9 @@ import  ThirdSectionLeft  from '../../img/left  third section .png';
 import ThirdSectionRight from '../../img/right third section.png'  ;
 import FourthSection from '../../img/Group 1501.png';
 import FifthSection from '../../img/Group 1502.png';
+import BlackLogo from '../../img/logo Omnify.png';
+import PictureProduct from '../../img/LepTop.png' ;
+import starEmpty from '../../img/icons8-star-25.png';
 
 
 const ProductPage = () => {
@@ -94,10 +97,109 @@ const ProductPage = () => {
 
                  <div className='technical-characteristics'> Technical characteristics</div>
 
-
+                   <div className='top-table'> <strong>Name Product</strong></div>
 
                  <div className='technical-characteristics-table'>
+                         <table className='table-container'>
+                            <thead>
+                                <tr>
+                                    <th> <img src={BlackLogo} alt=''/></th>
+                                    <th> 
+                                         <div>
+                                            <img  className='image-product' src={PictureProduct}/>
+                                            <div> Products name1</div>
+                                            <button className='btn-add-to-card'> Add to card</button>
+                                        </div>
+                                        </th>
+                                    <th>
+                                    <div>
+                                            <img  className='image-product' src={PictureProduct}/>
+                                            <div> Products name2</div>
+                                            <button className='btn-add-to-card'> Add to card</button>
+                                        </div> 
+                                    </th>
+                                    <th>
+                                    <div>
+                                            <img  className='image-product' src={PictureProduct}/>
+                                            <div> Products name3</div>
+                                            <button className='btn-add-to-card'> Add to card</button>
+                                        </div>
+                                    </th>
+                                    <th>
+                                    <div>
+                                            <img  className='image-product' src={PictureProduct}/>
+                                            <div> Products name4</div>
+                                            <button className='btn-add-to-card'> Add to card</button>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
 
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <tr>Customer Review</tr>
+                                        <tr>Color</tr>
+                                        <tr>Display</tr>
+                                        <tr>Processor</tr>
+                                        <tr> Graphics</tr>
+                                        <tr>Battery</tr>
+                                        <tr> OS</tr>
+                                        <tr>Memory</tr>
+                                        <tr>Storage</tr>
+                                        <tr>Webcam</tr>
+                                    </td>
+                                    <td>
+                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr> 16"</tr>
+                                        <tr> Graphite</tr>
+                                        <tr> 16:10 AMOLED WQXGA+</tr>
+                                        <tr> Intel Iris Xe Graphics</tr>
+                                        <tr> 76Wh</tr>
+                                        <tr>Wndows 11 PRO</tr>
+                                        <tr> 16GB</tr>
+                                        <tr>512 GB</tr>
+                                        <tr> 1080p FHD</tr>
+                                    </td>
+                                    <td>
+                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr> 16"</tr>
+                                        <tr> Graphite</tr>
+                                        <tr> 16:10 AMOLED WQXGA+</tr>
+                                        <tr> Intel Iris Xe Graphics</tr>
+                                        <tr> 76Wh</tr>
+                                        <tr>Wndows 11 PRO</tr>
+                                        <tr> 16GB</tr>
+                                        <tr>512 GB</tr>
+                                        <tr> 1080p FHD</tr>
+                                    </td>
+                                    <td>
+                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr> 16"</tr>
+                                        <tr> Graphite</tr>
+                                        <tr> 16:10 AMOLED WQXGA+</tr>
+                                        <tr> Intel Iris Xe Graphics</tr>
+                                        <tr> 76Wh</tr>
+                                        <tr>Wndows 11 PRO</tr>
+                                        <tr> 16GB</tr>
+                                        <tr>512 GB</tr>
+                                        <tr> 1080p FHD</tr>
+                                    </td>
+                                    <td>
+                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr> 16"</tr>
+                                        <tr> Graphite</tr>
+                                        <tr> 16:10 AMOLED WQXGA+</tr>
+                                        <tr> Intel Iris Xe Graphics</tr>
+                                        <tr> 76Wh</tr>
+                                        <tr>Wndows 11 PRO</tr>
+                                        <tr> 16GB</tr>
+                                        <tr>512 GB</tr>
+                                        <tr> 1080p FHD</tr>
+                                    </td>
+                                </tr>
+                            </tbody>
+                         </table>
                  </div>
             
         </div>
