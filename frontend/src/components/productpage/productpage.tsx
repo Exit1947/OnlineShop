@@ -13,6 +13,7 @@ import FifthSection from '../../img/Group 1502.png';
 import BlackLogo from '../../img/logo Omnify.png';
 import PictureProduct from '../../img/LepTop.png' ;
 import starEmpty from '../../img/icons8-star-25.png';
+import arrowDown from '../../img/drop-down-arrow.png';
 
 
 const ProductPage = () => {
@@ -95,7 +96,7 @@ const ProductPage = () => {
                  </div>
 
 
-                 <div className='technical-characteristics'> Technical characteristics</div>
+                 <div className='technical-characteristics'> <strong>Technical characteristics</strong></div>
 
                    <div className='top-table'> <strong>Name Product</strong></div>
 
@@ -200,6 +201,61 @@ const ProductPage = () => {
                                 </tr>
                             </tbody>
                          </table>
+                 </div>
+
+                 <div className='reviews'> <strong>Reviews</strong>
+                    <button className='btn-reviews'> <strong>Reviews</strong>  <img src={arrowDown} alt='' className='arrow'/> </button> 
+                     
+                     
+                     <div className='estimate'>
+                        <div className='  result-estimate'>
+                            <div className='first-section-estimate'> 
+                                 <div className='result-of-calculation'> 4.8 </div>
+                                 <div>of 125 reviews</div>
+                                 <div><img src={starEmpty}/><img src={starEmpty}/><img src={starEmpty}/><img src={starEmpty}/><img src={starEmpty}/></div>
+                            </div>
+
+                            <div className='second-section-estimate'>
+
+                                  <div className='result-excellent'> 
+                                        <div className='name-result' >Excellent</div>                                        
+                                        <div className='line-result'></div>                                  
+                                        <div className='result-number'> 100</div>                                   
+                                  </div>
+
+                                  <div className='result-good'> 
+                                        <div className='name-result' >Good</div>                                        
+                                        <div className='line-result'></div>                                  
+                                        <div className='result-number'> 11</div>                                   
+                                  </div>
+
+                                  <div className='result-average'> 
+                                        <div className='name-result' >Average</div>                                        
+                                        <div className='line-result'></div>                                  
+                                        <div className='result-number'> 3</div>                                   
+                                  </div>
+
+                                  <div className='result-bad'> 
+                                        <div className='name-result' >Bad</div>                                        
+                                        <div className='line-result'></div>                                  
+                                        <div className='result-number'> 8</div>                                   
+                                  </div>
+
+                                  <div className='result-poor'> 
+                                        <div className='name-result' >Poor</div>                                        
+                                        <div className='line-result'></div>                                  
+                                        <div className='result-number'> 1</div>                                   
+                                  </div>
+                            </div>
+                        </div>
+
+                        <div className='comment'>
+                            <input type="text" className='input-comment' placeholder='Leave comment'></input>
+                        </div>
+                     </div>
+
+
+
                  </div>
             
         </div>
