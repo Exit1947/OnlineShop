@@ -14,9 +14,21 @@ import BlackLogo from '../../img/logo Omnify.png';
 import PictureProduct from '../../img/LepTop.png' ;
 import starEmpty from '../../img/icons8-star-25.png';
 import arrowDown from '../../img/drop-down-arrow.png';
+import PhotoUser from '../../img/image 95.png';
+import PhotoProduct from '../../img/Frame 427320002.png';
+import ThreeDots from '../../img/three-dots.png';
+import ArrowBack from '../../img/arrow back.png';
+import ThumbUp from '../../img/thumb-up.png';
+import ThumbDown from '../../img/thumb-down.png';
+import ArrowDown from '../../img/arrow-down.png';
+import ArrowLeft from '../../img/arrow-left.png';
+import ArrowRight from '../../img/arrow-right.png';
+import HeartCard from '../../img/heart.png';
 
 
 const ProductPage = () => {
+
+
     return (
         <div className="main-product-page">
 
@@ -107,28 +119,28 @@ const ProductPage = () => {
                                     <th> <img src={BlackLogo} alt=''/></th>
                                     <th> 
                                          <div>
-                                            <img  className='image-product' src={PictureProduct}/>
+                                            <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name1</div>
                                             <button className='btn-add-to-card'> Add to card</button>
                                         </div>
                                         </th>
                                     <th>
                                     <div>
-                                            <img  className='image-product' src={PictureProduct}/>
+                                            <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name2</div>
                                             <button className='btn-add-to-card'> Add to card</button>
                                         </div> 
                                     </th>
                                     <th>
                                     <div>
-                                            <img  className='image-product' src={PictureProduct}/>
+                                            <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name3</div>
                                             <button className='btn-add-to-card'> Add to card</button>
                                         </div>
                                     </th>
                                     <th>
                                     <div>
-                                            <img  className='image-product' src={PictureProduct}/>
+                                            <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name4</div>
                                             <button className='btn-add-to-card'> Add to card</button>
                                         </div>
@@ -151,7 +163,7 @@ const ProductPage = () => {
                                         <tr>Webcam</tr>
                                     </td>
                                     <td>
-                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr><img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/></tr>
                                         <tr> 16"</tr>
                                         <tr> Graphite</tr>
                                         <tr> 16:10 AMOLED WQXGA+</tr>
@@ -163,7 +175,7 @@ const ProductPage = () => {
                                         <tr> 1080p FHD</tr>
                                     </td>
                                     <td>
-                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr><img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/></tr>
                                         <tr> 16"</tr>
                                         <tr> Graphite</tr>
                                         <tr> 16:10 AMOLED WQXGA+</tr>
@@ -175,7 +187,7 @@ const ProductPage = () => {
                                         <tr> 1080p FHD</tr>
                                     </td>
                                     <td>
-                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr><img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/></tr>
                                         <tr> 16"</tr>
                                         <tr> Graphite</tr>
                                         <tr> 16:10 AMOLED WQXGA+</tr>
@@ -187,7 +199,7 @@ const ProductPage = () => {
                                         <tr> 1080p FHD</tr>
                                     </td>
                                     <td>
-                                        <tr><img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/> <img src={starEmpty}/></tr>
+                                        <tr><img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/></tr>
                                         <tr> 16"</tr>
                                         <tr> Graphite</tr>
                                         <tr> 16:10 AMOLED WQXGA+</tr>
@@ -203,16 +215,26 @@ const ProductPage = () => {
                          </table>
                  </div>
 
-                 <div className='reviews'> <strong>Reviews</strong>
-                    <button className='btn-reviews'> <strong>Reviews</strong>  <img src={arrowDown} alt='' className='arrow'/> </button> 
+                 <div className='reviews'> 
+                    <div className='just-name'><strong>Reviews</strong></div>
+
+                    <div className=''>
+                    <button className='btn-reviews'> <strong>Reviews</strong> 
+                     <img src={arrowDown} alt='' className='arrow'/> 
+                     </button> 
+                     </div>
                      
-                     
+                    </div>
+
+
                      <div className='estimate'>
-                        <div className='  result-estimate'>
+
+                        <div className='result-estimate'>
+
                             <div className='first-section-estimate'> 
                                  <div className='result-of-calculation'> 4.8 </div>
                                  <div>of 125 reviews</div>
-                                 <div><img src={starEmpty}/><img src={starEmpty}/><img src={starEmpty}/><img src={starEmpty}/><img src={starEmpty}/></div>
+                                 <div><img src={starEmpty} alt=''/><img src={starEmpty} alt=''/><img src={starEmpty} alt=''/><img src={starEmpty} alt=''/><img src={starEmpty} alt=''/> </div>
                             </div>
 
                             <div className='second-section-estimate'>
@@ -247,16 +269,119 @@ const ProductPage = () => {
                                         <div className='result-number'> 1</div>                                   
                                   </div>
                             </div>
+
                         </div>
 
                         <div className='comment'>
                             <input type="text" className='input-comment' placeholder='Leave comment'></input>
                         </div>
+
                      </div>
+                 
+
+              <div className='person-comment'>
+
+                   <div className='photo-name-comment'>
+                    <div className='photo-user'> <img src={PhotoUser} alt=''/></div>
+                    <div className='name-user'> <strong>Names User</strong></div>
+                   </div>
+
+                   <div className='star-comment'>
+                   <img src={starEmpty} alt=''/>
+                   <img src={starEmpty} alt=''/>
+                   <img src={starEmpty} alt=''/>
+                   <img src={starEmpty} alt=''/>
+                   <img src={starEmpty} alt=''/>
+                   <div className='short-comment'> Short comment </div> 
+                   <div className='three-dots'>
+                    <button className='btn-infa'><img src={ThreeDots} alt=''/></button>
+                   </div>
+                   </div>
+
+                   <div className='date-comment'> Reviewed in the 
+                    <div className='country-comment'>  United States</div>
+                    <div className='date-of-comment'>  Junuary 22,2024</div>
+                   </div>
+                   <div className='comment-properties'> CPU: Intel Core i7 - 1360P   Capacity: 16" 32/1TB   Style: Windows 11 PRO</div>
+
+                   <div  className='text-comment'>
+                    The Laptop is light and the size is perfect for traveling
+                   </div>
+
+                   <div className='advantages-comment'><strong>Advantages:</strong>
+                   <div className='text-advantages'> Good price</div>
+                   </div>
+                   <div className='disadvantages-comment'><strong>Disadvantages:</strong>
+                   <div className='text-disadvantages'> None</div>
+                   </div>
+                   
+                   <div  className='photo-panel'>
+                    <img src={PhotoProduct} alt = '' className=''/>
+                   </div>
+
+                   <div className='lover-panel'>
+                    <button className='answer-panel'> <img  src={ArrowBack} alt=''/></button>
+                    <div className='thumb-panel'>
+                    <div className='thumb-up'><img  src={ThumbUp} alt=''/></div>
+                    <div className='love-number'> 0 </div>
+                    <div className='thumb-down'><img  src={ThumbDown} alt=''/></div>
+                    <div className='unlove-number'> 0 </div>
+                    </div>
+                   </div>
+              </div>
+
+              <div className='view-more'>
+                <button className='btn-view-more' >View More <img src={ArrowDown} alt='' /></button>
+
+              </div>
 
 
+              <div className='related-products'> 
+                 <div className='just-name'> Related Products</div>
+                    <div className='left-button' >
+                <button className='arrow-left'><img src={ArrowLeft} alt=''></img></button>
+                <button className='arrow-right'> <img src={ArrowRight} alt=''></img></button>
+                </div>
+              </div>
 
-                 </div>
+
+              <div className='collection-card'>
+
+                <div className='card'>
+
+                    <div className='top-card'>
+                    <div className='title-card'> Asus TUF Gaming A15 (2023)</div>
+                    <div className='heart-card'> <img src={HeartCard} alt=''/></div>
+                    </div>
+
+                    <div className='image-card'> 
+                        <img src={PictureProduct} alt='' className='image-product'/>
+                    </div>
+
+                    <div className='point-cart'>
+                        <div className='point'></div>
+                        <div className='point'></div>
+                        <div className='point'></div>
+                    </div>
+                   
+                    <div className='bottom-cart'>
+                        <div className='price-card'>1241,99 $</div>
+                        <div className='star-card'> <img src={starEmpty} alt=''/></div>
+                        <div className='rating-card'> 4,7</div>
+                    </div>
+                    
+                    
+                </div>
+                <div className='card'> </div>
+                <div className='card'> </div>
+                <div className='card'> </div>
+                <div className='card'> </div>
+                <div className='card'> </div>
+                <div className='card'> </div>
+
+              </div>
+
+
             
         </div>
     )
