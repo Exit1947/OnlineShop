@@ -28,18 +28,17 @@
     margin-top: 2%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
     gap: 1em;
 }
 
 
 .main-card-product-top {
     width: 95%;
-    height: 55px;
+    height: 8%;
     margin-left: 2.5%;
     margin-top: 1%;
-    display: flex;
-   
+    display: flex;   
     border-bottom: 3px solid orange;
     gap: 2em;
     align-items: center;
@@ -630,8 +629,7 @@ table tr th, table tr td {
 
 .card {
     width: 250px;
-    height: 380px;
-    
+    height: 380px;    
     margin-left: 1%;
     background-color: white;
     text-align: center;
@@ -641,7 +639,7 @@ table tr th, table tr td {
 
 .top-card {
     width: 100%;
-    height: 25%;
+    height: 15%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -653,61 +651,369 @@ table tr th, table tr td {
     height: 100%;
     font-size: 18px;    
     font-weight: bold;
+    margin-top: 29%;
+    
     
 }
 
 .image-card {
     width: 100%;
-    height: 50%;
+    height: 45%;
    
   
 }
 
 .image-product {
-    width: 100%;
-    height: 100%;
+    width: 100% auto;
+    height: 100% auto;
    
 }
 
 .point-cart {
     width: 100%;
-    height: 10%;
-   
+    height: 10%;   
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 5%;
 }
 
 .point {
     width: 10px;
     height: 10px;
     background-color: gray;
-    border-radius: 5px;
-    gap: 5px;
+    border-radius: 5px;    
     margin-left: 4px;
 }
 
 .bottom-cart {
     width: 100%;
-    height: 15%;
-    
+    height: 10%;    
     display: flex;
     text-align: center;
     justify-content: center;
+    margin-top: 5%;
 }
 
 .price-card {
     height: 100%;
-    width: 75%;
+    width: 70%;
+    font-weight: bold;
+    font-size: larger;
+    text-align: left;
+    margin-left: 4%;
 }
 
 .star-card {
     height: 100%;
-    width: 10%;
+    width: 15%;
 }
 
 .rating-card {
     height: 100%;
     width: 10%;
 }
+
+.real-price {
+    width: 100%;
+    height: 5%;   
+    text-decoration: line-through;
+    text-align: left;
+    margin-left: 4%;
+}
+
+/* Main card product                 */
+
+.product-card
+{
+    height: 92%;
+    width: 100%;
+    display: flex;
+  
+
+}
+
+.main-photo {
+    height: 100%;
+    width: 70%;
+   
+}
+
+.colour-photo-product {
+    height: 178px;
+    width: 37px;   
+    margin-top: 5%;
+    margin-left: 5%;
+    align-items: center;
+    justify-content: center;
+}
+.first-colour {
+    background-color: black;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+}
+.second-colour {
+    background-color: darkkhaki;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    margin-top: 9px;
+}
+
+.third-colour {
+    background-color: gray;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    margin-top: 9px;
+}
+
+.fourth-colour {
+    background-color: darkblue;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    margin-top: 9px;
+}
+
+.photo-product  {
+    height: 50%;
+    width: 100%;
+  
+    padding-left: 25%;
+    
+}
+
+.extra-photo 
+{
+    height: 23%;
+    width: 100%;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.extra-photo1 {
+  height: 120px;
+  width: 120px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  margin-left: 5%;
+}
+.extra-photo2 {
+    height: 120px;
+    width: 120px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-left: 5%;
+  }
+
+  .extra-photo3 {
+    height: 120px;
+    width: 120px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-left: 5%;
+  }
+  .extra-photo4 {
+    height: 120px;
+    width: 120px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-left: 5%;
+  }
+  .extra-photo5 {
+    height: 120px;
+    width: 120px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-left: 5%;
+  }
+  .heart {
+    margin-left: 90%;
+  }
+
+
+  .name-product{
+    height: 5%;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 5%;
+  }
+
+  .star-product {
+    height: 5%;
+    width: 100%;   
+    align-items: left;
+    justify-content: center;
+    margin-top: 5%;
+  }
+
+  .stock {
+    height: 5%;
+    width: 100%;
+    color: green;
+    align-items: left;
+    justify-content: center;
+    margin-top: 5%;
+    font-weight: bolder;
+    font-size: 26px;
+  }
+
+  
+  .price-product {
+    height: 5%;
+    width: 100%;
+   
+    align-items: left;
+    justify-content: center;
+    margin-top: 5%;
+    font-weight: bolder;
+    font-size: 30px;
+  }
+
+  .btn-buy-now{
+    height: 51px;
+    width: 323px;
+    border-radius: 5px ;
+    background-color: orange;
+    font-weight: bolder;
+    font-size: 20px;
+    
+  }
+  
+
+  .btn-add-to-cart {
+    height: 51px;
+    width: 323px;
+    border-radius: 5px ;
+    background-color: black;
+    color: orange;
+    font-weight: bolder;
+    font-size: 20px;
+    margin-top: 2%;
+    
+  }
+  .label {
+    font-size: 20px;
+    margin-top: 2%;
+    margin-left: 5%;
+  }
+
+  
+
+  .choose {
+     height: 50%;
+     width: 100%;
+     margin-top: 5%;
+    
+  }
+
+
+  .choose-display {
+    display: flex;
+    margin-top: 2%;
+  
+  }
+
+  .section-uno-display {
+     height: 43px;
+     width: 124px;
+     border: 1px solid orange;
+     border-radius: 6px;
+     text-align: center;
+    padding-top: 1.5%;
+     
+  }
+
+  .section-dos-display {
+    height: 43px;
+    width: 124px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    margin-left: 2%;
+    text-align: center;
+    padding-top: 1.5%;
+ }
+
+ .choose-processor {
+    display: flex;
+    margin-top: 2%;
+ }
+
+ .section-uno-processor {
+    height: 43px;
+    width: 124px;
+    border: 1px solid orange;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 1.5%;
+    
+ }
+
+ .section-dos-processor {
+   height: 43px;
+   width: 124px;
+   border: 1px solid gray;
+   border-radius: 6px;
+   margin-left: 2%;
+   text-align: center;
+    padding-top: 1.5%;
+}
+
+.choose-storage {
+    display: flex;
+    margin-top: 2%;
+}
+
+.section-uno-storage{
+    height: 43px;
+    width: 124px;
+    border: 1px solid orange;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 1.5%;
+    
+ }
+
+ .section-dos-storage {
+   height: 43px;
+   width: 124px;
+   border: 1px solid gray;
+   border-radius: 6px;
+   margin-left: 2%;
+   text-align: center;
+    padding-top: 1.5%;
+}
+
+.choose-ram {
+    display: flex;
+    margin-top: 2%;
+}
+
+.section-uno-ram{
+    height: 43px;
+    width: 124px;
+    border: 1px solid orange;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 1.5%;
+    
+ }
+
+ .section-dos-ram {
+   height: 43px;
+   width: 124px;
+   border: 1px solid gray;
+   border-radius: 6px;
+   margin-left: 2%;
+   text-align: center;
+    padding-top: 1.5%;
+}
+
+
 

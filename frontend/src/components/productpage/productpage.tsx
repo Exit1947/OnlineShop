@@ -24,10 +24,16 @@ import ArrowDown from '../../img/arrow-down.png';
 import ArrowLeft from '../../img/arrow-left.png';
 import ArrowRight from '../../img/arrow-right.png';
 import HeartCard from '../../img/heart.png';
+import PhotoLaptop from '../../img/main-photo-laptop.png';
+import ExtraPhotoLaptop1 from '../../img/photo-laptop1.jpg';
+import ExtraPhotoLaptop2 from '../../img/photo-laptop2.png';
+import ExtraPhotoLaptop3 from '../../img/photo-laptop3.png';
+import ExtraPhotoLaptop4 from '../../img/photo-laptop4.png';
+import ExtraPhotoLaptop5 from '../../img/photo-laptop5.png';
 
 
 const ProductPage = () => {
-
+     
 
     return (
         <div className="main-product-page">
@@ -44,6 +50,7 @@ const ProductPage = () => {
             </div>
 
             <div className='main-card-product'>
+
                 <div className='main-card-product-top'>
                 <img src={Arrow} alt=''/>
                 <div> All about</div>
@@ -52,8 +59,70 @@ const ProductPage = () => {
                 <div> Reviews </div>
                 <div> Related Products</div>
                 </div>
+
+                <div className='product-card'>
+                     <div className='main-photo'>
+                        <div className='colour-photo-product'>
+                            <div className='first-colour'></div>
+                            <div className='second-colour'></div>
+                            <div className='third-colour'></div>
+                            <div className='fourth-colour'></div>
+                            <div className='fifth-colour'></div>
+                        </div>
+                        <div className='heart'> <img  src={HeartCard} alt=''/></div>
+                        <div className='photo-product'> <img src ={PhotoLaptop} alt=''/> </div>
+                        <div className='extra-photo'>
+                        <div className='extra-photo1'> <img src={ExtraPhotoLaptop1}  alt=''/></div>
+                        <div className='extra-photo2'> <img src={ExtraPhotoLaptop2}  alt=''/></div>
+                        <div className='extra-photo3'> <img src={ExtraPhotoLaptop3}  alt=''/></div>
+                        <div className='extra-photo4'> <img src={ExtraPhotoLaptop4}  alt=''/></div>
+                        <div className='extra-photo5'> <img src={ExtraPhotoLaptop5}  alt=''/></div>
+                        </div>                        
+                     </div>
+
+                     <div className='back-panel'>
+                          <div className='name-product'> Galaxy Book 3 Pro 14" </div>
+                          <div className='star-product'>
+                           <img src={starEmpty} alt=''/>
+                           <img src={starEmpty} alt=''/>
+                           <img src={starEmpty} alt=''/>
+                           <img src={starEmpty} alt=''/>
+                           <img src={starEmpty} alt=''/>
+                            (125)</div>
+                          <div className='stock'> In Stock </div>
+                          <div className='price-product'> $ 1449,99</div>
+                          <button className='btn-buy-now'> Buy Now </button>
+                          <button className='btn-add-to-cart'> Add to Card</button>
+
+                          <div className='choose'>
+                            <lable> Choose Display</lable>
+                            <div className='choose-display'> 
+                                <div className='section-uno-display'>14"</div>
+                                <div className='section-dos-display'>16"</div>
+                            </div>
+                            <lable> Choose Processor</lable>
+                            <div className='choose-processor'>
+                                  <div className='section-uno-processor'> Intel Core i5</div>
+                                  <div className='section-dos-processor'> Intel Core i7</div>
+                            </div>
+                            <lable> Choose Storage </lable>
+                            <div className='choose-storage'>
+                                 <div className='section-uno-storage'>512 gb</div>
+                                  <div className='section-dos-storage'> 1 Tb </div>
+                            </div>
+
+                            <lable> Choose RAM </lable>
+                            <div className='choose-ram'>
+                            <div className='section-uno-ram'> 16Gb</div>
+                            <div className='section-dos-ram'> 32Gb</div>
+                            </div>
+                          </div>
+                     </div>
             </div>
 
+            </div>
+
+            
             <div className='business-account'>
                 <div className='container-iconsfour'>
                 <img src={IconsFour} alt="" className='paint-business'/>
@@ -344,8 +413,8 @@ const ProductPage = () => {
                 </div>
               </div>
 
-
-              <div className='collection-card'>
+                 
+              <div className='collection-card' >
 
                 <div className='card'>
 
@@ -369,6 +438,8 @@ const ProductPage = () => {
                         <div className='star-card'> <img src={starEmpty} alt=''/></div>
                         <div className='rating-card'> 4,7</div>
                     </div>
+
+                    <div className='real-price'>1462.99$</div>
                     
                     
                 </div>
@@ -380,6 +451,7 @@ const ProductPage = () => {
                 <div className='card'> </div>
 
               </div>
+              
 
 
             
