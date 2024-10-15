@@ -16,40 +16,52 @@ import HomePage from './pages/HomePage.tsx';
 import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
+import AdminPage from './components/adminpage/AdminPage.tsx';
+
+
 
 const router = createBrowserRouter([
+
     {
         path: '/',
         element: <HomePage />
     },
+    
     {
-        path: '/auth',
-        element: <AuthPage />,
-        children: [
-            {
-                path: 'heder',
-                element: < Header/>
-            },
-            {
-                path: 'registration',
-                element: <Form />
-            }
-            
-        ]
-    }
-]);
+      path: '/auth',
+      element: <AuthPage />,
+      children: [
+        {
+            path: 'login',
+            element: <Login />
+          },
+        
+        {
+          path: 'registration',
+          element: <Form />
+        }
+      ]
+    },
+    {
+        path: '/form/:id',  // Динамічний маршрут для сторінки продукту
+        element: <Form />
+      },
+      {
+        path: '/admin/:id',  // Динамічний маршрут для сторінки продукту
+        element: <AdminPage />
+      }
 
-function App() {
-  const project = '';
+  ]);
   
-  return (
-    <div className="App">
-     <h1>{project}</h1>
-
+  function App() {
+    const project = '';
+  
+    return (
+      <div className="App">
+        <h1>{project}</h1>
         <RouterProvider router={router} />
-
-    </div>
-  );
-}
-
-export default App;
+      </div>
+    );
+  }
+  
+  export default App;

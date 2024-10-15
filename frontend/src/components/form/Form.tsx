@@ -1,14 +1,20 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import './form.css';
-import Sidebar from './Sidebar.jsx';
-import ProgressBar from './ProgressBar.jsx';
-import FormFields from './FormFields.jsx';
+import Sidebar from './Sidebar.tsx';
+import ProgressBar from './ProgressBar.tsx';
+import FormFields from './FormFields.tsx';
 import {backendUrl} from "../../environments";
+import Footer from './../footer/Footer.tsx';
 import axios from "axios";
 import toast from "react-hot-toast";
+import Header from './../header/Header.tsx'; 
 import profileImage from './../../img/Questions-rafiki 1.png';
 import addressImage from './../../img/House searching-rafiki 1.png';
+import Dropdown from './../dropmenu/Dropdown.tsx';
+import Aftermenu from './../aftermenu/Aftermenu.tsx';
+import LanguageDropdown from './../languagedrop/LanguageDropdown.tsx';
+import CurrencyDropdown from './../currencydropdown/CurrencyDropdown.tsx';
 
 type FormValues = {
     email: string,
@@ -87,18 +93,27 @@ const Form = () => {
     };
 
     return (
-        
+        <>
+            <Header />  
+            
+            <Aftermenu/>
+            <Dropdown/>
+            <LanguageDropdown/>
+            <CurrencyDropdown/>
             <div className="form-container">
-            <Sidebar activeStep={activeStep} handleStepClick={handleStepClick} />
-            <div className="profile-image-container">
-                {activeStep === 1 && <img src={profileImage} alt="Profile" />}
-                {activeStep === 2 && <img src={addressImage} alt="Address" />}
+                <Sidebar activeStep={activeStep} handleStepClick={handleStepClick} />
+                <div className="profile-image-container">
+                    {activeStep === 1 && <img src={profileImage} alt="Profile" />}
+                    {activeStep === 2 && <img src={addressImage} alt="Address" />}
+                </div>
+                <div className="content">
+                    <ProgressBar progress={progress} title={getTitleForStep(activeStep)} />
+                    <FormFields activeStep={activeStep} handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
+                </div>
             </div>
-            <div className="content">
-                <ProgressBar progress={progress} title={getTitleForStep(activeStep)} />
-                <FormFields activeStep={activeStep} handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
-            </div>
-        </div>
+            <Footer/>
+        </>
+        
     );
 };
 

@@ -1,4 +1,4 @@
-import './header.module.css'
+import  './header.module.css'
 import logoImg from './../../img/Group 1474.png'
 import logoImgs from './../../img/Frame 427319424.png'
 import histImg from './../../img/Frame 427319439.png'
@@ -12,6 +12,7 @@ import React from 'react'
 function Header (){
     return (
       <header className="header">
+          <h1>Test Header</h1> {/* Простий текст для тесту */}
     <div className="header_left">
         <img src={logoImg} alt="Logo" className="header_logo" />
         <div className="header_catalogue">
