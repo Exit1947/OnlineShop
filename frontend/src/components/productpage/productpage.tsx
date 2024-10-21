@@ -1,4 +1,6 @@
 import './productpagestyle.css';
+import React from 'react';
+import { useState, useEffect} from "react";
 import Arrow from '../../img/icons-arrow-left.png';
 import IconsFour from '../../img/Frame 427319916.png';
 import Business from '../../img/Frame 427319913.png';
@@ -23,18 +25,87 @@ import ThumbDown from '../../img/thumb-down.png';
 import ArrowDown from '../../img/arrow-down.png';
 import ArrowLeft from '../../img/arrow-left.png';
 import ArrowRight from '../../img/arrow-right.png';
-import HeartCard from '../../img/heart.png';
-import PhotoLaptop from '../../img/main-photo-laptop.png';
-import ExtraPhotoLaptop1 from '../../img/photo-laptop1.jpg';
-import ExtraPhotoLaptop2 from '../../img/photo-laptop2.png';
-import ExtraPhotoLaptop3 from '../../img/photo-laptop3.png';
-import ExtraPhotoLaptop4 from '../../img/photo-laptop4.png';
-import ExtraPhotoLaptop5 from '../../img/photo-laptop5.png';
+import HeartCard from '../../img/heart-orange-border.png';
+import HeartOrange from '../../img/full-heart-orange.png';
+import ExtraPhotoLaptop01 from '../../img/main-photo-laptop.png';
+import ExtraPhotoLaptop02 from '../../img/photo-laptop1.jpg';
+import ExtraPhotoLaptop03 from '../../img/photo-laptop2.png';
+import ExtraPhotoLaptop04 from '../../img/photo-laptop3.png';
+import ExtraPhotoLaptop05 from '../../img/photo-laptop4.png';
+import ExtraPhotoLaptop06 from '../../img/photo-laptop5.png';
 
 
 const ProductPage = () => {
-     
 
+//   Slider photo laptop
+  const ImageMain =({arr, image, index}) => {
+    return (
+        
+        <div className='img'>
+            {arr.map ((imgsrc,i)=>
+            <img 
+            key={i}
+            height ={150}
+            width={150}
+            src={imgsrc}
+            onClick={()=> image(i)}
+            className={index ===i ? 'active' : ''}
+            />
+            )}
+        </div>
+    )
+  }
+
+  const Slideshow = ( {imgs}) =>{
+    const [index, setIndex] = useState(0);
+
+    useEffect(()=> {setIndex(0)},[])
+
+    const next= ()=> {
+        if (index=== imgs.length-1){
+            setIndex(0)
+        } else { setIndex(index+1)}
+    }
+
+    const prev= ()=> {
+    if (index === 0)
+         { setIndex (imgs.length-1)}
+    else { setIndex(index-1)}
+    }
+
+
+    return <div className='slideshow '>
+     <img className="mainImg"  src={imgs[index]}/>
+     <div className='actions'>
+        <button onClick={prev}> <img src={ArrowLeft} /></button>
+        <button onClick={next}> <img src={ArrowRight}/></button>
+        </div>
+        <ImageMain arr={imgs} image={setIndex} index={index}></ImageMain>
+     
+    </div>
+  }
+
+
+  // Add color to heart 
+   
+  const [colorHeart, setColorHeart] = useState(HeartCard);
+
+   let toggle= true;
+  
+  
+  const changeColor =()=> {
+      toggle=!toggle;
+      toggle? setColorHeart (HeartCard) : setColorHeart (HeartOrange);
+     
+      
+  }
+
+  
+        
+   
+   
+  
+     
     return (
         <div className="main-product-page">
 
@@ -69,15 +140,38 @@ const ProductPage = () => {
                             <div className='fourth-colour'></div>
                             <div className='fifth-colour'></div>
                         </div>
-                        <div className='heart'> <img  src={HeartCard} alt=''/></div>
-                        <div className='photo-product'> <img src ={PhotoLaptop} alt=''/> </div>
+                        <div className='heart' > <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
+                         
+                        
                         <div className='extra-photo'>
-                        <div className='extra-photo1'> <img src={ExtraPhotoLaptop1}  alt=''/></div>
-                        <div className='extra-photo2'> <img src={ExtraPhotoLaptop2}  alt=''/></div>
-                        <div className='extra-photo3'> <img src={ExtraPhotoLaptop3}  alt=''/></div>
-                        <div className='extra-photo4'> <img src={ExtraPhotoLaptop4}  alt=''/></div>
-                        <div className='extra-photo5'> <img src={ExtraPhotoLaptop5}  alt=''/></div>
-                        </div>                        
+                           <Slideshow imgs={[
+                            ExtraPhotoLaptop01,
+                            ExtraPhotoLaptop02,
+                            ExtraPhotoLaptop03,
+                            ExtraPhotoLaptop04,
+                            ExtraPhotoLaptop05,
+                            ExtraPhotoLaptop06
+ 
+
+                           ]} />
+                        {/* <div className='extra-photo1'> 
+                            <img src={ExtraPhotoLaptop02}  alt=''/>
+                            </div>
+                        <div className='extra-photo2'> 
+                            <img src={ExtraPhotoLaptop03}  alt=''/>
+                            </div>
+                        <div className='extra-photo3'> 
+                            <img src={ExtraPhotoLaptop04}  alt=''/>
+                            </div>
+                        <div className='extra-photo4'> 
+                            <img src={ExtraPhotoLaptop05}  alt=''/>
+                            </div>
+                        <div className='extra-photo5'> 
+                            <img src={ExtraPhotoLaptop06}  alt=''/>
+                            </div> */}
+                        
+                        </ div> 
+                                            
                      </div>
 
                      <div className='back-panel'>
@@ -95,23 +189,23 @@ const ProductPage = () => {
                           <button className='btn-add-to-cart'> Add to Card</button>
 
                           <div className='choose'>
-                            <lable> Choose Display</lable>
+                            <lable> <strong >Choose Display</strong></lable>
                             <div className='choose-display'> 
                                 <div className='section-uno-display'>14"</div>
                                 <div className='section-dos-display'>16"</div>
                             </div>
-                            <lable> Choose Processor</lable>
+                            <lable> <strong>Choose Processor</strong></lable>
                             <div className='choose-processor'>
                                   <div className='section-uno-processor'> Intel Core i5</div>
                                   <div className='section-dos-processor'> Intel Core i7</div>
                             </div>
-                            <lable> Choose Storage </lable>
+                            <lable> <strong>Choose Storage</strong> </lable>
                             <div className='choose-storage'>
                                  <div className='section-uno-storage'>512 gb</div>
                                   <div className='section-dos-storage'> 1 Tb </div>
                             </div>
 
-                            <lable> Choose RAM </lable>
+                            <lable> <strong>Choose RAM</strong> </lable>
                             <div className='choose-ram'>
                             <div className='section-uno-ram'> 16Gb</div>
                             <div className='section-dos-ram'> 32Gb</div>
@@ -187,32 +281,32 @@ const ProductPage = () => {
                                 <tr>
                                     <th> <img src={BlackLogo} alt=''/></th>
                                     <th> 
-                                         <div>
+                                         
                                             <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name1</div>
                                             <button className='btn-add-to-card'> Add to card</button>
-                                        </div>
+                                        
                                         </th>
                                     <th>
-                                    <div>
+                                    
                                             <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name2</div>
                                             <button className='btn-add-to-card'> Add to card</button>
-                                        </div> 
+                                    
                                     </th>
                                     <th>
-                                    <div>
+                                
                                             <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name3</div>
                                             <button className='btn-add-to-card'> Add to card</button>
-                                        </div>
+                                    
                                     </th>
                                     <th>
-                                    <div>
+                                    
                                             <img  className='image-product' src={PictureProduct} alt=''/>
                                             <div> Products name4</div>
                                             <button className='btn-add-to-card'> Add to card</button>
-                                        </div>
+                                    
                                     </th>
                                 </tr>
                             </thead>
