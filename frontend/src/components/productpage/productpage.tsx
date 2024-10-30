@@ -1,5 +1,9 @@
 import './productpagestyle.css';
 import React from 'react';
+import {useRef} from 'react';
+import Card from './card.tsx'
+import { Rating } from 'react-simple-star-rating';
+import { FaStar } from 'react-icons/fa';
 import { useState, useEffect} from "react";
 import Arrow from '../../img/icons-arrow-left.png';
 import IconsFour from '../../img/Frame 427319916.png';
@@ -14,7 +18,8 @@ import FourthSection from '../../img/Group 1501.png';
 import FifthSection from '../../img/Group 1502.png';
 import BlackLogo from '../../img/logo Omnify.png';
 import PictureProduct from '../../img/LepTop.png' ;
-import starEmpty from '../../img/icons8-star-25.png';
+import starEmpty from '../../img/star-empty.png';
+import starOrange from '../../img/star-full-orange.png';
 import arrowDown from '../../img/drop-down-arrow.png';
 import PhotoUser from '../../img/image 95.png';
 import PhotoProduct from '../../img/Frame 427320002.png';
@@ -33,58 +38,84 @@ import ExtraPhotoLaptop03 from '../../img/photo-laptop2.png';
 import ExtraPhotoLaptop04 from '../../img/photo-laptop3.png';
 import ExtraPhotoLaptop05 from '../../img/photo-laptop4.png';
 import ExtraPhotoLaptop06 from '../../img/photo-laptop5.png';
+import starEmptyUno from '../../img/star-empty.png';
+import starOrangeUno from '../../img/star-full-orange.png';
+import { toBeDisabled } from '@testing-library/jest-dom/matchers';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 const ProductPage = () => {
+    
+    const imgs =[
+        {id:0, value:ExtraPhotoLaptop01},
+        {id:1, value:ExtraPhotoLaptop02},
+        {id:2, value:ExtraPhotoLaptop03},
+        {id:3, value:ExtraPhotoLaptop04},
+        {id:4, value:ExtraPhotoLaptop05},
+        {id:5, value:ExtraPhotoLaptop06},
+    ];
+
+  const [sliderData, setSliderData] = useState(imgs[0])
+    const HandleClick = (index) =>{
+        const slider=imgs[index];
+        setSliderData(slider);
+    }
 
 //   Slider photo laptop
-  const ImageMain =({arr, image, index}) => {
-    return (
+//   const ImageMain =({arr, image, index}) => {
+//     return (
         
-        <div className='img'>
-            {arr.map ((imgsrc,i)=>
-            <img 
-            key={i}
-            height ={150}
-            width={150}
-            src={imgsrc}
-            onClick={()=> image(i)}
-            className={index ===i ? 'active' : ''}
-            />
-            )}
-        </div>
-    )
-  }
+//         <div className='img'>
+//             {arr.map ((imgsrc,i)=>
+//             <img 
+//             key={i}
+//             height ={150}
+//             width={150}
+           
+//             src={imgsrc}
+//             onClick={()=> image(i)}
+//             className={index ===i ? 'active' : ''}
+//             />
+//             )}
+//         </div>
+//     )
+//   }
 
-  const Slideshow = ( {imgs}) =>{
-    const [index, setIndex] = useState(0);
+//   const Slideshow = ( {imgs}) =>{
+//     const [index, setIndex] = useState(0);
 
-    useEffect(()=> {setIndex(0)},[])
+//     useEffect(()=> {setIndex(0)},[])
 
-    const next= ()=> {
-        if (index=== imgs.length-1){
-            setIndex(0)
-        } else { setIndex(index+1)}
-    }
+//     const next= ()=> {
+//         if (index=== imgs.length-1){
+//             setIndex(0)
+//         } else { setIndex(index+1)}
+//     }
 
-    const prev= ()=> {
-    if (index === 0)
-         { setIndex (imgs.length-1)}
-    else { setIndex(index-1)}
-    }
+//     const prev= ()=> {
+//     if (index === 0)
+//          { setIndex (imgs.length-1)}
+//     else { setIndex(index-1)}
+//     }
 
 
-    return <div className='slideshow '>
-     <img className="mainImg"  src={imgs[index]}/>
-     <div className='actions'>
-        <button onClick={prev}> <img src={ArrowLeft} /></button>
-        <button onClick={next}> <img src={ArrowRight}/></button>
-        </div>
-        <ImageMain arr={imgs} image={setIndex} index={index}></ImageMain>
+//     return <div className='slideshow '>
+//      <img className="mainImg"  src={imgs[index]}/>
+//      <div className='actions'>
+//         <button onClick={prev}> <img src={ArrowLeft} /></button>
+        
+//         <button onClick={next}> <img src={ArrowRight}/></button>
+//         </div>
+//         <ImageMain arr={imgs} image={setIndex} index={index}></ImageMain>
+       
      
-    </div>
-  }
+//     </div>
+//   }
 
+    
+                   
 
   // Add color to heart 
    
@@ -100,12 +131,63 @@ const ProductPage = () => {
       
   }
 
-  
+
+  // add color to heart
+  const [colorStar, setColorStar] = useState(starEmptyUno);   
+
+  let id = null;
+
+  const changeColorStar =()=> {
+    toggle=!toggle;
+    
+    toggle? setColorStar (starEmptyUno) : setColorStar (starOrangeUno);    
+    
+} 
+  // add color to star
+    const [rating, setRating]= useState(null);
+    const [hover, setHover] = useState(null); 
         
+   // slider card 
+   let box = document.querySelector('.collection-card');
    
    
-  
-     
+   const next= ()=> {
+       let width= box.clientWidth;
+       box.scrollLeft=box.scrollLeft + width;
+    }
+
+    const prev= ()=> {
+        let width= box.clientWidth;
+        box.scrollLeft=box.scrollLeft - width;
+    }
+
+    // scroll to different position
+
+    const ref= useRef(null);
+    
+
+     const scrolltoArea =()=>{
+        
+        ref.current?.scrollIntoView({behavior: 'smooth'})      
+        
+    }
+
+    const scrolltoAreaTable =()=>{
+        
+        window.scrollTo(0,3490)     
+        
+    }
+
+    const scrolltoAreaAllAbout =()=>{
+        
+        window.scrollTo(0,1200)     
+        
+    }
+
+    const scrolltoAreaReview=() =>{
+        window.scrollTo(0,3900)    
+    }
+
     return (
         <div className="main-product-page">
 
@@ -124,11 +206,10 @@ const ProductPage = () => {
 
                 <div className='main-card-product-top'>
                 <img src={Arrow} alt=''/>
-                <div> All about</div>
-                <div> Technical characteristics</div>
-                <div> Tables</div>
-                <div> Reviews </div>
-                <div> Related Products</div>
+                <div onClick={scrolltoAreaAllAbout}> All about</div>
+                <div onClick={scrolltoAreaTable}> Technical characteristics</div>
+                <div onClick={scrolltoAreaReview}> Reviews </div>
+                <div onClick={scrolltoArea}> Related Products</div>
                 </div>
 
                 <div className='product-card'>
@@ -142,9 +223,22 @@ const ProductPage = () => {
                         </div>
                         <div className='heart' > <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
                          
-                        
+                       <div className="photo-view"> 
+                        <img   src= { sliderData.value} height='450' width='500' />
+                        </div> 
                         <div className='extra-photo'>
-                           <Slideshow imgs={[
+                             
+                            {
+
+
+                                imgs.map ((data,i) => 
+                                    <div className='thumbnail'> 
+                                        <img className={sliderData.id===i? "clicked" : ""} key={data.id} src={data.value} onClick={()=>HandleClick(i)} height="70" width="100"/>
+                                     </div>
+                                
+                            )
+                            }
+                           {/* <Slideshow imgs={[
                             ExtraPhotoLaptop01,
                             ExtraPhotoLaptop02,
                             ExtraPhotoLaptop03,
@@ -153,7 +247,7 @@ const ProductPage = () => {
                             ExtraPhotoLaptop06
  
 
-                           ]} />
+                           ]} /> */}
                         {/* <div className='extra-photo1'> 
                             <img src={ExtraPhotoLaptop02}  alt=''/>
                             </div>
@@ -176,13 +270,37 @@ const ProductPage = () => {
 
                      <div className='back-panel'>
                           <div className='name-product'> Galaxy Book 3 Pro 14" </div>
+
                           <div className='star-product'>
-                           <img src={starEmpty} alt=''/>
-                           <img src={starEmpty} alt=''/>
-                           <img src={starEmpty} alt=''/>
-                           <img src={starEmpty} alt=''/>
-                           <img src={starEmpty} alt=''/>
-                            (125)</div>
+
+                            {[...Array(5)].map((star,i) => {
+                                const ratingValue= i + 1;
+                                  return (
+                                    <label className='inputRadio'>
+                                        <input type="radio"
+                                         name="rating" 
+                                         className='inputRadio'                                        
+                                                                      
+                                         value={ratingValue}
+                                         onClick= {() => setRating ( ratingValue )}                                       
+                                         
+                                         />
+
+                                        <FaStar className='star' 
+                                        size="40"                                      
+                                        color= {ratingValue <= ( hover || rating ) ? "orange" : "gray"}                                         
+                                        onMouseEnter={()=> setHover( ratingValue )}
+                                        onMouseLeave={()=> setHover(null)}
+                                         />
+                                    </label>
+                                  
+                                )
+                            })}
+             
+                            
+                           
+                            <label className='numberStar'>(125)</label>
+                            </div>
                           <div className='stock'> In Stock </div>
                           <div className='price-product'> $ 1449,99</div>
                           <button className='btn-buy-now'> Buy Now </button>
@@ -226,7 +344,7 @@ const ProductPage = () => {
             </div>
 
 
-            <div className='all-about'> All about</div>
+            <div className='all-about' ref={ref}> <strong>All about</strong></div>
 
             <div className='full-all-about'>
                 
@@ -271,7 +389,7 @@ const ProductPage = () => {
                  </div>
 
 
-                 <div className='technical-characteristics'> <strong>Technical characteristics</strong></div>
+                 <div className='technical-characteristics' ref={ref}> <strong>Technical characteristics</strong></div>
 
                    <div className='top-table'> <strong>Name Product</strong></div>
 
@@ -326,7 +444,7 @@ const ProductPage = () => {
                                         <tr>Webcam</tr>
                                     </td>
                                     <td>
-                                        <tr><img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/> <img src={starEmpty} alt=''/></tr>
+                                        <tr><img src={colorStar}  onClick={changeColorStar} alt=''/> <img src={starEmpty}  onClick={changeColorStar} alt=''/> <img src={starEmpty} onClick={changeColorStar} alt=''/> <img src={starEmpty} onClick={changeColorStar} alt=''/> <img src={starEmpty}  onClick={changeColorStar} alt=''/></tr>
                                         <tr> 16"</tr>
                                         <tr> Graphite</tr>
                                         <tr> 16:10 AMOLED WQXGA+</tr>
@@ -379,7 +497,7 @@ const ProductPage = () => {
                  </div>
 
                  <div className='reviews'> 
-                    <div className='just-name'><strong>Reviews</strong></div>
+                    <div className='just-name' ref={ref}><strong>Reviews</strong></div>
 
                     <div className=''>
                     <button className='btn-reviews'> <strong>Reviews</strong> 
@@ -499,22 +617,24 @@ const ProductPage = () => {
               </div>
 
 
-              <div className='related-products'> 
+              <div className='related-products' ref={ref}> 
                  <div className='just-name'> Related Products</div>
                     <div className='left-button' >
-                <button className='arrow-left'><img src={ArrowLeft} alt=''></img></button>
-                <button className='arrow-right'> <img src={ArrowRight} alt=''></img></button>
+                <button className='arrow-left' onClick={next}> <img src={ArrowLeft} alt=''></img></button>
+                <button className='arrow-right' onClick={prev}>  <img src={ArrowRight} alt=''></img></button>
                 </div>
               </div>
 
+
+
                  
               <div className='collection-card' >
-
-                <div className='card'>
-
+                                      
+                       
+                        {/* <div className='card'>
                     <div className='top-card'>
                     <div className='title-card'> Asus TUF Gaming A15 (2023)</div>
-                    <div className='heart-card'> <img src={HeartCard} alt=''/></div>
+                    <div className='heart-card'> <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
                     </div>
 
                     <div className='image-card'> 
@@ -529,21 +649,31 @@ const ProductPage = () => {
                    
                     <div className='bottom-cart'>
                         <div className='price-card'>1241,99 $</div>
-                        <div className='star-card'> <img src={starEmpty} alt=''/></div>
+                        <div className='star-card'> <img src={colorStar} onClick={changeColorStar} alt=''/></div>
                         <div className='rating-card'> 4,7</div>
                     </div>
 
                     <div className='real-price'>1462.99$</div>
+                        
                     
-                    
-                </div>
-                <div className='card'> </div>
-                <div className='card'> </div>
-                <div className='card'> </div>
-                <div className='card'> </div>
-                <div className='card'> </div>
-                <div className='card'> </div>
+                </div> */}
+                                
+               
 
+                      
+
+                <div  > <Card ></Card> </div>                        
+                <div > <Card ></Card> </div>
+                <div > <Card ></Card> </div>
+                <div > <Card ></Card></div>
+                <div > <Card ></Card></div>
+                <div > <Card ></Card></div>
+                <div > <Card ></Card></div>
+                <div > <Card ></Card></div>
+                <div > <Card ></Card></div>
+                <div > <Card ></Card></div>
+               
+                
               </div>
               
 
@@ -552,6 +682,7 @@ const ProductPage = () => {
         </div>
     )
 }
+
 
 
 export default ProductPage;
