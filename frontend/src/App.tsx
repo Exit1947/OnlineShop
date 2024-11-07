@@ -17,6 +17,7 @@ import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
 import AdminPage from './components/adminpage/AdminPage.tsx';
+import CartPage from './components/cardpage/CardPage.jsx';
 
 
 
@@ -49,7 +50,12 @@ const router = createBrowserRouter([
       {
         path: '/admin/:id',  // Динамічний маршрут для сторінки продукту
         element: <AdminPage />
+      },
+      {
+        path: '/cardpage/:id',  // Динамічний маршрут для сторінки продукту
+        element: <CartPage />
       }
+
 
   ]);
   
