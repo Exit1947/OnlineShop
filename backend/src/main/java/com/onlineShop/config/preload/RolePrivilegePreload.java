@@ -1,5 +1,9 @@
-package com.onlineShop.models.Users.RolePrivilege;
+package com.onlineShop.config.preload;
 
+import com.onlineShop.models.Users.RolePrivilege.Privilege;
+import com.onlineShop.models.Users.RolePrivilege.PrivilegeType;
+import com.onlineShop.models.Users.RolePrivilege.Role;
+import com.onlineShop.models.Users.RolePrivilege.RoleType;
 import com.onlineShop.service.PrivilegeService;
 import com.onlineShop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class RolePrivilegeConfig {
+public class RolePrivilegePreload {
 
     public final Role ADMIN;
     public final Role MODERATOR;
@@ -20,8 +24,8 @@ public class RolePrivilegeConfig {
     public final List<Privilege> listOfAllPrivileges;
 
     @Autowired
-    public RolePrivilegeConfig(RoleService roleRepository, PrivilegeService privilegeService) {
-        listOfAllRoles = roleRepository.getAll();
+    public RolePrivilegePreload(RoleService roleService, PrivilegeService privilegeService) {
+        listOfAllRoles = roleService.getAll();
         listOfAllPrivileges = privilegeService.getAll();
         baseRegisterPrivilege = baseRegisterPrivilege();
 

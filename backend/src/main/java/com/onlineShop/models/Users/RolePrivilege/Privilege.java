@@ -3,7 +3,6 @@ package com.onlineShop.models.Users.RolePrivilege;
 import com.onlineShop.models.Users.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;

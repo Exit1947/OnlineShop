@@ -1,19 +1,19 @@
 package com.onlineShop.service;
 
 import com.onlineShop.models.Users.UserEntity;
-import com.onlineShop.repository.PersonRepository;
+import com.onlineShop.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class PersonService {
+public class UserEntityService {
 
-    private final PersonRepository personRepository;
+    private final UserEntityRepository personRepository;
 
     @Autowired
-    public PersonService(final PersonRepository personRepository) {
+    public UserEntityService(final UserEntityRepository personRepository) {
         this.personRepository = personRepository;
     }
 

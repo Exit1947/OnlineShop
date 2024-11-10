@@ -1,11 +1,13 @@
 package com.onlineShop.models.Users.Staff;
 
-import com.onlineShop.models.Company.Company;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.*;
+import com.onlineShop.models.Shop.Company.Company;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -14,22 +16,24 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SalesRep extends Staff {
-    @NonNull
-    @Column(name="city_shop", nullable = false)
+    @NotBlank(message = "City can't be empty")
+    @Column(name="city_shop")
     @Length(min = 3, max = 100, message = "City shop must be between 3 and 100 characters")
     private String cityShop;
 
-    @NonNull
-    @Column(name="street", nullable = false)
+    @NotBlank(message = "Street can't be empty")
+    @Column(name="street")
     @Length(min = 3, max = 100, message = "Street must be between 3 and 100 characters")
     private String street;
 
-    @ManyToOne
-    @JoinColumn(name="id_company", nullable = false)
+    @NotNull(message = "Company can't be empty")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_company")
     private Company company;
 
-    @ManyToOne
-    @JoinColumn(name = "id_admin", nullable = false)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_admin")
     private Admin admin;
 
 }

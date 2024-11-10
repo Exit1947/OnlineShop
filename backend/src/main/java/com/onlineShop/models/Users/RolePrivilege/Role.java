@@ -2,7 +2,6 @@ package com.onlineShop.models.Users.RolePrivilege;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Getter

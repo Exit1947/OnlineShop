@@ -5,7 +5,7 @@ import com.onlineShop.dto.LoginRequest;
 import com.onlineShop.dto.LoginResponse;
 import com.onlineShop.dto.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
-import com.onlineShop.models.Users.RolePrivilege.RolePrivilegeConfig;
+import com.onlineShop.config.preload.RolePrivilegePreload;
 import com.onlineShop.security.JwtIssuer;
 import com.onlineShop.security.UserPrincipal;
 import jakarta.transaction.Transactional;
@@ -22,22 +22,22 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final RolePrivilegeConfig rolePrivilegeConfig;
-    private final PersonService personService;
+    private final RolePrivilegePreload rolePrivilegePreload;
+    private final UserEntityService userEntityService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtIssuer jwtIssuer;
 
     @Transactional
     public ResponseEntity<HttpStatus> register(final RegisterRequest request) {
-        if (!personService.existsByEmail(request.getEmail())) {
+        if (!userEntityService.existsByEmail(request.getEmail())) {
             EndUser endUser = AuthConverter.toEndUser(request);
 
             endUser.setPassword(passwordEncoder.encode(request.getPassword()));
-            endUser.setRole(rolePrivilegeConfig.END_USER);
-            endUser.setPrivileges(rolePrivilegeConfig.baseRegisterPrivilege);
+            endUser.setRole(rolePrivilegePreload.END_USER);
+            endUser.setPrivileges(rolePrivilegePreload.baseRegisterPrivilege);
 
-            personService.save(endUser);
+            userEntityService.save(endUser);
 
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }

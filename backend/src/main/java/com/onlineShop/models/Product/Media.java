@@ -1,8 +1,8 @@
 package com.onlineShop.models.Product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Getter
@@ -11,11 +11,16 @@ import org.springframework.lang.NonNull;
 @NoArgsConstructor
 public class Media {
     @Id
-    @NonNull
+    @NotBlank
     @Column(name = "id")
     private String id;
 
+    @NonNull
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name="id_product")
     private Product product;
+
+    @NotBlank
+    @Column(name="mediaName")
+    private String mediaName;
 }
