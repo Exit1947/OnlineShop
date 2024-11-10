@@ -1,5 +1,4 @@
-
-import './header.css'
+import './header.module.css'
 import logoImg from './../../img/Group 1474.png'
 import logoImgs from './../../img/Frame 427319424.png'
 import histImg from './../../img/Frame 427319439.png'
@@ -8,7 +7,6 @@ import logologImg from './../../img/iconamoon_profile.png'
 import vectorImg from './../../img/Vector 2629.png'
 import logotextImg from './../../img/Hello, sign in.png'
 import byelogImg from './../../img/shopping_cart.png'
-
 
 
 function Header (){
@@ -27,11 +25,6 @@ function Header (){
 <img src={vectorImg} alt="" className='vectors_logo' />
 <img src={byelogImg} alt="" className="byelogo_logo" span="0000"/>
 </div>
-
-
-
-
-
 
 
 <div className="header_nav">

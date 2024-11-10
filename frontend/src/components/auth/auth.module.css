@@ -1,0 +1,140 @@
+.auth-container {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth-card {
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px #ccc;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.auth-card h1 {
+    font-weight: 400;
+}
+
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-wrapper label {
+    font-weight: bold;
+}
+
+.input-wrapper input {
+    border-radius: 4px;
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.input-wrapper input:focus {
+    box-shadow: 0 0 0 3px #c8f3fa;
+}
+
+.input-error {
+    border-color: red !important;
+}
+
+.input-error:focus {
+    box-shadow: 0 0 0 3px rgb(238, 184, 184) !important;
+}
+
+.error {
+    color: #c40000;
+    font-size: 12px;
+}
+
+.auth-card form button {
+    padding: 5px;
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: #FFD814;
+}
+
+.auth-card form button:hover {
+    background-color: #F7CA00;
+}
+
+.auth-card a, .auth-card a:visited {
+    color: #0066c0;
+}
+
+.auth-card a:hover {
+    color: #c45500;
+    text-decoration: underline;
+}
+
+.link-divider {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.link-divider h5 {
+    font-weight: 400;
+    font-size: 13px;
+    color: #767676;
+    white-space: nowrap;
+}
+
+.line {
+    border-top: 1px solid #e7e7e7;
+    width: 100%;
+}
+
+.link-wrapper {
+    width: 350px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px #ccc;
+    padding: 5px;
+}
+
+.link-wrapper a {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.link-wrapper a, .link-wrapper a:visited {
+    color: black;
+}
+
+.link-wrapper:hover {
+    background-color: #F7FAFA;
+}
+
+.login-error-box {
+    border-radius: 5px;
+    border: 1px solid #c40000;
+    padding: .5rem;
+    text-align: center;
+}
+
+.login-error-box h4 {
+    font-weight: 400;
+    font-size: 17px;
+    color: #c40000;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+
+    .auth-container {
+        width: 300px;
+    }
+}

@@ -5,6 +5,9 @@
     padding: 17px, 60px, 17px, 46px;
     gap: 46px;
 }
+.img-logo {
+    cursor: pointer;
+}
 .header_logo{
     width: 100px;
     height: 50px;
