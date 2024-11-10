@@ -22,12 +22,10 @@ import java.util.Optional;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtDecoder jwtDecoder;
-    private final JwtToPrincipalConverter jwtToPrincipalConverter;
 
     @Autowired
-    public JwtAuthenticationFilter(final JwtDecoder jwtDecoder, final JwtToPrincipalConverter jwtToPrincipalConverter) {
+    public JwtAuthenticationFilter(final JwtDecoder jwtDecoder) {
         this.jwtDecoder = jwtDecoder;
-        this.jwtToPrincipalConverter = jwtToPrincipalConverter;
     }
 
     @Override
@@ -35,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     final FilterChain filterChain) throws ServletException, IOException {
         extractTokenFromRequest(request)
                 .map(jwtDecoder::decode)
-                .map(jwtToPrincipalConverter::convert)
+                .map(JwtToPrincipalConverter::convert)
                 .map(UserPrincipalAuthenticationToken::new)
                 .ifPresent(authenticationToken -> {
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);

@@ -1,0 +1,38 @@
+.aftermenu{
+    background-color:#FFB600;
+    width: 1519px;
+    height: 30px;
+    top: 80px;
+    
+}
+.location_img{
+    width: 18px;
+    height: 18px;
+    padding: 1px;
+    margin-top: 5px;
+    margin-left: 45px;
+}
+.countlist{
+    width: 20px;
+    margin-top: -17px;
+    margin-left: 63px;
+    
+
+    
+}
+.countries_img{
+    width: 18px;
+    height: 18px;
+    padding: 1px;
+    margin-top: 5px;
+    margin-left: 85px;
+
+}
+
+.currency_img{
+    width: 20px;
+    height: 20px;
+    padding: 1px;
+    margin-top: 4px;
+    margin-left: 75px;
+}
