@@ -11,12 +11,12 @@ import sweaterImage from './../../img/Rectangle 23922 (16).png';
 import iphoneImage from './../../img/Rectangle 23922 (17).png';
 import asusLaptopImage from './../../img/Rectangle 23922 (18).png';
 import duckSweaterImage from './../../img/Rectangle 23922 (19).png';
-import Dropdown from './../dropmenu/Dropdown.tsx';
-import Aftermenu from './../aftermenu/Aftermenu.tsx';
-import LanguageDropdown from './../languagedrop/LanguageDropdown.tsx';
-import CurrencyDropdown from './../currencydropdown/CurrencyDropdown.tsx';
-import Header from './../header/Header.tsx'; 
-import Footer from './../footer/Footer.tsx';
+import Dropdown from '../dropmenu/Dropdown.tsx';
+import Aftermenu from '../aftermenu/Aftermenu.tsx';
+import LanguageDropdown from '../languagedrop/LanguageDropdown.tsx';
+import CurrencyDropdown from '../currencydropdown/CurrencyDropdown.tsx';
+import Header from '../header/Header.tsx'; 
+import Footer from '../footer/Footer.tsx';
 
 
 
@@ -32,6 +32,9 @@ const CartPage = () => {
 
     const pricePerItem = 1449.99;
     const totalPrice = (pricePerItem * quantity).toFixed(2);
+
+
+
 
     const handleIncrease = () => {
         setQuantity(quantity + 1);
@@ -72,6 +75,8 @@ const CartPage = () => {
             [item]: !prev[item]
         }));
     };
+
+    
 
     return (
         <>
@@ -114,7 +119,7 @@ const CartPage = () => {
             {!isDeleted && (
                 <div className="price-info">
                     <p className="total-price">Total Price ({quantity} item{quantity > 1 ? 's' : ''}): ${totalPrice}</p>
-                    <button className="buy-now">Buy Now</button>
+                    <button className="buy-now">Buy Now</button> 
                 </div>
             )}
 

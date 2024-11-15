@@ -16,7 +16,7 @@ import HomePage from './pages/HomePage.tsx';
 import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
-import AdminPage from './components/adminpage/AdminPage.tsx';
+import AdminPage from './components/adminpage/AdminPage.jsx';
 import CartPage from './components/cardpage/CardPage.jsx';
 
 
