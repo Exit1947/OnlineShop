@@ -2,6 +2,7 @@ package com.onlineShop.models.Product;
 
 import com.onlineShop.models.Feedback.Feedback;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,6 +41,10 @@ public class Product {
 
     @Column(name = "discount")
     private boolean discount;
+
+    @Column(name = "price")
+    @DecimalMin("0.1")
+    private double price;
 
     @NotBlank(message = "Thumbnail image can't be empty")
     @Column(name = "thumbnailImage_name")
