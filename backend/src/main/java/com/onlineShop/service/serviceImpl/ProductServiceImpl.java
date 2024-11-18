@@ -49,14 +49,16 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isEmpty()) {
             product.setId(UUID.randomUUID().toString());
 
-            List<File> mediaFiles = convertRequestOfMediaFilesToListOfFiles(mediaFilesReq);
-            if(!mediaFiles.isEmpty()) {
-                List<Media> mediaList = new ArrayList<>();
-                for(File file : mediaFiles) {
-                    mediaList.add(new Media(file.getName(), product, file.getName()));
+            if(!mediaFilesReq.getMediaFiles().isEmpty()) {
+                List<File> mediaFiles = convertRequestOfMediaFilesToListOfFiles(mediaFilesReq);
+                if (!mediaFiles.isEmpty()) {
+                    List<Media> mediaList = new ArrayList<>();
+                    for (File file : mediaFiles) {
+                        mediaList.add(new Media(file.getName(), product, file.getName()));
+                    }
+                    mediaService.saveAll(mediaList);
+                    s3CloudService.store(mediaFiles);
                 }
-                mediaService.saveAll(mediaList);
-                s3CloudService.store(mediaFiles);
             }
 
             productRepository.save(product);
@@ -70,7 +72,9 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> existingProduct = productRepository.findById(id);
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
-            product.setThumbnailImage(convertFileToBase64String(s3CloudService.get(product.getThumbnailImage())));
+            if(!product.getThumbnailImage().isEmpty()) {
+                product.setThumbnailImage(convertFileToBase64String(s3CloudService.get(product.getThumbnailImage())));
+            }
 
             return new ResponseEntity<>(product, HttpStatus.OK);
         }
