@@ -20,7 +20,7 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
     private final String bucketName;
 
     @Autowired
-    public AmazonS3CloudServiceImpl(final S3Client s3Client, @Value("${s3.bucket-name}") String bucketName) throws NullPointerException, URISyntaxException {
+    public AmazonS3CloudServiceImpl(final S3Client s3Client, @Value("${s3.bucket-name}") String bucketName) throws NullPointerException {
         this.s3Client = s3Client;
         this.bucketName = bucketName;
         if(this.bucketName != null && !this.bucketName.isEmpty()) {
