@@ -20,8 +20,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping
-    public ResponseEntity<HttpStatus> save(@RequestBody Product product, MediaFilesRequest mediaFiles) {
+    @PostMapping("/save")
+    public ResponseEntity<HttpStatus> save(@RequestBody Product product,@RequestBody MediaFilesRequest mediaFiles) {
         return productService.save(product, mediaFiles);
     }
 
@@ -40,12 +40,17 @@ public class ProductController {
         return productService.getByTitle(title);
     }
 
-    @PutMapping
+    @GetMapping("/card/{title}")
+    public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(@PathVariable("title") String title) {
+        return productService.getProductCardInfoByTitle(title);
+    }
+
+    @PutMapping("/update")
     public @ResponseBody ResponseEntity<HttpStatus> update(@RequestBody Product product) {
         return productService.update(product);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public @ResponseBody ResponseEntity<HttpStatus> delete(@PathVariable("id") String id) {
         return productService.delete(id);
     }

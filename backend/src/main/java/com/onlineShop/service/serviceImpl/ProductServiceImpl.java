@@ -2,6 +2,7 @@ package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.dto.MediaFilesRequest;
 import com.onlineShop.dto.ProductCardInfoResponse;
+import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.DiscountProductRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -81,12 +83,29 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
 
+            String thumbnailImage = null;
+            try {
+                File file = s3CloudService.get(product.getThumbnailImage());
+                thumbnailImage = convertFileToBase64String(file);
+                file.delete();
+            }
+            catch (S3Exception e){}
+
+            int discount = 0;
+            if(product.isDiscount()) {
+                Optional<DiscountProduct> discountProduct = discountProductService.findByProductId(product.getId());
+                if (discountProduct.isPresent()) {
+                    discount = discountProduct.get().getDiscount();
+                }
+            }
+
             ProductCardInfoResponse productCardInfoResponse = ProductCardInfoResponse.builder()
                     .id(product.getId())
                     .title(product.getTitle())
-                    .discount(product.isDiscount() ? discountProductService.findByProductId(product.getId()).get().getDiscount() : 0d)
+                    .discount(discount)
                     .countOfFeedbacks(product.getFeedbacks().size())
                     .price(product.getPrice())
+                    .thumbnailImage(thumbnailImage)
                     .build();
 
             return new ResponseEntity<>(productCardInfoResponse, HttpStatus.OK);

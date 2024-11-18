@@ -13,7 +13,7 @@ public class ProductCardInfoResponse {
 
     private String title;
 
-    private double discount;
+    private int discount;
 
     private int countOfFeedbacks;
 
