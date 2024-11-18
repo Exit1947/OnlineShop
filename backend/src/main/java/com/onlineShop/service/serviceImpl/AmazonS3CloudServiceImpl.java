@@ -34,7 +34,7 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
     }
 
     @Override
-    public void upload(File uploadingFile) {
+    public void store(File uploadingFile) {
         PutObjectRequest request = PutObjectRequest
                 .builder()
                 .bucket(bucketName)
@@ -52,6 +52,16 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
                     .key(fileName), ResponseTransformer.toFile(file));
 
         return file;
+    }
+
+    @Override
+    public void rename(String oldName, String newName) {
+        s3Client.copyObject(request ->
+                request
+                        .sourceBucket(bucketName)
+                        .sourceKey(oldName)
+                        .destinationBucket(bucketName)
+                        .destinationKey(newName));
     }
 
     @Override
