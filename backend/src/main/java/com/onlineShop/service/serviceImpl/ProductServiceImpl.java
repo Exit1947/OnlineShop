@@ -1,39 +1,55 @@
 package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.dto.MediaFilesRequest;
+import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.AmazonS3CloudService;
+import com.onlineShop.service.MediaService;
 import com.onlineShop.service.ProductService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.services.s3.S3Client;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    private final MediaService mediaService;
+
     private final AmazonS3CloudService s3CloudService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final AmazonS3CloudService s3CloudService) {
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService, final AmazonS3CloudService s3CloudService) {
         this.productRepository = productRepository;
+        this.mediaService = mediaService;
         this.s3CloudService = s3CloudService;
     }
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> add(final Product product, final MediaFilesRequest mediaFiles) {
+    public ResponseEntity<HttpStatus> save(final Product product, final MediaFilesRequest mediaFilesReq) {
         Optional<Product> existingProduct = productRepository.findByTitle(product.getTitle());
         if(existingProduct.isEmpty()) {
             product.setId(UUID.randomUUID().toString());
+
+            List<File> mediaFiles = convertRequestOfMediaFilesToListOfFiles(mediaFilesReq);
+            if(!mediaFiles.isEmpty()) {
+                List<Media> mediaList = new ArrayList<>();
+                for(File file : mediaFiles) {
+                    mediaList.add(new Media(file.getName(), product, file.getName()));
+                }
+                mediaService.saveAll(mediaList);
+                s3CloudService.store(mediaFiles);
+            }
+
             productRepository.save(product);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -69,6 +85,19 @@ public class ProductServiceImpl implements ProductService {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    private List<File> convertRequestOfMediaFilesToListOfFiles(MediaFilesRequest mediaFilesRequest){
+        List<File> files = new ArrayList<>();
+        for(var file : mediaFilesRequest.getMediaFiles()){
+            try{
+                File tmpFile = new File(UUID.randomUUID().toString());
+                file.transferTo(tmpFile);
+                files.add(tmpFile);
+            }
+            catch (IOException e){}
+        }
+        return files;
     }
 
 }

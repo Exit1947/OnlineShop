@@ -11,6 +11,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
+import java.util.List;
 
 @Service
 public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
@@ -41,6 +42,12 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
                 .build();
         RequestBody requestBody = RequestBody.fromFile(uploadingFile);
         s3Client.putObject(request, requestBody);
+    }
+
+    public void store(List<File> uploadingFile) {
+        for(File mediaFile : uploadingFile) {
+            store(mediaFile);
+        }
     }
 
     @Override

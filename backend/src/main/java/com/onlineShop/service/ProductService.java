@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface ProductService {
 
-    ResponseEntity<HttpStatus> add(Product product, MediaFilesRequest mediaFiles);
+    ResponseEntity<HttpStatus> save(Product product, MediaFilesRequest mediaFiles);
 
     ResponseEntity<Product> getById(String id);
 
