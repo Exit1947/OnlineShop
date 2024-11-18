@@ -10,13 +10,13 @@ public interface DiscountProductService {
 
     void save(DiscountProduct discountProduct);
 
-    Optional<DiscountProduct> findById(String id);
+    Optional<DiscountProduct> findById(long id);
 
     Optional<DiscountProduct> findByProductId(String mediaName);
 
     void update(DiscountProduct discountProduct);
 
-    void delete(String id);
+    void delete(long id);
 
     void deleteAll(List<DiscountProduct> productList);
 

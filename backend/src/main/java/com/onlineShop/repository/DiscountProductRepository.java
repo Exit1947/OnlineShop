@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface DiscountProductRepository extends JpaRepository<DiscountProduct, Integer> {
+public interface DiscountProductRepository extends JpaRepository<DiscountProduct, Long> {
 
-    Optional<DiscountProduct> findById(String id);
+    Optional<DiscountProduct> findById(long id);
 
-    Optional<DiscountProduct> findByProductId(String name);
+    Optional<DiscountProduct> findByProductId(String productId);
 
 }
