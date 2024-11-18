@@ -1,13 +1,16 @@
 package com.onlineShop.service.serviceImpl;
 
+import com.onlineShop.dto.MediaFilesRequest;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.ProductRepository;
+import com.onlineShop.service.AmazonS3CloudService;
 import com.onlineShop.service.ProductService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import software.amazon.awssdk.services.s3.S3Client;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -17,14 +20,17 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    private final AmazonS3CloudService s3CloudService;
+
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository) {
+    public ProductServiceImpl(final ProductRepository productRepository, final AmazonS3CloudService s3CloudService) {
         this.productRepository = productRepository;
+        this.s3CloudService = s3CloudService;
     }
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> add(final Product product) {
+    public ResponseEntity<HttpStatus> add(final Product product, final MediaFilesRequest mediaFiles) {
         Optional<Product> existingProduct = productRepository.findByTitle(product.getTitle());
         if(existingProduct.isEmpty()) {
             product.setId(UUID.randomUUID().toString());
