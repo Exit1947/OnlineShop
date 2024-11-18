@@ -5,23 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 @Service
 public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
 
     private final S3Client s3Client;
-
     private final String bucketName;
 
     @Autowired
-    public AmazonS3CloudServiceImpl(final S3Client s3Client, @Value("${s3.bucket-name}") String bucketName) throws NullPointerException {
+    public AmazonS3CloudServiceImpl(final S3Client s3Client, @Value("${s3.bucket-name}") String bucketName) throws NullPointerException, URISyntaxException {
         this.s3Client = s3Client;
-        this.bucketName = null;
+        this.bucketName = bucketName;
         if(this.bucketName != null && !this.bucketName.isEmpty()) {
             if(!isBucketExist()) {
                 createBucket();
@@ -45,12 +46,17 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
 
     @Override
     public File get(String fileName) {
-        return null;
+        File file = new File(fileName);
+        s3Client
+                .getObject(request -> request.bucket(bucketName)
+                    .key(fileName), ResponseTransformer.toFile(file));
+
+        return file;
     }
 
     @Override
     public void delete(String fileName) {
-
+        s3Client.deleteObject(request -> request.bucket(bucketName).key(fileName));
     }
 
     private boolean isBucketExist() {
