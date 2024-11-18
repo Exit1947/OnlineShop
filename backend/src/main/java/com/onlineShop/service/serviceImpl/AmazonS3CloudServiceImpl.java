@@ -11,7 +11,6 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
-import java.net.URISyntaxException;
 
 @Service
 public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
