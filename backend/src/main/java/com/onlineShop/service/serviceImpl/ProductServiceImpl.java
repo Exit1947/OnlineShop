@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -73,7 +72,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(String id) {
-        return null;
+        Optional<Product> existingProduct = productRepository.findById(id);
+        if(existingProduct.isPresent()) {
+            Product product = existingProduct.get();
+
+            ProductCardInfoResponse productCardInfoResponse = ProductCardInfoResponse.builder()
+                    .id(product.getId())
+                    .title(product.getTitle())
+                    .discount(product.isDiscount())
+                    .price(product.getPrice())
+                    .build();
+
+            return new ResponseEntity<>(productCardInfoResponse, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override
