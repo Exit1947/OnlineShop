@@ -14,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -59,7 +61,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ResponseEntity<Product> getById(String id) {
-        return ResponseEntity.of(productRepository.findById(id));
+        Optional<Product> existingProduct = productRepository.findById(id);
+        if(existingProduct.isPresent()) {
+            Product product = existingProduct.get();
+            product.setThumbnailImage(convertFileToBase64String(s3CloudService.get(product.getThumbnailImage())));
+
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -109,6 +118,17 @@ public class ProductServiceImpl implements ProductService {
             catch (IOException e){}
         }
         return files;
+    }
+
+    private String convertFileToBase64String(File file){
+        byte[] bytesFile = new byte[(int) file.length()];
+        try(FileInputStream fIS = new FileInputStream(file)){
+            fIS.read(bytesFile);
+        }
+        catch (IOException e){
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(bytesFile);
     }
 
 }
