@@ -1,6 +1,7 @@
 package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.dto.MediaFilesRequest;
+import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.ProductRepository;
@@ -62,8 +63,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(String id) {
+        return null;
+    }
+
+    @Override
     public ResponseEntity<Product> getByTitle(String title) {
         return ResponseEntity.of(productRepository.findByTitle(title));
+    }
+
+    @Override
+    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(String title) {
+        return null;
     }
 
     @Override
