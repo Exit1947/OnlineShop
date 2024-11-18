@@ -4,8 +4,10 @@ import com.onlineShop.dto.MediaFilesRequest;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
+import com.onlineShop.repository.DiscountProductRepository;
 import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.AmazonS3CloudService;
+import com.onlineShop.service.DiscountProductService;
 import com.onlineShop.service.MediaService;
 import com.onlineShop.service.ProductService;
 import jakarta.transaction.Transactional;
@@ -26,12 +28,15 @@ public class ProductServiceImpl implements ProductService {
 
     private final MediaService mediaService;
 
+    private final DiscountProductService discountProductService;
+
     private final AmazonS3CloudService s3CloudService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService, final AmazonS3CloudService s3CloudService) {
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService, final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService) {
         this.productRepository = productRepository;
         this.mediaService = mediaService;
+        this.discountProductService = discountProductService;
         this.s3CloudService = s3CloudService;
     }
 
@@ -79,7 +84,8 @@ public class ProductServiceImpl implements ProductService {
             ProductCardInfoResponse productCardInfoResponse = ProductCardInfoResponse.builder()
                     .id(product.getId())
                     .title(product.getTitle())
-                    .discount(product.isDiscount())
+                    .discount(product.isDiscount() ? discountProductService.findByProductId(product.getId()).get().getDiscount() : 0d)
+                    .countOfFeedbacks(product.getFeedbacks().size())
                     .price(product.getPrice())
                     .build();
 

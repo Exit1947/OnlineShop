@@ -1,6 +1,7 @@
 package com.onlineShop.controllers;
 
 import com.onlineShop.dto.MediaFilesRequest;
+import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,18 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addProduct(@RequestBody Product product, MediaFilesRequest mediaFiles) {
-        return productService.add(product, mediaFiles);
+    public ResponseEntity<HttpStatus> save(@RequestBody Product product, MediaFilesRequest mediaFiles) {
+        return productService.save(product, mediaFiles);
     }
 
     @GetMapping("/{id}")
     public @ResponseBody ResponseEntity<Product> getById(@PathVariable("id") String id) {
         return productService.getById(id);
+    }
+
+    @GetMapping("/card/{id}")
+    public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(@PathVariable("id") String id) {
+        return productService.getProductCardInfoById(id);
     }
 
     @GetMapping("/{title}")
