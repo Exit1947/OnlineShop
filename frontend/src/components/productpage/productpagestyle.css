@@ -252,9 +252,10 @@
 
 table  {
     width: 100%; 
-    background-color: aliceblue;
+    height: 100%;
+    background-color:white;
     text-align: center;
-    justify-items: center;
+    justify-content: center;
      
    
     
@@ -262,8 +263,26 @@ table  {
 
 
 
-tbody tr:nth-child(even) {
-    background-color:beige;
+tbody  tr:nth-child(odd) {
+    background-color:lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+     
+   
+    
+   
+}
+
+tbody  tr:nth-child(even) {
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+     
+   
     
    
 }
@@ -280,7 +299,6 @@ tbody td {
 
 table th
 table tr {
-    
    
 }
 
@@ -289,23 +307,18 @@ th {
    
    
    
-    text-align: center;    
-    justify-items: center;
+    
   
 }
 
-td :hover {
-    border-left: 2px solid orange;
-    border-top: 2px solid orange;
-    border-right: 2px solid orange;
-}
+
 
  
 
   tr {
     height: 50px;  
-    text-align: center;
-    justify-content: center;
+   
+    
    
    
     
@@ -314,8 +327,10 @@ td :hover {
   td  {
     
     
-    text-align: center;    
-    justify-items: center;
+   
+   
+   
+    
     
   }
   
@@ -484,7 +499,21 @@ td :hover {
     height: 10%;   
     margin-left: 10%;
     margin-top: 2%;
+    display: flex;
     
+}
+
+.btn-post {
+   height: 100%; 
+   width: 75px;
+   border: 1px solid gray;
+   border-radius: 15px;
+}
+
+.btn-post :hover {
+    transform: scale (1.1);
+    text-shadow: 1px gray;
+
 }
 
 
@@ -494,12 +523,31 @@ td :hover {
     border-radius: 10px; 
     border: 1px solid gray;
     padding: 20px;
-   
-
     background-color: white;
+    cursor: pointer; 
+    text-align: left;
+    color: gray;
     
     
    
+}
+
+.input-comment:hover {
+    border: 3px solid orange;
+    
+
+    
+}
+
+.comment-container {
+    width: 100%;
+    height: 10%;
+    border-radius: 10px; 
+    border: 1px solid gray;
+    padding: 20px;
+    background-color: white;
+    cursor: pointer; 
+    word-break: break-all;
 }
 
 
@@ -512,47 +560,91 @@ td :hover {
     
 }
 
+
+
 .photo-name-comment {
   height: 10%;  
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: left;
+  align-items: center;  
   padding-left: 3%;
+  
 }
 
 .photo-user {
  padding-left: 1%;
+ width: 10%;
+ height: 100%;
+ 
+ 
  
 }
+
 .name-user {
     padding-left: 3%;
-    font-size: 30px;
-}
-
-.star-comment {
-  height: 8%;  
-  width: 10%;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  padding-left: 3%;
-}
-
-.short-comment {
-  font-size: 25px;
-  padding-left: 3%;
-  width: 80%;
-  border: 1px solid gray;
-}
-
-.three-dots {
-   padding-left: 75%;
+    font-size: 20px;
+    width: 20%;
+    height: 100%;
+   
 }
 
 .btn-infa {
+  
+    width: 70%;
+    height: 100%;
+    text-align: end;
+   
+  
+}
+
+.post-comment {
+   width: 200px;
+   height: 50px;
+   color: white;
+   background-color: black;
+   border-radius: 5px;
+   cursor: pointer;
+  
+}
+
+.star-comment {
+  height: 10%;  
+  width: 100%;
+  display: flex;  
+  padding-left: 3%;
+}
+
+.stars {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    
+}
+
+.container-comment {
+    width: 100%;
+    height: 20%;
    
 }
+
+.short-comment {
+
+  font-weight: bold; 
+  height: 100%;
+  width: 570px;
+  align-content: center;
+  
+}
+
+
+
+
+
+.three-dots {
+   
+}
+
+
 
 .date-comment {
   height: 5%;  
@@ -611,6 +703,9 @@ td :hover {
 
 .photo-panel  {
     padding-left: 3%;
+    width: 100%;
+   
+  
 }
 
 .lover-panel {
@@ -699,22 +794,48 @@ td :hover {
    
 }
 
+.prevCard {
+    left: calc(0% + 2rem);
+}
+
+.activeCard {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.naxtCard {
+    left: 100%;
+    transform: translateX(calc(50% - 2rem));
+
+}
+
+
+.fatBorder {
+    border: 5px solid orange;
+}
+
 .arrow-left {
    
+   
+ 
     
 }
 
 .arrow-right {
-   
+  
+    
+    
 }
 
-.collection-card {
+.collectioncard {
     width: 98%;
     height: 390px;  
-    border: 1px solid gray;
+  
     display: flex;
-    justify-content: space-between;
+    
     overflow-x: hidden;
+    overflow-y: hidden;
     scroll-behavior: smooth;
    
     
@@ -723,13 +844,11 @@ td :hover {
 
 .card {
     width: 250px;
-    height: 380px;    
-    margin-left: 1%;
-    margin-top: 2%;
+    height: 100%;    
+    margin-left: 10px;
     background-color: white;
     text-align: center;
-    justify-content: center;
-    padding-left: 25px;
+    justify-content: center;   
     border: 1px solid gray;
     
    
@@ -942,6 +1061,7 @@ td :hover {
     transform: scale(1.1);
 }
 
+
 .photo-view {
     height: 50%;
     width: 100%;   
@@ -1116,20 +1236,34 @@ td :hover {
   .choose-display {
     display: flex;
     margin-top: 2%;
+    margin-bottom: 3%;
   
   }
+
+  .section-uno-display-border {
+    
+     border: 3px solid orange;
+     height: 43px;
+     width: 124px;    
+     border-radius: 6px;
+     text-align: center;
+     padding-top: 1.5%;
+    
+  }
+
   .section-uno-display:hover {
     border: 2px solid orange;
     transform: scale(1.1);
     cursor: pointer;
   }
+
   .section-uno-display {
      height: 43px;
      width: 124px;
      border: 1px solid gray;
      border-radius: 6px;
      text-align: center;
-    padding-top: 1.5%;
+     padding-top: 1.5%;
      
   }
   .section-dos-display:hover {
@@ -1137,6 +1271,18 @@ td :hover {
     transform: scale(1.1);
     cursor: pointer;
   }
+
+
+  .section-dos-display-border {
+    height: 43px;
+    width: 124px;
+    border: 3px solid orange;
+    border-radius: 6px;
+    margin-left: 2%;
+    text-align: center;
+    padding-top: 1.5%;
+    padding-bottom: 3%;
+ }
   .section-dos-display {
     height: 43px;
     width: 124px;
@@ -1150,6 +1296,17 @@ td :hover {
  .choose-processor {
     display: flex;
     margin-top: 2%;
+    margin-bottom: 3%;
+ }
+
+ .section-uno-processor-border {
+    height: 43px;
+    width: 124px;
+    border: 3px solid orange;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 1.5%;
+    
  }
  .section-uno-processor:hover {
     border: 2px solid orange;
@@ -1164,6 +1321,16 @@ td :hover {
     text-align: center;
     padding-top: 1.5%;
     
+ }
+
+ .section-dos-processor-border {
+    height: 43px;
+    width: 124px;
+    border: 3px solid orange;
+    border-radius: 6px;
+    margin-left: 2%;
+    text-align: center;
+    padding-top: 1.5%;
  }
  .section-dos-processor:hover {
     border: 2px solid orange;
@@ -1183,7 +1350,18 @@ td :hover {
 .choose-storage {
     display: flex;
     margin-top: 2%;
+    margin-bottom: 3%;
 }
+
+.section-uno-storage-border {
+    height: 43px;
+    width: 124px;
+    border: 3px solid orange;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 1.5%;
+    
+ }
 
 .section-uno-storage:hover {
     border: 2px solid orange;
@@ -1199,6 +1377,16 @@ td :hover {
     text-align: center;
     padding-top: 1.5%;
     
+ }
+
+ .section-dos-storage-border {
+    height: 43px;
+    width: 124px;
+    border: 3px solid orange;
+    border-radius: 6px;
+    margin-left: 2%;
+    text-align: center;
+     padding-top: 1.5%;
  }
 
  .section-dos-storage:hover {
@@ -1222,6 +1410,16 @@ td :hover {
     margin-top: 2%;
 }
 
+.section-uno-ram-border{
+    height: 43px;
+    width: 124px;
+    border: 3px solid orange;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 1.5%;
+    
+ }
+
 .section-uno-ram:hover {
     border: 2px solid orange;
     transform: scale(1.1);
@@ -1237,6 +1435,17 @@ td :hover {
     padding-top: 1.5%;
     
  }
+
+ .section-dos-ram-border {
+    height: 43px;
+    width: 124px;
+    border: 3px solid orange;
+    border-radius: 6px;
+    margin-left: 2%;
+    text-align: center;
+     padding-top: 1.5%;
+ }
+
  .section-dos-ram:hover {
     border: 2px solid orange;
     transform: scale(1.1);

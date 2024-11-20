@@ -7,8 +7,10 @@ import HeartCard from '../../img/heart-orange-border.png';
 import HeartOrange from '../../img/full-heart-orange.png';
 import { useState, useEffect} from "react";
 
-const Card =() => {
+const Card =(props) => {
 
+    
+ 
 // Add color to heart 
    
 const [colorHeart, setColorHeart] = useState(HeartCard);

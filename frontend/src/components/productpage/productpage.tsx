@@ -1,10 +1,10 @@
 import './productpagestyle.css';
 import React from 'react';
-import {useRef} from 'react';
 import Card from './card.tsx'
 import { Rating } from 'react-simple-star-rating';
 import { FaStar } from 'react-icons/fa';
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
+import { useNavigate } from 'react-router-dom'
 import Arrow from '../../img/icons-arrow-left.png';
 import IconsFour from '../../img/Frame 427319916.png';
 import Business from '../../img/Frame 427319913.png';
@@ -40,13 +40,24 @@ import ExtraPhotoLaptop05 from '../../img/photo-laptop4.png';
 import ExtraPhotoLaptop06 from '../../img/photo-laptop5.png';
 import starEmptyUno from '../../img/star-empty.png';
 import starOrangeUno from '../../img/star-full-orange.png';
-import { toBeDisabled } from '@testing-library/jest-dom/matchers';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+import "react-multi-carousel/lib/styles.css";
+
+
+
 
 
 const ProductPage = () => {
+
+     // NAVIGATED
+
+     const navigate =useNavigate();
+
+   function navMainPage (event){
+    event.preventDefault();
+    navigate('/auth/comment', { replace: true });
+   }
+    // SLIDER MAIN PRODUCT
     
     const imgs =[
         {id:0, value:ExtraPhotoLaptop01},
@@ -63,56 +74,7 @@ const ProductPage = () => {
         setSliderData(slider);
     }
 
-//   Slider photo laptop
-//   const ImageMain =({arr, image, index}) => {
-//     return (
-        
-//         <div className='img'>
-//             {arr.map ((imgsrc,i)=>
-//             <img 
-//             key={i}
-//             height ={150}
-//             width={150}
-           
-//             src={imgsrc}
-//             onClick={()=> image(i)}
-//             className={index ===i ? 'active' : ''}
-//             />
-//             )}
-//         </div>
-//     )
-//   }
 
-//   const Slideshow = ( {imgs}) =>{
-//     const [index, setIndex] = useState(0);
-
-//     useEffect(()=> {setIndex(0)},[])
-
-//     const next= ()=> {
-//         if (index=== imgs.length-1){
-//             setIndex(0)
-//         } else { setIndex(index+1)}
-//     }
-
-//     const prev= ()=> {
-//     if (index === 0)
-//          { setIndex (imgs.length-1)}
-//     else { setIndex(index-1)}
-//     }
-
-
-//     return <div className='slideshow '>
-//      <img className="mainImg"  src={imgs[index]}/>
-//      <div className='actions'>
-//         <button onClick={prev}> <img src={ArrowLeft} /></button>
-        
-//         <button onClick={next}> <img src={ArrowRight}/></button>
-//         </div>
-//         <ImageMain arr={imgs} image={setIndex} index={index}></ImageMain>
-       
-     
-//     </div>
-//   }
 
     
                    
@@ -146,20 +108,30 @@ const ProductPage = () => {
   // add color to star
     const [rating, setRating]= useState(null);
     const [hover, setHover] = useState(null); 
-        
+      
+    
+
+
    // slider card 
-   let box = document.querySelector('.collection-card');
-   
-   
-   const next= ()=> {
-       let width= box.clientWidth;
-       box.scrollLeft=box.scrollLeft + width;
+
+
+    
+
+    let elementRef = useRef(null);
+
+      
+    const next = (scrollOffset) => {
+           elementRef.current.scrollLeft+=scrollOffset; 
+       
+       
+       
     }
 
-    const prev= ()=> {
-        let width= box.clientWidth;
-        box.scrollLeft=box.scrollLeft - width;
-    }
+    
+
+    
+    
+    
 
     // scroll to different position
 
@@ -168,7 +140,7 @@ const ProductPage = () => {
 
      const scrolltoArea =()=>{
         
-        ref.current?.scrollIntoView({behavior: 'smooth'})      
+        ref.current.scrollIntoView({behavior: 'smooth'})      
         
     }
 
@@ -185,8 +157,60 @@ const ProductPage = () => {
     }
 
     const scrolltoAreaReview=() =>{
-        window.scrollTo(0,3900)    
+        window.scrollTo(0,4500)    
     }
+
+
+     
+      
+
+
+
+    // add fat border to button area
+
+    const [toggleOrange,  setToggleOrange] = useState('14"');
+    const [toggleOrange1, setToggleOrange1] = useState('Intel Core i5');
+    const [toggleOrange2, setToggleOrange2] = useState('512 gb');
+    const [toggleOrange3, setToggleOrange3] = useState('16Gb');
+
+    
+    
+  // create counter 
+
+  const [counter, setCounter] = useState(0);
+  const [counterMinus, setCounterMinus] = useState(0);
+   
+    const plusCounter= ()=> {
+        setCounter  (counter + 1);
+    }
+
+    const minusCounter= ()=> {
+        setCounter  (counter - 1);
+        setCounterMinus(counterMinus + 1);
+    }
+
+
+    // add comment to reviews
+
+    const myFormRef= useRef(null); 
+
+    const [comment, setComment] = useState('');
+    const [comments, setComments] = useState([]);
+
+
+    const onChangeHandler = (event) => {
+        setComment(event.target.value);
+    }
+
+    const onFormSubmit = ()=> {
+   
+        setComments((comments)=> [...comments, comment]);
+    }
+       
+       
+    
+
+
 
     return (
         <div className="main-product-page">
@@ -238,31 +262,7 @@ const ProductPage = () => {
                                 
                             )
                             }
-                           {/* <Slideshow imgs={[
-                            ExtraPhotoLaptop01,
-                            ExtraPhotoLaptop02,
-                            ExtraPhotoLaptop03,
-                            ExtraPhotoLaptop04,
-                            ExtraPhotoLaptop05,
-                            ExtraPhotoLaptop06
- 
-
-                           ]} /> */}
-                        {/* <div className='extra-photo1'> 
-                            <img src={ExtraPhotoLaptop02}  alt=''/>
-                            </div>
-                        <div className='extra-photo2'> 
-                            <img src={ExtraPhotoLaptop03}  alt=''/>
-                            </div>
-                        <div className='extra-photo3'> 
-                            <img src={ExtraPhotoLaptop04}  alt=''/>
-                            </div>
-                        <div className='extra-photo4'> 
-                            <img src={ExtraPhotoLaptop05}  alt=''/>
-                            </div>
-                        <div className='extra-photo5'> 
-                            <img src={ExtraPhotoLaptop06}  alt=''/>
-                            </div> */}
+                          
                         
                         </ div> 
                                             
@@ -309,24 +309,24 @@ const ProductPage = () => {
                           <div className='choose'>
                             <lable> <strong >Choose Display</strong></lable>
                             <div className='choose-display'> 
-                                <div className='section-uno-display'>14"</div>
-                                <div className='section-dos-display'>16"</div>
+                                <div className={ toggleOrange==='16"' ?  'section-uno-display' : 'section-uno-display-border'}  onClick={()=>{setToggleOrange('14"')}}>14"</div>
+                                <div className={ toggleOrange==='14"' ? 'section-dos-display' : 'section-dos-display-border' }  onClick={()=>{setToggleOrange('16"')}}>16"</div>
                             </div>
                             <lable> <strong>Choose Processor</strong></lable>
                             <div className='choose-processor'>
-                                  <div className='section-uno-processor'> Intel Core i5</div>
-                                  <div className='section-dos-processor'> Intel Core i7</div>
+                                  <div className={ toggleOrange1==='Intel Core i7' ?  'section-uno-processor' : 'section-uno-processor-border'} onClick={()=>{setToggleOrange1('Intel Core i5')}}> Intel Core i5</div>
+                                  <div className={ toggleOrange1==='Intel Core i5' ?  'section-dos-processor' : 'section-dos-processor-border'} onClick={()=>{setToggleOrange1('Intel Core i7')}}> Intel Core i7</div>
                             </div>
                             <lable> <strong>Choose Storage</strong> </lable>
                             <div className='choose-storage'>
-                                 <div className='section-uno-storage'>512 gb</div>
-                                  <div className='section-dos-storage'> 1 Tb </div>
+                                 <div className= { toggleOrange2==='1 Tb' ?  'section-uno-storage' : 'section-uno-storage-border'}  onClick={()=>{setToggleOrange2('512 gb')}}>512 gb</div>
+                                  <div className= { toggleOrange2==='512 gb' ?  'section-dos-storage' : 'section-dos-storage-border'} onClick={()=>{setToggleOrange2('1 Tb')}}> 1 Tb </div>
                             </div>
 
                             <lable> <strong>Choose RAM</strong> </lable>
                             <div className='choose-ram'>
-                            <div className='section-uno-ram'> 16Gb</div>
-                            <div className='section-dos-ram'> 32Gb</div>
+                            <div className= { toggleOrange3==='32Gb' ?  'section-uno-ram' : 'section-uno-ram-border'}  onClick={()=>{setToggleOrange3('16Gb')}}> 16Gb</div>
+                            <div className= { toggleOrange3==='16Gb' ?  'section-dos-ram' : 'section-dos-ram-border'}  onClick={()=>{setToggleOrange3('32Gb')}}> 32Gb</div>
                             </div>
                           </div>
                      </div>
@@ -397,7 +397,7 @@ const ProductPage = () => {
                          <table className='table-container'>
                             <thead>
                                 <tr>
-                                    <th> <img src={BlackLogo} alt=''/></th>
+                                    <th> <img src={BlackLogo} alt='' width='300' height='100'/></th>
                                     <th> 
                                          
                                             <img  className='image-product' src={PictureProduct} alt=''/>
@@ -430,7 +430,7 @@ const ProductPage = () => {
                             </thead>
 
                             <tbody>
-                                <tr>
+                                
                                     <td>
                                         <tr>Customer Review</tr>
                                         <tr>Color</tr>
@@ -491,7 +491,7 @@ const ProductPage = () => {
                                         <tr>512 GB</tr>
                                         <tr> 1080p FHD</tr>
                                     </td>
-                                </tr>
+                                
                             </tbody>
                          </table>
                  </div>
@@ -552,11 +552,26 @@ const ProductPage = () => {
                             </div>
 
                         </div>
-
+                       
                         <div className='comment'>
-                            <input type="text" className='input-comment' placeholder='Leave comment'></input>
-                        </div>
-
+                            <button  className='input-comment' onClick={navMainPage} > Leave comment   </button>
+                        {/* <form   >
+                            { comments.map ((text) => (
+                              <div className='comment-container'>{text}</div>    
+                            ))}
+                            
+                            <textarea 
+                              className='input-comment'
+                              value={comment} 
+                              onChange ={onChangeHandler} 
+                              placeholder='Leave comment'>                                              
+                              
+                            </textarea>
+                            </form>
+                            <button className='btn-post' onClick={onFormSubmit}>POST</button>        
+                        </div> */}
+                       
+                       </div>
                      </div>
                  
 
@@ -564,19 +579,40 @@ const ProductPage = () => {
 
                    <div className='photo-name-comment'>
                     <div className='photo-user'> <img src={PhotoUser} alt=''/></div>
-                    <div className='name-user'> <strong>Names User</strong></div>
+                    <div className='name-user'> <strong>Vivian Weaver</strong></div>
+                    <button className='btn-infa'> <img src={ThreeDots} alt='' /></button>
                    </div>
 
                    <div className='star-comment'>
-                   <img src={starEmpty} alt=''/>
-                   <img src={starEmpty} alt=''/>
-                   <img src={starEmpty} alt=''/>
-                   <img src={starEmpty} alt=''/>
-                   <img src={starEmpty} alt=''/>
-                   <div className='short-comment'> Short comment </div> 
-                   <div className='three-dots'>
-                    <button className='btn-infa'><img src={ThreeDots} alt=''/></button>
+                   <div className="stars">
+                   {[...Array(5)].map((star,i) => {
+                                const ratingValue= i + 1;
+                                  return (
+                                    <label className='inputRadio'>
+                                        <input type="radio"
+                                         name="rating" 
+                                         className='inputRadio'                                        
+                                                                      
+                                         value={ratingValue}
+                                         onClick= {() => setRating ( ratingValue )}                                       
+                                         
+                                         />
+
+                                        <FaStar className='star' 
+                                        size="40"                                      
+                                        color= {ratingValue <= ( hover || rating ) ? "orange" : "gray"}                                         
+                                        onMouseEnter={()=> setHover( ratingValue )}
+                                        onMouseLeave={()=> setHover(null)}
+                                         />
+                                    </label>
+                                  
+                                )
+                            })}
                    </div>
+                   
+                   <div className='short-comment'> Love this laptop, like a MacBook but for Windows </div> 
+
+                   
                    </div>
 
                    <div className='date-comment'> Reviewed in the 
@@ -597,16 +633,17 @@ const ProductPage = () => {
                    </div>
                    
                    <div  className='photo-panel'>
-                    <img src={PhotoProduct} alt = '' className=''/>
+                    <img src={PhotoProduct} alt = '' className='' />
                    </div>
 
                    <div className='lover-panel'>
                     <button className='answer-panel'> <img  src={ArrowBack} alt=''/></button>
+                    
                     <div className='thumb-panel'>
-                    <div className='thumb-up'><img  src={ThumbUp} alt=''/></div>
-                    <div className='love-number'> 0 </div>
-                    <div className='thumb-down'><img  src={ThumbDown} alt=''/></div>
-                    <div className='unlove-number'> 0 </div>
+                    <div className='thumb-up' onClick={plusCounter}><img  src={ThumbUp} alt=''/></div>
+                    <div className='love-number' > {counter} </div>
+                    <div className='thumb-down' onClick={minusCounter}><img  src={ThumbDown} alt=''/></div>
+                    <div className='unlove-number' > {counterMinus} </div>
                     </div>
                    </div>
               </div>
@@ -620,59 +657,32 @@ const ProductPage = () => {
               <div className='related-products' ref={ref}> 
                  <div className='just-name'> Related Products</div>
                     <div className='left-button' >
-                <button className='arrow-left' onClick={next}> <img src={ArrowLeft} alt=''></img></button>
-                <button className='arrow-right' onClick={prev}>  <img src={ArrowRight} alt=''></img></button>
+                <button className='arrow-left' onClick={() => next(-260)}> <img src={ArrowLeft} alt='' /></button>
+                <button className='arrow-right' onClick={()=> next(+260)}> <img src={ArrowRight} alt=''/> </button>
                 </div>
               </div>
-
-
+ 
 
                  
-              <div className='collection-card' >
+            <div className='collectioncard'  ref={elementRef}>
                                       
-                       
-                        {/* <div className='card'>
-                    <div className='top-card'>
-                    <div className='title-card'> Asus TUF Gaming A15 (2023)</div>
-                    <div className='heart-card'> <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
-                    </div>
 
-                    <div className='image-card'> 
-                        <img src={PictureProduct} alt='' className='image-product'/>
-                    </div>
-
-                    <div className='point-cart'>
-                        <div className='point'></div>
-                        <div className='point'></div>
-                        <div className='point'></div>
-                    </div>
-                   
-                    <div className='bottom-cart'>
-                        <div className='price-card'>1241,99 $</div>
-                        <div className='star-card'> <img src={colorStar} onClick={changeColorStar} alt=''/></div>
-                        <div className='rating-card'> 4,7</div>
-                    </div>
-
-                    <div className='real-price'>1462.99$</div>
-                        
-                    
-                </div> */}
                                 
-               
-
-                      
-
-                <div  > <Card ></Card> </div>                        
-                <div > <Card ></Card> </div>
-                <div > <Card ></Card> </div>
-                <div > <Card ></Card></div>
-                <div > <Card ></Card></div>
-                <div > <Card ></Card></div>
-                <div > <Card ></Card></div>
-                <div > <Card ></Card></div>
-                <div > <Card ></Card></div>
-                <div > <Card ></Card></div>
-               
+                                <div><Card ></Card></div> 
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                <div><Card></Card></div>
+                                 
+                                   
                 
               </div>
               

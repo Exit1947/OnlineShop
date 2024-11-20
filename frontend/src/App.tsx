@@ -17,6 +17,7 @@ import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
 import ProductPage from './components/productpage/productpage.tsx';
+import Comments from './components/comments/comment.tsx';
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: 'product',
                 element:<ProductPage/>
+            }, 
+            {
+                path: 'comment',                
+                element: <Comments />
             }
 
         
