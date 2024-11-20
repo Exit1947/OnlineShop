@@ -5,7 +5,6 @@ import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
-import com.onlineShop.repository.DiscountProductRepository;
 import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.AmazonS3CloudService;
 import com.onlineShop.service.DiscountProductService;
@@ -70,6 +69,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<Product> getById(String id) {
         Optional<Product> existingProduct = productRepository.findById(id);
+        return getProductResponseEntity(existingProduct);
+    }
+
+    @Override
+    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(String id) {
+        Optional<Product> existingProduct = productRepository.findById(id);
+        return getProductCardInfoResponseResponseEntity(existingProduct);
+    }
+
+    @Override
+    public ResponseEntity<Product> getByTitle(String title) {
+        Optional<Product> existingProduct = productRepository.findByTitle(title);
+        return getProductResponseEntity(existingProduct);
+    }
+
+    private ResponseEntity<Product> getProductResponseEntity(Optional<Product> existingProduct) {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
             if(!product.getThumbnailImage().isEmpty()) {
@@ -82,8 +97,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(String id) {
-        Optional<Product> existingProduct = productRepository.findById(id);
+    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(String title) {
+        Optional<Product> existingProduct = productRepository.findByTitle(title);
+        return getProductCardInfoResponseResponseEntity(existingProduct);
+    }
+
+    private ResponseEntity<ProductCardInfoResponse> getProductCardInfoResponseResponseEntity(Optional<Product> existingProduct) {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
 
@@ -93,7 +112,7 @@ public class ProductServiceImpl implements ProductService {
                 thumbnailImage = convertFileToBase64String(file);
                 file.delete();
             }
-            catch (S3Exception e){}
+            catch (S3Exception ignored){}
 
             int discount = 0;
             if(product.isDiscount()) {
@@ -115,16 +134,6 @@ public class ProductServiceImpl implements ProductService {
             return new ResponseEntity<>(productCardInfoResponse, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    public ResponseEntity<Product> getByTitle(String title) {
-        return ResponseEntity.of(productRepository.findByTitle(title));
-    }
-
-    @Override
-    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(String title) {
-        return null;
     }
 
     @Override
