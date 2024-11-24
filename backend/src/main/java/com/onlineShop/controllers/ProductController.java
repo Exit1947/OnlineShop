@@ -1,6 +1,7 @@
 package com.onlineShop.controllers;
 
 import com.onlineShop.dto.ProductCardInfoResponse;
+import com.onlineShop.dto.productDto.ProductRequest;
 import com.onlineShop.dto.productDto.ProductResponse;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.service.ProductService;
@@ -21,11 +22,8 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public @ResponseBody ResponseEntity<String> save(@RequestBody Product product) {
-        if(product!=null) {
+    public @ResponseBody ResponseEntity<String> save(@RequestBody ProductRequest product) {
             return productService.save(product);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/id={id}")

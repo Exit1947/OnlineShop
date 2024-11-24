@@ -1,8 +1,9 @@
 package com.onlineShop.service.serviceImpl;
 
-import com.onlineShop.dto.productDto.CharacteristicResponse;
+import com.onlineShop.dto.productDto.CharacteristicDto;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.dto.productDto.MediaResponse;
+import com.onlineShop.dto.productDto.ProductRequest;
 import com.onlineShop.dto.productDto.ProductResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
@@ -40,18 +41,39 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ResponseEntity<String> save(final Product product) {
-        Optional<Product> existingProduct = productRepository.findByTitle(product.getTitle());
-        if(existingProduct.isEmpty()) {
-            product.setId(UUID.randomUUID().toString());
-            productRepository.save(product);
+    public ResponseEntity<String> save(final ProductRequest productRequest) {
+        if(productRequest != null) {
+            Optional<Product> existingProduct = productRepository.findByTitle(productRequest.getTitle());
+            if (existingProduct.isEmpty()) {
 
-            String idForSavingMedia = UUID.randomUUID().toString();
-            //to do: write method in service for saving media by produced id
+                Product product = Product.builder()
+                        .id(UUID.randomUUID().toString())
+                        .title(productRequest.getTitle())
+                        .price(productRequest.getPrice())
+                        .discount(productRequest.getDiscount() > 0)
+                        .build();
 
-            return ResponseEntity.ok(idForSavingMedia);
+                productRepository.save(product);
+
+                if (productRequest.getDiscount() > 0) {
+                    DiscountProduct discountProduct = DiscountProduct.builder()
+                            .product(product)
+                            .discount(productRequest.getDiscount())
+                            .dateFrom(productRequest.getDateFrom())
+                            .dateTo(productRequest.getDateTo())
+                            .build();
+
+                    discountProductService.save(discountProduct);
+                }
+
+                String idForSavingMedia = UUID.randomUUID().toString();
+                //to do: write method in service for saving media by produced id
+
+                return ResponseEntity.ok(idForSavingMedia);
+            }
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(HttpStatus.CONFLICT);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -86,7 +108,7 @@ public class ProductServiceImpl implements ProductService {
                             product.getCharacteristicValues()
                                     .stream()
                                     .map((productCharacteristic)->
-                                        CharacteristicResponse.builder()
+                                        CharacteristicDto.builder()
                                                 .id(productCharacteristic.getId())
                                                 .name(productCharacteristic.getCharacteristic().getName())
                                                 .value(productCharacteristic.getValue())

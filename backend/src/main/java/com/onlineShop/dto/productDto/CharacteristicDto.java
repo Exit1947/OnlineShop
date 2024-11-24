@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class CharacteristicResponse {
+public class CharacteristicDto {
 
     private int id;
 

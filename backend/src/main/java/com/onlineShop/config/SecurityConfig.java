@@ -50,9 +50,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/register").permitAll()
 
                         //Product api gateway's
-                        .requestMatchers("/api/product/save").hasAuthority("CREATE_PRODUCT")
-                        .requestMatchers("/api/product/save").hasAuthority("MODERATOR")
-                        .requestMatchers("/api/product/save").hasAuthority("ADMIN")
+//                        .requestMatchers("/api/product/save").hasAuthority("CREATE_PRODUCT")
+//                        .requestMatchers("/api/product/save").hasAuthority("MODERATOR")
+//                        .requestMatchers("/api/product/save").hasAuthority("ADMIN")
                         .requestMatchers("/api/product/{id}").permitAll()
                         .requestMatchers("/api/product/{title}").permitAll()
                         .requestMatchers("/api/product/card/{id}").permitAll()
@@ -64,7 +64,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/product/delete/{id}").hasRole("MODERATOR")
                         .requestMatchers("/api/product/delete/{id}").hasRole("ADMIN")
 
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
         return http.build();
     }

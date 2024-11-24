@@ -4,14 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @Builder
-public class ProductResponse {
-
-    private String id;
+public class ProductRequest {
 
     private String title;
 
@@ -19,8 +18,12 @@ public class ProductResponse {
 
     private int discount;
 
-    private List<CharacteristicDto> characteristicValuesList;
+    private String nameCategory;
 
-    private List<MediaResponse> mediaList;
+    private Date dateFrom;
+
+    private Date dateTo;
+
+    private List<CharacteristicDto> characteristicValuesList;
 
 }
