@@ -1,19 +1,37 @@
 .form-container {
+    top: 0;
     display: flex;
-    max-width: 1200px;
+    justify-content: space-between;
+    max-width: 100%; 
     margin: 0 auto;
+    padding: 15px;
+    height: 70vh; 
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden;
+    margin-top: 50px;
+    min-height: 100vh; 
+    box-sizing: border-box;
 }
 
+
 .sidebar {
-    width: 25%;
+    width: 100%;
+    max-width: 500px;
     padding: 20px;
     border-right: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #fff; 
+    font-size: 18px; 
+    margin-bottom: 20px;
     position: relative;
 }
 
 .sidebar h2 {
     margin-bottom: 10px;
 }
+
 
 .divider {
     width: 100%;
@@ -29,83 +47,184 @@
 }
 
 .sidebar ul li {
-    padding: 10px 0;
+    padding: 18px 0;
     cursor: pointer;
     color: black;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    font-weight: bold;
 }
 
 .sidebar ul li.active {
     font-weight: bold;
+    
 }
+
+
 
 .highlight {
     width: 3px;
     height: 30px;
     background-color: orange;
     position: absolute;
-    margin-top: 100px;
-    left: -1px;
+    left: -8px;
     top: 0;
-    transition: top 0.3s ease;
+    transition: top 0.3s ease, height 0.3s ease;
+    margin-top: 10px;
 }
+
 
 .content {
     width: 75%;
     padding: 20px;
-    position: relative;
+    box-sizing: border-box;
 }
+
 
 .progress-bar-container {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     justify-content: space-between;
+    justify-content: flex-end;
     position: relative;
+    width: 100%;
+    
 }
 
 .user-profile-header {
+    
     margin-right: 20px;
     flex-grow: 1;
 }
 
 .progress-bar {
-    width: 366px;
-    height: 8px;
+    width: 530px;
+    flex-grow: 1;
+    height: 6px;
     background-color: #ddd;
     position: relative;
     border-radius: 4px;
+    margin-right: 10px;
+}
+
+.sidebar ul li:hover .highlight,
+.sidebar ul li.active .highlight {
+    height: 30px; 
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        font-size: 16px; 
+    }
 }
 
 .progress {
+    position: absolute;
+    width: 0%;
     height: 100%;
-    background-color: orange;
     border-radius: 4px;
-    display: flex;
+    background-color: orange;
     align-items: center;
     justify-content: center;
+    display: flex;
+    transition: width 0.3s ease;
+}
+
+
+.progress-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 40%;
+    background-color: #ddd;
+    position: absolute;
+    top: -3px;
+    transition: background-color 0.3s, width 0.3s, height 0.3s;
 }
 
 .progress-percentage {
-    color: black;
+    position: absolute;
+    top: -30px; 
+    left: calc(100% - 35px);
+    color: #888; 
     font-weight: bold;
+    transition: left 0.3s ease;
+    
+}
+
+.progress-circle.active {
+    background-color: orange;
+    width: 16px;
+    height: 16px;
+}
+
+.milestone {
+    position: absolute;
+    top: -4px;
+    width: 13px;
+    height: 13px;
+    background-color: #ddd;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.milestone.filled {
+    background-color: orange; 
+}
+
+.milestone-0 { left: 0%; }
+.milestone-33 { left: 33%; }
+.milestone-66 { left: 66%; }
+.milestone-100 { left: 100%; }
+
+@keyframes movePercentage {
+    0% { left: 0; }
+    33% { left: 33%; }
+    66% { left: 66%; }
+    100% { left: 100%; }
+}
+
+
+@media (max-width: 768px) {
+    .progress-bar {
+        width: 80%; 
+    }
+
+    .user-profile-header {
+        font-size: 1rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-bar {
+        width: 100%; 
+    }
+
+    .user-profile-header {
+        font-size: 0.9rem; 
+    }
 }
 
 .form-fields {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 31px;
 }
 
 .form-label {
     margin-bottom: 5px;
-    color: #888888; 
-    font-weight: normal; 
+    color: #888888;
+    font-weight: normal;
+    
 }
 
 .form-input {
-    width: 320px;
-    height: 40px;
-    border-radius: 20px; 
+    width: 460px;
+    height: 45px;
+    border-radius: 20px;
     border: 1px solid #ddd;
     padding: 10px;
     outline: none;
@@ -127,14 +246,34 @@
 .date-of-birth.focused .form-input,
 .address:hover .form-input,
 .address.focused .form-input {
-    border-color: orange; 
+    border-color: orange;
+   
 }
 
+.date-of-birth{
+    display: flex;
+    justify-content: space-between;
+    width: 450px;  
+    gap: 10px;  
+    
+}
+
+.date-of-birth .form-input {
+
+    width: 1120px;  
+    height: 45px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
 .small-input {
     width: 100px;
     height: 38px;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
+
 
 .buttons-container {
     display: flex;
@@ -149,7 +288,7 @@
     background-color: orange;
     color: black;
     border: none;
-    border-radius: 0; 
+    border-radius: 0;
     cursor: pointer;
 }
 
@@ -158,21 +297,80 @@
     border: 1px solid orange;
 }
 
+
 .profile-image-container {
     position: absolute;
     right: 0;
-    top: 200px;
+    bottom: 0;
+    width: 35%;
+    text-align: right;
+    max-width: 800px;
+    height: auto; 
+    padding-right: 17%;
+    top: 2%;
 }
 
 .profile-image-container img {
-    width: 500px;
-    height: 500px;
+    width: 300%;
+    max-width: 600px;
+    min-width: 400px; 
+    height: auto; 
+    position: relative;
+    margin-left: auto; 
+    margin-right: auto;
+    display: block;
+    
 }
+
+
 
 .select-input {
     appearance: none;
     background: url('./../../img/chevron_right.png') no-repeat right 10px center;
     background-size: 12px 12px;
     padding-right: 20px;
-    border-radius: 20px; 
+    border-radius: 20px;
+    width: 460px; 
+    height: 46px;
+}
+
+
+
+
+@media (max-width: 1024px) {
+    .profile-image-container {
+        padding-right: 5%; 
+        top: 5%;
+
+
+}
+
+.profile-image-container img {
+    width: 60%; 
+}
+
+    
+}
+
+@media (max-width: 768px) {
+    .profile-image-container {
+        width: 50%; 
+        padding-right: 2%;
+    }
+    .profile-image-container img {
+        width: 80%; 
+    }
+    
+}
+
+
+@media (max-width: 480px) {
+    .profile-image-container {
+        width: 70%; 
+        padding-right: 5%;
+    }
+
+    .profile-image-container img {
+        width: 70%; 
+    }
 }

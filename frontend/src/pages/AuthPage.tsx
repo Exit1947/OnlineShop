@@ -5,8 +5,7 @@ import styles from './auth-page.module.css';
 const AuthPage = () => {
     return (
         <main className={styles['auth-page']}>
-            {/*//<Logo titleColor='black' arrowColor='orange' />*/}
-            <Outlet />
+           <Outlet />
         </main>
     );
 }

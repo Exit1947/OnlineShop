@@ -15,6 +15,7 @@ import Subscriptions from "../components/subscriptions/Subscriptions.tsx";
 import Carousel from "../components/сarousel/Carousel.tsx";
 import PosterSlider from "../components/posterslider/PosterSlider.tsx";
 
+
 const HomePage = () => {
     return (
         <>

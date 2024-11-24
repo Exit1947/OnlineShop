@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Aftermenu from "./components/aftermenu/Aftermenu.js";
-import Header from "./components/header/Header.js";
+import Header from "./components/header/Header.tsx";
 import Dropdown from "./components/dropmenu/Dropdown.js";
 import LanguageDropdown from './components/languagedrop/LanguageDropdown.js'
 import CurrencyDropdown from './components/currencydropdown/CurrencyDropdown.js'
@@ -17,42 +17,56 @@ import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
 import LoginPage from './components/logInPage/LogPage.tsx';
+import AdminPage from './components/adminpage/AdminPage.tsx';
+
+
 
 const router = createBrowserRouter([
+
     {
         path: '/',
         element: <HomePage />
     },
 
-    
+
+
     {
-        path: '/auth',
-        element: <AuthPage />,
-        children: [
-            {
-                path: 'login',
-                element: <Login />
-            },
-            {
-                path: 'registration',
-                element: <Form />
-            },
-            {
-                path: 'loginpage',
-                element:<LoginPage/>
-            },
-        ]
-    }
-]);
+      path: '/auth',
+      element: <AuthPage />,
+      children: [
+        {
+            path: 'login',
+            element: <Login />
+          },
+        {
+          path: 'registration',
+          element: <Form />
+        },
+        {
+            path: 'loginpage',
+            element:<LoginPage/>
+        },
+      ]
+    },
+    {
+        path: '/form/:id',  // Динамічний маршрут для сторінки продукту
+        element: <Form />
+      },
+      {
+        path: '/admin/:id',  // Динамічний маршрут для сторінки продукту
+        element: <AdminPage />
+      }
 
-function App() {
-  const project = '';
+  ]);
+
+  function App() {
+    const project = '';
   
-  return (
-    <div className="App">
-     <h1>{project}</h1>
-
+    return (
+      <div className="App">
+        <h1>{project}</h1>
         <RouterProvider router={router} />
+
     </div>
   );
 }

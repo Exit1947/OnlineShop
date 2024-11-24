@@ -1,8 +1,8 @@
 import React from 'react';
 import './subscriptions.css';
-import image1 from './../../img/789b4e3d1c5cfb07f12539e2cf9e6af9.jpeg'; 
-import image2 from './../../img/c49aa9df182cc97207247ca3e2baca7b.jpeg';
-import image3 from './../../img/ff45a67279a923d9d8f7e060bba6b623.jpeg';
+import image1 from './../../img/Rectangle 24020.png'; 
+import image2 from './../../img/Rectangle 24020 (1).png';
+import image3 from './../../img/Rectangle 40444.png';
 import icon1 from './../../img/Group 14559.png'; 
 import icon2 from './../../img/Group 1415.png';
 import icon3 from './../../img/Group 1455.png';
