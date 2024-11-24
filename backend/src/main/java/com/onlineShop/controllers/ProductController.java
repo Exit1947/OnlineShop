@@ -22,7 +22,10 @@ public class ProductController {
 
     @PostMapping("/save")
     public @ResponseBody ResponseEntity<String> save(@RequestBody ProductRequest product) {
+        if(product!=null) {
             return productService.save(product);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/id={id}")
@@ -47,7 +50,10 @@ public class ProductController {
 
     @PutMapping("/update")
     public @ResponseBody ResponseEntity<HttpStatus> update(@RequestBody ProductRequest product) {
-        return productService.update(product);
+        if(product!=null) {
+            return productService.update(product);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/delete/{id}")
