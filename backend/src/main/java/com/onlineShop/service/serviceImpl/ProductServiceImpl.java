@@ -1,10 +1,7 @@
 package com.onlineShop.service.serviceImpl;
 
-import com.onlineShop.dto.productDto.CharacteristicDto;
+import com.onlineShop.dto.productDto.*;
 import com.onlineShop.dto.ProductCardInfoResponse;
-import com.onlineShop.dto.productDto.MediaResponse;
-import com.onlineShop.dto.productDto.ProductRequest;
-import com.onlineShop.dto.productDto.ProductResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.ProductRepository;
@@ -55,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
 
                 productRepository.save(product);
 
-                if (productRequest.getDiscount() > 0) {
+                if (product.isDiscount()) {
                     DiscountProduct discountProduct = DiscountProduct.builder()
                             .product(product)
                             .discount(productRequest.getDiscount())
@@ -158,11 +155,33 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> update(final Product product) {
-        Optional<Product> existingProduct = productRepository.findByTitle(product.getTitle());
+    public ResponseEntity<HttpStatus> update(final ProductRequest productRequest) {
+        Optional<Product> existingProduct = productRepository.findById(productRequest.getId());
         if(existingProduct.isPresent()){
-            product.setId(existingProduct.get().getId());
+            Product product = Product.builder()
+                    .id(existingProduct.get().getId())
+                    .title(productRequest.getTitle())
+                    .price(productRequest.getPrice())
+                    .discount(productRequest.getDiscount() > 0)
+                    .build();
+
             productRepository.save(product);
+
+
+            if(product.isDiscount()) {
+                Optional<DiscountProduct> existingDiscountProduct = discountProductService.findByProductId(product.getId());
+                if(existingDiscountProduct.isPresent()){
+                    DiscountProduct discountProduct = DiscountProduct.builder()
+                                    .id(existingDiscountProduct.get().getId())
+                                    .product(product)
+                                    .discount(productRequest.getDiscount())
+                                    .dateFrom(productRequest.getDateFrom())
+                                    .dateTo(productRequest.getDateTo())
+                                    .build();
+                    discountProductService.update(discountProduct);
+                }
+            }
+
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

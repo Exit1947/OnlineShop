@@ -3,7 +3,6 @@ package com.onlineShop.controllers;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.dto.productDto.ProductRequest;
 import com.onlineShop.dto.productDto.ProductResponse;
-import com.onlineShop.models.Product.Product;
 import com.onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,7 +46,7 @@ public class ProductController {
     }
 
     @PutMapping("/update")
-    public @ResponseBody ResponseEntity<HttpStatus> update(@RequestBody Product product) {
+    public @ResponseBody ResponseEntity<HttpStatus> update(@RequestBody ProductRequest product) {
         return productService.update(product);
     }
 

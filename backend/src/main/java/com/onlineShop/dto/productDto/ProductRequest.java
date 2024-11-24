@@ -12,6 +12,8 @@ import java.util.List;
 @Builder
 public class ProductRequest {
 
+    private String id;
+
     private String title;
 
     private int price;
