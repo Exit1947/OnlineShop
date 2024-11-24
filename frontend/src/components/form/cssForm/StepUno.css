@@ -1,0 +1,335 @@
+.main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+   
+    
+    
+}
+
+.sidepanel {
+ width: 25%;
+ height: 100%;
+
+
+ 
+}
+
+.between {
+    width: 0.2%;
+    height: 100%;
+    background-color: orange;
+}
+
+.top-side {
+    width: 80%;
+    height: 12%;
+    margin-top: 2%;
+    margin-left: 8%;  
+    border-bottom: 2px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+.name-side {
+    font-style: SF Pro Text;     
+    width: 80%;
+    height: 100%;    
+    font-size: 26px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.spusok {
+    
+    margin-left: 5%;
+    margin-top: 4%;
+    line-height: 70px;
+    text-align: justify;    
+    padding-left: 5%;
+
+}
+
+.line-vertical {
+    display: flex;
+    margin-left: 2%;
+    margin-top: 6%;
+    
+}
+
+
+.line-vertical1  {
+    display: flex;
+    border-left: 4px solid rgb(255, 166, 0);
+    height: 25%;
+    margin-left: 24px;
+    
+}
+.line-vertical2  {
+    display: flex;
+    border-left: 2px solid gray;
+    height: 25%;
+    margin-left: 24px;
+}
+.line-vertical3  {
+    display: flex;
+    border-left: 2px solid gray;
+    height: 25%;
+    margin-left: 24px;
+}
+.line-vertical4  {
+    display: flex;
+    border-left: 2px solid gray;
+    height: 25%;
+    margin-left: 24px;
+}
+
+.main-panel {
+    width: 75%;
+    height: 100%;
+    
+   
+   
+  
+    
+    
+}
+
+.main-top {
+    font-style: SF Pro Text;
+    font-size: 26px;    
+    width: 25%;
+    height: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.top-top {
+    width: 95%;
+    height: 12%;
+    margin-left: 1%; 
+    margin-top: 1%;
+    border-bottom: 2px solid gray;
+    display: flex;   
+   
+    
+    
+}
+
+
+
+.gorizontal-line {
+        margin-left: 1%;
+        display: flex;
+        width: 98%;
+        height: 40%;
+     
+    
+    
+}
+.line-sign {
+        width: 75%;
+        height: 90%;
+    
+}   
+.number-percent {
+        display: flex;
+        width: 100%;
+        height: 40%;
+      
+
+}
+
+.percent0 {
+    margin-top: 1%;
+}
+.percent33 {
+    margin-top: 1%;
+    margin-left: 33%;
+}
+.percent66 {
+    margin-top: 1%;
+    margin-left: 66%;
+}
+.percent100 {
+    margin-top: 1%;
+    margin-left: 96%;
+}
+
+.canvas {
+    width: 33%;
+    height: 1px;     
+    border: 1px solid gray;
+    background-color: gray;
+   
+}
+.canvas1 {
+    width: 33%;
+    height: 1px;     
+    border: 1px solid gray;
+    background-color: gray;
+   
+}
+.canvas2 {
+    width: 33%;
+    height: 1px;     
+    border: 1px solid gray;
+    background-color: gray;
+   
+}
+.point {
+    width: 6px;
+    height: 6px;  
+    background-color: rgb(255, 166, 0);
+    border-radius: 2px;
+    
+}
+.point1 {
+    width: 6px;
+    height: 6px;  
+    background-color: gray;
+    border-radius: 2px;
+    
+}
+.point2 {
+    width: 6px;
+    height: 6px;
+ 
+    background-color: gray;
+    border-radius: 2px;
+    
+}
+.point3 {
+    width: 6px;
+    height: 6px;
+  
+    background-color: gray;
+    border-radius: 2px;
+    
+}
+
+.filldate {
+    width: 40%;
+    height: 100%;
+   
+    padding-left: 2%;
+}
+
+
+.paint {
+    width: 60%;
+    height: 100%;   
+    
+     
+}
+.firstimage {
+    width: 100%;
+    height: 100%;
+    
+}
+.main-center {
+
+    display: flex;
+    width: 100%;
+    height: 86%;
+   
+    
+}
+
+.input-date-birth {
+    display: flex;
+    width: 100%;
+    height: 9%;
+  
+    gap: 0.5%;
+}
+.input-date {
+    width: 33%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid gray;    
+   
+}
+
+.input-month {
+    width: 33%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.input-year {
+    width: 33%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.input-name {
+    width: 100%;
+    height: 8%;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.input-email {
+    width: 100%;
+    height: 9%;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.input-phone {
+    width: 100%;
+    height: 9%;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+
+
+.btn-confirm {
+    height: 100%;
+    width: 45%;   
+    background-color: rgb(255, 166, 0);
+    border: 2px solid rgb(255, 166, 0);
+    border-radius: 5px;
+    margin-left: 55%;
+   
+    
+   
+
+    
+}
+
+
+
+.dosbutton1 {
+    width: 100%; 
+    height: 9%; 
+    margin-top: 25%;
+   
+    display: flex;
+   
+}
+
+.label {
+    font-style: SF Pro Text;
+    font-size: 18px;    
+    display: flex;
+    align-items: start;
+    margin-top: 5%;
+}
+
+
+
+
+

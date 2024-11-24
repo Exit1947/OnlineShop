@@ -21,6 +21,7 @@ import AdminPage from './components/adminpage/AdminPage.tsx';
 import CartPage from './components/cardpage/CardPage.jsx';
 
 
+import Form from "./components/form/registration/RegistrationForm.tsx";
 
 const router = createBrowserRouter([
 
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <HomePage />
     },
-    
+
     {
       path: '/auth',
       element: <AuthPage />,
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
             path: 'login',
             element: <Login />
           },
-        
+
         {
           path: 'registration',
           element: <Form />
@@ -74,5 +75,5 @@ const router = createBrowserRouter([
       </div>
     );
   }
-  
+
   export default App;
