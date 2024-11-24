@@ -1,6 +1,8 @@
 package com.onlineShop.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.onlineShop.security.S3Properties;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,22 +12,15 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 
 @Configuration
+@Getter
 public class AmazonS3Config {
 
-    @Value("${s3.access-key}")
-    private String accessKey;
-
-    @Value("${s3.secret-key}")
-    private String secretKey;
-
-    @Value("${s3.region-name}")
-    private String regionName;
-
     @Bean
-    public S3Client s3Client() {
+    @Autowired
+    public S3Client s3Client(S3Properties s3Properties) {
         return S3Client.builder()
-                .region(Region.of(regionName))
-                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
+                .region(Region.of(s3Properties.getRegionName()))
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(s3Properties.getAccessKey(), s3Properties.getSecretKey())))
                 .build();
     }
 

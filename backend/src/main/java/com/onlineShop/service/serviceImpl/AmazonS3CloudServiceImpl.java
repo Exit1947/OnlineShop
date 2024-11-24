@@ -1,29 +1,30 @@
 package com.onlineShop.service.serviceImpl;
 
+import com.onlineShop.security.S3Properties;
 import com.onlineShop.service.AmazonS3CloudService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
 
     private final S3Client s3Client;
-    private final String bucketName;
+    private final S3Properties s3Properties;
 
     @Autowired
-    public AmazonS3CloudServiceImpl(final S3Client s3Client, @Value("${s3.bucket-name}") String bucketName) throws NullPointerException {
+    public AmazonS3CloudServiceImpl(final S3Client s3Client, final S3Properties s3Properties) throws NullPointerException {
         this.s3Client = s3Client;
-        this.bucketName = bucketName;
-        if(this.bucketName != null && !this.bucketName.isEmpty()) {
+        this.s3Properties = s3Properties;
+        if(Objects.nonNull(this.s3Properties.getBucketName()) && !this.s3Properties.getBucketName().isEmpty()) {
             if(!isBucketExist()) {
                 createBucket();
             }
@@ -37,7 +38,7 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
     public void store(File uploadingFile) {
         PutObjectRequest request = PutObjectRequest
                 .builder()
-                .bucket(bucketName)
+                .bucket(s3Properties.getBucketName())
                 .key(uploadingFile.getName())
                 .build();
         RequestBody requestBody = RequestBody.fromFile(uploadingFile);
@@ -51,33 +52,39 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
     }
 
     @Override
-    public File get(String fileName) {
-        File file = new File(fileName);
-        s3Client
-                .getObject(request -> request.bucket(bucketName)
-                    .key(fileName), ResponseTransformer.toFile(file));
+    public String get(String fileName) {
+        try {
+            HeadObjectRequest headObjectRequest = HeadObjectRequest.builder()
+                    .bucket(s3Properties.getBucketName())
+                    .key(fileName)
+                    .build();
 
-        return file;
+            s3Client.headObject(headObjectRequest);
+
+            return s3Properties.getImgGatewayUrl() + fileName;
+        } catch (S3Exception e) {
+            return null;
+        }
     }
 
     @Override
     public void rename(String oldName, String newName) {
         s3Client.copyObject(request ->
                 request
-                        .sourceBucket(bucketName)
+                        .sourceBucket(s3Properties.getBucketName())
                         .sourceKey(oldName)
-                        .destinationBucket(bucketName)
+                        .destinationBucket(s3Properties.getBucketName())
                         .destinationKey(newName));
     }
 
     @Override
     public void delete(String fileName) {
-        s3Client.deleteObject(request -> request.bucket(bucketName).key(fileName));
+        s3Client.deleteObject(request -> request.bucket(s3Properties.getBucketName()).key(fileName));
     }
 
     private boolean isBucketExist() {
         try {
-            s3Client.headBucket(request -> request.bucket(bucketName));
+            s3Client.headBucket(request -> request.bucket(s3Properties.getBucketName()));
             return true;
         }
         catch(S3Exception e) {
@@ -86,7 +93,7 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
     }
 
     private void createBucket() {
-        s3Client.createBucket(request -> request.bucket(bucketName));
+        s3Client.createBucket(request -> request.bucket(s3Properties.getBucketName()));
     }
 
 }

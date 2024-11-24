@@ -1,9 +1,8 @@
 package com.onlineShop.service.serviceImpl;
 
-import com.onlineShop.dto.MediaFilesRequest;
+import com.onlineShop.dto.MediaFiles;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.DiscountProduct;
-import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.AmazonS3CloudService;
@@ -15,11 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.services.s3.model.S3Exception;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -43,25 +38,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> save(final Product product, final MediaFilesRequest mediaFilesReq) {
+    public ResponseEntity<String> save(final Product product) {
         Optional<Product> existingProduct = productRepository.findByTitle(product.getTitle());
         if(existingProduct.isEmpty()) {
             product.setId(UUID.randomUUID().toString());
-
-            if(!mediaFilesReq.getMediaFiles().isEmpty()) {
-                List<File> mediaFiles = convertRequestOfMediaFilesToListOfFiles(mediaFilesReq);
-                if (!mediaFiles.isEmpty()) {
-                    List<Media> mediaList = new ArrayList<>();
-                    for (File file : mediaFiles) {
-                        mediaList.add(new Media(file.getName(), product, file.getName()));
-                    }
-                    mediaService.saveAll(mediaList);
-                    s3CloudService.store(mediaFiles);
-                }
-            }
-
             productRepository.save(product);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+
+            String idForSavingMedia = UUID.randomUUID().toString();
+            //to do: write method in service for saving media by produced id
+
+            return ResponseEntity.ok(idForSavingMedia);
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
@@ -88,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
             if(!product.getThumbnailImage().isEmpty()) {
-                product.setThumbnailImage(convertFileToBase64String(s3CloudService.get(product.getThumbnailImage())));
+                product.setThumbnailImage(s3CloudService.get(product.getThumbnailImage()));
             }
 
             return new ResponseEntity<>(product, HttpStatus.OK);
@@ -106,13 +92,7 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
 
-            String thumbnailImage = null;
-            try {
-                File file = s3CloudService.get(product.getThumbnailImage());
-                thumbnailImage = convertFileToBase64String(file);
-                file.delete();
-            }
-            catch (S3Exception ignored){}
+            String thumbnailImage = s3CloudService.get(product.getThumbnailImage());
 
             int discount = 0;
             if(product.isDiscount()) {
@@ -155,30 +135,6 @@ public class ProductServiceImpl implements ProductService {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    private List<File> convertRequestOfMediaFilesToListOfFiles(MediaFilesRequest mediaFilesRequest){
-        List<File> files = new ArrayList<>();
-        for(var file : mediaFilesRequest.getMediaFiles()){
-            try{
-                File tmpFile = new File(UUID.randomUUID().toString());
-                file.transferTo(tmpFile);
-                files.add(tmpFile);
-            }
-            catch (IOException e){}
-        }
-        return files;
-    }
-
-    private String convertFileToBase64String(File file){
-        byte[] bytesFile = new byte[(int) file.length()];
-        try(FileInputStream fIS = new FileInputStream(file)){
-            fIS.read(bytesFile);
-        }
-        catch (IOException e){
-            return null;
-        }
-        return Base64.getEncoder().encodeToString(bytesFile);
     }
 
 }

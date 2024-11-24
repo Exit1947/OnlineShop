@@ -9,7 +9,7 @@ public interface AmazonS3CloudService {
 
     void store(List<File> uploadingFile);
 
-    File get(String fileName);
+    String get(String fileName);
 
     void delete(String fileName);
 

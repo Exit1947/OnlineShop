@@ -1,6 +1,5 @@
 package com.onlineShop.controllers;
 
-import com.onlineShop.dto.MediaFilesRequest;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.service.ProductService;
@@ -21,8 +20,11 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<HttpStatus> save(@RequestBody Product product,@RequestBody MediaFilesRequest mediaFiles) {
-        return productService.save(product, mediaFiles);
+    public @ResponseBody ResponseEntity<String> save(@RequestBody Product product) {
+        if(product!=null) {
+            return productService.save(product);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/{id}")
@@ -30,17 +32,17 @@ public class ProductController {
         return productService.getById(id);
     }
 
-    @GetMapping("/card/{id}")
+    @GetMapping("/card/id={id}")
     public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(@PathVariable("id") String id) {
         return productService.getProductCardInfoById(id);
     }
 
-    @GetMapping("/{title}")
+    @GetMapping("/title={title}")
     public @ResponseBody ResponseEntity<Product> getByTitle(@PathVariable("title") String title) {
         return productService.getByTitle(title);
     }
 
-    @GetMapping("/card/{title}")
+    @GetMapping("/card/title={title}")
     public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(@PathVariable("title") String title) {
         return productService.getProductCardInfoByTitle(title);
     }
