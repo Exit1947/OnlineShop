@@ -1,0 +1,343 @@
+.cart-page {
+    max-width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 2%; 
+    padding-right: 2%; 
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: left;
+    position: relative;
+}
+
+.orange-bar {
+    width: 3px;
+    height: 100%;
+    background-color: orange;
+    position: absolute;
+    left: -20px;
+}
+
+.yellow-line {
+    border-top: 2px solid orange;
+    margin: 10px 0;
+}
+
+.cart-item {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #fcfbfb;
+    border-radius: 8px;
+    background-color: #fffefe;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-circle {
+    width: 24px;
+    height: 24px;
+    border: 2px solid orange;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox-circle.checked {
+    background-color: orange;
+}
+
+.checkmark {
+    color: white;
+}
+
+.item-image {
+    width: 168px;
+    height: 117px;
+    margin-right: 20px;
+}
+
+.item-details h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.item-details p {
+    margin: 2px 0;
+}
+
+.in-stock {
+    color: green;
+    font-weight: bold;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls button {
+    width: 24px;
+    height: 24px;
+}
+
+.delete-icon {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.gray-line {
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+.price-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 20px;
+    text-align: right;
+}
+
+.total-price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 90px;
+    text-align: right;
+    margin-right: -270px;
+}
+
+.buy-now {
+    width: 328px;
+    height: 45px;
+    background-color: orange;
+    border: none;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buy-now:hover {
+    background-color: black;
+    color: white;
+}
+
+.delete-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.delete-confirmation button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+
+.your-items {
+    max-width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 0%; 
+    padding-right: 0%; 
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.save-later-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid transparent;
+    color:black;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.save-later-btn.active {
+    background-color: transparent;
+    color: white;
+    background-color: orange;
+    
+}
+
+.buy-again-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buy-again-btn.active {
+    background-color: orange;
+    color: white;
+}
+
+
+.recommended-section,
+.browsing-history-section {
+    margin-top: 40px;
+}
+
+.recommended-section h2,
+.browsing-history-section h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px
+    
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 20px;
+    padding: 0 20px; 
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.product-item {
+    width: 250px;
+    height: 380px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    width: 214px;
+    height: 214px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 10px;
+}
+
+
+
+.rating {
+    font-size: 14px;
+    color: orange;
+    position: absolute;
+    bottom: 40px;
+    right: 10px;
+}
+
+.product-rating{
+    margin-left: 180px;
+    margin-top: 20px;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: lightgray;
+    cursor: pointer;
+}
+
+.heart-icon.active {
+    color: pink;
+    
+}
+
+.product-item h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.buy-now-btn {
+    display: none;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.product-item:hover .buy-now-btn {
+    display: block;
+}
+
+.show-more {
+    background-color: lightgray;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 20px auto;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.product-item .price {
+    font-size: 14px;
+    color: black; 
+    position: absolute;
+    bottom: 10px; 
+    left: 10px;
+}
+
+.show-more:hover {
+    background-color: gray;
+}

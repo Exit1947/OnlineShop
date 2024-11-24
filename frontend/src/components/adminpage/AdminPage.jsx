@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import './adminpages.css'
-import UserProfiles from './../adminpage/UserProfiles.jsx';
-import Orders from './../adminpage/Orders.jsx';
-import Messages from './../adminpage/Messages.jsx';
-import Payments from './../adminpage/Payments.jsx';
-import Security from './../adminpage/Security.jsx';
-import History from './../adminpage/History.jsx';
-import Subscribes from './../adminpage/Subscribes.jsx';
-import CustomerService from './../adminpage/CustomerService.jsx';
+import UserProfiles from './UserProfiles.jsx';
+import Orders from './Orders.jsx';
+import Messages from './Messages.jsx';
+import Payments from './Payments.jsx';
+import Security from './Security.jsx';
+import History from './History.jsx';
+import Subscribes from './Subscribes.jsx';
+import CustomerService from './CustomerService.jsx';
 import userAvatar from './../../img/Ellipse 255.png'
-import Header from './../header/Header.tsx';
-import Dropdown from './../dropmenu/Dropdown.tsx';
-import Aftermenu from './../aftermenu/Aftermenu.tsx';
-import LanguageDropdown from './../languagedrop/LanguageDropdown.tsx';
-import CurrencyDropdown from './../currencydropdown/CurrencyDropdown.tsx';
-import Footer from './../footer/Footer.tsx';
+import Header from '../header/Header.tsx';
+import Dropdown from '../dropmenu/Dropdown.tsx';
+import Aftermenu from '../aftermenu/Aftermenu.tsx';
+import LanguageDropdown from '../languagedrop/LanguageDropdown.tsx';
+import CurrencyDropdown from '../currencydropdown/CurrencyDropdown.tsx';
+import Footer from '../footer/Footer.tsx';
 
 
 const AdminPage = () => {

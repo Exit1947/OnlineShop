@@ -18,6 +18,7 @@ import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
 import LoginPage from './components/logInPage/LogPage.tsx';
 import AdminPage from './components/adminpage/AdminPage.tsx';
+import CartPage from './components/cardpage/CardPage.jsx';
 
 
 
@@ -27,9 +28,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <HomePage />
     },
-
-
-
+    
     {
       path: '/auth',
       element: <AuthPage />,
@@ -38,6 +37,7 @@ const router = createBrowserRouter([
             path: 'login',
             element: <Login />
           },
+        
         {
           path: 'registration',
           element: <Form />
@@ -55,7 +55,12 @@ const router = createBrowserRouter([
       {
         path: '/admin/:id',  // Динамічний маршрут для сторінки продукту
         element: <AdminPage />
+      },
+      {
+        path: '/cardpage/:id',  // Динамічний маршрут для сторінки продукту
+        element: <CartPage />
       }
+
 
   ]);
 
@@ -66,9 +71,8 @@ const router = createBrowserRouter([
       <div className="App">
         <h1>{project}</h1>
         <RouterProvider router={router} />
-
-    </div>
-  );
-}
-
-export default App;
+      </div>
+    );
+  }
+  
+  export default App;
