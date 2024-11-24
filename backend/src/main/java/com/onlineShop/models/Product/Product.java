@@ -3,20 +3,19 @@ package com.onlineShop.models.Product;
 import com.onlineShop.models.Feedback.Feedback;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
 
     @Id
@@ -26,12 +25,18 @@ public class Product {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_product")
-    List<Feedback> feedbacks;
+    private List<Feedback> feedbacks;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductCharacteristics> characteristicValues = new ArrayList<>();
 
     @NotBlank(message = "Category name can't be empty")
     @Column(name = "name_category")
     @Length(min = 3, max = 100)
     private String nameCategory;
+
+    @Positive(message = "Price must be a positive number")
+    private int price;
 
     @NotBlank(message = "Title of product can't be empty")
     @Column(name = "title")
