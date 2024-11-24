@@ -1,6 +1,6 @@
 import React from 'react';
 import './banner.css';
-import bannerImage from './../../img/top-view-travel-items-arrangement_23-2148666247 (1).avif'; 
+import bannerImage from './../../img/pexels-cottonbro-6055969.jpg'; 
 
 const Banner = () => {
   return (

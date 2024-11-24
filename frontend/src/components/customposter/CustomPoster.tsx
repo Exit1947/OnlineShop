@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './customposter.css';
-import image1 from './../../img/generation-white-game-controller-isolated-black-background-with-colored-lights-illuminating-it-close-up-selective-focus_442713-2617.avif'; 
+import image1 from './../../img/3poster.jpg'; 
 import image2 from './../../img/2post.jpg';
 import image3 from './../../img/4poster.jpg';
 import image4 from './../../img/1post.jpg';
