@@ -1,4 +1,4 @@
-import  './header.module.css'
+import './header.css'
 import logoImg from './../../img/Group 1474.png'
 import logoImgs from './../../img/Frame 427319424.png'
 import histImg from './../../img/Frame 427319439.png'

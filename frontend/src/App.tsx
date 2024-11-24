@@ -17,11 +17,11 @@ import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import Form from "./components/form/Form.tsx";
 import LoginPage from './components/logInPage/LogPage.tsx';
-import AdminPage from './components/adminpage/AdminPage.tsx';
+import AdminPage from './components/adminpage/AdminPage.jsx';
 import CartPage from './components/cardpage/CardPage.jsx';
 
 
-import Form from "./components/form/registration/RegistrationForm.tsx";
+//import Form from "./components/form/registration/RegistrationForm.tsx";
 import ProductPage from './components/productpage/productpage.tsx';
 import Comments from './components/comments/comment.tsx';
 
