@@ -22,6 +22,8 @@ import CartPage from './components/cardpage/CardPage.jsx';
 
 
 import Form from "./components/form/registration/RegistrationForm.tsx";
+import ProductPage from './components/productpage/productpage.tsx';
+import Comments from './components/comments/comment.tsx';
 
 const router = createBrowserRouter([
 
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
             path: 'loginpage',
             element:<LoginPage/>
         },
+        {
+            path: 'product',
+            element:<ProductPage/>
+        },
+        {
+            path: 'comment',
+            element: <Comments />
+        }
       ]
     },
     {

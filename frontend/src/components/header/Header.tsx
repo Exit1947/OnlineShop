@@ -17,7 +17,7 @@ function Header (){
         <img src={logoImg} alt="Logo" className="header_logo" />
         <div className="header_catalogue">
             <img src={logoImgs} alt="Catalogue Icon" className="header_catalogue_icon" />
-            
+
         </div>
     </div>
 
@@ -50,10 +50,9 @@ function Header (){
     </div>
 </div>
 
-    
+
 </header>
 
   );
 }
-
 export default Header;
