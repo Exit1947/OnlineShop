@@ -1,7 +1,6 @@
 package com.onlineShop.service;
 
 import com.onlineShop.models.Product.DiscountProduct;
-import com.onlineShop.models.Product.Media;
 
 import java.util.List;
 import java.util.Optional;

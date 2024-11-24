@@ -1,6 +1,9 @@
 package com.onlineShop.service.serviceImpl;
 
+import com.onlineShop.dto.productDto.CharacteristicResponse;
 import com.onlineShop.dto.ProductCardInfoResponse;
+import com.onlineShop.dto.productDto.MediaResponse;
+import com.onlineShop.dto.productDto.ProductResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.ProductRepository;
@@ -52,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<Product> getById(String id) {
+    public ResponseEntity<ProductResponse> getById(String id) {
         Optional<Product> existingProduct = productRepository.findById(id);
         return getProductResponseEntity(existingProduct);
     }
@@ -64,19 +67,43 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<Product> getByTitle(String title) {
+    public ResponseEntity<ProductResponse> getByTitle(String title) {
         Optional<Product> existingProduct = productRepository.findByTitle(title);
         return getProductResponseEntity(existingProduct);
     }
 
-    private ResponseEntity<Product> getProductResponseEntity(Optional<Product> existingProduct) {
+    private ResponseEntity<ProductResponse> getProductResponseEntity(Optional<Product> existingProduct) {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
-            if(!product.getThumbnailImage().isEmpty()) {
-                product.setThumbnailImage(s3CloudService.get(product.getThumbnailImage()));
-            }
 
-            return new ResponseEntity<>(product, HttpStatus.OK);
+            ProductResponse productResponse = ProductResponse
+                    .builder()
+                    .id(product.getId())
+                    .title(product.getTitle())
+                    .price(product.getPrice())
+                    .discount(getDiscount(product))
+                    .characteristicValuesList(
+                            product.getCharacteristicValues()
+                                    .stream()
+                                    .map((productCharacteristic)->
+                                        CharacteristicResponse.builder()
+                                                .id(productCharacteristic.getId())
+                                                .name(productCharacteristic.getCharacteristic().getName())
+                                                .value(productCharacteristic.getValue())
+                                                .description(productCharacteristic.getCharacteristic().getDescription())
+                                                .characteristicId(productCharacteristic.getCharacteristic().getId())
+                                                .build()
+                                    ).toList())
+                    .mediaList(mediaService.getAllForProduct(product)
+                            .stream()
+                            .map((media)->
+                                    MediaResponse.builder()
+                                            .id(media.getId())
+                                            .mediaUrl(s3CloudService.get(media.getMediaName()))
+                                            .build()).toList())
+                    .build();
+
+            return new ResponseEntity<>(productResponse, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -93,18 +120,10 @@ public class ProductServiceImpl implements ProductService {
 
             String thumbnailImage = s3CloudService.get(product.getThumbnailImage());
 
-            int discount = 0;
-            if(product.isDiscount()) {
-                Optional<DiscountProduct> discountProduct = discountProductService.findByProductId(product.getId());
-                if (discountProduct.isPresent()) {
-                    discount = discountProduct.get().getDiscount();
-                }
-            }
-
             ProductCardInfoResponse productCardInfoResponse = ProductCardInfoResponse.builder()
                     .id(product.getId())
                     .title(product.getTitle())
-                    .discount(discount)
+                    .discount(getDiscount(product))
                     .countOfFeedbacks(product.getFeedbacks().size())
                     .price(product.getPrice())
                     .thumbnailImage(thumbnailImage)
@@ -134,6 +153,18 @@ public class ProductServiceImpl implements ProductService {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    private int getDiscount(Product product){
+        int discount = 0;
+        if(product.isDiscount()) {
+            Optional<DiscountProduct> discountProduct = discountProductService.findByProductId(product.getId());
+            if (discountProduct.isPresent()) {
+                discount = discountProduct.get().getDiscount();
+            }
+        }
+
+        return discount;
     }
 
 }

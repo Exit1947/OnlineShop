@@ -1,6 +1,7 @@
 package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.models.Product.Media;
+import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.MediaRepository;
 import com.onlineShop.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class MediaServiceImp implements MediaService {
                 save(media);
             }
         }
+    }
+
+    @Override
+    public List<Media> getAllForProduct(Product product) {
+        return mediaRepository.findAllByProduct(product);
     }
 
     @Override

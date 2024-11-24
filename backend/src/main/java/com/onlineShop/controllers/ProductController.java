@@ -1,6 +1,7 @@
 package com.onlineShop.controllers;
 
 import com.onlineShop.dto.ProductCardInfoResponse;
+import com.onlineShop.dto.productDto.ProductResponse;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<Product> getById(@PathVariable("id") String id) {
+    @GetMapping("/id={id}")
+    public @ResponseBody ResponseEntity<ProductResponse> getById(@PathVariable("id") String id) {
         return productService.getById(id);
     }
 
@@ -38,7 +39,7 @@ public class ProductController {
     }
 
     @GetMapping("/title={title}")
-    public @ResponseBody ResponseEntity<Product> getByTitle(@PathVariable("title") String title) {
+    public @ResponseBody ResponseEntity<ProductResponse> getByTitle(@PathVariable("title") String title) {
         return productService.getByTitle(title);
     }
 

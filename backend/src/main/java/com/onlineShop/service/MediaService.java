@@ -12,6 +12,8 @@ public interface MediaService {
 
     void saveAll(List<Media> mediaList);
 
+    List<Media> getAllForProduct(Product product);
+
     Optional<Media> findById(String id);
 
     Optional<Media> findByMediaName(String mediaName);
