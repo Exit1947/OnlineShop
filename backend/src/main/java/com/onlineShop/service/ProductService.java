@@ -1,6 +1,5 @@
 package com.onlineShop.service;
 
-import com.onlineShop.dto.MediaFiles;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.Product;
 import org.springframework.http.HttpStatus;

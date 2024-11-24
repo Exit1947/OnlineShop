@@ -1,6 +1,5 @@
 package com.onlineShop.service.serviceImpl;
 
-import com.onlineShop.dto.MediaFiles;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
