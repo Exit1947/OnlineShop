@@ -1,5 +1,6 @@
 package com.onlineShop.service.serviceImpl;
 
+import com.onlineShop.converter.product.ProductConverter;
 import com.onlineShop.dto.CharacteristicDto;
 import com.onlineShop.dto.product.*;
 import com.onlineShop.dto.product.ProductCardInfoResponse;
@@ -58,13 +59,7 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<String> save(final ProductRequest productRequest) {
             Optional<Product> existingProduct = productRepository.findByTitle(productRequest.getTitle());
             if (existingProduct.isEmpty()) {
-
-                Product product = Product.builder()
-                        .id(UUID.randomUUID().toString())
-                        .title(productRequest.getTitle())
-                        .price(productRequest.getPrice())
-                        .discount(productRequest.getDiscount() > 0)
-                        .build();
+                Product product = ProductConverter.toProduct(productRequest);
 
                 productRepository.save(product);
 
@@ -112,29 +107,26 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
 
-            ProductResponse productResponse = ProductResponse
-                    .builder()
-                    .id(product.getId())
-                    .title(product.getTitle())
-                    .price(product.getPrice())
-                    .discount(getDiscount(product))
-                    .description(product.getDescription())
-                    .characteristicValuesList(
-                            product.getCharacteristicValues()
-                                    .stream()
-                                    .sorted(Comparator.comparingInt(ProductCharacteristic::getNumber))
-                                    .map((productCharacteristic)->
-                                        CharacteristicDto.builder()
-                                                .id(productCharacteristic.getId())
-                                                .name(productCharacteristic.getCharacteristic().getName())
-                                                .value(productCharacteristic.getValue())
-                                                .description(productCharacteristic.getCharacteristic().getDescription())
-                                                .characteristicId(productCharacteristic.getCharacteristic().getId())
-                                                .build()
-                                    )
-                                    .toList())
-                    .mediaList(mediaService.getAllForProduct(product.getId()).getBody())
-                    .build();
+            ProductResponse productResponse = ProductConverter.toProductResponse(product);
+            productResponse.setDiscount(getDiscount(product));
+
+            List<CharacteristicDto> characteristicList = product.getCharacteristicValues()
+                    .stream()
+                    .sorted(Comparator.comparingInt(ProductCharacteristic::getNumber))
+                    .map((productCharacteristic)->
+                                    CharacteristicDto.builder()
+                                            .id(productCharacteristic.getId())
+                                            .name(productCharacteristic.getCharacteristic().getName())
+                                            .value(productCharacteristic.getValue())
+                                            .description(productCharacteristic.getCharacteristic().getDescription())
+                                            .characteristicId(productCharacteristic.getCharacteristic().getId())
+                                            .build()).toList();
+            productResponse.setCharacteristicValuesList(characteristicList);
+
+            List<MediaResponse> mediaList = mediaService.getAllForProduct(product.getId()).getBody();
+            if (mediaList != null && !mediaList.isEmpty()) {
+                productResponse.setMediaList(mediaList);
+            }
 
             return new ResponseEntity<>(productResponse, HttpStatus.OK);
         }
@@ -150,9 +142,9 @@ public class ProductServiceImpl implements ProductService {
             ProductCardInfoResponse productCardInfoResponse = ProductCardInfoResponse.builder()
                     .id(product.getId())
                     .title(product.getTitle())
+                    .price(product.getPrice())
                     .discount(getDiscount(product))
                     .countOfFeedbacks(feedbackService.getAllFeedbacksForProduct(product.getId()).size())
-                    .price(product.getPrice())
                     .thumbnailImage(thumbnailImage)
                     .build();
 
@@ -166,12 +158,7 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<HttpStatus> update(final ProductRequest productRequest) {
         Optional<Product> existingProduct = productRepository.findById(productRequest.getId());
         if(existingProduct.isPresent()){
-            Product product = Product.builder()
-                    .id(existingProduct.get().getId())
-                    .title(productRequest.getTitle())
-                    .price(productRequest.getPrice())
-                    .discount(productRequest.isDiscount())
-                    .build();
+            Product product = ProductConverter.toProduct(productRequest);
 
             productRepository.save(product);
 
