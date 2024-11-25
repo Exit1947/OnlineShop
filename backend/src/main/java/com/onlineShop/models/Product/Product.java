@@ -4,6 +4,7 @@ import com.onlineShop.models.Feedback.Feedback;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -44,6 +45,7 @@ public class Product {
     private String title;
 
     @Column(name = "discount")
+    @PositiveOrZero(message = "Discount must be a positive number or zero.")
     private boolean discount;
 
     @NotBlank(message = "Thumbnail image can't be empty")

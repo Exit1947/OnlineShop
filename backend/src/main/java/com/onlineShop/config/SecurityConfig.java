@@ -60,9 +60,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/product/update").hasAuthority("UPDATE_PRODUCT")
                         .requestMatchers("/api/product/update").hasRole("MODERATOR")
                         .requestMatchers("/api/product/update").hasRole("ADMIN")
-                        .requestMatchers("/api/product/delete/{id}").hasAuthority("DELETE_PRODUCT")
-                        .requestMatchers("/api/product/delete/{id}").hasRole("MODERATOR")
-                        .requestMatchers("/api/product/delete/{id}").hasRole("ADMIN")
+                        .requestMatchers("/api/product/delete/id={id}").hasAuthority("DELETE_PRODUCT")
+                        .requestMatchers("/api/product/delete/id={id}").hasRole("MODERATOR")
+                        .requestMatchers("/api/product/delete/id={id}").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 );

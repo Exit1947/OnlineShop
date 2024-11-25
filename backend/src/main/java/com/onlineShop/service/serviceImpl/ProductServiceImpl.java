@@ -51,7 +51,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public ResponseEntity<String> save(final ProductRequest productRequest) {
-        if(productRequest != null) {
             Optional<Product> existingProduct = productRepository.findByTitle(productRequest.getTitle());
             if (existingProduct.isEmpty()) {
 
@@ -78,8 +77,6 @@ public class ProductServiceImpl implements ProductService {
                 return new ResponseEntity<>(mediaService.createSessionForMedia(product), HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Override

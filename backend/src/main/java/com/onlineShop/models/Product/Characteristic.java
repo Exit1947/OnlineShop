@@ -27,11 +27,9 @@ public class Characteristic {
     @Size(min = 3, max = 20, message = "Name must be between 3 and 20 characters")
     private String name;
 
-    @NotBlank(message = "Description must not be blank")
     @Size(min = 5, max = 50, message = "Description must be between 5 and 50 characters")
     private String description;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "characteristic", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductCharacteristics> characteristicValues = new ArrayList<>();
 
