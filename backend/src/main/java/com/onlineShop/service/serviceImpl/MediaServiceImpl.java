@@ -89,6 +89,7 @@ public class MediaServiceImpl implements MediaService {
                             .id(media.getId())
                             .mediaUrl(media.getMediaName())
                             .productId(productId)
+                            .type(media.getType())
                             .build()).toList();
 
             mediaRequestList
@@ -117,6 +118,7 @@ public class MediaServiceImpl implements MediaService {
                             .id(media.getId())
                             .mediaUrl(media.getMediaName())
                             .productId(media.getProduct().getId())
+                            .type(media.getType())
                             .build(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -134,6 +136,7 @@ public class MediaServiceImpl implements MediaService {
                     .id(oldMedia.getId())
                     .mediaName(mediaName)
                     .product(oldMedia.getProduct())
+                    .type(oldMedia.getType())
                     .build();
 
             mediaRepository.save(newMedia);

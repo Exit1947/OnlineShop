@@ -2,6 +2,7 @@ package com.onlineShop.models.Product;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 @Entity
@@ -24,4 +25,12 @@ public class Media {
     @NotBlank
     @Column(name="mediaName")
     private String mediaName;
+
+    @Positive(message = "Number must not be blank")
+    private int number;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", unique = true)
+    private MediaType type;
+
 }

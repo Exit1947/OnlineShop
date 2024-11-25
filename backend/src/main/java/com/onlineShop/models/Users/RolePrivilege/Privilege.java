@@ -20,8 +20,8 @@ public class Privilege implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "type", unique = true)
     @Enumerated(EnumType.STRING)
+    @Column(name = "type", unique = true)
     private PrivilegeType type;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "privileges")

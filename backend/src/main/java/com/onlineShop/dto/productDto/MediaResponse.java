@@ -1,6 +1,8 @@
 package com.onlineShop.dto.productDto;
 
+import com.onlineShop.models.Product.MediaType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +19,8 @@ public class MediaResponse {
 
     @NotBlank(message = "Product id can't be empty")
     private String productId;
+
+    @NotNull(message = "Media type can't be empty")
+    private MediaType type;
 
 }
