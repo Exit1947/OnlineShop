@@ -15,9 +15,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Privilege implements GrantedAuthority {
 
+    public Privilege(PrivilegeType privilegeType){
+        this.setType(privilegeType);
+    }
+
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Enumerated(EnumType.STRING)

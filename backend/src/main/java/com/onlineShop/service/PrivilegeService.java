@@ -1,6 +1,7 @@
 package com.onlineShop.service;
 
 import com.onlineShop.models.Users.RolePrivilege.Privilege;
+import com.onlineShop.models.Users.RolePrivilege.PrivilegeType;
 import com.onlineShop.repository.PrivilegeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,14 @@ public class PrivilegeService {
     }
 
     public List<Privilege> getAll(){
-        return privilegeRepository.findAll();
+        List<Privilege> privilegeList = privilegeRepository.findAll();
+        if(privilegeList.isEmpty()){
+            for(PrivilegeType privilege : PrivilegeType.values()){
+                privilegeList.add(new Privilege(privilege));
+            }
+            privilegeRepository.saveAll(privilegeList);
+        }
+        return privilegeList;
     }
 
 }
