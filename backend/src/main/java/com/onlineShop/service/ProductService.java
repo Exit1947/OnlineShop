@@ -3,8 +3,11 @@ package com.onlineShop.service;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.dto.productDto.ProductRequest;
 import com.onlineShop.dto.productDto.ProductResponse;
+import com.onlineShop.models.Feedback.Feedback;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 public interface ProductService {
 
@@ -21,5 +24,7 @@ public interface ProductService {
     ResponseEntity<HttpStatus> update(ProductRequest product);
 
     ResponseEntity<HttpStatus> delete(String id);
+
+    List<Feedback> getAllFeedBacksForProductById(String id);
 
 }

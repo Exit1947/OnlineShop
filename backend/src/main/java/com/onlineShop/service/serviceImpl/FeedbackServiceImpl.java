@@ -2,9 +2,12 @@ package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.models.Feedback.Feedback;
 import com.onlineShop.repository.FeedbackRepository;
+import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.FeedbackService;
+import com.onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.*;
 
@@ -13,9 +16,12 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
 
+    private final ProductService productService;
+
     @Autowired
-    public FeedbackServiceImpl(FeedbackRepository feedbackRepository) {
+    public FeedbackServiceImpl(final FeedbackRepository feedbackRepository,final ProductService productService) {
         this.feedbackRepository = feedbackRepository;
+        this.productService = productService;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getAllForProduct(String productId) {
-        return feedbackRepository.findAllByProductId(productId);
+        return productService.getAllFeedBacksForProductById(productId);
     }
 
     @Override

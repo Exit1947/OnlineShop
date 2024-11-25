@@ -13,4 +13,6 @@ public interface LikedProductRepository extends JpaRepository<LikedProduct, Stri
 
     List<LikedProduct> findAllByUserId(String userId);
 
+    List<LikedProduct> findAllByProductId(String productId);
+
 }

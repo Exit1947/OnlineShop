@@ -7,12 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class MediaResponse {
+public class MediaRequest {
 
     private String id;
 
     private String mediaUrl;
-
-    private String productId;
 
 }

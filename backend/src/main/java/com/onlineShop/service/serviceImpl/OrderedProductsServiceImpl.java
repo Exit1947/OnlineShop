@@ -32,7 +32,7 @@ public class OrderedProductsServiceImpl implements OrderedProductsService {
 
     @Override
     public List<OrderedProducts> findAllByProductId(String productId) {
-        return orderedProductsRepository.findAllByProductId(productId);
+        return orderedProductsRepository.findByOrderedProducts_Id(productId);
     }
 
     @Override

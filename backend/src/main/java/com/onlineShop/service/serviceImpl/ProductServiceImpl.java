@@ -2,14 +2,13 @@ package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.dto.productDto.*;
 import com.onlineShop.dto.ProductCardInfoResponse;
+import com.onlineShop.models.Feedback.Feedback;
 import com.onlineShop.models.Product.DiscountProduct;
-import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
+import com.onlineShop.models.Users.EndUserEntities.LikedProduct;
+import com.onlineShop.models.Users.EndUserEntities.shoppingOrder.OrderedProducts;
 import com.onlineShop.repository.ProductRepository;
-import com.onlineShop.service.AmazonS3CloudService;
-import com.onlineShop.service.DiscountProductService;
-import com.onlineShop.service.MediaService;
-import com.onlineShop.service.ProductService;
+import com.onlineShop.service.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,12 +28,24 @@ public class ProductServiceImpl implements ProductService {
 
     private final AmazonS3CloudService s3CloudService;
 
+    private final OrderedProductsService orderedProductsService;
+
+    private final LikedProductService likedProductService;
+
+    private final ProductInventoryService productInventoryService;
+
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService, final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService) {
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService,
+                              final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService,
+                              final OrderedProductsService orderedProductsService, final LikedProductService likedProductService,
+                              final ProductInventoryService productInventoryService) {
         this.productRepository = productRepository;
         this.mediaService = mediaService;
         this.discountProductService = discountProductService;
         this.s3CloudService = s3CloudService;
+        this.orderedProductsService = orderedProductsService;
+        this.likedProductService = likedProductService;
+        this.productInventoryService = productInventoryService;
     }
 
     @Override
@@ -64,10 +75,7 @@ public class ProductServiceImpl implements ProductService {
                     discountProductService.save(discountProduct);
                 }
 
-                String idForSavingMedia = UUID.randomUUID().toString();
-                //to do: write method in service for saving media by produced id
-
-                return ResponseEntity.ok(idForSavingMedia);
+                return new ResponseEntity<>(mediaService.createSessionForMedia(product), HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
@@ -92,6 +100,12 @@ public class ProductServiceImpl implements ProductService {
         return getProductResponseEntity(existingProduct);
     }
 
+    @Override
+    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(String title) {
+        Optional<Product> existingProduct = productRepository.findByTitle(title);
+        return getProductCardInfoResponseResponseEntity(existingProduct);
+    }
+
     private ResponseEntity<ProductResponse> getProductResponseEntity(Optional<Product> existingProduct) {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
@@ -114,24 +128,12 @@ public class ProductServiceImpl implements ProductService {
                                                 .characteristicId(productCharacteristic.getCharacteristic().getId())
                                                 .build()
                                     ).toList())
-                    .mediaList(mediaService.getAllForProduct(product)
-                            .stream()
-                            .map((media)->
-                                    MediaResponse.builder()
-                                            .id(media.getId())
-                                            .mediaUrl(s3CloudService.get(media.getMediaName()))
-                                            .build()).toList())
+                    .mediaList(mediaService.getAllForProduct(product.getId()).getBody())
                     .build();
 
             return new ResponseEntity<>(productResponse, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(String title) {
-        Optional<Product> existingProduct = productRepository.findByTitle(title);
-        return getProductCardInfoResponseResponseEntity(existingProduct);
     }
 
     private ResponseEntity<ProductCardInfoResponse> getProductCardInfoResponseResponseEntity(Optional<Product> existingProduct) {
@@ -163,7 +165,7 @@ public class ProductServiceImpl implements ProductService {
                     .id(existingProduct.get().getId())
                     .title(productRequest.getTitle())
                     .price(productRequest.getPrice())
-                    .discount(productRequest.getDiscount() > 0)
+                    .discount(productRequest.isDiscount())
                     .build();
 
             productRepository.save(product);
@@ -196,14 +198,29 @@ public class ProductServiceImpl implements ProductService {
             Product product = existingProduct.get();
 
             deleteFromDiscountProductIfExist(id);
-            deleteFromMediaProductIfExist(product);
+            deleteFromMediaProductIfExist(id);
+            deleteFromOrderedProductsIfExist(id);
+            deleteFromLikedProductIfExist(id);
+            deleteFromProductInventoryIfExist(id);
+            product.setFeedbacks(null);
+            product.setCharacteristicValues(null);
 
+            s3CloudService.delete(product.getThumbnailImage());
 
             productRepository.deleteById(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<Feedback> getAllFeedBacksForProductById(String id) {
+        Optional<Product> existingProduct = productRepository.findById(id);
+        if(existingProduct.isPresent()){
+            return existingProduct.get().getFeedbacks();
+        }
+        return null;
     }
 
     private int getDiscount(Product product){
@@ -223,10 +240,30 @@ public class ProductServiceImpl implements ProductService {
         discount.ifPresent(discountProduct -> discountProductService.delete(discountProduct.getId()));
     }
 
-    private void deleteFromMediaProductIfExist(Product product){
-        List<Media> discount = mediaService.getAllForProduct(product);
-        discount
-                .forEach(media->mediaService.delete(media.getId()));
+    private void deleteFromMediaProductIfExist(String productId){
+        List<MediaResponse> mediaList = mediaService.getAllForProduct(productId).getBody();
+        if(!mediaList.isEmpty()) {
+            mediaList
+                    .forEach(media -> mediaService.delete(media.getId()));
+        }
+    }
+
+    private void deleteFromOrderedProductsIfExist(String productId){
+        List<OrderedProducts> orderedProducts = orderedProductsService.findAllByProductId(productId);
+        if(!orderedProducts.isEmpty()) {
+            orderedProductsService.deleteAll(orderedProducts);
+        }
+    }
+
+    private void deleteFromLikedProductIfExist(String productId){
+        List<LikedProduct> likedProducts = likedProductService.getAllLikedProductsByProductId(productId);
+        if(!likedProducts.isEmpty()) {
+            likedProductService.deleteAll(likedProducts);
+        }
+    }
+
+    private void deleteFromProductInventoryIfExist(String productId){
+        productInventoryService.deleteAllProductInventoryByProductId(productId);
     }
 
 }

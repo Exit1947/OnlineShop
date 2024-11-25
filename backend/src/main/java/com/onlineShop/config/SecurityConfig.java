@@ -51,20 +51,20 @@ public class SecurityConfig {
 
                         //Product api gateway's
                         .requestMatchers("/api/product/save").hasAuthority("CREATE_PRODUCT")
-                        .requestMatchers("/api/product/save").hasAuthority("MODERATOR")
-                        .requestMatchers("/api/product/save").hasAuthority("ADMIN")
-                        .requestMatchers("/api/product/{id}").permitAll()
-                        .requestMatchers("/api/product/{title}").permitAll()
-                        .requestMatchers("/api/product/card/{id}").permitAll()
-                        .requestMatchers("/api/product/card/{title}").permitAll()
-                        .requestMatchers("/api/product/update").hasAuthority("UPDATE_PRODUCT")
-                        .requestMatchers("/api/product/update").hasRole("MODERATOR")
-                        .requestMatchers("/api/product/update").hasRole("ADMIN")
-                        .requestMatchers("/api/product/delete/{id}").hasAuthority("DELETE_PRODUCT")
-                        .requestMatchers("/api/product/delete/{id}").hasRole("MODERATOR")
-                        .requestMatchers("/api/product/delete/{id}").hasRole("ADMIN")
+//                        .requestMatchers("/api/product/save").hasAuthority("MODERATOR")
+//                        .requestMatchers("/api/product/save").hasAuthority("ADMIN")
+//                        .requestMatchers("/api/product/id={id}").permitAll()
+//                        .requestMatchers("/api/product/title{title}").permitAll()
+//                        .requestMatchers("/api/product/card/id={id}").permitAll()
+//                        .requestMatchers("/api/product/card/title={title}").permitAll()
+//                        .requestMatchers("/api/product/update").hasAuthority("UPDATE_PRODUCT")
+//                        .requestMatchers("/api/product/update").hasRole("MODERATOR")
+//                        .requestMatchers("/api/product/update").hasRole("ADMIN")
+//                        .requestMatchers("/api/product/delete/{id}").hasAuthority("DELETE_PRODUCT")
+//                        .requestMatchers("/api/product/delete/{id}").hasRole("MODERATOR")
+//                        .requestMatchers("/api/product/delete/{id}").hasRole("ADMIN")
 
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
         return http.build();
     }

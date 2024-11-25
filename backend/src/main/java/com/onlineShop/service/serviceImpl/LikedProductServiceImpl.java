@@ -41,6 +41,11 @@ public class LikedProductServiceImpl implements LikedProductService {
     }
 
     @Override
+    public List<LikedProduct> getAllLikedProductsByProductId(String productId) {
+        return likedProductRepository.findAllByProductId(productId);
+    }
+
+    @Override
     public boolean update(LikedProduct likedProduct) {
         Optional<LikedProduct> existingLikedProduct = likedProductRepository.findById(likedProduct.getId());
         if(existingLikedProduct.isPresent()) {

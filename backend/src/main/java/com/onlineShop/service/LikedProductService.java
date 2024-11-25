@@ -13,6 +13,8 @@ public interface LikedProductService {
 
     List<LikedProduct> getAllLikedProductsByUserId(String userId);
 
+    List<LikedProduct> getAllLikedProductsByProductId(String productId);
+
     boolean update(LikedProduct likedProduct);
 
     boolean delete(String id);

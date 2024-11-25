@@ -15,6 +15,6 @@ public interface MediaRepository extends JpaRepository<Media, String> {
 
     void deleteById(String id);
 
-    List<Media> findAllByProduct(Product product);
+    List<Media> findAllByProductId(String productId);
 
 }

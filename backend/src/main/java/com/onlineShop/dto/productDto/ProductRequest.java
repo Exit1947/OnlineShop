@@ -28,4 +28,8 @@ public class ProductRequest {
 
     private List<CharacteristicDto> characteristicValuesList;
 
+    public boolean isDiscount(){
+        return discount > 0;
+    }
+
 }
