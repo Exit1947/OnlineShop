@@ -107,8 +107,7 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
 
-            ProductResponse productResponse = ProductConverter.toProductResponse(product);
-            productResponse.setDiscount(getDiscount(product));
+            ProductResponse productResponse = ProductConverter.toProductResponse(product, getDiscount(product));
 
             List<CharacteristicDto> characteristicList = product.getCharacteristicValues()
                     .stream()
@@ -139,14 +138,8 @@ public class ProductServiceImpl implements ProductService {
 
             String thumbnailImage = s3CloudService.get(product.getThumbnailImage());
 
-            ProductCardInfoResponse productCardInfoResponse = ProductCardInfoResponse.builder()
-                    .id(product.getId())
-                    .title(product.getTitle())
-                    .price(product.getPrice())
-                    .discount(getDiscount(product))
-                    .countOfFeedbacks(feedbackService.getAllFeedbacksForProduct(product.getId()).size())
-                    .thumbnailImage(thumbnailImage)
-                    .build();
+            ProductCardInfoResponse productCardInfoResponse = ProductConverter.toProductCardResponse(product, getDiscount(product),
+                    thumbnailImage, feedbackService.getAllFeedbacksForProduct(product.getId()).size());
 
             return new ResponseEntity<>(productCardInfoResponse, HttpStatus.OK);
         }
