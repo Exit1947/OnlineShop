@@ -27,6 +27,9 @@ public class ProductResponse {
     @PositiveOrZero(message = "Discount must be a positive number or zero.")
     private int discount;
 
+    @Length(min = 10, max = 500, message = "Product description must be between 10 and 500 characters")
+    private String description;
+
     private List<CharacteristicDto> characteristicValuesList;
 
     private List<MediaResponse> mediaList;

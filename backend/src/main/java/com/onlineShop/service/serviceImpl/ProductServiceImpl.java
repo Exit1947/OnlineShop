@@ -116,6 +116,7 @@ public class ProductServiceImpl implements ProductService {
                     .title(product.getTitle())
                     .price(product.getPrice())
                     .discount(getDiscount(product))
+                    .description(product.getDescription())
                     .characteristicValuesList(
                             product.getCharacteristicValues()
                                     .stream()

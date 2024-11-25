@@ -40,6 +40,10 @@ public class Product {
     @Length(min = 3, max = 100, message = "Product title must be between 3 and 100 characters")
     private String title;
 
+    @Column(name = "title")
+    @Length(min = 10, max = 500, message = "Product description must be between 10 and 500 characters")
+    private String description;
+
     @Column(name = "discount")
     @PositiveOrZero(message = "Discount must be a positive number or zero.")
     private boolean discount;
