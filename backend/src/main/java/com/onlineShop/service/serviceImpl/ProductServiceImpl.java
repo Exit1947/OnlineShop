@@ -217,10 +217,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Feedback> getAllFeedBacksForProductById(String id) {
         Optional<Product> existingProduct = productRepository.findById(id);
-        if(existingProduct.isPresent()){
-            return existingProduct.get().getFeedbacks();
-        }
-        return null;
+        return existingProduct.map(Product::getFeedbacks).orElse(null);
     }
 
     private int getDiscount(Product product){
