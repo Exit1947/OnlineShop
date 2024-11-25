@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MediaServiceImp implements MediaService {
@@ -23,6 +24,10 @@ public class MediaServiceImp implements MediaService {
     @Override
     public void save(Media media) {
         if(!mediaRepository.existsByMediaName(media.getMediaName())){
+            String id = UUID.randomUUID().toString();
+            media.setId(id);
+            media.setMediaName(id);
+
             mediaRepository.save(media);
         }
     }

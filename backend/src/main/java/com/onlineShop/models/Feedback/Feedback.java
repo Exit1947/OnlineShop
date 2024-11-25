@@ -9,6 +9,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.NonNull;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +31,12 @@ public class Feedback {
     @JoinColumn(name = "id_user")
     private UserEntity user;
 
-
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_parent_comment")
-    private List<Feedback> subFeedbacks;
+    private Feedback parentComment;
+
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Feedback> childComments = new ArrayList<>();
 
     @Column(name = "stars")
     @Min(value = 0, message = "Minimal count of stars is 0")
@@ -66,5 +69,9 @@ public class Feedback {
     @NonNull
     @Column(name = "date_publication")
     private Date datePublication;
+
+    public boolean isRootComment() {
+        return this.parentComment == null;
+    }
 
 }

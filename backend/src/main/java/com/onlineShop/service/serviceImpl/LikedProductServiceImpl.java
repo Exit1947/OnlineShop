@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class LikedProductServiceImpl implements LikedProductService {
@@ -22,6 +23,7 @@ public class LikedProductServiceImpl implements LikedProductService {
     @Override
     public boolean save(LikedProduct likedProduct) {
         if(!likedProductRepository.existsByUserIdAndProductId(likedProduct.getUser().getId(), likedProduct.getProduct().getId())) {
+            likedProduct.setId(UUID.randomUUID().toString());
             likedProductRepository.save(likedProduct);
             return true;
         }
