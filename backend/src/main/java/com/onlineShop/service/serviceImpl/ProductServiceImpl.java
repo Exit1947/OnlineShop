@@ -2,7 +2,6 @@ package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.dto.productDto.*;
 import com.onlineShop.dto.ProductCardInfoResponse;
-import com.onlineShop.models.Feedback.Feedback;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.models.Users.EndUserEntities.LikedProduct;
@@ -34,11 +33,13 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductInventoryService productInventoryService;
 
+    private final FeedbackService feedbackService;
+
     @Autowired
     public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService,
                               final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService,
                               final OrderedProductsService orderedProductsService, final LikedProductService likedProductService,
-                              final ProductInventoryService productInventoryService) {
+                              final ProductInventoryService productInventoryService, FeedbackService feedbackService) {
         this.productRepository = productRepository;
         this.mediaService = mediaService;
         this.discountProductService = discountProductService;
@@ -46,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
         this.orderedProductsService = orderedProductsService;
         this.likedProductService = likedProductService;
         this.productInventoryService = productInventoryService;
+        this.feedbackService = feedbackService;
     }
 
     @Override
@@ -143,7 +145,7 @@ public class ProductServiceImpl implements ProductService {
                     .id(product.getId())
                     .title(product.getTitle())
                     .discount(getDiscount(product))
-                    .countOfFeedbacks(product.getFeedbacks().size())
+                    .countOfFeedbacks(feedbackService.getAllFeedbacksForProduct(product.getId()).size())
                     .price(product.getPrice())
                     .thumbnailImage(thumbnailImage)
                     .build();
@@ -199,7 +201,7 @@ public class ProductServiceImpl implements ProductService {
             deleteFromOrderedProductsIfExist(id);
             deleteFromLikedProductIfExist(id);
             deleteFromProductInventoryIfExist(id);
-            product.setFeedbacks(null);
+            deleteFromFeedbackIfExist(id);
             product.setCharacteristicValues(null);
 
             s3CloudService.delete(product.getThumbnailImage());
@@ -209,12 +211,6 @@ public class ProductServiceImpl implements ProductService {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    public List<Feedback> getAllFeedBacksForProductById(String id) {
-        Optional<Product> existingProduct = productRepository.findById(id);
-        return existingProduct.map(Product::getFeedbacks).orElse(null);
     }
 
     private int getDiscount(Product product){
@@ -234,9 +230,13 @@ public class ProductServiceImpl implements ProductService {
         discount.ifPresent(discountProduct -> discountProductService.delete(discountProduct.getId()));
     }
 
+    private void deleteFromFeedbackIfExist(String productId){
+        feedbackService.deleteAllForProduct(productId);
+    }
+
     private void deleteFromMediaProductIfExist(String productId){
         List<MediaResponse> mediaList = mediaService.getAllForProduct(productId).getBody();
-        if(!mediaList.isEmpty()) {
+        if(mediaList!=null && !mediaList.isEmpty()) {
             mediaList
                     .forEach(media -> mediaService.delete(media.getId()));
         }
@@ -244,14 +244,14 @@ public class ProductServiceImpl implements ProductService {
 
     private void deleteFromOrderedProductsIfExist(String productId){
         List<OrderedProducts> orderedProducts = orderedProductsService.findAllByProductId(productId);
-        if(!orderedProducts.isEmpty()) {
+        if(orderedProducts!=null && !orderedProducts.isEmpty()) {
             orderedProductsService.deleteAll(orderedProducts);
         }
     }
 
     private void deleteFromLikedProductIfExist(String productId){
         List<LikedProduct> likedProducts = likedProductService.getAllLikedProductsByProductId(productId);
-        if(!likedProducts.isEmpty()) {
+        if(likedProducts!=null && !likedProducts.isEmpty()) {
             likedProductService.deleteAll(likedProducts);
         }
     }

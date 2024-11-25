@@ -12,15 +12,13 @@ public interface FeedbackService {
 
     Optional<Feedback> getById(String id);
 
-    List<Feedback> getAllForProduct(String productId);
+    List<Feedback> getAllFeedbacksForProduct(String productId);
 
-    List<Feedback> getMainFeedbacksCountForProductAfterDate(String productId, int count, Date date);
-
-    List<Feedback> getAllMainFeedbacksForProduct(String productId);
+    List<Feedback> getFeedbacksCountForProductAfterDate(String productId, int count, Date date);
 
     List<Feedback> getAllFeedbacksForUser(String userId);
 
-    Optional<Feedback> getLastMainCommentForProduct(String productId);
+    Optional<Feedback> getLastFeedbackForProduct(String productId);
 
     boolean update(Feedback feedback);
 

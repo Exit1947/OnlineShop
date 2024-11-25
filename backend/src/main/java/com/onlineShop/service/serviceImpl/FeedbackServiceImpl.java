@@ -2,9 +2,7 @@ package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.models.Feedback.Feedback;
 import com.onlineShop.repository.FeedbackRepository;
-import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.FeedbackService;
-import com.onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +14,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
 
-    private final ProductService productService;
-
     @Autowired
-    public FeedbackServiceImpl(final FeedbackRepository feedbackRepository,final ProductService productService) {
+    public FeedbackServiceImpl(final FeedbackRepository feedbackRepository) {
         this.feedbackRepository = feedbackRepository;
-        this.productService = productService;
     }
 
     @Override
@@ -37,24 +32,15 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public List<Feedback> getAllForProduct(String productId) {
-        return productService.getAllFeedBacksForProductById(productId);
+    public List<Feedback> getAllFeedbacksForProduct(String productId) {
+        return feedbackRepository.findAllByProductId(productId);
     }
 
     @Override
-    public List<Feedback> getMainFeedbacksCountForProductAfterDate(String productId, int count, Date date) {
-        return getAllMainFeedbacksForProduct(productId).stream()
+    public List<Feedback> getFeedbacksCountForProductAfterDate(String productId, int count, Date date) {
+        return getAllFeedbacksForUser(productId).stream()
                 .filter(feedback -> feedback.getDatePublication().before(date))
                 .limit(count)
-                .toList();
-    }
-
-    @Override
-    public List<Feedback> getAllMainFeedbacksForProduct(String productId) {
-        return getAllForProduct(productId)
-                .stream()
-                .filter(Feedback::isRootComment)
-                .sorted(Comparator.comparing(Feedback::getDatePublication))
                 .toList();
     }
 
@@ -64,8 +50,8 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public Optional<Feedback> getLastMainCommentForProduct(String productId) {
-        return getAllForProduct(productId).stream()
+    public Optional<Feedback> getLastFeedbackForProduct(String productId) {
+        return getAllFeedbacksForProduct(productId).stream()
                 .max(Comparator.comparing(Feedback::getDatePublication));
     }
 
@@ -91,7 +77,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public boolean deleteAllForProduct(String productId) {
-        getAllForProduct(productId).
+        getAllFeedbacksForProduct(productId).
                 forEach(feedback -> feedbackRepository.deleteById(feedback.getId()));
         return true;
     }

@@ -24,10 +24,6 @@ public class Product {
     @Column(name = "id")
     private String id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_product")
-    private List<Feedback> feedbacks;
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductCharacteristics> characteristicValues = new ArrayList<>();
 

@@ -25,6 +25,4 @@ public interface ProductService {
 
     ResponseEntity<HttpStatus> delete(String id);
 
-    List<Feedback> getAllFeedBacksForProductById(String id);
-
 }
