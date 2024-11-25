@@ -1,6 +1,5 @@
 package com.onlineShop.models.Product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -31,6 +30,6 @@ public class Characteristic {
     private String description;
 
     @OneToMany(mappedBy = "characteristic", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductCharacteristics> characteristicValues = new ArrayList<>();
+    private List<ProductCharacteristic> characteristicValues = new ArrayList<>();
 
 }
