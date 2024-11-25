@@ -3,6 +3,7 @@ package com.onlineShop.service.serviceImpl;
 import com.onlineShop.dto.productDto.*;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.DiscountProduct;
+import com.onlineShop.models.Product.Media;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.AmazonS3CloudService;
@@ -188,9 +189,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<HttpStatus> delete(String id) {
-        if(productRepository.existsById(id)){
+        Optional<Product> existingProduct = productRepository.findById(id);
+        if(existingProduct.isPresent()){
+            Product product = existingProduct.get();
+
+            deleteFromDiscountProductIfExist(id);
+            deleteFromMediaProductIfExist(product);
+
+
             productRepository.deleteById(id);
+
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -206,6 +216,17 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return discount;
+    }
+
+    private void deleteFromDiscountProductIfExist(String productId){
+        Optional<DiscountProduct> discount = discountProductService.findByProductId(productId);
+        discount.ifPresent(discountProduct -> discountProductService.delete(discountProduct.getId()));
+    }
+
+    private void deleteFromMediaProductIfExist(Product product){
+        List<Media> discount = mediaService.getAllForProduct(product);
+        discount
+                .forEach(media->mediaService.delete(media.getId()));
     }
 
 }
