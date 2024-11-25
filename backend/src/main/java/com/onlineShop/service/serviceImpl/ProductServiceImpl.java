@@ -4,6 +4,7 @@ import com.onlineShop.dto.productDto.*;
 import com.onlineShop.dto.ProductCardInfoResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
+import com.onlineShop.models.Product.ProductCharacteristics;
 import com.onlineShop.models.Users.EndUserEntities.LikedProduct;
 import com.onlineShop.models.Users.EndUserEntities.shoppingOrder.OrderedProducts;
 import com.onlineShop.repository.ProductRepository;
@@ -118,6 +119,7 @@ public class ProductServiceImpl implements ProductService {
                     .characteristicValuesList(
                             product.getCharacteristicValues()
                                     .stream()
+                                    .sorted(Comparator.comparingInt(ProductCharacteristics::getNumber))
                                     .map((productCharacteristic)->
                                         CharacteristicDto.builder()
                                                 .id(productCharacteristic.getId())
@@ -126,7 +128,8 @@ public class ProductServiceImpl implements ProductService {
                                                 .description(productCharacteristic.getCharacteristic().getDescription())
                                                 .characteristicId(productCharacteristic.getCharacteristic().getId())
                                                 .build()
-                                    ).toList())
+                                    )
+                                    .toList())
                     .mediaList(mediaService.getAllForProduct(product.getId()).getBody())
                     .build();
 

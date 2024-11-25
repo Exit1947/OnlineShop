@@ -54,7 +54,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/product/save").hasAuthority("MODERATOR")
                         .requestMatchers("/api/product/save").hasAuthority("ADMIN")
                         .requestMatchers("/api/product/id={id}").permitAll()
-                        .requestMatchers("/api/product/title{title}").permitAll()
+                        .requestMatchers("/api/product/title={title}").permitAll()
                         .requestMatchers("/api/product/card/id={id}").permitAll()
                         .requestMatchers("/api/product/card/title={title}").permitAll()
                         .requestMatchers("/api/product/update").hasAuthority("UPDATE_PRODUCT")
