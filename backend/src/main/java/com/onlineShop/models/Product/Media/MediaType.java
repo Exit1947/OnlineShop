@@ -1,4 +1,4 @@
-package com.onlineShop.models.Product;
+package com.onlineShop.models.Product.Media;
 
 public enum MediaType {
 

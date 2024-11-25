@@ -1,5 +1,6 @@
-package com.onlineShop.dto.productDto;
+package com.onlineShop.dto.product;
 
+import com.onlineShop.dto.CharacteristicDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;

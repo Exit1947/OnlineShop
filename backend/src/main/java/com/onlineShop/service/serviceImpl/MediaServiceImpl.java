@@ -1,8 +1,8 @@
 package com.onlineShop.service.serviceImpl;
 
-import com.onlineShop.dto.productDto.MediaRequest;
-import com.onlineShop.dto.productDto.MediaResponse;
-import com.onlineShop.models.Product.Media;
+import com.onlineShop.dto.media.MediaRequest;
+import com.onlineShop.dto.media.MediaResponse;
+import com.onlineShop.models.Product.Media.Media;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.repository.MediaRepository;
 import com.onlineShop.service.MediaService;

@@ -1,4 +1,4 @@
-package com.onlineShop.models.Product;
+package com.onlineShop.models.Product.Characteristic;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

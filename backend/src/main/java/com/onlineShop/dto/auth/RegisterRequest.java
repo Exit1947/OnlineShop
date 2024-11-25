@@ -1,4 +1,4 @@
-package com.onlineShop.dto;
+package com.onlineShop.dto.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;

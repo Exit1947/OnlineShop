@@ -1,4 +1,4 @@
-package com.onlineShop.dto;
+package com.onlineShop.dto.product;
 
 import lombok.Builder;
 import lombok.Getter;

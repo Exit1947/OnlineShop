@@ -1,4 +1,4 @@
-package com.onlineShop.dto;
+package com.onlineShop.dto.auth;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,6 @@
 package com.onlineShop.converter.users;
 
-import com.onlineShop.dto.RegisterRequest;
+import com.onlineShop.dto.auth.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
 import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.security.UserPrincipal;

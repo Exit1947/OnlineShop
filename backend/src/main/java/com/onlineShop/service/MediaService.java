@@ -1,14 +1,13 @@
 package com.onlineShop.service;
 
-import com.onlineShop.dto.productDto.MediaRequest;
-import com.onlineShop.dto.productDto.MediaResponse;
+import com.onlineShop.dto.media.MediaRequest;
+import com.onlineShop.dto.media.MediaResponse;
 import com.onlineShop.models.Product.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.File;
 import java.util.List;
-import java.util.Optional;
 
 public interface MediaService {
 

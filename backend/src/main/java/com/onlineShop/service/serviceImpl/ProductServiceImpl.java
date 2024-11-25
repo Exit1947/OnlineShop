@@ -1,10 +1,12 @@
 package com.onlineShop.service.serviceImpl;
 
-import com.onlineShop.dto.productDto.*;
-import com.onlineShop.dto.ProductCardInfoResponse;
+import com.onlineShop.dto.CharacteristicDto;
+import com.onlineShop.dto.product.*;
+import com.onlineShop.dto.product.ProductCardInfoResponse;
+import com.onlineShop.dto.media.MediaResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
-import com.onlineShop.models.Product.ProductCharacteristic;
+import com.onlineShop.models.Product.Characteristic.ProductCharacteristic;
 import com.onlineShop.models.Users.EndUserEntities.LikedProduct;
 import com.onlineShop.models.Users.EndUserEntities.shoppingOrder.OrderedProducts;
 import com.onlineShop.repository.ProductRepository;

@@ -1,5 +1,6 @@
 package com.onlineShop.models.Product;
 
+import com.onlineShop.models.Product.Characteristic.ProductCharacteristic;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;

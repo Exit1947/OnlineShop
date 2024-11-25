@@ -1,6 +1,6 @@
-package com.onlineShop.dto.productDto;
+package com.onlineShop.dto.media;
 
-import com.onlineShop.models.Product.MediaType;
+import com.onlineShop.models.Product.Media.MediaType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
