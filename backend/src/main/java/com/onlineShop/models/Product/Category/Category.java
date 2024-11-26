@@ -11,9 +11,11 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
+
     @Id
     @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Name of category can't be empty")
@@ -24,4 +26,5 @@ public class Category {
     @NotBlank
     @Column(name="image")
     private String image;
+
 }

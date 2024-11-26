@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 public class Category_Subcategory {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NonNull

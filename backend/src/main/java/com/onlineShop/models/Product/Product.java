@@ -22,6 +22,7 @@ public class Product {
     @Id
     @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)

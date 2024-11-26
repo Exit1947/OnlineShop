@@ -12,8 +12,8 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class Sub_Subcategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Name of sub_subcategory can't be empty")

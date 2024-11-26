@@ -10,9 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +23,7 @@ public class Feedback {
     @Id
     @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @NotNull

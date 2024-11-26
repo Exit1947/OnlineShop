@@ -18,6 +18,7 @@ import lombok.Setter;
 public class ProductCharacteristic {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

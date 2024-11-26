@@ -22,7 +22,6 @@ public class MediaServiceImpl implements MediaService {
     private final AmazonS3CloudServiceImpl amazonS3CloudService;
     private Map<String, Product> productFileMap;
 
-
     @Autowired
     public MediaServiceImpl(MediaRepository mediaRepository, AmazonS3CloudServiceImpl amazonS3CloudService) {
         this.mediaRepository = mediaRepository;
