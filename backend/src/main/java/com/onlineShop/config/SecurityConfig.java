@@ -51,8 +51,8 @@ public class SecurityConfig {
 
                         //Product api gateway's
                         .requestMatchers("/api/product/save").hasAuthority("CREATE_PRODUCT")
-                        .requestMatchers("/api/product/save").hasAuthority("MODERATOR")
-                        .requestMatchers("/api/product/save").hasAuthority("ADMIN")
+                        .requestMatchers("/api/product/save").hasRole("MODERATOR")
+                        .requestMatchers("/api/product/save").hasRole("ADMIN")
                         .requestMatchers("/api/product/id={id}").permitAll()
                         .requestMatchers("/api/product/title={title}").permitAll()
                         .requestMatchers("/api/product/card/id={id}").permitAll()
