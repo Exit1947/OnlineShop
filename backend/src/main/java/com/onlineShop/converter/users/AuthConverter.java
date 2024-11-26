@@ -1,17 +1,14 @@
 package com.onlineShop.converter.users;
 
-import com.onlineShop.dto.RegisterRequest;
+import com.onlineShop.dto.auth.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
 import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.security.UserPrincipal;
-
-import java.util.UUID;
 
 public class AuthConverter {
 
     public static EndUser toEndUser(final RegisterRequest request){
         EndUser endUser = new EndUser();
-        endUser.setId(UUID.randomUUID().toString());
         endUser.setEmail(request.getEmail());
         endUser.setFirstName(request.getFirstName());
         endUser.setLastName(request.getLastName());

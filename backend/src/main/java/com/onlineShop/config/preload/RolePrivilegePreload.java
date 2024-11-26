@@ -38,7 +38,7 @@ public class RolePrivilegePreload {
     private Role findByTypeOfRole(RoleType type){
         return listOfAllRoles.stream()
                 .filter(role -> role.getType().equals(type))
-                .findFirst().get();
+                .findFirst().orElseGet(null);
     }
 
     private List<Privilege> baseRegisterPrivilege(){

@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Moderator extends Staff {
+
     @NotBlank(message = "City of shop can't be empty")
     @Column(name="city_shop")
     @Length(min = 3, max = 100, message = "City shop must be between 3 and 100 characters")

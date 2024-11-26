@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SalesRep extends Staff {
+
     @NotBlank(message = "City can't be empty")
     @Column(name="city_shop")
     @Length(min = 3, max = 100, message = "City shop must be between 3 and 100 characters")

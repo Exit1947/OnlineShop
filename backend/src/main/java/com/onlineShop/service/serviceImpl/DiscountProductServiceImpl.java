@@ -22,7 +22,7 @@ public class DiscountProductServiceImpl implements DiscountProductService {
 
     @Override
     @Transactional
-    public void save(DiscountProduct discountProduct) {
+    public boolean save(DiscountProduct discountProduct) {
         Optional<DiscountProduct> existedDiscountProduct = discountProductRepository.findByProductId(discountProduct.getProduct().getId());
         if(existedDiscountProduct.isEmpty()){
             discountProduct.setDiscount(discountProduct.getDiscount());
@@ -31,7 +31,9 @@ public class DiscountProductServiceImpl implements DiscountProductService {
             discountProduct.setProduct(discountProduct.getProduct());
 
             discountProductRepository.save(discountProduct);
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -45,29 +47,35 @@ public class DiscountProductServiceImpl implements DiscountProductService {
     }
 
     @Override
-    public void update(DiscountProduct discountProduct) {
+    public boolean update(DiscountProduct discountProduct) {
         Optional<DiscountProduct> existedDiscountProduct = discountProductRepository.findByProductId(discountProduct.getProduct().getId());
         if(existedDiscountProduct.isPresent()){
             DiscountProduct existingDiscount = existedDiscountProduct.get();
             discountProduct.setId(discountProduct.getId());
 
             discountProductRepository.save(discountProduct);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
         Optional<DiscountProduct> existedDiscountProduct = discountProductRepository.findById(id);
         if(existedDiscountProduct.isPresent()){
             discountProductRepository.deleteById(id);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void deleteAll(List<DiscountProduct> productList) {
+    public boolean deleteAll(List<DiscountProduct> productList) {
         for(DiscountProduct discountProduct : productList){
             delete(discountProduct.getId());
+            return true;
         }
+        return false;
     }
 
 }

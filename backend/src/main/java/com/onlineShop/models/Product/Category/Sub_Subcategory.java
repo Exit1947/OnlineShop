@@ -1,10 +1,9 @@
-package com.onlineShop.models.Product;
+package com.onlineShop.models.Product.Category;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Getter
@@ -13,8 +12,8 @@ import org.springframework.lang.NonNull;
 @NoArgsConstructor
 public class Sub_Subcategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Name of sub_subcategory can't be empty")

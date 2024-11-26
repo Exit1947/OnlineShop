@@ -1,9 +1,10 @@
 package com.onlineShop.controllers;
 
-import com.onlineShop.dto.ProductCardInfoResponse;
-import com.onlineShop.dto.productDto.ProductRequest;
-import com.onlineShop.dto.productDto.ProductResponse;
+import com.onlineShop.dto.product.ProductCardInfoResponse;
+import com.onlineShop.dto.product.ProductRequest;
+import com.onlineShop.dto.product.ProductResponse;
 import com.onlineShop.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,44 +22,53 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public @ResponseBody ResponseEntity<String> save(@RequestBody ProductRequest product) {
-        if(product!=null) {
-            return productService.save(product);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public @ResponseBody ResponseEntity<String> save(@RequestBody @Valid ProductRequest product) {
+        return productService.save(product);
     }
 
     @GetMapping("/id={id}")
     public @ResponseBody ResponseEntity<ProductResponse> getById(@PathVariable("id") String id) {
-        return productService.getById(id);
-    }
-
-    @GetMapping("/card/id={id}")
-    public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(@PathVariable("id") String id) {
-        return productService.getProductCardInfoById(id);
-    }
-
-    @GetMapping("/title={title}")
-    public @ResponseBody ResponseEntity<ProductResponse> getByTitle(@PathVariable("title") String title) {
-        return productService.getByTitle(title);
-    }
-
-    @GetMapping("/card/title={title}")
-    public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(@PathVariable("title") String title) {
-        return productService.getProductCardInfoByTitle(title);
-    }
-
-    @PutMapping("/update")
-    public @ResponseBody ResponseEntity<HttpStatus> update(@RequestBody ProductRequest product) {
-        if(product!=null) {
-            return productService.update(product);
+        if(id!=null && !id.isEmpty()) {
+            return productService.getById(id);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/card/id={id}")
+    public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(@PathVariable("id") String id) {
+        if(id!=null && !id.isEmpty()) {
+            return productService.getProductCardInfoById(id);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/title={title}")
+    public @ResponseBody ResponseEntity<ProductResponse> getByTitle(@PathVariable("title") String title) {
+        if(title!=null && !title.isEmpty()) {
+            return productService.getByTitle(title);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/card/title={title}")
+    public @ResponseBody ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(@PathVariable("title") String title) {
+        if(title!=null && !title.isEmpty()) {
+            return productService.getProductCardInfoByTitle(title);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/update")
+    public @ResponseBody ResponseEntity<HttpStatus> update(@RequestBody @Valid ProductRequest product) {
+        return productService.update(product);
+    }
+
+    @DeleteMapping("/delete/id={id}")
     public @ResponseBody ResponseEntity<HttpStatus> delete(@PathVariable("id") String id) {
-        return productService.delete(id);
+        if(id!=null && !id.isEmpty()) {
+            return productService.delete(id);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }

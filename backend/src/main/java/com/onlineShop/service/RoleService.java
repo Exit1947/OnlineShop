@@ -28,7 +28,14 @@ public class RoleService {
     }
 
     public List<Role> getAll() {
-        return roleRepository.findAll();
+        List<Role> roleList = roleRepository.findAll();
+        if(roleList.isEmpty()){
+            for(RoleType role : RoleType.values()){
+                roleList.add(new Role(role));
+            }
+            roleRepository.saveAll(roleList);
+        }
+        return roleList;
     }
 
 }

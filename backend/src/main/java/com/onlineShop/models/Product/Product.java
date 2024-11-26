@@ -1,9 +1,10 @@
 package com.onlineShop.models.Product;
 
-import com.onlineShop.models.Feedback.Feedback;
+import com.onlineShop.models.Product.Characteristic.ProductCharacteristic;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -21,14 +22,11 @@ public class Product {
     @Id
     @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_product")
-    private List<Feedback> feedbacks;
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductCharacteristics> characteristicValues = new ArrayList<>();
+    private List<ProductCharacteristic> characteristicValues = new ArrayList<>();
 
     @NotBlank(message = "Category name can't be empty")
     @Column(name = "name_category")
@@ -43,7 +41,12 @@ public class Product {
     @Length(min = 3, max = 100, message = "Product title must be between 3 and 100 characters")
     private String title;
 
+    @Column(name = "description")
+    @Length(min = 10, max = 500, message = "Product description must be between 10 and 500 characters")
+    private String description;
+
     @Column(name = "discount")
+    @PositiveOrZero(message = "Discount must be a positive number or zero.")
     private boolean discount;
 
     @NotBlank(message = "Thumbnail image can't be empty")

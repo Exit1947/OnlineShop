@@ -17,9 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderedProducts {
+
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
@@ -34,4 +35,5 @@ public class OrderedProducts {
     @Positive
     @Column(name = "count_of_products")
     private int countOfProducts;
+
 }

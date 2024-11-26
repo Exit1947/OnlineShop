@@ -25,8 +25,8 @@ import java.util.List;
 public class UserEntity {
 
     @Id
-    @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @NotNull

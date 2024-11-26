@@ -1,16 +1,16 @@
 package com.onlineShop.models.Feedback;
 
+import com.onlineShop.models.Product.Product;
 import com.onlineShop.models.Users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.lang.NonNull;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -23,17 +23,18 @@ public class Feedback {
     @Id
     @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_product")
+    private Product product;
 
     @NonNull
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_user")
     private UserEntity user;
-
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_parent_comment")
-    private List<Feedback> subFeedbacks;
 
     @Column(name = "stars")
     @Min(value = 0, message = "Minimal count of stars is 0")

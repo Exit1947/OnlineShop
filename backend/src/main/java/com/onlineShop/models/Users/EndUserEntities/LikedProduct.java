@@ -18,8 +18,8 @@ import lombok.Setter;
 public class LikedProduct {
 
     @Id
-    @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @NotNull

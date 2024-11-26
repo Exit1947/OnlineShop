@@ -1,25 +1,28 @@
 package com.onlineShop.service;
 
-import com.onlineShop.models.Product.Media;
+import com.onlineShop.dto.media.MediaRequest;
+import com.onlineShop.dto.media.MediaResponse;
 import com.onlineShop.models.Product.Product;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import java.io.File;
 import java.util.List;
-import java.util.Optional;
 
 public interface MediaService {
 
-    void save(Media media);
+    String createSessionForMedia(Product product);
 
-    void saveAll(List<Media> mediaList);
+    ResponseEntity<HttpStatus> save(String sessionId, List<File> mediaFiles);
 
-    List<Media> getAllForProduct(Product product);
+    ResponseEntity<List<MediaResponse>> getAllForProduct(String productId);
 
-    Optional<Media> findById(String id);
+    ResponseEntity<MediaResponse> findById(String id);
 
-    Optional<Media> findByMediaName(String mediaName);
+    ResponseEntity<MediaResponse> findByMediaName(String mediaName);
 
-    void update(Media media);
+    ResponseEntity<HttpStatus> update(MediaRequest media);
 
-    void delete(String id);
+    ResponseEntity<HttpStatus> delete(String id);
 
 }

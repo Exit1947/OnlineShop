@@ -1,10 +1,9 @@
-package com.onlineShop.models.Product;
+package com.onlineShop.models.Product.Category;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Getter
@@ -12,9 +11,11 @@ import org.springframework.lang.NonNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
+
     @Id
     @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Name of category can't be empty")
@@ -25,4 +26,5 @@ public class Category {
     @NotBlank
     @Column(name="image")
     private String image;
+
 }

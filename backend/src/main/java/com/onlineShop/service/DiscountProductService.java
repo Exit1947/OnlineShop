@@ -7,16 +7,16 @@ import java.util.Optional;
 
 public interface DiscountProductService {
 
-    void save(DiscountProduct discountProduct);
+    boolean save(DiscountProduct discountProduct);
 
     Optional<DiscountProduct> findById(long id);
 
-    Optional<DiscountProduct> findByProductId(String mediaName);
+    Optional<DiscountProduct> findByProductId(String productId);
 
-    void update(DiscountProduct discountProduct);
+    boolean update(DiscountProduct discountProduct);
 
-    void delete(long id);
+    boolean delete(long id);
 
-    void deleteAll(List<DiscountProduct> productList);
+    boolean deleteAll(List<DiscountProduct> productList);
 
 }

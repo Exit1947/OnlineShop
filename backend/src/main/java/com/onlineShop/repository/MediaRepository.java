@@ -1,7 +1,6 @@
 package com.onlineShop.repository;
 
-import com.onlineShop.models.Product.Media;
-import com.onlineShop.models.Product.Product;
+import com.onlineShop.models.Product.Media.Media;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,6 +14,6 @@ public interface MediaRepository extends JpaRepository<Media, String> {
 
     void deleteById(String id);
 
-    List<Media> findAllByProduct(Product product);
+    List<Media> findAllByProductId(String productId);
 
 }

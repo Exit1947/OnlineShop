@@ -1,4 +1,4 @@
-package com.onlineShop.dto;
+package com.onlineShop.dto.auth;
 
 import lombok.Getter;
 import lombok.Setter;

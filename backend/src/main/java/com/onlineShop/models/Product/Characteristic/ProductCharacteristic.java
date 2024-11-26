@@ -1,8 +1,9 @@
-package com.onlineShop.models.Product;
+package com.onlineShop.models.Product.Characteristic;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.onlineShop.models.Product.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,13 +15,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductCharacteristics {
+public class ProductCharacteristic {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
@@ -33,5 +34,8 @@ public class ProductCharacteristics {
     @Size(min = 1, max = 30, message = "Value must be between 1 and 30 characters")
     @Column(name = "characteristic_value", nullable = false)
     private String value;
+
+    @Positive(message = "Number must not be blank")
+    private int number;
 
 }

@@ -1,8 +1,8 @@
 package com.onlineShop.controllers;
 
-import com.onlineShop.dto.LoginRequest;
-import com.onlineShop.dto.LoginResponse;
-import com.onlineShop.dto.RegisterRequest;
+import com.onlineShop.dto.auth.LoginRequest;
+import com.onlineShop.dto.auth.LoginResponse;
+import com.onlineShop.dto.auth.RegisterRequest;
 import com.onlineShop.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

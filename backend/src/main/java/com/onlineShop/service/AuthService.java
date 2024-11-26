@@ -1,9 +1,9 @@
 package com.onlineShop.service;
 
 import com.onlineShop.converter.users.AuthConverter;
-import com.onlineShop.dto.LoginRequest;
-import com.onlineShop.dto.LoginResponse;
-import com.onlineShop.dto.RegisterRequest;
+import com.onlineShop.dto.auth.LoginRequest;
+import com.onlineShop.dto.auth.LoginResponse;
+import com.onlineShop.dto.auth.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
 import com.onlineShop.config.preload.RolePrivilegePreload;
 import com.onlineShop.security.JwtIssuer;

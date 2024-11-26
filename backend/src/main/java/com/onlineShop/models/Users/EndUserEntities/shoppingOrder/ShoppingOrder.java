@@ -17,9 +17,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShoppingOrder {
+
     @Id
-    @NotBlank
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @NotNull
@@ -30,4 +31,5 @@ public class ShoppingOrder {
     @NotNull
     @Column(name = "shopping_order_created_at")
     private Date orderCreatedAt;
+
 }
