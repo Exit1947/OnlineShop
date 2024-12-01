@@ -31,8 +31,8 @@ public class Item {
     @JoinColumn(name = "id_product")
     private Product product;
 
-    @Positive(message = "Count must be positive number")
     @Column(name = "count_of_products")
+    @Positive(message = "Count must be positive number")
     private int countOfProducts;
 
 }
