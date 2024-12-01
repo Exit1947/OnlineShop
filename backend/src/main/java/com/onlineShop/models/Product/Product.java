@@ -34,7 +34,7 @@ public class Product {
     private String nameCategory;
 
     @Positive(message = "Price must be a positive number")
-    private int price;
+    private double price;
 
     @NotBlank(message = "Title of product can't be empty")
     @Column(name = "title")

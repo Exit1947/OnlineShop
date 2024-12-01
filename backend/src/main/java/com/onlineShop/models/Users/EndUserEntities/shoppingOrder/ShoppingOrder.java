@@ -2,7 +2,6 @@ package com.onlineShop.models.Users.EndUserEntities.shoppingOrder;
 
 import com.onlineShop.models.Users.EndUser;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +23,7 @@ public class ShoppingOrder {
     private String id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_end_user")
     private EndUser endUser;
 

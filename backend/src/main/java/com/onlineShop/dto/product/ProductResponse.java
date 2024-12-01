@@ -24,7 +24,7 @@ public class ProductResponse {
     private String title;
 
     @Positive(message = "Price must be a positive number")
-    private int price;
+    private double price;
 
     @PositiveOrZero(message = "Discount must be a positive number or zero.")
     private int discount;
