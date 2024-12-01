@@ -1,10 +1,12 @@
 import './productpagestyle.css';
 import React from 'react';
 import Card from './card.tsx'
+
 import { Rating } from 'react-simple-star-rating';
 import { FaStar } from 'react-icons/fa';
 import { useState, useEffect, useRef} from "react";
 import { useNavigate } from 'react-router-dom'
+import axios from "axios";
 import Arrow from '../../img/icons-arrow-left.png';
 import IconsFour from '../../img/Frame 427319916.png';
 import Business from '../../img/Frame 427319913.png';
@@ -43,19 +45,39 @@ import starOrangeUno from '../../img/star-full-orange.png';
 
 import "react-multi-carousel/lib/styles.css";
 
-
+// https://omnify-online-marketplace-storage.s3.eu-north-1.amazonaws.com/2.png
 
 
 
 const ProductPage = () => {
 
+
+//   const [data, setData]= useState([])
+
+//     useEffect (()=> {
+//     axios.get('http://localhost:8080/api/product/id=1').
+//     then((response) => setData(response.data))
+   
+//       })
+    
+  
+
+
+
      // NAVIGATED
 
      const navigate =useNavigate();
+     const navigate1 =useNavigate();
 
    function navMainPage (event){
     event.preventDefault();
     navigate('/auth/comment', { replace: true });
+   } 
+     
+
+   function returnMainPage (event){
+    event.preventDefault();
+    navigate1('/', { replace: true });
    }
     // SLIDER MAIN PRODUCT
     
@@ -206,7 +228,42 @@ const ProductPage = () => {
    
         setComments((comments)=> [...comments, comment]);
     }
+
+
+    // ADD Answer
        
+    const [showField, setshowField]= useState(1);
+
+    const handleshow = (e)=> {
+     setshowField(e);
+    }
+//ADD AXIOUS
+
+    // const [data, setData]= useState();  
+
+    
+
+    //     useEffect(() => {
+    //       const fetchData = async () => {
+    //         try {
+    //           const response = await axios.get('http://localhost:8080/api/product/id=1');
+    //           setData(response.data); // Зберігаємо лише потрібні дані
+    //           console.log(data);
+              
+    //         } catch (error) {
+    //           console.error('Помилка запиту:', error);
+    //         }
+    //       };
+      
+    //       fetchData();
+    //     }, []);
+
+
+       
+        // add comment to reviews
+
+    
+      
        
     
 
@@ -217,7 +274,7 @@ const ProductPage = () => {
 
             <div className='top-product-page'>
                 <img src={Arrow} alt=''/>
-                <div className=''> Home </div>
+                <div className='' onClick={returnMainPage}> Home </div>
                 <div> / </div>
                 <div className=''> Category </div>
                 <div> / </div>
@@ -301,6 +358,7 @@ const ProductPage = () => {
                            
                             <label className='numberStar'>(125)</label>
                             </div>
+                           
                           <div className='stock'> In Stock </div>
                           <div className='price-product'> $ 1449,99</div>
                           <button className='btn-buy-now'> Buy Now </button>
@@ -636,9 +694,10 @@ const ProductPage = () => {
                     <img src={PhotoProduct} alt = '' className='' />
                    </div>
 
-                   <div className='lover-panel'>
-                    <button className='answer-panel'> <img  src={ArrowBack} alt=''/></button>
-                    
+                   <div className='lover-panel'>                    
+                    <button className='answer-panel' onClick={()=>handleshow(2)}> <img  src={ArrowBack} alt=''/></button>
+
+                   
                     <div className='thumb-panel'>
                     <div className='thumb-up' onClick={plusCounter}><img  src={ThumbUp} alt=''/></div>
                     <div className='love-number' > {counter} </div>
@@ -646,6 +705,7 @@ const ProductPage = () => {
                     <div className='unlove-number' > {counterMinus} </div>
                     </div>
                    </div>
+                   <div className={ showField===2 ?  'input-comment-answer-show' : 'input-comment-answer'} onClick={()=>handleshow(1)}></div>
               </div>
 
               <div className='view-more'>
