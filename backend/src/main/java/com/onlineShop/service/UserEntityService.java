@@ -29,6 +29,10 @@ public class UserEntityService {
         personRepository.save(userEntity);
     }
 
+    public boolean existsById(String id) {
+        return personRepository.existsById(id);
+    }
+
     public boolean existsByEmail(String email) {
         return personRepository.existsByEmail(email);
     }

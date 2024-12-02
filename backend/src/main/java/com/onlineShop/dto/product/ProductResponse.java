@@ -1,6 +1,5 @@
 package com.onlineShop.dto.product;
 
-import com.onlineShop.dto.CharacteristicDto;
 import com.onlineShop.dto.media.MediaResponse;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;

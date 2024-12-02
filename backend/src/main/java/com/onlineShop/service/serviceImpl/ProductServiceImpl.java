@@ -1,7 +1,7 @@
 package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.converter.product.ProductConverter;
-import com.onlineShop.dto.CharacteristicDto;
+import com.onlineShop.dto.product.CharacteristicDto;
 import com.onlineShop.dto.product.*;
 import com.onlineShop.dto.product.ProductCardInfoResponse;
 import com.onlineShop.dto.media.MediaResponse;
