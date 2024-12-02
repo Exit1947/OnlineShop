@@ -13,7 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntityRequest {
@@ -35,7 +34,7 @@ public class UserEntityRequest {
 
     private String password;
 
-    private String avatar;
+    private boolean avatar;
 
     @Column(name = "creation_date", nullable = false)
     private Date creationDate;

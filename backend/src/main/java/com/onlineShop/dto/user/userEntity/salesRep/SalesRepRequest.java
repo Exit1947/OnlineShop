@@ -1,14 +1,12 @@
 package com.onlineShop.dto.user.userEntity.salesRep;
 
 import com.onlineShop.dto.user.userEntity.staff.StaffRequest;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class SalesRepRequest extends StaffRequest {
@@ -22,7 +20,7 @@ public class SalesRepRequest extends StaffRequest {
     private String street;
 
     @NotBlank(message = "Company can't be empty")
-    private String companyId;
+    private long companyId;
 
     @NotBlank(message = "Admin id can't be empty")
     private String adminId;

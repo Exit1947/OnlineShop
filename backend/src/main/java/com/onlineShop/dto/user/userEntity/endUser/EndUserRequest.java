@@ -1,13 +1,11 @@
 package com.onlineShop.dto.user.userEntity.endUser;
 
 import com.onlineShop.dto.user.userEntity.userEntity.UserEntityRequest;
-import jakarta.persistence.Column;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EndUserRequest extends UserEntityRequest {

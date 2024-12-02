@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ModeratorResponse extends StaffResponse {
