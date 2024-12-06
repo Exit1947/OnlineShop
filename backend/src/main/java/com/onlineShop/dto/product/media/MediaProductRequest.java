@@ -1,4 +1,4 @@
-package com.onlineShop.dto.media;
+package com.onlineShop.dto.product.media;
 
 import com.onlineShop.models.Product.Media.MediaType;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class MediaRequest {
+public class MediaProductRequest {
 
     private String id;
 

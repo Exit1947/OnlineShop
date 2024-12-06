@@ -16,4 +16,6 @@ public interface MediaRepository extends JpaRepository<Media, String> {
 
     List<Media> findAllByProductId(String productId);
 
+    int getCountByProductId(String productId);
+
 }

@@ -4,7 +4,7 @@ import com.onlineShop.converter.product.ProductConverter;
 import com.onlineShop.dto.product.CharacteristicDto;
 import com.onlineShop.dto.product.*;
 import com.onlineShop.dto.product.ProductCardInfoResponse;
-import com.onlineShop.dto.media.MediaResponse;
+import com.onlineShop.dto.product.media.MediaProductResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.models.Product.Characteristic.ProductCharacteristic;
@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    private final MediaService mediaService;
+    private final MediaApiService<String, Product> mediaApiService;
 
     private final DiscountProductService discountProductService;
 
@@ -40,12 +40,12 @@ public class ProductServiceImpl implements ProductService {
     private final FeedbackService feedbackService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService,
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaApiService<String, Product> mediaApiService,
                               final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService,
                               final OrderedProductsService orderedProductsService, final LikedProductService likedProductService,
                               final ProductInventoryService productInventoryService, FeedbackService feedbackService) {
         this.productRepository = productRepository;
-        this.mediaService = mediaService;
+        this.mediaApiService = mediaApiService;
         this.discountProductService = discountProductService;
         this.s3CloudService = s3CloudService;
         this.orderedProductsService = orderedProductsService;
@@ -73,8 +73,6 @@ public class ProductServiceImpl implements ProductService {
 
                     discountProductService.save(discountProduct);
                 }
-
-                return new ResponseEntity<>(mediaService.createSessionForMedia(product), HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
@@ -122,7 +120,7 @@ public class ProductServiceImpl implements ProductService {
                                             .build()).toList();
             productResponse.setCharacteristicValuesList(characteristicList);
 
-            List<MediaResponse> mediaList = mediaService.getAllForProduct(product.getId()).getBody();
+            List<MediaProductResponse> mediaList = mediaApiService.getAllForEntity(product.getId()).getBody();
             if (mediaList != null && !mediaList.isEmpty()) {
                 productResponse.setMediaList(mediaList);
             }
@@ -221,11 +219,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void deleteFromMediaProductIfExist(String productId){
-        List<MediaResponse> mediaList = mediaService.getAllForProduct(productId).getBody();
-        if(mediaList!=null && !mediaList.isEmpty()) {
-            mediaList
-                    .forEach(media -> mediaService.delete(media.getId()));
-        }
+        mediaApiService.deleteAllForEntity(productId);
     }
 
     private void deleteFromOrderedProductsIfExist(String productId){

@@ -1,28 +1,33 @@
 package com.onlineShop.service;
 
-import com.onlineShop.dto.media.MediaRequest;
-import com.onlineShop.dto.media.MediaResponse;
-import com.onlineShop.models.Product.Product;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.onlineShop.models.Product.Media.Media;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
-public interface MediaService {
+public interface MediaService<ID, T> {
 
-    String createSessionForMedia(Product product);
+    boolean save(ID entityId, MultipartFile mediaFile);
 
-    ResponseEntity<HttpStatus> save(String sessionId, List<File> mediaFiles);
+    boolean initialSave(ID entityId, List<MultipartFile> mediaFiles);
 
-    ResponseEntity<List<MediaResponse>> getAllForProduct(String productId);
+    List<Media> getAllForEntity(ID id);
 
-    ResponseEntity<MediaResponse> findById(String id);
+    String getUrl(String name);
 
-    ResponseEntity<MediaResponse> findByMediaName(String mediaName);
+    Optional<Media> getById(String id);
 
-    ResponseEntity<HttpStatus> update(MediaRequest media);
+    Optional<Media> getByMediaName(String mediaName);
 
-    ResponseEntity<HttpStatus> delete(String id);
+    boolean update(Media newMedia);
+
+    boolean delete(ID id);
+
+    boolean deleteAll(List<Media> medias);
+
+    boolean existsById(ID id);
+
+    boolean existsByMediaName(String mediaName);
 
 }
