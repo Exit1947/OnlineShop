@@ -13,21 +13,45 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserEntityApiService {
 
-    ResponseEntity<HttpStatus> createAdmin(AdminRequest admin);
+    ResponseEntity<String> createAdmin(AdminRequest adminRequest);
 
-    ResponseEntity<HttpStatus> createModerator(ModeratorRequest moderator);
+    ResponseEntity<String> createModerator(ModeratorRequest moderatorRequest);
 
-    ResponseEntity<HttpStatus> createSalesRep(SalesRepRequest salesRep);
+    ResponseEntity<String> createSalesRep(SalesRepRequest salesRepRequest);
 
-    ResponseEntity<HttpStatus> createEndUser(EndUserRequest endUser);
+    ResponseEntity<String> createEndUser(EndUserRequest endUserRequest);
 
-    ResponseEntity<AdminResponse> getAdmin(String id);
+    ResponseEntity<AdminResponse> getAdminById(String id);
 
-    ResponseEntity<ModeratorResponse> getModerator(String id);
+    ResponseEntity<AdminResponse> getAdminByEmail(String email);
 
-    ResponseEntity<SalesRepResponse> getSalesRep(String id);
+    ResponseEntity<AdminResponse> getAdminByLogin(String login);
 
-    ResponseEntity<EndUserResponse> getEndUser(String id);
+    ResponseEntity<AdminResponse> getAdminByPhoneNumber(String phoneNumber);
+
+    ResponseEntity<ModeratorResponse> getModeratorById(String id);
+
+    ResponseEntity<ModeratorResponse> getModeratorByEmail(String email);
+
+    ResponseEntity<ModeratorResponse> getModeratorByLogin(String login);
+
+    ResponseEntity<ModeratorResponse> getModeratorByPhoneNumber(String phoneNumber);
+
+    ResponseEntity<SalesRepResponse> getSalesRepById(String id);
+
+    ResponseEntity<SalesRepResponse> getSalesRepByEmail(String email);
+
+    ResponseEntity<SalesRepResponse> getSalesRepByLogin(String login);
+
+    ResponseEntity<SalesRepResponse> getSalesRepByPhoneNumber(String phoneNumber);
+
+    ResponseEntity<EndUserResponse> getEndUserById(String id);
+
+    ResponseEntity<EndUserResponse> getEndUserByEmail(String email);
+
+    ResponseEntity<EndUserResponse> getEndUserByLogin(String login);
+
+    ResponseEntity<EndUserResponse> getEndUserByPhoneNumber(String email);
 
     ResponseEntity<HttpStatus> updateAdmin(AdminRequest adminRequest);
 
@@ -37,6 +61,12 @@ public interface UserEntityApiService {
 
     ResponseEntity<HttpStatus> updateEndUser(EndUserRequest endUserRequest);
 
-    ResponseEntity<HttpStatus> deleteUserEntity(String id);
+    ResponseEntity<HttpStatus> deleteAdmin(String id, String requestAdminId);
+
+    ResponseEntity<HttpStatus> deleteModerator(String id);
+
+    ResponseEntity<HttpStatus> deleteSalesRep(String id);
+
+    ResponseEntity<HttpStatus> deleteEndUser(String id);
 
 }

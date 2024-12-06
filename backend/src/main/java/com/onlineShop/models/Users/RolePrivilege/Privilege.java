@@ -28,8 +28,8 @@ public class Privilege implements GrantedAuthority {
     @Column(name = "type", unique = true)
     private PrivilegeType type;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "privileges")
-    private List<UserEntity> users = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "privilege")
+    private List<UserEntityPrivilege> users = new ArrayList<>();
 
     @Override
     public String getAuthority() {

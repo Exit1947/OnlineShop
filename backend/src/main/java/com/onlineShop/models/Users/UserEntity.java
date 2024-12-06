@@ -3,6 +3,7 @@ package com.onlineShop.models.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.onlineShop.models.Users.RolePrivilege.Privilege;
 import com.onlineShop.models.Users.RolePrivilege.Role;
+import com.onlineShop.models.Users.RolePrivilege.UserEntityPrivilege;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -51,7 +52,6 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @NotBlank
     @Column(name = "avatar")
     private String avatar;
 
@@ -59,12 +59,7 @@ public class UserEntity {
     @Column(name = "creation_date", nullable = false)
     private Date creationDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "person_privilege",
-            joinColumns = {@JoinColumn(name = "id_person")},
-            inverseJoinColumns = {@JoinColumn(name="id_privilege")}
-    )
-    private List<Privilege> privileges = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userEntity")
+    private List<UserEntityPrivilege> privileges;
 
 }

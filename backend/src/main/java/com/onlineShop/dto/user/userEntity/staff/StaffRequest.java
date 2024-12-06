@@ -19,6 +19,6 @@ public class StaffRequest extends UserEntityRequest {
     private String lastName;
 
     @NotNull(message = "Shop list can't be empty")
-    private List<Long> shopIds;
+    private List<Long> shops;
 
 }

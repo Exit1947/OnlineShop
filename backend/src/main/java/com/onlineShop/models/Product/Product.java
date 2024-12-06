@@ -49,7 +49,6 @@ public class Product {
     @PositiveOrZero(message = "Discount must be a positive number or zero.")
     private boolean discount;
 
-    @NotBlank(message = "Thumbnail image can't be empty")
     @Column(name = "thumbnailImage_name")
     private String thumbnailImage;
 

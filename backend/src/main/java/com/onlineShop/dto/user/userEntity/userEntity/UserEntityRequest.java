@@ -22,6 +22,7 @@ public class UserEntityRequest {
     @Length(min = 3, max = 50, message = "Login must be between 3 and 50 characters")
     private String login;
 
+    @NotBlank(message = "Email column can't be empty")
     @Length(min = 3, max = 50, message = "Email number must be between 10 and 20 characters")
     private String email;
 
@@ -34,10 +35,8 @@ public class UserEntityRequest {
 
     private String password;
 
-    private boolean avatar;
-
     @Column(name = "creation_date", nullable = false)
-    private Date creationDate;
+    private Date creationDate = new Date();
 
     @NotNull
     private RoleRequest role;
