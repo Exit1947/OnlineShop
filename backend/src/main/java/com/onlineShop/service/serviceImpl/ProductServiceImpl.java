@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    private final MediaApiService<String, Product> mediaApiService;
+    private final MediaProductApiService<String, Product> mediaProductApiService;
 
     private final DiscountProductService discountProductService;
 
@@ -40,12 +40,12 @@ public class ProductServiceImpl implements ProductService {
     private final FeedbackService feedbackService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaApiService<String, Product> mediaApiService,
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaProductApiService<String, Product> mediaProductApiService,
                               final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService,
                               final OrderedProductsService orderedProductsService, final LikedProductService likedProductService,
                               final ProductInventoryService productInventoryService, FeedbackService feedbackService) {
         this.productRepository = productRepository;
-        this.mediaApiService = mediaApiService;
+        this.mediaProductApiService = mediaProductApiService;
         this.discountProductService = discountProductService;
         this.s3CloudService = s3CloudService;
         this.orderedProductsService = orderedProductsService;
@@ -120,7 +120,7 @@ public class ProductServiceImpl implements ProductService {
                                             .build()).toList();
             productResponse.setCharacteristicValuesList(characteristicList);
 
-            List<MediaProductResponse> mediaList = mediaApiService.getAllForEntity(product.getId()).getBody();
+            List<MediaProductResponse> mediaList = mediaProductApiService.getAllForEntity(product.getId()).getBody();
             if (mediaList != null && !mediaList.isEmpty()) {
                 productResponse.setMediaList(mediaList);
             }
@@ -219,7 +219,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void deleteFromMediaProductIfExist(String productId){
-        mediaApiService.deleteAllForEntity(productId);
+        mediaProductApiService.deleteAllForEntity(productId);
     }
 
     private void deleteFromOrderedProductsIfExist(String productId){

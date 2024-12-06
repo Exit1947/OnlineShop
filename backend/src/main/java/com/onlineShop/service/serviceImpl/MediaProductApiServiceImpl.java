@@ -5,7 +5,7 @@ import com.onlineShop.dto.product.media.MediaProductRequest;
 import com.onlineShop.dto.product.media.MediaProductResponse;
 import com.onlineShop.models.Product.Media.Media;
 import com.onlineShop.models.Product.Product;
-import com.onlineShop.service.MediaApiService;
+import com.onlineShop.service.MediaProductApiService;
 import com.onlineShop.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MediaProductServiceApiServiceImpl implements MediaApiService<String, Product> {
+public class MediaProductApiServiceImpl implements MediaProductApiService<String, Product> {
 
     private final MediaService<String, Product> mediaService;
 
     @Autowired
-    public MediaProductServiceApiServiceImpl(MediaService<String, Product> mediaService) {
+    public MediaProductApiServiceImpl(MediaService<String, Product> mediaService) {
         this.mediaService = mediaService;
     }
 
