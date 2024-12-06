@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    private final MediaProductApiService<String, Product> mediaProductApiService;
+    private final MediaApiService<String, Product> mediaProductApiService;
 
     private final DiscountProductService discountProductService;
 
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     private final FeedbackService feedbackService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaProductApiService<String, Product> mediaProductApiService,
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaApiService<String, Product> mediaProductApiService,
                               final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService,
                               final OrderedProductsService orderedProductsService, final LikedProductService likedProductService,
                               final ProductInventoryService productInventoryService, FeedbackService feedbackService) {
@@ -120,9 +120,9 @@ public class ProductServiceImpl implements ProductService {
                                             .build()).toList();
             productResponse.setCharacteristicValuesList(characteristicList);
 
-            List<MediaProductResponse> mediaList = mediaProductApiService.getAllForEntity(product.getId()).getBody();
+            List<MediaProductResponse> mediaList =  (List<MediaProductResponse>) mediaProductApiService.getAllForEntity(product.getId()).getBody();
             if (mediaList != null && !mediaList.isEmpty()) {
-                productResponse.setMediaList(mediaList);
+                    productResponse.setMediaList(mediaList);
             }
 
             return new ResponseEntity<>(productResponse, HttpStatus.OK);

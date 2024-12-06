@@ -14,14 +14,14 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
-public class MediaServiceImpl implements MediaService<String, Product> {
+public class MediaProductServiceImpl implements MediaService<String, Product> {
 
     private final ProductRepository productRepository;
     private final MediaRepository mediaRepository;
     private final AmazonS3CloudServiceImpl amazonS3CloudService;
 
     @Autowired
-    public MediaServiceImpl(ProductRepository productRepository, MediaRepository mediaRepository, AmazonS3CloudServiceImpl amazonS3CloudService) {
+    public MediaProductServiceImpl(ProductRepository productRepository, MediaRepository mediaRepository, AmazonS3CloudServiceImpl amazonS3CloudService) {
         this.productRepository = productRepository;
         this.mediaRepository = mediaRepository;
         this.amazonS3CloudService = amazonS3CloudService;

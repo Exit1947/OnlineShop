@@ -1,21 +1,18 @@
 package com.onlineShop.dto.product.media;
 
+import com.onlineShop.dto.media.MediaRequest;
+import com.onlineShop.dto.product.ProductRequest;
 import com.onlineShop.models.Product.Media.MediaType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
-public class MediaProductRequest {
-
-    private String id;
-
-    @NotBlank(message = "MediaUrl can't be empty")
-    private String mediaUrl;
+@AllArgsConstructor
+@NoArgsConstructor
+public class MediaProductRequest extends MediaRequest {
 
     @NotNull(message = "Media type can't be empty")
     private MediaType type;

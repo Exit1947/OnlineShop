@@ -1,11 +1,14 @@
 package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.converter.media.MediaConverter;
+import com.onlineShop.dto.media.MediaRequest;
+import com.onlineShop.dto.media.MediaResponse;
+import com.onlineShop.dto.product.ProductResponse;
 import com.onlineShop.dto.product.media.MediaProductRequest;
 import com.onlineShop.dto.product.media.MediaProductResponse;
 import com.onlineShop.models.Product.Media.Media;
 import com.onlineShop.models.Product.Product;
-import com.onlineShop.service.MediaProductApiService;
+import com.onlineShop.service.MediaApiService;
 import com.onlineShop.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class MediaProductApiServiceImpl implements MediaProductApiService<String, Product> {
+public class MediaProductApiServiceImpl implements MediaApiService<String, Product> {
 
     private final MediaService<String, Product> mediaService;
 
@@ -45,7 +49,7 @@ public class MediaProductApiServiceImpl implements MediaProductApiService<String
     }
 
     @Override
-    public ResponseEntity<List<MediaProductResponse>> getAllForEntity(String productId) {
+    public ResponseEntity<List<? extends MediaResponse>> getAllForEntity(String productId) {
         List<MediaProductResponse> mediaProductResponseList = mediaService.getAllForEntity(productId).stream()
                 .map(MediaConverter::toMediaProductResponse)
                 .toList();
@@ -75,11 +79,19 @@ public class MediaProductApiServiceImpl implements MediaProductApiService<String
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> update(MediaProductRequest media) {
-        if(mediaService.update(MediaConverter.toMedia(media))){
-            return new ResponseEntity<>(HttpStatus.OK);
+    public <M extends MediaRequest> ResponseEntity<HttpStatus> update(M media){
+        MediaProductRequest mediaProductRequest = null;
+        if(media instanceof MediaProductRequest){
+            mediaProductRequest = (MediaProductRequest) media;
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        if(mediaProductRequest!=null) {
+            if (mediaService.update(MediaConverter.toMedia(mediaProductRequest))) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @Override
@@ -92,9 +104,18 @@ public class MediaProductApiServiceImpl implements MediaProductApiService<String
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> deleteAll(List<MediaProductRequest> products) {
-        if(mediaService.deleteAll(
-                products.stream().map(MediaConverter::toMedia).toList())){
+    public ResponseEntity<HttpStatus> deleteAll(List<? extends MediaRequest> mediaRequests) {
+        List<Media> mediaProductRequests = mediaRequests.stream().map(
+                        mediaRequest -> {
+                            if(mediaRequest instanceof MediaProductRequest){
+                                return MediaConverter.toMedia((MediaProductRequest) mediaRequest);
+                            }
+                            return null;
+                        }
+                )
+                .filter(Objects::nonNull)
+                .toList();
+        if(mediaService.deleteAll(mediaProductRequests)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -1,16 +1,17 @@
 package com.onlineShop.dto.product.media;
 
+import com.onlineShop.dto.media.MediaResponse;
 import com.onlineShop.models.Product.Media.MediaType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
-public class MediaProductResponse {
+@AllArgsConstructor
+@NoArgsConstructor
+public class MediaProductResponse extends MediaResponse {
 
     private String id;
 
