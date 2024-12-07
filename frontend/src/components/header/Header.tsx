@@ -1,4 +1,6 @@
-import './header.css'
+import { Link, useNavigate } from 'react-router-dom';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import styles from './header.css'
 import logoImg from './../../img/Group 1474.png'
 import logoImgs from './../../img/Frame 427319424.png'
 import histImg from './../../img/Frame 427319439.png'
@@ -10,6 +12,9 @@ import React from 'react'
 
 
 function Header (){
+    const navigate = useNavigate();
+
+
     return (
       <header className="header">
           <h1>Test Header</h1> {/* Простий текст для тесту */}
@@ -36,16 +41,16 @@ function Header (){
     <div className="header_icon icon_favorites">
         <img src={loghartImg} alt="Favorites" />
     </div>
-    <div className="header_icon icon_profile">
-        <img src={logologImg} alt="Profile" />
+    <div className="header_icon">
+        <img src={logologImg} alt="Profile" onClick={() => navigate("/auth/login")} />
     </div>
-    <div className="text_signin">
+    <div className="text_signin" onClick={() => navigate("/auth/login")}>
         Hello, sign in
     </div>
-    <div className="header_icon icon_cart">
-        <img src={byelogImg} alt="Cart" />
+    <div className="header_icon">
+        <img src={byelogImg} alt="Cart" onClick={() => navigate("/cardpage/:id")} />
     </div>
-    <div className="text_cart">
+    <div className={styles["text_cart"]}>
         0$
     </div>
 </div>
