@@ -19,7 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,21 +33,13 @@ public class AuthService {
 
     @Transactional
     public ResponseEntity<HttpStatus> register(final RegisterRequest request) {
-        if (!userEntityService.existsByEmail(request.getEmail())) {
+        if (!userEntityService.exist(request.getEmail(), request.getLogin(), request.getPhoneNumber())) {
             EndUser endUser = AuthConverter.toEndUser(request);
 
             endUser.setPassword(passwordEncoder.encode(request.getPassword()));
             endUser.setRole(rolePrivilegePreload.END_USER);
 
-            userEntityService.save(endUser);
-
-            endUser.setPrivileges(rolePrivilegePreload.baseRegisterPrivilege.stream()
-                    .map(privilege -> {
-                        UserEntityPrivilege userEntityPrivilege = new UserEntityPrivilege();
-                        userEntityPrivilege.setPrivilege(privilege);
-                        userEntityPrivilege.setUserEntity(endUser);
-                        return userEntityPrivilege;
-                    }).toList());
+            endUser.setPrivileges(mapEndUserPrivilegesToUserEntityPrivilege(endUser));
 
             userEntityService.save(endUser);
 
@@ -63,6 +55,17 @@ public class AuthService {
         UserPrincipal user = (UserPrincipal) authentication.getPrincipal();
         String issue = jwtIssuer.issue(user.getUserId(), user.getEmail(), user.getRole(), user.getAuthorities());
         return ResponseEntity.ok(new LoginResponse(issue));
+    }
+
+    private List<UserEntityPrivilege> mapEndUserPrivilegesToUserEntityPrivilege(EndUser endUser) {
+        return rolePrivilegePreload.baseRegisterPrivilege.stream()
+                .map(privilege -> {
+                    UserEntityPrivilege userEntityPrivilege = new UserEntityPrivilege();
+                    userEntityPrivilege.setPrivilege(privilege);
+                    userEntityPrivilege.setUserEntity(endUser);
+                    return userEntityPrivilege;
+                })
+                .toList();
     }
 
 }
