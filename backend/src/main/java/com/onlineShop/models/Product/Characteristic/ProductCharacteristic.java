@@ -31,7 +31,7 @@ public class ProductCharacteristic {
     private Characteristic characteristic;
 
     @NotBlank(message = "Value must not be blank")
-    @Size(min = 1, max = 2000, message = "Value must be between 1 and 2000 characters")
+    @Size(min = 1, max = 1000, message = "Value must be between 1 and 2000 characters")
     @Column(name = "characteristic_value", nullable = false)
     private String value;
 

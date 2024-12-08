@@ -37,11 +37,11 @@ public class Product {
 
     @NotBlank(message = "Title of product can't be empty")
     @Column(name = "title")
-    @Length(min = 3, max = 250, message = "Product title must be between 3 and 250 characters")
+    @Length(min = 3, max = 400, message = "Product title must be between 3 and 250 characters")
     private String title;
 
     @Column(name = "description")
-    @Length(min = 10, max = 2500, message = "Product description must be between 10 and 2500 characters")
+    @Length(min = 10, max = 5000, message = "Product description must be between 10 and 5000 characters")
     private String description;
 
     @Column(name = "discount")
