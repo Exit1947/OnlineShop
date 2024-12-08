@@ -72,7 +72,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/product/delete/id={id}").hasRole("ADMIN")
 
                         //UserEntity api gateway's
-                        .requestMatchers(HttpMethod.POST,"/api/user/admin").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/user/admin").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/me").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/id={id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/email={email}").hasRole("ADMIN")
