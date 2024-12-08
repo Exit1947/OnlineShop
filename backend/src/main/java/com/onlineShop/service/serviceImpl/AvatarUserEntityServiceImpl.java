@@ -47,7 +47,10 @@ public class AvatarUserEntityServiceImpl {
     }
 
     public String getUrl(String name) {
-        return amazonS3CloudService.get(name);
+        if(name !=null) {
+            return amazonS3CloudService.get(name);
+        }
+        return null;
     }
 
     public String getForEntity(String userId){

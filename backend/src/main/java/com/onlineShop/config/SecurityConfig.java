@@ -73,6 +73,7 @@ public class SecurityConfig {
 
                         //UserEntity api gateway's
                         .requestMatchers(HttpMethod.POST,"/api/user/admin").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/user/admin/me").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/id={id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/email={email}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/login={login}").hasRole("ADMIN")
@@ -82,6 +83,7 @@ public class SecurityConfig {
                         //-----------------------------------------------------------
                         .requestMatchers(HttpMethod.POST,"/api/user/moderator").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/api/user/moderator").hasAuthority("CREATE_MODERATOR")
+                        .requestMatchers(HttpMethod.GET,"/api/user/moderator/me").hasRole("MODERATOR")
                         .requestMatchers(HttpMethod.GET,"/api/user/moderator/id={id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/moderator/id={id}").hasAuthority("GET_MODERATOR")
                         .requestMatchers(HttpMethod.GET,"/api/user/moderator/email={email}").hasRole("ADMIN")
@@ -97,6 +99,7 @@ public class SecurityConfig {
                         //-----------------------------------------------------------
                         .requestMatchers(HttpMethod.POST,"/api/user/sales-rep").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/api/user/sales-rep").hasAuthority("CREATE_SALES_REP")
+                        .requestMatchers(HttpMethod.GET,"/api/user/sales-rep/me").hasRole("SALES_REP")
                         .requestMatchers(HttpMethod.GET,"/api/user/sales-rep/id={id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/sales-rep/id={id}").hasAuthority("GET_SALES_REP")
                         .requestMatchers(HttpMethod.GET,"/api/user/sales-rep/email={email}").hasRole("ADMIN")
