@@ -1,7 +1,9 @@
 package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.models.Users.EndUserEntities.cart.Cart;
+import com.onlineShop.models.Users.EndUserEntities.cart.Item;
 import com.onlineShop.repository.CartRepository;
+import com.onlineShop.repository.ItemRepository;
 import com.onlineShop.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.Optional;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final ItemRepository itemRepository;
 
     @Autowired
-    public CartServiceImpl(CartRepository cartRepository) {
+    public CartServiceImpl(CartRepository cartRepository, ItemRepository itemRepository) {
         this.cartRepository = cartRepository;
+        this.itemRepository = itemRepository;
     }
 
     @Override
@@ -24,7 +28,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Optional<Cart> getById(long id) {
+    public Optional<Cart> getById(String id) {
         return cartRepository.findById(id);
     }
 
@@ -34,9 +38,30 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteById(long id) {
-        cartRepository.deleteById(id);
+    public Optional<Item> existItemInCart(Cart cart, String productId) {
+        return cart.getItems().stream()
+                .filter(item -> item.getProduct().getId().equals(productId))
+                .findFirst();
     }
+
+    @Override
+    public void deleteById(String id) {
+        Optional<Cart> cartOptional = cartRepository.findById(id);
+        if (cartOptional.isPresent()) {
+            Cart cart = cartOptional.get();
+            itemRepository.deleteAll(cart.getItems());
+
+            cartRepository.delete(cart);
+        }
+    }
+
+    @Override
+    public void deleteItem(Cart cart, Item item) {
+        cart.getItems().remove(item);
+        save(cart);
+        itemRepository.deleteItemById(item.getId());
+    }
+
 
     @Override
     public boolean existsByUserId(String userId) {

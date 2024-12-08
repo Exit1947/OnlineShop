@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Long> {
+public interface CartRepository extends JpaRepository<Cart, String> {
 
-    Optional<Cart> getCartById(long id);
+    Optional<Cart> getCartById(String id);
 
     Optional<Cart> getCartByEndUserId(String userId);
 
-    void deleteById(long id);
+    void deleteById(String id);
 
     boolean existsByEndUserId(String userId);
 

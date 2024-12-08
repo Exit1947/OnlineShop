@@ -18,6 +18,8 @@ public interface EndUserRepository extends JpaRepository<EndUser, UUID> {
 
     Optional<EndUser> findByPhoneNumber(String phoneNumber);
 
+    boolean existsById(String id);
+
     boolean existsEndUserByEmail(String email);
 
     boolean existsEndUserByPhoneNumber(String phoneNumber);
