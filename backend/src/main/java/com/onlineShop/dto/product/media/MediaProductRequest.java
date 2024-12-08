@@ -14,6 +14,8 @@ import lombok.*;
 @NoArgsConstructor
 public class MediaProductRequest extends MediaRequest {
 
+    private String id;
+
     @NotNull(message = "Media type can't be empty")
     private MediaType type;
 

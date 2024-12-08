@@ -1,4 +1,4 @@
-package com.onlineShop.converter.media;
+package com.onlineShop.converter.product.media;
 
 import com.onlineShop.dto.product.media.MediaProductRequest;
 import com.onlineShop.dto.product.media.MediaProductResponse;

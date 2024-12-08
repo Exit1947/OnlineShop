@@ -1,5 +1,6 @@
 package com.onlineShop.service;
 
+import com.onlineShop.dto.media.MediaResponse;
 import com.onlineShop.dto.user.userEntity.admin.AdminRequest;
 import com.onlineShop.dto.user.userEntity.admin.AdminResponse;
 import com.onlineShop.dto.user.userEntity.endUser.EndUserRequest;
@@ -10,6 +11,7 @@ import com.onlineShop.dto.user.userEntity.salesRep.SalesRepRequest;
 import com.onlineShop.dto.user.userEntity.salesRep.SalesRepResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface UserEntityApiService {
 
@@ -68,5 +70,13 @@ public interface UserEntityApiService {
     ResponseEntity<HttpStatus> deleteSalesRep(String id);
 
     ResponseEntity<HttpStatus> deleteEndUser(String id);
+
+    public ResponseEntity<HttpStatus> saveAvatar(String entityId, MultipartFile mediaFile);
+
+    public ResponseEntity<MediaResponse> getAvatarByMediaName(String mediaName);
+
+    public ResponseEntity<MediaResponse> getAvatarForEntity(String userId);
+
+    public ResponseEntity<HttpStatus> deleteAvatar(String userId);
 
 }

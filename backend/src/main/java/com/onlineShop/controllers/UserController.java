@@ -1,5 +1,6 @@
 package com.onlineShop.controllers;
 
+import com.onlineShop.dto.media.MediaResponse;
 import com.onlineShop.dto.user.userEntity.admin.AdminRequest;
 import com.onlineShop.dto.user.userEntity.admin.AdminResponse;
 import com.onlineShop.dto.user.userEntity.endUser.EndUserRequest;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/user")
@@ -51,6 +53,18 @@ public class UserController {
         return userEntityApiService.createEndUser(endUserRequest);
     }
 
+    @GetMapping("/admin/me")
+    public ResponseEntity<AdminResponse> getSelfInfoAdminById(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String requestAdminId;
+        try {
+            requestAdminId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return userEntityApiService.getAdminById(requestAdminId);
+    }
+
     @GetMapping("/admin/id={id}")
     public ResponseEntity<AdminResponse> getAdminById(@PathVariable("id") String id) {
         if(id!=null && !id.isEmpty()) {
@@ -81,6 +95,18 @@ public class UserController {
             return userEntityApiService.getAdminByPhoneNumber(phoneNumber);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/moderator/me")
+    public ResponseEntity<ModeratorResponse> getSelfInfoModeratorById(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String requestModeratorId;
+        try {
+            requestModeratorId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return userEntityApiService.getModeratorById(requestModeratorId);
     }
 
     @GetMapping("/moderator/id={id}")
@@ -114,6 +140,18 @@ public class UserController {
             return userEntityApiService.getModeratorByPhoneNumber(phoneNumber);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/sales-rep/me")
+    public ResponseEntity<SalesRepResponse> getSelfInfoSalesRepById(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String requestSalesRepId;
+        try {
+            requestSalesRepId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return userEntityApiService.getSalesRepById(requestSalesRepId);
     }
 
     @GetMapping("/sales-rep/id={id}")
@@ -193,22 +231,22 @@ public class UserController {
     }
 
     @PutMapping("/admin")
-    public ResponseEntity<HttpStatus> updateAdmin(@RequestBody AdminRequest adminRequest) {
+    public ResponseEntity<HttpStatus> updateAdmin(@RequestBody @Valid AdminRequest adminRequest) {
         return userEntityApiService.updateAdmin(adminRequest);
     }
 
     @PutMapping("/moderator")
-    public ResponseEntity<HttpStatus> updateModerator(@RequestBody ModeratorRequest moderatorRequest) {
+    public ResponseEntity<HttpStatus> updateModerator(@RequestBody @Valid ModeratorRequest moderatorRequest) {
         return userEntityApiService.updateModerator(moderatorRequest);
     }
 
     @PutMapping("/sales-rep")
-    public ResponseEntity<HttpStatus> updateSalesRep(@RequestBody SalesRepRequest salesRepRequest) {
+    public ResponseEntity<HttpStatus> updateSalesRep(@RequestBody @Valid SalesRepRequest salesRepRequest) {
         return userEntityApiService.updateSalesRep(salesRepRequest);
     }
 
     @PutMapping("/end-user/me")
-    public ResponseEntity<HttpStatus> updateEndUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @RequestBody EndUserRequest endUserRequest) {
+    public ResponseEntity<HttpStatus> updateEndUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader, @RequestBody @Valid EndUserRequest endUserRequest) {
         String requestEndUserId;
         try {
             requestEndUserId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
@@ -224,7 +262,7 @@ public class UserController {
     }
 
     @PutMapping("/end-user")
-    public ResponseEntity<HttpStatus> updateEndUser(@RequestBody EndUserRequest endUserRequest) {
+    public ResponseEntity<HttpStatus> updateEndUser(@RequestBody @Valid EndUserRequest endUserRequest) {
         return userEntityApiService.updateEndUser(endUserRequest);
     }
 
@@ -259,10 +297,79 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @DeleteMapping("/end-user/me")
+    public ResponseEntity<HttpStatus> deleteSelfEndUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String requestEndUserId;
+        try {
+            requestEndUserId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return userEntityApiService.deleteEndUser(requestEndUserId);
+    }
+
     @DeleteMapping("/end-user/id={id}")
     public ResponseEntity<HttpStatus> deleteEndUser(@PathVariable("id") String id) {
         if(id!=null && !id.isEmpty()) {
             return userEntityApiService.deleteEndUser(id);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/avatar/user-id={userId}")
+    public ResponseEntity<HttpStatus> saveAvatar(@PathVariable("userId") String userId,  @RequestPart("avatar") MultipartFile avatar) {
+        if(userId!=null && !userId.isEmpty()) {
+            return userEntityApiService.saveAvatar(userId, avatar);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/avatar/me")
+    public ResponseEntity<HttpStatus> saveSelfAvatar(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,  @RequestPart("avatar") MultipartFile avatar) {
+        String requestUserId;
+        try {
+            requestUserId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return userEntityApiService.saveAvatar(requestUserId, avatar);
+    }
+
+    @GetMapping("/avatar/me")
+    public ResponseEntity<MediaResponse> getSelfAvatar(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String requestUserId;
+        try {
+            requestUserId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return userEntityApiService.getAvatarForEntity(requestUserId);
+    }
+
+    @GetMapping("/avatar/user-id={userId}")
+    public ResponseEntity<MediaResponse> getAvatar(@PathVariable("userId") String userId) {
+        return userEntityApiService.getAvatarForEntity(userId);
+    }
+
+    @DeleteMapping("/avatar/me")
+    public ResponseEntity<HttpStatus> deleteSelfAvatar(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader) {
+        String requestUserId;
+        try {
+            requestUserId = JwtToPrincipalConverter.convert(jwtDecoder.decode(authorizationHeader.substring(7))).getUserId();
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return userEntityApiService.deleteAvatar(requestUserId);
+    }
+
+    @DeleteMapping("/avatar/user-id={userId}")
+    public ResponseEntity<HttpStatus> deleteAvatar(@PathVariable("userId") String userId) {
+        if(userId!=null && !userId.isEmpty()) {
+            return userEntityApiService.deleteAvatar(userId);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

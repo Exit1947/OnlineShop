@@ -78,7 +78,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/login={login}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/admin/phoneNumber={phoneNumber}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,"/api/user/admin").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/api/user/admin/id={id}").authenticated()
                         .requestMatchers(HttpMethod.DELETE,"/api/user/admin/id={id}").hasRole("ADMIN")
                         //-----------------------------------------------------------
                         .requestMatchers(HttpMethod.POST,"/api/user/moderator").hasRole("ADMIN")
@@ -113,7 +112,6 @@ public class SecurityConfig {
                         //-----------------------------------------------------------
                         .requestMatchers(HttpMethod.POST,"/api/user/end-user").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/api/user/end-user").hasAuthority("CREATE_END_USER")
-                        .requestMatchers(HttpMethod.GET,"/api/user/end-user/me").authenticated()
                         .requestMatchers(HttpMethod.GET,"/api/user/end-user/me").hasRole("END_USER")
                         .requestMatchers(HttpMethod.GET,"/api/user/end-user/id={id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/end-user/id={id}").hasAuthority("GET_END_USER")
@@ -123,13 +121,22 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/user/end-user/login={login}").hasAuthority("GET_END_USER")
                         .requestMatchers(HttpMethod.GET,"/api/user/end-user/phoneNumber={phoneNumber}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/user/end-user/phoneNumber={phoneNumber}").hasAuthority("GET_END_USER")
-                        .requestMatchers(HttpMethod.PUT,"/api/user/end-user/me").authenticated()
                         .requestMatchers(HttpMethod.PUT,"/api/user/end-user/me").hasRole("END_USER")
                         .requestMatchers(HttpMethod.PUT,"/api/user/end-user").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,"/api/user/end-user").hasAuthority("UPDATE_END_USER")
-                        .requestMatchers(HttpMethod.DELETE,"/api/user/end-user/id={id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE,"/api/user/end-user/me").hasRole("END_USER")
+                        .requestMatchers(HttpMethod.DELETE,"/api/user/end-user/id={id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/user/end-user/id={id}").hasAuthority("DELETE_END_USER")
+                        .requestMatchers(HttpMethod.GET, "/api/user/avatar/me").hasRole("END_USER")
+                        .requestMatchers(HttpMethod.GET, "/api/user/avatar/user-id={userId}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/user/avatar/user-id={userId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/user/avatar/user-id={userId}").hasAuthority("UPDATE_AVATAR")
+                        .requestMatchers(HttpMethod.POST, "/api/user/avatar/me").hasRole("END_USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/user/avatar/me").hasRole("END_USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/user/avatar/user-id={userId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/user/avatar/user-id={userId}").hasAuthority("UPDATE_AVATAR")
 
-                        .anyRequest().authenticated()
+                        .anyRequest().denyAll()
                 );
         return http.build();
     }

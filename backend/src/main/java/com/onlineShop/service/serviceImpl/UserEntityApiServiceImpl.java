@@ -2,6 +2,7 @@ package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.config.preload.RolePrivilegePreload;
 import com.onlineShop.converter.users.UserEntityConverter;
+import com.onlineShop.dto.media.MediaResponse;
 import com.onlineShop.dto.user.userEntity.admin.AdminRequest;
 import com.onlineShop.dto.user.userEntity.admin.AdminResponse;
 import com.onlineShop.dto.user.userEntity.endUser.EndUserRequest;
@@ -28,6 +29,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -43,6 +45,8 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
     private final FeedbackService feedbackService;
     private final CartService cartService;
     private final ShoppingOrderService shoppingOrderService;
+    private final AvatarUserEntityApiServiceImpl avatarUserEntityApiServiceImpl;
+    private final AvatarUserEntityServiceImpl avatarUserEntityServiceImpl;
     private final StaffRepository staffRepository;
     private final AdminRepository adminRepository;
     private final ModeratorRepository moderatorRepository;
@@ -55,6 +59,7 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
     @Autowired
     public UserEntityApiServiceImpl(UserEntityService userEntityService, RolePrivilegePreload rolePrivilegePreload, ShopService shopService,
                                     CompanyService companyService, FeedbackServiceImpl feedbackService, CartService cartService, ShoppingOrderService shoppingOrderService,
+                                    AvatarUserEntityApiServiceImpl avatarUserEntityApiServiceImpl, AvatarUserEntityServiceImpl avatarUserEntityServiceImpl,
                                     StaffRepository staffRepository, AdminRepository adminRepository, ModeratorRepository moderatorRepository,
                                     SalesRepRepository salesRepRepository, EndUserRepository endUserRepository, StaffListRepository staffListRepository,
                                     PasswordEncoder passwordEncoder) {
@@ -65,6 +70,8 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
         this.feedbackService = feedbackService;
         this.cartService = cartService;
         this.shoppingOrderService = shoppingOrderService;
+        this.avatarUserEntityApiServiceImpl = avatarUserEntityApiServiceImpl;
+        this.avatarUserEntityServiceImpl = avatarUserEntityServiceImpl;
         this.staffRepository = staffRepository;
         this.adminRepository = adminRepository;
         this.moderatorRepository = moderatorRepository;
@@ -581,6 +588,27 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @Override
+    public ResponseEntity<HttpStatus> saveAvatar(String entityId, MultipartFile mediaFile) {
+        return avatarUserEntityApiServiceImpl.save(entityId, mediaFile);
+    }
+
+    @Override
+    public ResponseEntity<MediaResponse> getAvatarByMediaName(String mediaName) {
+        return avatarUserEntityApiServiceImpl.getByMediaName(mediaName);
+    }
+
+    @Override
+    public ResponseEntity<MediaResponse> getAvatarForEntity(String userId) {
+        return avatarUserEntityApiServiceImpl.getForEntity(userId);
+    }
+
+    @Override
+    public ResponseEntity<HttpStatus> deleteAvatar(String userId) {
+        return avatarUserEntityApiServiceImpl.delete(userId);
+    }
+
+
     private void deleteStaff(final Staff staff){
         if(!staff.getShops().isEmpty()){
             staffListRepository.deleteStaffListByStaffId(staff.getId());
@@ -598,7 +626,7 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
         userEntityService.delete(userEntity.getId());
 
         if(userEntity.getAvatar() != null) {
-            //delete avatar from cloud
+            avatarUserEntityServiceImpl.delete(userEntity.getId());
         }
     }
 
@@ -649,23 +677,43 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
     }
 
     private ResponseEntity<AdminResponse> getAdminResponseResponseEntity(Optional<Admin> existingAdmin) {
-        return existingAdmin.map(admin -> new ResponseEntity<>(UserEntityConverter.toAdminResponse(admin), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if(existingAdmin.isPresent()){
+            Admin admin = existingAdmin.get();
+            AdminResponse response = UserEntityConverter.toAdminResponse(admin);
+            response.setAvatar(avatarUserEntityServiceImpl.getUrl(avatarUserEntityServiceImpl.getForEntity(admin.getId())));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<ModeratorResponse> getModeratorResponseResponseEntity(final Optional<Moderator> existingModerator) {
-        return existingModerator.map(moderator -> new ResponseEntity<>(UserEntityConverter.toModeratorResponse(moderator), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if(existingModerator.isPresent()){
+            Moderator moderator = existingModerator.get();
+            ModeratorResponse response = UserEntityConverter.toModeratorResponse(moderator);
+            response.setAvatar(avatarUserEntityServiceImpl.getUrl(avatarUserEntityServiceImpl.getForEntity(moderator.getId())));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<SalesRepResponse> getSalesRepResponseResponseEntity(final Optional<SalesRep> existingSalesRep) {
-        return existingSalesRep.map(salesRep -> new ResponseEntity<>(UserEntityConverter.toSalesRepResponse(salesRep), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if(existingSalesRep.isPresent()){
+            SalesRep salesRep = existingSalesRep.get();
+            SalesRepResponse response = UserEntityConverter.toSalesRepResponse(salesRep);
+            response.setAvatar(avatarUserEntityServiceImpl.getUrl(avatarUserEntityServiceImpl.getForEntity(salesRep.getId())));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<EndUserResponse> getEndUserResponseResponseEntity(final Optional<EndUser> existingEndUser) {
-        return existingEndUser.map(endUser -> new ResponseEntity<>(UserEntityConverter.toEndUserResponse(endUser), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if(existingEndUser.isPresent()){
+            EndUser endUser = existingEndUser.get();
+            EndUserResponse response = UserEntityConverter.toEndUserResponse(endUser);
+            response.setAvatar(avatarUserEntityServiceImpl.getUrl(avatarUserEntityServiceImpl.getForEntity(endUser.getId())));
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<String> checkAndSetRoleAndPrivileges(UserEntityRequest userEntityRequest, UserEntity userEntity) {

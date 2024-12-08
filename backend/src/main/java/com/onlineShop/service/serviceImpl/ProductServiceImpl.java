@@ -25,11 +25,11 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    private final MediaApiService<String, Product> mediaProductApiService;
+    private final MediaProductApiServiceImpl mediaProductApiService;
+
+    private final MediaProductServiceImpl mediaProductService;
 
     private final DiscountProductService discountProductService;
-
-    private final AmazonS3CloudService s3CloudService;
 
     private final OrderedProductsService orderedProductsService;
 
@@ -40,14 +40,15 @@ public class ProductServiceImpl implements ProductService {
     private final FeedbackService feedbackService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaApiService<String, Product> mediaProductApiService,
-                              final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService,
-                              final OrderedProductsService orderedProductsService, final LikedProductService likedProductService,
-                              final ProductInventoryService productInventoryService, FeedbackService feedbackService) {
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaProductApiServiceImpl mediaProductApiService,
+                              final MediaProductServiceImpl mediaProductService, final DiscountProductService discountProductService,
+                              final AmazonS3CloudService s3CloudService, final OrderedProductsService orderedProductsService,
+                              final LikedProductService likedProductService, final ProductInventoryService productInventoryService,
+                              FeedbackService feedbackService) {
         this.productRepository = productRepository;
         this.mediaProductApiService = mediaProductApiService;
+        this.mediaProductService = mediaProductService;
         this.discountProductService = discountProductService;
-        this.s3CloudService = s3CloudService;
         this.orderedProductsService = orderedProductsService;
         this.likedProductService = likedProductService;
         this.productInventoryService = productInventoryService;
@@ -120,7 +121,7 @@ public class ProductServiceImpl implements ProductService {
                                             .build()).toList();
             productResponse.setCharacteristicValuesList(characteristicList);
 
-            List<MediaProductResponse> mediaList =  (List<MediaProductResponse>) mediaProductApiService.getAllForEntity(product.getId()).getBody();
+            List<MediaProductResponse> mediaList = mediaProductApiService.getAllForEntity(product.getId()).getBody();
             if (mediaList != null && !mediaList.isEmpty()) {
                     productResponse.setMediaList(mediaList);
             }
@@ -134,7 +135,7 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
 
-            String thumbnailImage = s3CloudService.get(product.getThumbnailImage());
+            String thumbnailImage = mediaProductService.getUrl(product.getThumbnailImage());
 
             ProductCardInfoResponse productCardInfoResponse = ProductConverter.toProductCardResponse(product, getDiscount(product),
                     thumbnailImage, feedbackService.getAllFeedbacksForProduct(product.getId()).size());
@@ -188,7 +189,7 @@ public class ProductServiceImpl implements ProductService {
             deleteFromFeedbackIfExist(id);
             product.setCharacteristicValues(null);
 
-            s3CloudService.delete(product.getThumbnailImage());
+            mediaProductService.delete(product.getThumbnailImage());
 
             productRepository.deleteById(id);
 
