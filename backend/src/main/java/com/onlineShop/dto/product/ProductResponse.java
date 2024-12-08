@@ -19,7 +19,7 @@ public class ProductResponse {
     private String id;
 
     @NotBlank(message = "Title of product can't be empty")
-    @Length(min = 3, max = 100, message = "Product title must be between 3 and 100 characters")
+    @Length(min = 3, max = 400, message = "Product title must be between 3 and 100 characters")
     private String title;
 
     @Positive(message = "Price must be a positive number")
