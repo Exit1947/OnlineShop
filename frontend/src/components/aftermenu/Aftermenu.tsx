@@ -9,7 +9,7 @@ import React from 'react';
 const Aftermenu = () => {
     return (
       <section className="aftermenu">
-        <div className="container">
+        <div className="container5">
           <div className="after_menu">
             <img src={locationImg} alt="Location" className="location_img" />
             <img src={countriesImg} alt="Countries" className="countries_img" />

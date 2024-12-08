@@ -19,11 +19,13 @@ import Form from "./components/form/Form.tsx";
 import LoginPage from './components/logInPage/LogPage.tsx';
 import AdminPage from './components/adminpage/AdminPage.jsx';
 import CartPage from './components/cardpage/CardPage.jsx';
+import Category from './components/category/category.tsx';
 
 
 //import Form from "./components/form/registration/RegistrationForm.tsx";
 import ProductPage from './components/productpage/productpage.tsx';
 import Comments from './components/comments/comment.tsx';
+import RegistrationForm from './components/form/registration/RegistrationForm.tsx';
 
 const router = createBrowserRouter([
 
@@ -45,17 +47,28 @@ const router = createBrowserRouter([
           path: 'registration',
           element: <Form />
         },
+
+        {
+          path: 'form',
+          element: <RegistrationForm />
+        },
         {
             path: 'loginpage',
             element:<LoginPage/>
         },
         {
+            
             path: 'product',
             element:<ProductPage/>
+           
         },
         {
             path: 'comment',
             element: <Comments />
+        }, 
+        {
+          path: 'subcategories',
+            element: <Category />
         }
       ]
     },
@@ -70,7 +83,13 @@ const router = createBrowserRouter([
       {
         path: '/cardpage/:id',  // Динамічний маршрут для сторінки продукту
         element: <CartPage />
-      }
+      },
+      {
+            
+        path: 'product/:id',
+        element:<ProductPage/>
+       
+    },
 
 
   ]);

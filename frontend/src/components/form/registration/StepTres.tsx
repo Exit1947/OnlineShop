@@ -7,7 +7,7 @@ import CreditCard from '../image/Credit Card.png';
 
 const StepTres= (props) =>{
     
-    const { next, prev } = useSteps();
+    const { next, prev, jump } = useSteps();
         return (
             <div className="main-container">
 
@@ -26,10 +26,10 @@ const StepTres= (props) =>{
                            </div>
 
                             <div className="spusok">
-                                <div>User Profile</div>
-                                <div>Residential Address</div>
-                                <div><strong>Bank Information</strong></div>
-                                <div>Finish</div>
+                                <div onClick={()=>jump(1)}>User Profile</div>
+                                <div onClick={()=>jump(2)}>Residential Address</div>
+                                <div onClick={()=>jump(3)}><strong>Bank Information</strong></div>
+                                <div onClick={()=>jump(4)}>Finish</div>
                             </div>
 
                             </div>

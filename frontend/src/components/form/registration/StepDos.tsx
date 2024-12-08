@@ -10,7 +10,7 @@ import housesearch from  '../image/House searching-rafiki 1 (1).png'
 
 const StepDos= (props) => {
     
-    const { next, prev } = useSteps();
+    const { next, prev, jump} = useSteps();
         
         return (
             <div className="main-container">
@@ -29,10 +29,10 @@ const StepDos= (props) => {
                            </div>
 
                             <div className="spusok">
-                                <div>User Profile</div>
-                                <div><strong>Residential Address</strong></div>
-                                <div>Bank Information</div>
-                                <div>Finish</div>
+                                <div onClick={()=>jump(1)}>User Profile</div>
+                                <div onClick={()=>jump(2)}><strong>Residential Address</strong></div>
+                                <div onClick={()=>jump(3)}>Bank Information</div>
+                                <div onClick={()=>jump(4)}>Finish</div>
                             </div>
 
                             </div>

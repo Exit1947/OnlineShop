@@ -42,26 +42,36 @@ import ExtraPhotoLaptop05 from '../../img/photo-laptop4.png';
 import ExtraPhotoLaptop06 from '../../img/photo-laptop5.png';
 import starEmptyUno from '../../img/star-empty.png';
 import starOrangeUno from '../../img/star-full-orange.png';
-
+import Footer from   "../footer/Footer.tsx";
+import Header from "../header/Header.tsx";
 import "react-multi-carousel/lib/styles.css";
+import Dropdown from './../dropmenu/Dropdown.tsx';
+import Aftermenu from './../aftermenu/Aftermenu.tsx';
+import LanguageDropdown from './../languagedrop/LanguageDropdown.tsx';
+import CurrencyDropdown from './../currencydropdown/CurrencyDropdown.tsx';
+import ProductList from '../productlist/ProductList.tsx';
 
 // https://omnify-online-marketplace-storage.s3.eu-north-1.amazonaws.com/2.png
 
 
 
-const ProductPage = () => {
+const ProductPage = (props) => {
 
 
 //   const [data, setData]= useState([])
 
 //     useEffect (()=> {
 //     axios.get('http://localhost:8080/api/product/id=1').
-//     then((response) => setData(response.data))
-   
-//       })
+//     then((response) => setData(response.data)
+//     )
+     
+      
+      
+     
+//       }, [])
     
-  
-
+//     console.log(data);
+    
 
 
      // NAVIGATED
@@ -77,7 +87,19 @@ const ProductPage = () => {
 
    function returnMainPage (event){
     event.preventDefault();
-    navigate1('/', { replace: true });
+    navigate1('/', { replace: true });    
+   }
+
+
+   function navCategory (event){
+    event.preventDefault();
+    navigate('/auth/subcategories', { replace: true });
+   } 
+
+
+   function navCart (event){
+    event.preventDefault();
+    navigate('/cardpage/:id', { replace: true });
    }
     // SLIDER MAIN PRODUCT
     
@@ -270,13 +292,22 @@ const ProductPage = () => {
 
 
     return (
+
+        <>
+            <Header />            
+            <Aftermenu/>
+            <Dropdown/>
+            <LanguageDropdown/>
+            <CurrencyDropdown/>
+
+      
         <div className="main-product-page">
 
             <div className='top-product-page'>
                 <img src={Arrow} alt=''/>
                 <div className='' onClick={returnMainPage}> Home </div>
                 <div> / </div>
-                <div className=''> Category </div>
+                <div className='' onClick= {navCategory}> Category </div>
                 <div> / </div>
                 <div className=''> Section </div>
                 <div> / </div>
@@ -361,8 +392,8 @@ const ProductPage = () => {
                            
                           <div className='stock'> In Stock </div>
                           <div className='price-product'> $ 1449,99</div>
-                          <button className='btn-buy-now'> Buy Now </button>
-                          <button className='btn-add-to-cart'> Add to Card</button>
+                          <button className='btn-buy-now' > Buy Now </button>
+                          <button className='btn-add-to-cart' onClick={navCart}> Add to Card</button>
 
                           <div className='choose'>
                             <lable> <strong >Choose Display</strong></lable>
@@ -748,8 +779,12 @@ const ProductPage = () => {
               
 
 
-            
+             
         </div>
+
+        <Footer/>
+        </>
+     
     )
 }
 

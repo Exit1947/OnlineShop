@@ -2,6 +2,8 @@ import {useSteps} from 'react-step-builder';
 import '../cssForm/StepCuatro.css';
 import Finish from  '../image/Super thank you.png';
 import Registri from '../image/registration.png';
+import StepDos from './StepDos';
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -10,7 +12,12 @@ import Registri from '../image/registration.png';
 
 const StepCuatro= (props) => {
     
-    const { next, prev } = useSteps();
+    const { next, prev, jump } = useSteps();
+    const navigate =useNavigate();
+    function navMain (event){
+        event.preventDefault();
+        navigate('/', { replace: true });    
+       }
         
         return (
             <div className="main-container">
@@ -29,10 +36,10 @@ const StepCuatro= (props) => {
                            </div>
 
                             <div className="spusok">
-                                <div>User Profile</div>
-                                <div>Residential Address</div>
-                                <div>Bank Information</div>
-                                <div><strong>Finish</strong></div>
+                                <div onClick={()=>jump(1)}>User Profile</div>
+                                <div onClick={()=>jump(2)}>Residential Address</div>
+                                <div onClick={()=>jump(3)}>Bank Information</div>
+                                <div onClick={()=>jump(4)}><strong>Finish</strong></div>
                             </div>
 
                             </div>
@@ -78,7 +85,7 @@ const StepCuatro= (props) => {
                    
 
                     <div className="dosbutton" >                       
-                        <button className='btn-confirm3' value="text" onClick={prev} ><strong>Return to shoping</strong></button>
+                        <button className='btn-confirm3' value="text" onClick={navMain} ><strong>Return to shoping</strong></button>
                     </div>
 
                         </div>
