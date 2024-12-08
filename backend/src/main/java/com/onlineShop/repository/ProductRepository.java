@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
 
-    Optional<Product> findByTitle(@NotBlank(message = "Title of product can't be empty") @Length(min = 3, max = 100, message = "Product title must be between 3 and 100 characters") String title);
+    Optional<Product> findByTitle(String title);
+
 }

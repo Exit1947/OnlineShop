@@ -6,6 +6,7 @@ import com.onlineShop.dto.auth.LoginResponse;
 import com.onlineShop.dto.auth.RegisterRequest;
 import com.onlineShop.models.Users.EndUser;
 import com.onlineShop.config.preload.RolePrivilegePreload;
+import com.onlineShop.models.Users.RolePrivilege.UserEntityPrivilege;
 import com.onlineShop.security.JwtIssuer;
 import com.onlineShop.security.UserPrincipal;
 import jakarta.transaction.Transactional;
@@ -17,6 +18,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +38,16 @@ public class AuthService {
 
             endUser.setPassword(passwordEncoder.encode(request.getPassword()));
             endUser.setRole(rolePrivilegePreload.END_USER);
-            endUser.setPrivileges(rolePrivilegePreload.baseRegisterPrivilege);
+
+            userEntityService.save(endUser);
+
+            endUser.setPrivileges(rolePrivilegePreload.baseRegisterPrivilege.stream()
+                    .map(privilege -> {
+                        UserEntityPrivilege userEntityPrivilege = new UserEntityPrivilege();
+                        userEntityPrivilege.setPrivilege(privilege);
+                        userEntityPrivilege.setUserEntity(endUser);
+                        return userEntityPrivilege;
+                    }).toList());
 
             userEntityService.save(endUser);
 

@@ -1,10 +1,10 @@
 package com.onlineShop.service.serviceImpl;
 
 import com.onlineShop.converter.product.ProductConverter;
-import com.onlineShop.dto.CharacteristicDto;
+import com.onlineShop.dto.product.CharacteristicDto;
 import com.onlineShop.dto.product.*;
 import com.onlineShop.dto.product.ProductCardInfoResponse;
-import com.onlineShop.dto.media.MediaResponse;
+import com.onlineShop.dto.product.media.MediaProductResponse;
 import com.onlineShop.models.Product.DiscountProduct;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.models.Product.Characteristic.ProductCharacteristic;
@@ -25,11 +25,11 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    private final MediaService mediaService;
+    private final MediaProductApiServiceImpl mediaProductApiService;
+
+    private final MediaProductServiceImpl mediaProductService;
 
     private final DiscountProductService discountProductService;
-
-    private final AmazonS3CloudService s3CloudService;
 
     private final OrderedProductsService orderedProductsService;
 
@@ -40,14 +40,15 @@ public class ProductServiceImpl implements ProductService {
     private final FeedbackService feedbackService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaService mediaService,
-                              final DiscountProductService discountProductService, final AmazonS3CloudService s3CloudService,
-                              final OrderedProductsService orderedProductsService, final LikedProductService likedProductService,
-                              final ProductInventoryService productInventoryService, FeedbackService feedbackService) {
+    public ProductServiceImpl(final ProductRepository productRepository, final MediaProductApiServiceImpl mediaProductApiService,
+                              final MediaProductServiceImpl mediaProductService, final DiscountProductService discountProductService,
+                              final AmazonS3CloudService s3CloudService, final OrderedProductsService orderedProductsService,
+                              final LikedProductService likedProductService, final ProductInventoryService productInventoryService,
+                              FeedbackService feedbackService) {
         this.productRepository = productRepository;
-        this.mediaService = mediaService;
+        this.mediaProductApiService = mediaProductApiService;
+        this.mediaProductService = mediaProductService;
         this.discountProductService = discountProductService;
-        this.s3CloudService = s3CloudService;
         this.orderedProductsService = orderedProductsService;
         this.likedProductService = likedProductService;
         this.productInventoryService = productInventoryService;
@@ -73,8 +74,6 @@ public class ProductServiceImpl implements ProductService {
 
                     discountProductService.save(discountProduct);
                 }
-
-                return new ResponseEntity<>(mediaService.createSessionForMedia(product), HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
@@ -122,9 +121,9 @@ public class ProductServiceImpl implements ProductService {
                                             .build()).toList();
             productResponse.setCharacteristicValuesList(characteristicList);
 
-            List<MediaResponse> mediaList = mediaService.getAllForProduct(product.getId()).getBody();
+            List<MediaProductResponse> mediaList = mediaProductApiService.getAllForEntity(product.getId()).getBody();
             if (mediaList != null && !mediaList.isEmpty()) {
-                productResponse.setMediaList(mediaList);
+                    productResponse.setMediaList(mediaList);
             }
 
             return new ResponseEntity<>(productResponse, HttpStatus.OK);
@@ -136,7 +135,7 @@ public class ProductServiceImpl implements ProductService {
         if(existingProduct.isPresent()) {
             Product product = existingProduct.get();
 
-            String thumbnailImage = s3CloudService.get(product.getThumbnailImage());
+            String thumbnailImage = mediaProductService.getUrl(product.getThumbnailImage());
 
             ProductCardInfoResponse productCardInfoResponse = ProductConverter.toProductCardResponse(product, getDiscount(product),
                     thumbnailImage, feedbackService.getAllFeedbacksForProduct(product.getId()).size());
@@ -190,7 +189,7 @@ public class ProductServiceImpl implements ProductService {
             deleteFromFeedbackIfExist(id);
             product.setCharacteristicValues(null);
 
-            s3CloudService.delete(product.getThumbnailImage());
+            mediaProductService.delete(product.getThumbnailImage());
 
             productRepository.deleteById(id);
 
@@ -221,11 +220,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void deleteFromMediaProductIfExist(String productId){
-        List<MediaResponse> mediaList = mediaService.getAllForProduct(productId).getBody();
-        if(mediaList!=null && !mediaList.isEmpty()) {
-            mediaList
-                    .forEach(media -> mediaService.delete(media.getId()));
-        }
+        mediaProductApiService.deleteAllForEntity(productId);
     }
 
     private void deleteFromOrderedProductsIfExist(String productId){

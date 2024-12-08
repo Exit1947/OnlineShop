@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,5 +31,9 @@ public class ShoppingOrder {
     @NotNull
     @Column(name = "shopping_order_created_at")
     private Date orderCreatedAt;
+
+    @NotNull
+    @OneToMany(mappedBy = "shoppingOrder")
+    List<OrderedProducts> orderedProductsList;
 
 }

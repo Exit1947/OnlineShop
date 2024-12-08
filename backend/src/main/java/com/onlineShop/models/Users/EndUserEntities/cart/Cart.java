@@ -3,14 +3,13 @@ package com.onlineShop.models.Users.EndUserEntities.cart;
 import com.onlineShop.models.Users.EndUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,12 +20,15 @@ public class Cart {
     private long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "id_end_user")
     private EndUser endUser;
 
-    @NotNull
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<Item> items = new ArrayList<>();
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "cart",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Item> items;
 
 }
