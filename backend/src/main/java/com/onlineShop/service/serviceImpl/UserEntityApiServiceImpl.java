@@ -84,7 +84,7 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
     @Override
     @Transactional
     public ResponseEntity<String> createAdmin(final AdminRequest adminRequest) {
-        if(!exist(adminRequest)){
+        if(!userEntityService.exist(adminRequest.getEmail(), adminRequest.getLogin(), adminRequest.getPhoneNumber())) {
             Admin admin = UserEntityConverter.toAdmin(adminRequest);
 
             ResponseEntity<String> res = checkAndSetRoleAndPrivileges(adminRequest, admin);
@@ -110,7 +110,7 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
     @Override
     @Transactional
     public ResponseEntity<String> createModerator(final ModeratorRequest moderatorRequest) {
-        if(!exist(moderatorRequest)){
+        if(!userEntityService.exist(moderatorRequest.getEmail(), moderatorRequest.getLogin(), moderatorRequest.getPhoneNumber())){
             Moderator moderator = UserEntityConverter.toModerator(moderatorRequest);
 
             ResponseEntity<String> res = checkAndSetRoleAndPrivileges(moderatorRequest, moderator);
@@ -148,7 +148,7 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
     @Override
     @Transactional
     public ResponseEntity<String> createSalesRep(final SalesRepRequest salesRepRequest) {
-        if(!exist(salesRepRequest)){
+        if(!userEntityService.exist(salesRepRequest.getEmail(), salesRepRequest.getLogin(), salesRepRequest.getPhoneNumber())){
             SalesRep salesRep = UserEntityConverter.toSalesRep(salesRepRequest);
 
             ResponseEntity<String> res = checkAndSetRoleAndPrivileges(salesRepRequest, salesRep);
@@ -186,7 +186,7 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
     @Override
     @Transactional
     public ResponseEntity<String> createEndUser(final EndUserRequest endUserRequest) {
-        if(!exist(endUserRequest)){
+        if(!userEntityService.exist(endUserRequest.getEmail(), endUserRequest.getLogin(), endUserRequest.getPhoneNumber())){
             EndUser endUser = UserEntityConverter.toEndUser(endUserRequest);
 
             ResponseEntity<String> res = checkAndSetRoleAndPrivileges(endUserRequest, endUser);
@@ -628,28 +628,6 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
         if(userEntity.getAvatar() != null) {
             avatarUserEntityServiceImpl.delete(userEntity.getId());
         }
-    }
-
-    private boolean exist(final UserEntityRequest userEntityRequest) {
-        if(userEntityRequest.getEmail() != null) {
-            if (userEntityService.existsByEmail(userEntityRequest.getLogin())) {
-                return true;
-            }
-        }
-
-        if(userEntityRequest.getLogin() != null) {
-            if (userEntityService.existByLogin(userEntityRequest.getLogin())) {
-                return true;
-            }
-        }
-
-        if(userEntityRequest.getPhoneNumber() != null) {
-            if (userEntityService.existByPhoneNumber(userEntityRequest.getLogin())) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private boolean checkUniqueConstrains(UserEntityRequest userEntityRequest, UserEntity existedUser) {
