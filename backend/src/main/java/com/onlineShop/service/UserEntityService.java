@@ -1,5 +1,6 @@
 package com.onlineShop.service;
 
+import com.onlineShop.dto.user.userEntity.userEntity.UserEntityRequest;
 import com.onlineShop.models.Users.UserEntity;
 import com.onlineShop.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,28 @@ public class UserEntityService {
 
     public boolean existByPhoneNumber(final String phoneNumber) {
         return userEntityRepository.existsUserEntitiesByPhoneNumber(phoneNumber);
+    }
+
+    public boolean exist(String email, String login, String phoneNumber) {
+        if(email!=null){
+            if (existsByEmail(email)) {
+                return true;
+            }
+        }
+
+        if(login != null) {
+            if (existByLogin(login)) {
+                return true;
+            }
+        }
+
+        if(phoneNumber != null) {
+            if (existByPhoneNumber(phoneNumber)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
