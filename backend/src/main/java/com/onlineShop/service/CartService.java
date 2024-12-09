@@ -15,9 +15,11 @@ public interface CartService {
 
     Optional<Item> existItemInCart(Cart cart, String productId);
 
-    void deleteById(String id);
+    void deleteCartById(String id);
 
-    void deleteItem(Cart cart, Item item);
+    void saveItem(Item item);
+
+    void deleteItemById(long itemId);
 
     boolean existsByUserId(String id);
 

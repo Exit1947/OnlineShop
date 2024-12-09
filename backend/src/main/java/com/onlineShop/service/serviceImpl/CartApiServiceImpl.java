@@ -3,7 +3,7 @@ package com.onlineShop.service.serviceImpl;
 import com.onlineShop.converter.cart.CartConverter;
 import com.onlineShop.dto.cart.CartRequest;
 import com.onlineShop.dto.cart.CartResponse;
-import com.onlineShop.dto.cart.productDto.ProductRequest;
+import com.onlineShop.dto.cart.productDto.ProductCartRequest;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.models.Users.EndUser;
 import com.onlineShop.models.Users.EndUserEntities.cart.Cart;
@@ -18,8 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartApiServiceImpl implements CartApiService {
@@ -37,16 +37,163 @@ public class CartApiServiceImpl implements CartApiService {
 
     @Override
     public ResponseEntity<CartResponse> getCartForEndUser(String endUserId) {
-        Optional<EndUser> existingEndUser = endUserRepository.findById(endUserId);
-        if(existingEndUser.isPresent()) {
-            EndUser endUser = existingEndUser.get();
+        Optional<Cart> cart = cartService.getByUserId(endUserId);
+        return cart.map(value -> new ResponseEntity<>(CartConverter.toCartResponse(value), HttpStatus.OK))
+                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
+    }
 
-            if(endUser.getCart()!=null) {
-                return new ResponseEntity<>(CartConverter.toCartResponse(endUser.getCart()), HttpStatus.OK);
+    @Override
+    @Transactional
+    public ResponseEntity<HttpStatus> addCartItemForEndUser(String userId, ProductCartRequest productCartRequest) {
+        if(endUserRepository.existsById(userId)) {
+            Optional<Cart> existingCart = cartService.getByUserId(userId);
+            if(existingCart.isPresent()) {
+                Cart cart = existingCart.get();
+
+                Optional<Item> existingItem = cartService.existItemInCart(cart, productCartRequest.getProductId());
+                if (existingItem.isPresent()) {
+                    Item item = existingItem.get();
+                    item.setCountOfProducts(item.getCountOfProducts() + productCartRequest.getQuantity());
+
+                    cartService.save(cart);
+
+                    return new ResponseEntity<>(HttpStatus.OK);
+                }
+
+                Item item = createItem(cart, productCartRequest);
+                if(item != null){
+                    cartService.saveItem(item);
+                    return new ResponseEntity<>(HttpStatus.OK);
+                }
             }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            else {
+                Cart cart = new Cart();
+                cart.setEndUser(endUserRepository.findById(userId).get());
+                if(productCartRequest.getQuantity() > 0) {
+                    Item item = createItem(cart, productCartRequest);
+                    if (item != null) {
+                        cart.setItems(List.of(item));
+                        cartService.save(cart);
+                        return new ResponseEntity<>(HttpStatus.CREATED);
+                    }
+                }
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<HttpStatus> updateCartItemByEndUserId(String endUserId, ProductCartRequest productCartRequest){
+        Optional<Cart> existingCart = cartService.getByUserId(endUserId);
+        if(existingCart.isPresent()) {
+            Cart cart = existingCart.get();
+            Optional<Item> existingItem = cartService.existItemInCart(cart, productCartRequest.getProductId());
+            if(existingItem.isPresent()) {
+                Item item = existingItem.get();
+                if(productCartRequest.getQuantity() > 0) {
+                    item.setCountOfProducts(productCartRequest.getQuantity());
+                    cartService.saveItem(item);
+
+                    return new ResponseEntity<>(HttpStatus.OK);
+                }
+                cart.getItems().remove(existingItem.get());
+                cartService.save(cart);
+
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<HttpStatus> removeCartItemByUserId(String endUserId, ProductCartRequest productCartRequest) {
+        Optional<Cart> existingCart = cartService.getByUserId(endUserId);
+        if(existingCart.isPresent()) {
+            Cart cart = existingCart.get();
+            Optional<Item> existingItem = cartService.existItemInCart(cart, productCartRequest.getProductId());
+
+            if (existingItem.isPresent()) {
+                cart.getItems().remove(existingItem.get());
+                cartService.save(cart);
+
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<HttpStatus> addCartItem(String cartId, ProductCartRequest productCartRequest) {
+        Optional<Cart> existingCart = cartService.getById(cartId);
+        if(existingCart.isPresent()) {
+            Cart cart = existingCart.get();
+
+            Optional<Item> existingItem = cartService.existItemInCart(cart, productCartRequest.getProductId());
+            if (existingItem.isPresent()) {
+                Item item = existingItem.get();
+                item.setCountOfProducts(item.getCountOfProducts() + productCartRequest.getQuantity());
+
+                cartService.save(cart);
+
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+
+            Item item = createItem(cart, productCartRequest);
+            if(item != null){
+                cartService.saveItem(item);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<HttpStatus> updateCartItem(String cartId, ProductCartRequest productCartRequest) {
+        Optional<Cart> existingCart = cartService.getById(cartId);
+        if(existingCart.isPresent()) {
+            Cart cart = existingCart.get();
+            Optional<Item> existingItem = cartService.existItemInCart(cart, productCartRequest.getProductId());
+            if(existingItem.isPresent()) {
+                Item item = existingItem.get();
+                if(productCartRequest.getQuantity() > 0) {
+                    item.setCountOfProducts(productCartRequest.getQuantity());
+                    cartService.saveItem(item);
+
+                    return new ResponseEntity<>(HttpStatus.OK);
+                }
+                cart.getItems().remove(existingItem.get());
+                cartService.save(cart);
+
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<HttpStatus> removeCartItem(String cartId, ProductCartRequest productCartRequest) {
+        Optional<Cart> existingCart = cartService.getById(cartId);
+        if(existingCart.isPresent()) {
+            Cart cart = existingCart.get();
+            Optional<Item> existingItem = cartService.existItemInCart(cart, productCartRequest.getProductId());
+
+            if (existingItem.isPresent()) {
+                cart.getItems().remove(existingItem.get());
+                cartService.save(cart);
+
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -58,104 +205,25 @@ public class CartApiServiceImpl implements CartApiService {
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> addCartItem(String userId, ProductRequest productRequest) {
-        Optional<EndUser> existingEndUser = endUserRepository.findById(userId);
-        if(existingEndUser.isPresent()) {
-            EndUser endUser = existingEndUser.get();
-
-            if(endUser.getCart()!=null) {
-                Cart cart = endUser.getCart();
-                Optional<Item> existingItem = cartService.existItemInCart(cart, productRequest.getProductId());
-                if (existingItem.isPresent()) {
-                    Item item = existingItem.get();
-                    int indexOfItem = cart.getItems().indexOf(item);
-                    item.setCountOfProducts(productRequest.getQuantity());
-
-                    cart.getItems().set(indexOfItem, item);
-
-                    cartService.save(cart);
-
-                    return new ResponseEntity<>(HttpStatus.OK);
-                }
-
-                Optional<Product> existingProduct = productRepository.findById(productRequest.getProductId());
-                if (existingProduct.isPresent()) {
-                    Item requestItem = CartConverter.toItem(productRequest);
-                    cart.getItems().add(requestItem);
-                    cartService.save(cart);
-
-                    return new ResponseEntity<>(HttpStatus.OK);
-                }
-            }
-            else {
-                Cart cart = new Cart();
-                cart.getItems().add(CartConverter.toItem(productRequest));
-                cart.setEndUser(endUser);
-                checkItemListAndSaveCart(cart);
-
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<HttpStatus> removeCartItem(String cartId, ProductRequest productRequest) {
-        Optional<Cart> existingCart = cartService.getById(cartId);
-        if(existingCart.isPresent()) {
-            Cart cart = existingCart.get();
-            Optional<Item> existingItem = cartService.existItemInCart(cart, productRequest.getProductId());
-
-            if (existingItem.isPresent()) {
-                cartService.deleteItem(cart, existingItem.get());
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<HttpStatus> updateCart(CartRequest cartRequest) {
-        Optional<EndUser> endUser = endUserRepository.findById(cartRequest.getEndUserId());
-        if(endUser.isPresent()) {
-            if (cartService.existsByUserId(cartRequest.getEndUserId())) {
-                Cart updateCart = CartConverter.toCart(cartRequest);
-                checkItemListAndSaveCart(updateCart);
-                return new ResponseEntity<>(HttpStatus.OK);
-            }
-
-            Cart createCart = CartConverter.toCart(cartRequest);
-            createCart.setEndUser(endUser.get());
-            checkItemListAndSaveCart(createCart);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    @Override
-    @Transactional
     public ResponseEntity<HttpStatus> removeCart(String cartId) {
         Optional<Cart> existingCart = cartService.getById(cartId);
         if(existingCart.isPresent()) {
-            cartService.deleteById(cartId);
+            cartService.deleteCartById(cartId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    private void checkItemListAndSaveCart(Cart cart){
-        List<Item> items = cart.getItems()
-                .stream()
-                .filter(item -> productRepository.existsById(item.getProduct().getId()))
-                .toList();
+    private Item createItem(Cart cart, ProductCartRequest productCartRequest) {
+        Optional<Product> existingProduct = productRepository.findById(productCartRequest.getProductId());
+        if (existingProduct.isPresent()) {
+            Item item = CartConverter.toItem(productCartRequest);
+            item.setCart(cart);
+            item.setProduct(existingProduct.get());
 
-        if(items!=null){
-            cart.setItems(items);
+            return item;
         }
-
-        cartService.save(cart);
+        return null;
     }
+
 }

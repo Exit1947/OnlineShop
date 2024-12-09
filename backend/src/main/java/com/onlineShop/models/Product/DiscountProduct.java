@@ -29,11 +29,9 @@ public class DiscountProduct {
     @Max(value = 99, message = "Maximum discount is 99%")
     private int discount;
 
-    @NonNull
     @Column(name = "date_from")
     private Date dateFrom;
 
-    @NonNull
     @Column(name = "date_to")
     private Date dateTo;
 

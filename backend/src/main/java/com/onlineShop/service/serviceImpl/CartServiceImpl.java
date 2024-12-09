@@ -45,7 +45,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteCartById(String id) {
         Optional<Cart> cartOptional = cartRepository.findById(id);
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
@@ -56,10 +56,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteItem(Cart cart, Item item) {
-        cart.getItems().remove(item);
-        save(cart);
-        itemRepository.deleteItemById(item.getId());
+    public void saveItem(Item item) {
+        itemRepository.save(item);
+    }
+
+    @Override
+    public void deleteItemById(long itemId) {
+        itemRepository.deleteById(itemId);
     }
 
 
@@ -67,6 +70,5 @@ public class CartServiceImpl implements CartService {
     public boolean existsByUserId(String userId) {
         return cartRepository.existsByEndUserId(userId);
     }
-
 
 }

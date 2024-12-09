@@ -139,16 +139,25 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/user/avatar/user-id={userId}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/user/avatar/user-id={userId}").hasAuthority("UPDATE_AVATAR")
 
-                        //UserEntity api gateway's
+                        //Cart api gateway's
                         .requestMatchers(HttpMethod.GET,"/api/cart/me").hasRole("END_USER")
+                        .requestMatchers(HttpMethod.POST,"/api/cart/item/me").hasRole("END_USER")
+                        .requestMatchers(HttpMethod.PUT,"/api/cart/item/me").hasRole("END_USER")
+                        .requestMatchers(HttpMethod.DELETE,"/api/cart/item/me").hasRole("END_USER")
                         .requestMatchers(HttpMethod.GET,"/api/cart/end-user-id={endUserId}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/api/cart/end-user-id={endUserId}").hasAuthority("GET_CART")
-                        .requestMatchers(HttpMethod.GET,"/cart-id={cartId}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET,"/cart-id={cartId}").hasAuthority("GET_CART")
-                        .requestMatchers(HttpMethod.DELETE,"/cart-id={cartId}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/cart-id={cartId}").hasAuthority("DELETE_CART")
-                        .requestMatchers(HttpMethod.PUT,"/cart-id={cartId}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/cart-id={cartId}").hasAuthority("DELETE_CART")
+                        .requestMatchers(HttpMethod.POST,"/api/cart/item/cart-id={cartId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/api/cart/item/cart-id={cartId}").hasAuthority("ADD_CART_ITEM")
+                        .requestMatchers(HttpMethod.PUT,"/api/cart/item/cart-id={cartId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/cart/item/cart-id={cartId}").hasAuthority("UPDATE_CART_ITEM")
+                        .requestMatchers(HttpMethod.DELETE,"/api/cart/item/cart-id={cartId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/cart/item/cart-id={cartId}").hasRole("DELETE_CART_ITEM")
+                        .requestMatchers(HttpMethod.GET,"/api/cart/cart-id={cartId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/cart/cart-id={cartId}").hasRole("GET_CART")
+                        .requestMatchers(HttpMethod.PUT,"/api/cart/cart-id={cartId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/cart/cart-id={cartId}").hasAuthority("DELETE_CART")
+                        .requestMatchers(HttpMethod.DELETE,"/api/cart/cart-id={cartId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/cart/cart-id={cartId}").hasAuthority("DELETE_CART")
 
                         .anyRequest().denyAll()
                 );

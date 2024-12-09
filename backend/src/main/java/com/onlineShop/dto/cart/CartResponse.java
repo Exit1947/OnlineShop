@@ -1,6 +1,6 @@
 package com.onlineShop.dto.cart;
 
-import com.onlineShop.dto.cart.productDto.ProductResponse;
+import com.onlineShop.dto.cart.productDto.ProductCartResponse;
 import lombok.*;
 
 import java.util.List;
@@ -16,6 +16,6 @@ public class CartResponse {
 
     private double totalPrice;
 
-    private List<ProductResponse> productList;
+    private List<ProductCartResponse> productList;
 
 }

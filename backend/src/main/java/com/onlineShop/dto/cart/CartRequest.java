@@ -1,6 +1,6 @@
 package com.onlineShop.dto.cart;
 
-import com.onlineShop.dto.cart.productDto.ProductRequest;
+import com.onlineShop.dto.cart.productDto.ProductCartRequest;
 import lombok.*;
 
 import java.util.List;
@@ -16,6 +16,6 @@ public class CartRequest {
 
     private String endUserId;
 
-    private List<ProductRequest> productList;
+    private List<ProductCartRequest> productList;
 
 }

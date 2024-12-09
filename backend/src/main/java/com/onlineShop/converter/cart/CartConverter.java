@@ -2,8 +2,8 @@ package com.onlineShop.converter.cart;
 
 import com.onlineShop.dto.cart.CartRequest;
 import com.onlineShop.dto.cart.CartResponse;
-import com.onlineShop.dto.cart.productDto.ProductRequest;
-import com.onlineShop.dto.cart.productDto.ProductResponse;
+import com.onlineShop.dto.cart.productDto.ProductCartRequest;
+import com.onlineShop.dto.cart.productDto.ProductCartResponse;
 import com.onlineShop.models.Product.Product;
 import com.onlineShop.models.Users.EndUserEntities.cart.Cart;
 import com.onlineShop.models.Users.EndUserEntities.cart.Item;
@@ -14,7 +14,7 @@ public class CartConverter {
         return CartResponse.builder()
                 .id(cart.getId())
                 .productList(cart.getItems().stream().map(CartConverter::toProductResponse).toList())
-                .totalPrice(cart.getItems().stream().mapToDouble(item -> item.getProduct().getPrice()).sum())
+                .totalPrice(cart.getItems().stream().mapToDouble(item -> item.getProduct().getPrice() * item.getCountOfProducts()).sum())
                 .build();
     }
 
@@ -25,8 +25,8 @@ public class CartConverter {
                 .build();
     }
 
-    public static ProductResponse toProductResponse(Item item) {
-        return ProductResponse.builder()
+    public static ProductCartResponse toProductResponse(Item item) {
+        return ProductCartResponse.builder()
                 .productId(item.getProduct().getId())
                 .title(item.getProduct().getTitle())
                 .price(item.getProduct().getPrice())
@@ -36,13 +36,9 @@ public class CartConverter {
                 .build();
     }
 
-    public static Item toItem(ProductRequest productRequest) {
-        Product product = new Product();
-        product.setId(productRequest.getProductId());
-
+    public static Item toItem(ProductCartRequest productCartRequest) {
         return Item.builder()
-                .product(product)
-                .countOfProducts(productRequest.getQuantity())
+                .countOfProducts(productCartRequest.getQuantity())
                 .build();
     }
 

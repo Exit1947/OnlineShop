@@ -572,7 +572,7 @@ public class UserEntityApiServiceImpl implements UserEntityApiService {
             EndUser endUser = existingEndUser.get();
 
             if(endUser.getCart() != null) {
-                cartService.deleteById(endUser.getCart().getId());
+                cartService.deleteCartById(endUser.getCart().getId());
             }
 
             if(!endUser.getShoppingOrders().isEmpty()) {

@@ -20,7 +20,7 @@ public class Cart {
     private String id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_end_user")
     private EndUser endUser;
 

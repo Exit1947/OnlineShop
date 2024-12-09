@@ -1,7 +1,7 @@
 package com.onlineShop.dto.cart.productDto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 @Getter
@@ -9,12 +9,12 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductRequest {
+public class ProductCartRequest {
 
     @NotBlank(message = "Product id can't be blank.")
     private String productId;
 
-    @Positive(message = "Quantity must be more than zero.")
+    @PositiveOrZero(message = "Quantity must be more than zero.")
     private int quantity;
 
 }
