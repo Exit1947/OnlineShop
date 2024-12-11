@@ -26,7 +26,6 @@ public class ProductResponse {
     @Length(min = 3, max = 150, message = "Product category must be between 3 and 100 characters")
     private String category;
 
-
     @Positive(message = "Price must be a positive number")
     private double price;
 
