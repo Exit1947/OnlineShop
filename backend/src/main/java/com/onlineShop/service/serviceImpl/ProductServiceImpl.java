@@ -1,52 +1,35 @@
 package com.onlineShop.service.serviceImpl;
 
-import com.onlineShop.converter.product.ProductConverter;
-import com.onlineShop.dto.product.CharacteristicDto;
-import com.onlineShop.dto.product.*;
-import com.onlineShop.dto.product.ProductCardInfoResponse;
-import com.onlineShop.dto.product.media.MediaProductResponse;
 import com.onlineShop.models.Product.DiscountProduct;
+import com.onlineShop.models.Product.Media.Media;
 import com.onlineShop.models.Product.Product;
-import com.onlineShop.models.Product.Characteristic.ProductCharacteristic;
 import com.onlineShop.models.Users.EndUserEntities.LikedProduct;
 import com.onlineShop.models.Users.EndUserEntities.shoppingOrder.OrderedProducts;
 import com.onlineShop.repository.ProductRepository;
 import com.onlineShop.service.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-
-    private final MediaProductApiServiceImpl mediaProductApiService;
-
     private final MediaProductServiceImpl mediaProductService;
-
     private final DiscountProductService discountProductService;
-
     private final OrderedProductsService orderedProductsService;
-
     private final LikedProductService likedProductService;
-
     private final ProductInventoryService productInventoryService;
-
     private final FeedbackService feedbackService;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository productRepository, final MediaProductApiServiceImpl mediaProductApiService,
-                              final MediaProductServiceImpl mediaProductService, final DiscountProductService discountProductService,
-                              final AmazonS3CloudService s3CloudService, final OrderedProductsService orderedProductsService,
-                              final LikedProductService likedProductService, final ProductInventoryService productInventoryService,
+    public ProductServiceImpl(ProductRepository productRepository, MediaProductServiceImpl mediaProductService, DiscountProductService discountProductService,
+                              OrderedProductsService orderedProductsService, LikedProductService likedProductService, ProductInventoryService productInventoryService,
                               FeedbackService feedbackService) {
         this.productRepository = productRepository;
-        this.mediaProductApiService = mediaProductApiService;
         this.mediaProductService = mediaProductService;
         this.discountProductService = discountProductService;
         this.orderedProductsService = orderedProductsService;
@@ -57,170 +40,96 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ResponseEntity<String> save(final ProductRequest productRequest) {
-            Optional<Product> existingProduct = productRepository.findByTitle(productRequest.getTitle());
-            if (existingProduct.isEmpty()) {
-                Product product = ProductConverter.toProduct(productRequest);
-
-                productRepository.save(product);
-
-                if (product.isDiscount()) {
-                    DiscountProduct discountProduct = DiscountProduct.builder()
-                            .product(product)
-                            .discount(productRequest.getDiscount())
-                            .dateFrom(productRequest.getDateFrom())
-                            .dateTo(productRequest.getDateTo())
-                            .build();
-
-                    discountProductService.save(discountProduct);
-                }
-            }
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+    public void saveProduct(Product product) {
+        productRepository.save(product);
     }
 
     @Override
-    public ResponseEntity<ProductResponse> getById(String id) {
-        Optional<Product> existingProduct = productRepository.findById(id);
-        return getProductResponseEntity(existingProduct);
+    public Optional<Product> getById(String id) {
+        return productRepository.findById(id);
     }
 
     @Override
-    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(String id) {
-        Optional<Product> existingProduct = productRepository.findById(id);
-        return getProductCardInfoResponseResponseEntity(existingProduct);
+    public Optional<Product> getByTitle(String title) {
+        return productRepository.findByTitle(title);
     }
 
     @Override
-    public ResponseEntity<ProductResponse> getByTitle(String title) {
-        Optional<Product> existingProduct = productRepository.findByTitle(title);
-        return getProductResponseEntity(existingProduct);
-    }
-
-    @Override
-    public ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(String title) {
-        Optional<Product> existingProduct = productRepository.findByTitle(title);
-        return getProductCardInfoResponseResponseEntity(existingProduct);
-    }
-
-    private ResponseEntity<ProductResponse> getProductResponseEntity(Optional<Product> existingProduct) {
-        if(existingProduct.isPresent()) {
-            Product product = existingProduct.get();
-
-            ProductResponse productResponse = ProductConverter.toProductResponse(product, getDiscount(product));
-
-            List<CharacteristicDto> characteristicList = product.getCharacteristicValues()
-                    .stream()
-                    .sorted(Comparator.comparingInt(ProductCharacteristic::getNumber))
-                    .map((productCharacteristic)->
-                                    CharacteristicDto.builder()
-                                            .id(productCharacteristic.getId())
-                                            .name(productCharacteristic.getCharacteristic().getName())
-                                            .value(productCharacteristic.getValue())
-                                            .description(productCharacteristic.getCharacteristic().getDescription())
-                                            .characteristicId(productCharacteristic.getCharacteristic().getId())
-                                            .build()).toList();
-            productResponse.setCharacteristicValuesList(characteristicList);
-
-            List<MediaProductResponse> mediaList = mediaProductApiService.getAllForEntity(product.getId()).getBody();
-            if (mediaList != null && !mediaList.isEmpty()) {
-                    productResponse.setMediaList(mediaList);
-            }
-
-            return new ResponseEntity<>(productResponse, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    private ResponseEntity<ProductCardInfoResponse> getProductCardInfoResponseResponseEntity(Optional<Product> existingProduct) {
-        if(existingProduct.isPresent()) {
-            Product product = existingProduct.get();
-
-            String thumbnailImage = mediaProductService.getUrl(product.getThumbnailImage());
-
-            ProductCardInfoResponse productCardInfoResponse = ProductConverter.toProductCardResponse(product, getDiscount(product),
-                    thumbnailImage, feedbackService.getAllFeedbacksForProduct(product.getId()).size());
-
-            return new ResponseEntity<>(productCardInfoResponse, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public List<Product> getRandomProductCardsById(int count) {
+        return productRepository.findRandomProduct(count);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<HttpStatus> update(final ProductRequest productRequest) {
-        Optional<Product> existingProduct = productRepository.findById(productRequest.getId());
-        if(existingProduct.isPresent()){
-            Product product = ProductConverter.toProduct(productRequest);
-
-            productRepository.save(product);
-
-
-            if(product.isDiscount()) {
-                Optional<DiscountProduct> existingDiscountProduct = discountProductService.findByProductId(product.getId());
-                if(existingDiscountProduct.isPresent()){
-                    DiscountProduct discountProduct = DiscountProduct.builder()
-                                    .id(existingDiscountProduct.get().getId())
-                                    .product(product)
-                                    .discount(productRequest.getDiscount())
-                                    .dateFrom(productRequest.getDateFrom())
-                                    .dateTo(productRequest.getDateTo())
-                                    .build();
-                    discountProductService.update(discountProduct);
-                }
-            }
-
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @Override
-    @Transactional
-    public ResponseEntity<HttpStatus> delete(String id) {
+    public boolean deleteById(String id) {
         Optional<Product> existingProduct = productRepository.findById(id);
         if(existingProduct.isPresent()){
             Product product = existingProduct.get();
 
             deleteFromDiscountProductIfExist(id);
-            deleteFromMediaProductIfExist(id);
             deleteFromOrderedProductsIfExist(id);
             deleteFromLikedProductIfExist(id);
             deleteFromProductInventoryIfExist(id);
             deleteFromFeedbackIfExist(id);
-            product.setCharacteristicValues(null);
 
-            mediaProductService.delete(product.getThumbnailImage());
+            if(product.getThumbnailImage()!=null) {
+                mediaProductService.deleteMediaFile(product.getThumbnailImage());
+            }
+
+            var testList = mediaProductService.getAllForEntity(product.getId());
+            mediaProductService.deleteAll(testList);
 
             productRepository.deleteById(id);
 
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return true;
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return false;
     }
 
-    private int getDiscount(Product product){
-        int discount = 0;
-        if(product.isDiscount()) {
-            Optional<DiscountProduct> discountProduct = discountProductService.findByProductId(product.getId());
-            if (discountProduct.isPresent()) {
-                discount = discountProduct.get().getDiscount();
-            }
-        }
+    @Override
+    public Optional<DiscountProduct> getDiscountByProductId(String productId) {
+        return discountProductService.findByProductId(productId);
+    }
 
-        return discount;
+    @Override
+    public void saveDiscount(DiscountProduct discount) {
+        discountProductService.save(discount);
+    }
+
+    @Override
+    public void deleteDiscount(long discountId) {
+        discountProductService.delete(discountId);
+    }
+
+    @Override
+    public boolean existByTitle(String title) {
+        return productRepository.existsByTitle(title);
+    }
+
+    @Override
+    public String thumbnailImageUrl(String thumbnailImage){
+        if(thumbnailImage!=null && !thumbnailImage.isEmpty()) {
+            return mediaProductService.getUrl(thumbnailImage);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Media> getAllForEntityById(String productId){
+        List<Media> mediaList = mediaProductService.getAllForEntity(productId);
+        mediaList
+                .forEach(media -> media.setMediaName(mediaProductService.getUrl(media.getMediaName())));
+        return mediaList;
     }
 
     private void deleteFromDiscountProductIfExist(String productId){
         Optional<DiscountProduct> discount = discountProductService.findByProductId(productId);
-        discount.ifPresent(discountProduct -> discountProductService.delete(discountProduct.getId()));
+        discount.ifPresent(discountProduct ->
+                discountProductService.delete(discountProduct.getId()));
     }
 
     private void deleteFromFeedbackIfExist(String productId){
         feedbackService.deleteAllForProduct(productId);
-    }
-
-    private void deleteFromMediaProductIfExist(String productId){
-        mediaProductApiService.deleteAllForEntity(productId);
     }
 
     private void deleteFromOrderedProductsIfExist(String productId){

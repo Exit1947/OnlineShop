@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,6 @@ public class Cart {
             mappedBy = "cart",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
 }

@@ -53,23 +53,37 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/registration").permitAll()
 
                         //Product api gateway's
-                        .requestMatchers("/api/product/save").hasAuthority("CREATE_PRODUCT")
-                        .requestMatchers("/api/product/save").hasRole("MODERATOR")
-                        .requestMatchers("/api/product/save").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/api/product").hasAuthority("CREATE_PRODUCT")
+                        .requestMatchers(HttpMethod.POST,"/api/product").hasRole("MODERATOR")
+                        .requestMatchers(HttpMethod.POST,"/api/product").hasRole("ADMIN")
                         //-----------------------------------------------------------
-                        .requestMatchers("/api/product/id={id}").permitAll()
-                        .requestMatchers("/api/product/title={title}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/product/id={id}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/product/title={title}").permitAll()
                         //-----------------------------------------------------------
-                        .requestMatchers("/api/product/card/id={id}").permitAll()
-                        .requestMatchers("/api/product/card/title={title}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/product/card/id={id}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/product/card/title={title}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/product/card/count={count}").permitAll()
                         //-----------------------------------------------------------
-                        .requestMatchers("/api/product/update").hasAuthority("UPDATE_PRODUCT")
-                        .requestMatchers("/api/product/update").hasRole("MODERATOR")
-                        .requestMatchers("/api/product/update").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/product").hasAuthority("UPDATE_PRODUCT")
+                        .requestMatchers(HttpMethod.PUT,"/api/product").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/product").hasRole("MODERATOR")
                         //-----------------------------------------------------------
-                        .requestMatchers("/api/product/delete/id={id}").hasAuthority("DELETE_PRODUCT")
-                        .requestMatchers("/api/product/delete/id={id}").hasRole("MODERATOR")
-                        .requestMatchers("/api/product/delete/id={id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/product/id={id}").hasAuthority("DELETE_PRODUCT")
+                        .requestMatchers(HttpMethod.DELETE,"/api/product/id={id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/product/id={id}").hasRole("MODERATOR")
+                        //-----------------------------------------------------------
+                        .requestMatchers(HttpMethod.POST, "/api/product/media/product-id={productId}").hasAuthority("SAVE_MEDIA")
+                        .requestMatchers(HttpMethod.POST,"/api/product/media/product-id={productId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/product/media/thumbnail/product-id={productId}").hasAuthority("SAVE_MEDIA")
+                        .requestMatchers(HttpMethod.POST,"/api/product/media/thumbnail/product-id={productId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/product/media/initial-save-media/product-id={productId}").hasAuthority("SAVE_MEDIA")
+                        .requestMatchers(HttpMethod.POST,"/api/product/media/initial-save-media/product-id={productId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/product/all-media/product-id={productId}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/product/media/media-name={mediaName}").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/api/product/media").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/api/product/media").hasAuthority("UPDATE_MEDIA")
+                        .requestMatchers(HttpMethod.DELETE,"/api/product/media/media-id={mediaId}").hasAuthority("DELETE_MEDIA")
+                        .requestMatchers(HttpMethod.DELETE,"/api/product/media/media-id={mediaId}").hasRole("ADMIN")
 
                         //UserEntity api gateway's
                         .requestMatchers(HttpMethod.POST,"/api/user/admin").hasRole("ADMIN")

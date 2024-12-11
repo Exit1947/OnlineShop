@@ -13,8 +13,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Media {
+
     @Id
-    @NotBlank
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private String id;
 

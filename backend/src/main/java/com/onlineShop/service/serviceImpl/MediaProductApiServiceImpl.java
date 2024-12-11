@@ -27,8 +27,16 @@ public class MediaProductApiServiceImpl {
 
 
     @Transactional
-    public ResponseEntity<HttpStatus> save(String entityId, MultipartFile mediaFile) {
-        if(mediaService.save(entityId, mediaFile)){
+    public ResponseEntity<HttpStatus> saveMedia(String entityId, MultipartFile mediaFile) {
+        if(mediaService.saveMedia(entityId, mediaFile)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @Transactional
+    public ResponseEntity<HttpStatus> saveThumbnail(String entityId, MultipartFile thumbnailImage) {
+        if(mediaService.saveThumbnail(entityId, thumbnailImage)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -77,8 +85,8 @@ public class MediaProductApiServiceImpl {
 
 
     @Transactional
-    public ResponseEntity<HttpStatus> delete(String idProduct) {
-        if(mediaService.delete(idProduct)){
+    public ResponseEntity<HttpStatus> deleteMedia(String mediaId) {
+        if(mediaService.deleteMediaById(mediaId)){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
