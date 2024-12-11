@@ -111,7 +111,7 @@ const Form = () => {
                     <FormFields activeStep={activeStep} handleNextClick={handleNextClick} handleBackClick={handleBackClick} />
                 </div>
             </div>
-            <Footer/>
+        
         </>
         
     );

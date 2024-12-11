@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom'
 
 
 
+
+
 const StepCuatro= (props) => {
     
     const { next, prev, jump } = useSteps();
@@ -20,6 +22,8 @@ const StepCuatro= (props) => {
        }
         
         return (
+ 
+
             <div className="main-container">
                 <div className="sidepanel">
                      <div className="top-side"> 
@@ -51,7 +55,7 @@ const StepCuatro= (props) => {
                 <div className="main-panel">
 
                  <div className="top-top">
-                 <div className="main-top"> Finish </div>
+                 <div className="main-top"> <strong>Finish</strong> </div>
 
                     <div className='line-sign'>
                     <div className='number-percent'>

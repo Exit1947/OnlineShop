@@ -19,6 +19,8 @@
    display: flex;
    align-items: center;
    gap: 60px;
+ 
+   
 }
 
 .header_logo {
@@ -37,6 +39,7 @@
    cursor: pointer;
    font-weight: bold;
    text-align: center;
+   
 }
 
 .header_catalogue_icon {

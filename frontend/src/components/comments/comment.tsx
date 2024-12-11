@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import './comments.css';
 import { Rating } from 'react-simple-star-rating';
 import { FaStar } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'
 import starEmpty from '../../img/star-empty.png';
 import PhotoUser from '../../img/image 95.png';
 import ThreeDots from '../../img/three-dots.png';
@@ -11,6 +12,12 @@ import PhotoProduct from '../../img/Frame 427320002.png';
 import ArrowBack from '../../img/arrow back.png';
 import photoFrame from '../../img/frame photo.png';
 import axios from "axios";
+import Footer from   "../footer/Footer.tsx";
+import Header from "../header/Header.tsx";
+import Dropdown from './../dropmenu/Dropdown.tsx';
+import Aftermenu from './../aftermenu/Aftermenu.tsx';
+import LanguageDropdown from './../languagedrop/LanguageDropdown.tsx';
+import CurrencyDropdown from './../currencydropdown/CurrencyDropdown.tsx';
 
 
 const Comment =()=>
@@ -71,9 +78,22 @@ const Comment =()=>
 
   let date= new Date();
   let data=date.getMonth()+1;
+  const navigate =useNavigate();
+    function navMain (event){
+        event.preventDefault();
+        navigate('/', { replace: true });    
+       }
 
 
   return (
+
+    <>
+
+            <Header />            
+            <Aftermenu/>
+            <Dropdown/>
+            <LanguageDropdown/>
+            <CurrencyDropdown/>
     <div className="container-comment">
       <form className='form-comment'>
     <div className='person-comment'>
@@ -169,11 +189,13 @@ const Comment =()=>
   
                    </div>
 
-                   <button  className="post-comment1" > POST </button>
+                   <button  className="post-comment1" onClick={navMain}> POST </button>
                    
               </div>
               </form>
               </div>
+              <Footer/>
+              </>
   )
 }
 

@@ -9,7 +9,7 @@ import { useState, useEffect} from "react";
 
 const Card =(props) => {
 
-    
+   
  
 // Add color to heart 
    
@@ -36,6 +36,8 @@ const [colorStar, setColorStar] = useState(starEmptyUno);
     toggle? setColorStar (starEmptyUno) : setColorStar (starOrangeUno);    
     
 } 
+
+
     return (
 <div className='card1'>
 <div className='top-card'>

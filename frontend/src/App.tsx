@@ -20,12 +20,12 @@ import LoginPage from './components/logInPage/LogPage.tsx';
 import AdminPage from './components/adminpage/AdminPage.jsx';
 import CartPage from './components/cardpage/CardPage.jsx';
 import Category from './components/category/category.tsx';
-
-
-//import Form from "./components/form/registration/RegistrationForm.tsx";
+// import Form from "./components/form/registration/RegistrationForm.tsx";
 import ProductPage from './components/productpage/productpage.tsx';
 import Comments from './components/comments/comment.tsx';
 import RegistrationForm from './components/form/registration/RegistrationForm.tsx';
+import React from 'react';
+import Product from '../src/components/productlist/product.tsx'
 
 const router = createBrowserRouter([
 
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
         }, 
         {
           path: 'subcategories',
-            element: <Category />
+          element: <Category/>
         }
       ]
     },
@@ -86,10 +86,10 @@ const router = createBrowserRouter([
       },
       {
             
-        path: 'product/:id',
-        element:<ProductPage/>
+        path: '/product/:id',
+        element:<ProductPage/>,
        
-    },
+      },
 
 
   ]);

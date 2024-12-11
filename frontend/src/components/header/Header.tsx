@@ -14,10 +14,11 @@ import { useNavigate } from 'react-router-dom';
 function Header (){
 
     const navigate =useNavigate();
+    const navigate1 =useNavigate();
 
    function navRegistration (event){
     event.preventDefault();
-    navigate('/auth/registration', { replace: true });
+    navigate('/auth/form', { replace: true });
    }
 
    function navLogin (event){
@@ -29,7 +30,8 @@ function Header (){
    function navCategory (event){
     event.preventDefault();
     navigate('/auth/subcategories', { replace: true });
-   }
+   } 
+
 
   
    function navCartPage (event){
@@ -48,10 +50,11 @@ function Header (){
           <h1>Test Header</h1> {/* Простий текст для тесту */}
     <div className="header_left" onClick={navHomePage}>
         <img src={logoImg} alt="Logo" className="header_logo" />
+        </div>
         <div className="header_catalogue" onClick={navCategory}>
             <img src={logoImgs} alt="Catalogue Icon"  className="header_catalogue_icon" />
 
-        </div>
+        
     </div>
 
     <div className="header_search">

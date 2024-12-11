@@ -49,7 +49,7 @@ const StepTres= (props) =>{
             <div className="main-panel">
                
                 <div className="top-top">
-                 <div className="main-top"> Bank Information </div>
+                 <div className="main-top"> <strong>Bank Information</strong> </div>
 
 
                     <div className='line-sign'>

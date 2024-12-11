@@ -1,7 +1,7 @@
 import './productpagestyle.css';
 import React from 'react';
 import Card from './card.tsx'
-
+import {useParams} from 'react-router-dom'
 import { Rating } from 'react-simple-star-rating';
 import { FaStar } from 'react-icons/fa';
 import { useState, useEffect, useRef} from "react";
@@ -58,19 +58,19 @@ import ProductList from '../productlist/ProductList.tsx';
 const ProductPage = (props) => {
 
 
-//   const [data, setData]= useState([])
+  const [data, setData]= useState([])
 
 //     useEffect (()=> {
 //     axios.get('http://localhost:8080/api/product/id=1').
 //     then((response) => setData(response.data)
 //     )
      
-      
+     
       
      
 //       }, [])
     
-//     console.log(data);
+  
     
 
 
@@ -87,7 +87,7 @@ const ProductPage = (props) => {
 
    function returnMainPage (event){
     event.preventDefault();
-    navigate1('/', { replace: true });    
+    navigate('/', { replace: true });    
    }
 
 
@@ -101,6 +101,10 @@ const ProductPage = (props) => {
     event.preventDefault();
     navigate('/cardpage/:id', { replace: true });
    }
+
+   /// Id
+       const params = useParams()
+
     // SLIDER MAIN PRODUCT
     
     const imgs =[
@@ -357,7 +361,7 @@ const ProductPage = (props) => {
                      </div>
 
                      <div className='back-panel'>
-                          <div className='name-product'> Galaxy Book 3 Pro 14" </div>
+                          <div className='name-product'> {data.title} </div>
 
                           <div className='star-product'>
 
@@ -391,7 +395,7 @@ const ProductPage = (props) => {
                             </div>
                            
                           <div className='stock'> In Stock </div>
-                          <div className='price-product'> $ 1449,99</div>
+                          <div className='price-product'> $ {data.price}</div>
                           <button className='btn-buy-now' > Buy Now </button>
                           <button className='btn-add-to-cart' onClick={navCart}> Add to Card</button>
 

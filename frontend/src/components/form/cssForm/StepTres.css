@@ -203,8 +203,9 @@
 } */
 .canvas5 {
     width: 33%;
-    height: 1px;  
-    
+    height: 3px;  
+    margin-top:0.3%;
+
     border: 1px solid rgb(255, 166, 0);
     background-color: rgb(255, 166, 0);
    
@@ -218,11 +219,11 @@
    
 } */
 .point5 {
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
    
     background-color: rgb(255, 166, 0);
-    border-radius: 2px;
+    border-radius: 5px;
     
 }
 /* .point1 {

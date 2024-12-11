@@ -44,7 +44,7 @@ const StepDos= (props) => {
                 <div className="main-panel">
 
                  <div className="top-top">
-                 <div className="main-top"> Residential Address </div>
+                 <div className="main-top"> <strong>Residential Address</strong> </div>
 
                    <div className='line-sign'>
                     <div className='number-percent'>
