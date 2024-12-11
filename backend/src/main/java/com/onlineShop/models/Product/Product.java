@@ -1,8 +1,10 @@
 package com.onlineShop.models.Product;
 
 import com.onlineShop.models.Product.Characteristic.ProductCharacteristic;
+import com.onlineShop.models.Users.EndUserEntities.cart.Item;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -24,8 +26,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @NotNull
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductCharacteristic> characteristicValues = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Item> itemsCart = new ArrayList<>();
 
     @NotBlank(message = "Category name can't be empty")
     @Column(name = "name_category")

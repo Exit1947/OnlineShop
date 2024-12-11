@@ -27,18 +27,43 @@ public class MediaProductServiceImpl{
     }
 
     @Transactional
-    public boolean save(String entityId, MultipartFile mediaFile) {
+    public boolean saveMedia(String entityId, MultipartFile mediaFile) {
         Optional<Product> existingProduct = productRepository.findById(entityId);
         if(existingProduct.isPresent()) {
             Media media = new Media();
             String extension = mediaFile.getOriginalFilename().substring(mediaFile.getOriginalFilename().lastIndexOf('.')).toLowerCase();
             media.setMediaName(UUID.randomUUID() + extension);
             media.setProduct(existingProduct.get());
-            media.setNumber(mediaRepository.getCountByProductId(entityId) + 1);
-            mediaRepository.save(media);
+            media.setNumber(mediaRepository.findAllByProductId(entityId).size() + 1);
 
             try {
                 amazonS3CloudService.store(media.getMediaName(), mediaFile.getBytes());
+                mediaRepository.save(media);
+                return true;
+            } catch (IOException ignored) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean saveThumbnail(String entityId, MultipartFile thumbnailImage) {
+        Optional<Product> existingProduct = productRepository.findById(entityId);
+        if(existingProduct.isPresent()) {
+            Product product = existingProduct.get();
+
+            if(product.getThumbnailImage() != null) {
+                amazonS3CloudService.delete(product.getThumbnailImage());
+            }
+
+            String extension = thumbnailImage.getOriginalFilename().substring(thumbnailImage.getOriginalFilename().lastIndexOf('.')).toLowerCase();
+            String thumbnailName = UUID.randomUUID() + extension;
+            product.setThumbnailImage(thumbnailName);
+
+            try {
+                amazonS3CloudService.store(thumbnailName, thumbnailImage.getBytes());
+                productRepository.save(product);
                 return true;
             } catch (IOException ignored) {
                 return false;
@@ -66,10 +91,10 @@ public class MediaProductServiceImpl{
                     media.setMediaName(UUID.randomUUID() + extension);
                     media.setProduct(product);
                     media.setNumber(i + 1);
-                    mediaRepository.save(media);
 
                     try {
                         storingFiles.put(media.getMediaName(), mediaFiles.get(i).getBytes());
+                        mediaRepository.save(media);
                     } catch (IOException ignored) {
                         return false;
                     }
@@ -122,12 +147,18 @@ public class MediaProductServiceImpl{
     }
 
     @Transactional
-    public boolean delete(String id) {
+    public void deleteMediaFile(String mediaName) {
+        amazonS3CloudService.delete(mediaName);
+    }
+
+    @Transactional
+    public boolean deleteMediaById(String id) {
         Optional<Media> existingMedia = mediaRepository.findById(id);
         if(existingMedia.isPresent()) {
-            mediaRepository.deleteById(id);
 
             amazonS3CloudService.delete(existingMedia.get().getMediaName());
+
+            mediaRepository.deleteById(id);
 
             return true;
         }
@@ -137,7 +168,7 @@ public class MediaProductServiceImpl{
     @Transactional
     public boolean deleteAll(List<Media> medias) {
         medias
-                .forEach(media -> delete(media.getId()));
+                .forEach(media -> deleteMediaById(media.getId()));
 
         return true;
     }

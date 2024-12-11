@@ -18,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -72,7 +71,7 @@ public class CartApiServiceImpl implements CartApiService {
                 if(productCartRequest.getQuantity() > 0) {
                     Item item = createItem(cart, productCartRequest);
                     if (item != null) {
-                        cart.setItems(List.of(item));
+                        cart.getItems().add(item);
                         cartService.save(cart);
                         return new ResponseEntity<>(HttpStatus.CREATED);
                     }

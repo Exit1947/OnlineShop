@@ -1,5 +1,6 @@
 package com.onlineShop.dto.product;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -21,6 +22,10 @@ public class ProductRequest {
     @NotBlank(message = "Title of product can't be empty")
     @Length(min = 3, max = 400, message = "Product title must be between 3 and 100 characters")
     private String title;
+
+    @Column(name = "description")
+    @Length(min = 10, max = 5000, message = "Product description must be between 10 and 5000 characters")
+    private String description;
 
     @Positive(message = "Price must be a positive number")
     private double price;

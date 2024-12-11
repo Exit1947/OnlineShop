@@ -27,7 +27,7 @@ public class Feedback {
     private String id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_product")
     private Product product;
 

@@ -30,7 +30,4 @@ public class Characteristic {
     @Size(min = 5, max = 500, message = "Description must be between 5 and 500 characters")
     private String description;
 
-    @OneToMany(mappedBy = "characteristic", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductCharacteristic> characteristicValues = new ArrayList<>();
-
 }

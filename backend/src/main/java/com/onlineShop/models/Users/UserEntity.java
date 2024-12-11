@@ -1,7 +1,6 @@
 package com.onlineShop.models.Users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.onlineShop.models.Users.RolePrivilege.Privilege;
 import com.onlineShop.models.Users.RolePrivilege.Role;
 import com.onlineShop.models.Users.RolePrivilege.UserEntityPrivilege;
 import jakarta.persistence.*;
@@ -10,7 +9,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
