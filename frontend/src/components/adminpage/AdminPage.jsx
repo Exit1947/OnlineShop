@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, setData } from 'react';
 import './adminpages.css'
 import UserProfiles from './UserProfiles.jsx';
 import Orders from './Orders.jsx';
@@ -15,10 +15,22 @@ import Aftermenu from '../aftermenu/Aftermenu.tsx';
 import LanguageDropdown from '../languagedrop/LanguageDropdown.tsx';
 import CurrencyDropdown from '../currencydropdown/CurrencyDropdown.tsx';
 import Footer from '../footer/Footer.tsx';
+import axios from 'axios'
 
 
 const AdminPage = () => {
     const [activeComponent, setActiveComponent] = useState('Profile');
+    const [data, setData]= useState([]);  
+    useEffect(()=> {
+        axios.get("http://localhost:8080/api/user/end-user/me",{
+                headers: {
+                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxZTMxMTZlYS1kYjUzLTRmOGYtODQzMi0xODZmYjczYzgyZmUiLCJlbWFpbCI6ImV4YW1wbGVAZXhhbXBsZS5jb20iLCJyb2xlIjoiRU5EX1VTRVIiLCJhdXRob3JpdGllcyI6WyJST0xFX0VORF9VU0VSIiwiQlVZX1BST0RVQ1QiXSwiaWF0IjoxNzMzNjgxMDUzLCJleHAiOjE3MzQxMTMwNTMsImlzcyI6IlNFUlZJQ0VfTkFNRSJ9.IjeZxZzKiEkPb1ZdVJq5Ul1ezIRmQnlSgfTRQP1Ohmg"
+                }
+              }
+        )
+        .then(response=> setData(response.data))
+        .catch(error => console.log(error));
+       }, [])
 
     const renderComponent = () => {
         switch (activeComponent) {
@@ -53,8 +65,8 @@ const AdminPage = () => {
             <div className="left-panel">
                 <div className="profile-box">
                     <img className="profile-img" src={userAvatar} alt="User Avatar" />
-                    <h3 className="profile-name">Vivian Weaver</h3>
-                    <p className="profile-email">cookie98@gmail.com</p>
+                    <h3 className="profile-name">{data.firstName}</h3>
+                    <p className="profile-email">{data.email}</p>
                 </div>
                 <div className="navigation-panel">
                     <ul>

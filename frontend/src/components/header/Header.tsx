@@ -17,7 +17,6 @@ function Header (){
 
     return (
       <header className="header">
-          <h1>Test Header</h1> {/* Простий текст для тесту */}
     <div className="header_left">
         <img src={logoImg} alt="Logo" className="header_logo" />
         <div className="header_catalogue">
@@ -50,7 +49,7 @@ function Header (){
     <div className="header_icon">
         <img src={byelogImg} alt="Cart" onClick={() => navigate("/cardpage/:id")} />
     </div>
-    <div className={styles["text_cart"]}>
+    <div className={styles["text_carts"]}>
         0$
     </div>
 </div>
