@@ -31,7 +31,7 @@ public class Media {
     private int number;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", unique = true)
+    @Column(name = "type")
     private MediaType type;
 
 }
