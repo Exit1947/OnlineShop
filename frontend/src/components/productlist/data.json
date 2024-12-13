@@ -5,7 +5,7 @@
  [
     {
        "id" :1,
-      "src": "src/img/Rectangle 23922.png",
+      "src": "src/img/id1.png",
       "title": "MacBook Air Pro 13-inch",
       "price": "1,299.99 $", 
       "oldPrice": "1,499.99 $", 
@@ -15,7 +15,7 @@
 
     { 
      "id": 2,
-     "src": "./../../img/Rectangle 23922 (1).png",
+     "src": "./../../img/id2.png",
      "title": "Samsung Galaxy s23 Ultra (Black)",
      "price": "1,100.00 $",
      "oldPrice": "1,300.00 $", 
@@ -25,7 +25,7 @@
 
     {
        "id":3, 
-       "src": "./../../img/Rectangle 23922 (2).png", 
+       "src": "id3.png", 
        "title": "Apple Watch Series 8 (Sport Band)",
        "price": "399.99 $",
        "oldPrice": "499.99 $", 
@@ -35,7 +35,7 @@
    
     { 
     "id":4, 
-    "src": "./../../img/Rectangle 23922 (3).png", 
+    "src": "./../../img/id4.png", 
     "title": "JBL Headphones Wireless E45", 
     "price": "59.99 $", 
     "oldPrice": "99.99 $", 
@@ -45,7 +45,7 @@
     
     { 
       "id":5,
-      "src" : "./../../img/Rectangle 23922 (4).png",
+      "src" : "./../../img/id5.png",
       "title": "Multi-function printer Epson L380", 
        "price": "399.99 $",
        "oldPrice": "499.99 $", 
@@ -55,7 +55,7 @@
 
     { 
       "id":6, 
-      "src": "./../../img/Rectangle 23922 (5).png",
+      "src": "./../../img/id6.png",
       "title": "PlayStation 5 (Blu-ray) 825 gb", 
       "price": "449.99 $",
       "oldPrice": "499.99 $",
@@ -65,7 +65,7 @@
 
     { 
       "id":7,
-      "src": "./../../img/Rectangle 23922 (6).png",
+      "src": "./../../img/id7.png",
       "title": "box Wireless Controller",
       "price": "79.99 $",
       "oldPrice": "89.99 $", 
@@ -75,7 +75,7 @@
 
     {
       "id":8, 
-      "src": "./../../img/Rectangle 23922 (7).png", 
+      "src": "./../../img/id8.png", 
       "title": "JBL Boombox 2 (Black)", 
       "price": "499.99 $", 
       "oldPrice": "599.99 $",

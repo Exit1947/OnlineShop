@@ -4,14 +4,14 @@ import { useEffect, useRef} from "react";
 import axios from "axios";
 import {Link, useParams} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import image1 from './../../img/Rectangle 23922.png'; 
-import image2 from './../../img/Rectangle 23922 (1).png';
-import image3 from './../../img/Rectangle 23922 (2).png';
-import image4 from './../../img/Rectangle 23922 (3).png';
-import image5 from './../../img/Rectangle 23922 (4).png';
-import image6 from './../../img/Rectangle 23922 (5).png';
-import image7 from './../../img/Rectangle 23922 (6).png';
-import image8 from './../../img/Rectangle 23922 (7).png';
+import image1 from './../../img/id1.png'; 
+import image2 from './../../img/id2.png';
+import image3 from './../../img/id3.png';
+import image4 from './../../img/id4.png';
+import image5 from './../../img/id5.png';
+import image6 from './../../img/id6.png';
+import image7 from './../../img/id7.png';
+import image8 from './../../img/id8.png';
 import data from './data.json';
 import Product from './product.tsx';
 
@@ -61,13 +61,23 @@ const ProductList = (props) => {
    
       
     //   console.log(data);
+     const [data, setData]= useState([])
+        useEffect (()=> {
+    axios.get('http://localhost:8080/api/product/card/count=8').
+    then((response) => setData(response.data)
+    )
+     
+     
+      
+     
+      }, [])
 
    let n= null;
     const navigate =useNavigate();
 
    function navProductPage (event){
     event.preventDefault();
-    navigate(`product/:id`, { replace: true });
+    navigate(`product/:id`, { replace: true, state:{data} });
    } 
 
    
@@ -107,11 +117,11 @@ const ProductList = (props) => {
           </div>
           <div className="custom-product-list-container"  >
               {
-              products.map((product, index) => {
+              data.map((product, index) => {
               return  (
-                  <div key={index} className="custom-product-item"  onClick={navProductPage}>
+                  <Link key={index} className="custom-product-item"  to ={`/product/${product.id}`}>
                    
-                      <img src={product.src} alt={product.title} />
+                      <img src={product.thumbnailImage} alt={product.title} />
                       <h3>{product.title}</h3>
                       <p className="custom-price">{product.price}</p>
                       <p className="custom-old-price">{product.oldPrice}</p>
@@ -125,7 +135,7 @@ const ProductList = (props) => {
                           className={`custom-heart ${liked[index] ? 'liked' : ''}`}
                           onClick={() => toggleLike(index)}
                       >❤</div>
-                  </div>
+                  </Link>
               )})}
           </div>
           <div className="custom-product-list-footer">

@@ -59,16 +59,16 @@ const ProductPage = (props) => {
 
 
   const [data, setData]= useState([])
-
-//     useEffect (()=> {
-//     axios.get('http://localhost:8080/api/product/id=1').
-//     then((response) => setData(response.data)
-//     )
+   
+    useEffect (()=> {
+    axios.get(`http://localhost:8080/api/product/id=${params.id}`).
+    then((response) => setData(response.data)
+    )
      
      
       
      
-//       }, [])
+      }, [])
     
   
     
