@@ -57,18 +57,21 @@ import ProductList from '../productlist/ProductList.tsx';
 
 const ProductPage = (props) => {
 
+    const {id} = useParams()
 
-  const [data, setData]= useState([])
-   
-    useEffect (()=> {
-    axios.get(`http://localhost:8080/api/product/id=${params.id}`).
-    then((response) => setData(response.data)
-    )
+//   const [data, setData]= useState([])
+//   const [mediaList, setMediaList] = useState([]);
+//     useEffect (()=> {
+//     axios.get(`http://localhost:8080/api/product/id=${id}`).
+//     then((response) => {
+//         setData(response.data)
+//     setMediaList(response.data.mediaList)}
+//     )
      
      
       
      
-      }, [])
+//       }, [id])
     
   
     
@@ -103,8 +106,7 @@ const ProductPage = (props) => {
    }
 
    /// Id
-       const params = useParams()
-
+      
     // SLIDER MAIN PRODUCT
     
     const imgs =[
@@ -116,11 +118,11 @@ const ProductPage = (props) => {
         {id:5, value:ExtraPhotoLaptop06},
     ];
 
-  const [sliderData, setSliderData] = useState(imgs[0])
-    const HandleClick = (index) =>{
-        const slider=imgs[index];
-        setSliderData(slider);
-    }
+//   const [sliderData, setSliderData] = useState(data[0])
+//     const HandleClick = (id) =>{
+//         const slider=mediaList[id];
+//         setSliderData(slider);
+//     }
 
 
 
@@ -145,7 +147,7 @@ const ProductPage = (props) => {
   // add color to heart
   const [colorStar, setColorStar] = useState(starEmptyUno);   
 
-  let id = null;
+  
 
   const changeColorStar =()=> {
     toggle=!toggle;
@@ -338,30 +340,32 @@ const ProductPage = (props) => {
                             <div className='fifth-colour'></div>
                         </div>
                         <div className='heart' > <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
-                         
+                           
                        <div className="photo-view"> 
-                        <img   src= { sliderData.value} height='450' width='500' />
-                        </div> 
+                       {/* <img className='thumbnail' src={sliderData.mediaUrl}> </img> */}
+                       </div>
                         <div className='extra-photo'>
-                             
-                            {
+                          
+                           {/* { 
 
 
-                                imgs.map ((data,i) => 
-                                    <div className='thumbnail'> 
-                                        <img className={sliderData.id===i? "clicked" : ""} key={data.id} src={data.value} onClick={()=>HandleClick(i)} height="70" width="100"/>
-                                     </div>
+                                   mediaList.map ((image,number) =>   
+                                     <div className='thumbnail'> 
+                                         <img className={sliderData.id===number? "clicked" : ""} 
+                                          key={image.id}
+                                          src={image.mediaUrl} 
+                                          onClick={()=>HandleClick(number)} height="70" width="100"/>
+                                      </div>
                                 
                             )
-                            }
+                            }  */}
                           
                         
-                        </ div> 
-                                            
+                        </ div>                                             
                      </div>
 
                      <div className='back-panel'>
-                          <div className='name-product'> {data.title} </div>
+                          {/* <div className='name-product'> {data.title} </div> */}
 
                           <div className='star-product'>
 
@@ -395,7 +399,7 @@ const ProductPage = (props) => {
                             </div>
                            
                           <div className='stock'> In Stock </div>
-                          <div className='price-product'> $ {data.price}</div>
+                          {/* <div className='price-product'> $ {data.price}</div> */}
                           <button className='btn-buy-now' > Buy Now </button>
                           <button className='btn-add-to-cart' onClick={navCart}> Add to Card</button>
 
