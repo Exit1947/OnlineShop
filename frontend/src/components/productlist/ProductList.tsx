@@ -119,7 +119,7 @@ const ProductList = (props) => {
               {
               data.map((product, index) => {
               return  (
-                  <Link key={index} className="custom-product-item"  to ={ `/product/${product.id}, state: thumbnailImage` }>
+                  <Link key={index} className="custom-product-item"  to ={`/product/${product.id}` }>
                    
                       <img src={product.thumbnailImage} alt={product.title} />
                       <h3>{product.title}</h3>
