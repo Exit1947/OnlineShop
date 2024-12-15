@@ -1,4 +1,6 @@
-import './header.css'
+import { Link, useNavigate } from 'react-router-dom';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import styles from './header.css'
 import logoImg from './../../img/Group 1474.png'
 import logoImgs from './../../img/Frame 427319424.png'
 import histImg from './../../img/Frame 427319439.png'
@@ -12,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Header (){
-
     const navigate =useNavigate();
     const navigate1 =useNavigate();
 
@@ -81,7 +82,7 @@ function Header (){
     <div className="header_icon icon_cart" onClick={navCartPage}>
         <img src={byelogImg} alt="Cart"  />
     </div>
-    <div className="text_cart">
+    <div className={styles["text_cart"]}>
         0$
     </div>
 </div>

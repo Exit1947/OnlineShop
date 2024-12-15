@@ -25,11 +25,6 @@ public class DiscountProductServiceImpl implements DiscountProductService {
     public boolean save(DiscountProduct discountProduct) {
         Optional<DiscountProduct> existedDiscountProduct = discountProductRepository.findByProductId(discountProduct.getProduct().getId());
         if(existedDiscountProduct.isEmpty()){
-            discountProduct.setDiscount(discountProduct.getDiscount());
-            discountProduct.setDateFrom(discountProduct.getDateFrom());
-            discountProduct.setDateTo(discountProduct.getDateTo());
-            discountProduct.setProduct(discountProduct.getProduct());
-
             discountProductRepository.save(discountProduct);
             return true;
         }

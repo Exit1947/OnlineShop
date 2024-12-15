@@ -1,25 +1,36 @@
 package com.onlineShop.service;
 
 import com.onlineShop.dto.product.ProductCardInfoResponse;
-import com.onlineShop.dto.product.ProductRequest;
-import com.onlineShop.dto.product.ProductResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.onlineShop.models.Product.DiscountProduct;
+import com.onlineShop.models.Product.Media.Media;
+import com.onlineShop.models.Product.Product;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
 
-    ResponseEntity<String> save(ProductRequest productRequest);
+    void saveProduct(Product product);
 
-    ResponseEntity<ProductResponse> getById(String id);
+    Optional<Product> getById(String id);
 
-    ResponseEntity<ProductCardInfoResponse> getProductCardInfoById(String id);
+    Optional<Product> getByTitle(String title);
 
-    ResponseEntity<ProductResponse> getByTitle(String title);
+    List<Product> getRandomProductCardsById(int count);
 
-    ResponseEntity<ProductCardInfoResponse> getProductCardInfoByTitle(String title);
+    boolean deleteById(String id);
 
-    ResponseEntity<HttpStatus> update(ProductRequest product);
+    Optional<DiscountProduct> getDiscountByProductId(String productId);
 
-    ResponseEntity<HttpStatus> delete(String id);
+    void saveDiscount(DiscountProduct discount);
+
+    void deleteDiscount(long discountId);
+
+    String thumbnailImageUrl(String thumbnailImage);
+
+    List<Media> getAllForEntityById(String productId);
+
+    boolean existByTitle(String title);
+
 
 }

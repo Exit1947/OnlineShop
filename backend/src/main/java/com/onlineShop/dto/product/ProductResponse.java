@@ -1,7 +1,6 @@
 package com.onlineShop.dto.product;
 
-import com.onlineShop.dto.CharacteristicDto;
-import com.onlineShop.dto.media.MediaResponse;
+import com.onlineShop.dto.product.media.MediaProductResponse;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -20,11 +19,15 @@ public class ProductResponse {
     private String id;
 
     @NotBlank(message = "Title of product can't be empty")
-    @Length(min = 3, max = 100, message = "Product title must be between 3 and 100 characters")
+    @Length(min = 3, max = 400, message = "Product title must be between 3 and 100 characters")
     private String title;
 
+    @NotBlank(message = "Category of product can't be empty")
+    @Length(min = 3, max = 150, message = "Product category must be between 3 and 100 characters")
+    private String category;
+
     @Positive(message = "Price must be a positive number")
-    private int price;
+    private double price;
 
     @PositiveOrZero(message = "Discount must be a positive number or zero.")
     private int discount;
@@ -34,6 +37,6 @@ public class ProductResponse {
 
     private List<CharacteristicDto> characteristicValuesList;
 
-    private List<MediaResponse> mediaList;
+    private List<MediaProductResponse> mediaList;
 
 }

@@ -2,12 +2,13 @@ package com.onlineShop.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public interface AmazonS3CloudService {
 
-    void store(File uploadingFile);
+    void store(String fileName, byte[] uploadingFile);
 
-    void store(List<File> uploadingFile);
+    void store(Map<String, byte[]> uploadingFiles);
 
     String get(String fileName);
 

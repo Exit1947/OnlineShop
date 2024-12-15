@@ -17,6 +17,9 @@ public class RegisterRequest {
     @Length(min = 3, max = 50, message = "Email number must be between 10 and 20 characters")
     private String email;
 
+    @Length(min = 3, max = 50, message = "Login number must be between 10 and 20 characters")
+    private String login;
+
     @NotBlank(message = "Firstname is required option")
     @Length(min = 3, max = 50, message = "Firstname must be between 3 and 50 characters")
     private String firstName;

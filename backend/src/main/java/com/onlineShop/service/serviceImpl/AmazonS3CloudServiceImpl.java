@@ -12,6 +12,7 @@ import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -35,19 +36,19 @@ public class AmazonS3CloudServiceImpl implements AmazonS3CloudService {
     }
 
     @Override
-    public void store(File uploadingFile) {
+    public void store(String fileName, byte[] uploadingFile) {
         PutObjectRequest request = PutObjectRequest
                 .builder()
                 .bucket(s3Properties.getBucketName())
-                .key(uploadingFile.getName())
+                .key(fileName)
                 .build();
-        RequestBody requestBody = RequestBody.fromFile(uploadingFile);
+        RequestBody requestBody = RequestBody.fromBytes(uploadingFile);
         s3Client.putObject(request, requestBody);
     }
 
-    public void store(List<File> uploadingFile) {
-        for(File mediaFile : uploadingFile) {
-            store(mediaFile);
+    public void store(Map<String, byte[]> uploadingFiles) {
+        for(Map.Entry<String, byte[]> entry : uploadingFiles.entrySet()) {
+            store(entry.getKey(), entry.getValue());
         }
     }
 

@@ -9,8 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -28,12 +26,12 @@ public class OrderedProducts {
     @JoinColumn(name = "id_shopping_order")
     private ShoppingOrder shoppingOrder;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_ordered_products")
-    private List<Product> orderedProducts;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_ordered_product")
+    private Product orderedProduct;
 
-    @Positive
     @Column(name = "count_of_products")
+    @Positive(message = "Count must be positive number")
     private int countOfProducts;
 
 }
