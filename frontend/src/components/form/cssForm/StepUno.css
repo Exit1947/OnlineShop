@@ -1,24 +1,28 @@
 .main-container {
     width: 100%;
     height: 100vh;
-    display: flex;
-   
-    
+    display: flex;   
+    background-color: rgb(233, 229, 229);
+    justify-content: center;
     
 }
 
+
+
 .sidepanel {
- width: 25%;
- height: 100%;
-
-
- 
+ width: 23%;
+ height: 96%;
+ background-color: white;
+text-align: centerl;
+justify-content: center;
+align-items: center;
+margin-top: 1%; 
 }
 
 .between {
-    width: 0.2%;
+    width: 1%;
     height: 100%;
-    background-color: orange;
+    
 }
 
 .top-side {
@@ -43,6 +47,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bolder;
     
 }
 
@@ -91,8 +96,12 @@
 }
 
 .main-panel {
-    width: 75%;
-    height: 100%;
+    width: 72%;
+    height: 96%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
     
    
    
@@ -160,59 +169,64 @@
     margin-left: 66%;
 }
 .percent100 {
-    margin-top: 1%;
+    margin-top: 1,0%;
     margin-left: 96%;
 }
 
 .canvas {
     width: 33%;
-    height: 1px;     
+    height: 3px;     
     border: 1px solid gray;
     background-color: gray;
+    margin-top:0.3%;
+
    
 }
 .canvas1 {
     width: 33%;
-    height: 1px;     
+    height: 3px;     
     border: 1px solid gray;
     background-color: gray;
+    margin-top:0.3%;
+
+   
    
 }
 .canvas2 {
     width: 33%;
-    height: 1px;     
+    height: 3px;     
     border: 1px solid gray;
     background-color: gray;
-   
+    margin-top:0.3%;
+
 }
 .point {
-    width: 6px;
-    height: 6px;  
+    width: 10px;
+    height: 10px;  
     background-color: rgb(255, 166, 0);
-    border-radius: 2px;
+    border-radius: 5px;
     
 }
 .point1 {
-    width: 6px;
-    height: 6px;  
+    width: 10px;
+    height: 10px;  
     background-color: gray;
-    border-radius: 2px;
+    border-radius: 5px;
     
 }
 .point2 {
-    width: 6px;
-    height: 6px;
- 
+    width: 10px;
+    height: 10px; 
     background-color: gray;
-    border-radius: 2px;
+    border-radius: 5px;
     
 }
 .point3 {
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
   
     background-color: gray;
-    border-radius: 2px;
+    border-radius: 5px;
     
 }
 

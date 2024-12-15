@@ -1,10 +1,12 @@
 import './productpagestyle.css';
 import React from 'react';
 import Card from './card.tsx'
+import {useParams} from 'react-router-dom'
 import { Rating } from 'react-simple-star-rating';
 import { FaStar } from 'react-icons/fa';
 import { useState, useEffect, useRef} from "react";
 import { useNavigate } from 'react-router-dom'
+import axios from "axios";
 import Arrow from '../../img/icons-arrow-left.png';
 import IconsFour from '../../img/Frame 427319916.png';
 import Business from '../../img/Frame 427319913.png';
@@ -40,23 +42,71 @@ import ExtraPhotoLaptop05 from '../../img/photo-laptop4.png';
 import ExtraPhotoLaptop06 from '../../img/photo-laptop5.png';
 import starEmptyUno from '../../img/star-empty.png';
 import starOrangeUno from '../../img/star-full-orange.png';
-
+import Footer from   "../footer/Footer.tsx";
+import Header from "../header/Header.tsx";
 import "react-multi-carousel/lib/styles.css";
+import Dropdown from './../dropmenu/Dropdown.tsx';
+import Aftermenu from './../aftermenu/Aftermenu.tsx';
+import LanguageDropdown from './../languagedrop/LanguageDropdown.tsx';
+import CurrencyDropdown from './../currencydropdown/CurrencyDropdown.tsx';
+import ProductList from '../productlist/ProductList.tsx';
+
+// https://omnify-online-marketplace-storage.s3.eu-north-1.amazonaws.com/2.png
 
 
 
+const ProductPage = (props) => {
 
+    const {id} = useParams()
 
-const ProductPage = () => {
+//   const [data, setData]= useState([])
+//   const [mediaList, setMediaList] = useState([]);
+//     useEffect (()=> {
+//     axios.get(`http://localhost:8080/api/product/id=${id}`).
+//     then((response) => {
+//         setData(response.data)
+//     setMediaList(response.data.mediaList)}
+//     )
+     
+     
+      
+     
+//       }, [id])
+    
+  
+    
+
 
      // NAVIGATED
 
      const navigate =useNavigate();
+     const navigate1 =useNavigate();
 
    function navMainPage (event){
     event.preventDefault();
     navigate('/auth/comment', { replace: true });
+   } 
+     
+
+   function returnMainPage (event){
+    event.preventDefault();
+    navigate('/', { replace: true });    
    }
+
+
+   function navCategory (event){
+    event.preventDefault();
+    navigate('/auth/subcategories', { replace: true });
+   } 
+
+
+   function navCart (event){
+    event.preventDefault();
+    navigate('/cardpage/:id', { replace: true });
+   }
+
+   /// Id
+      
     // SLIDER MAIN PRODUCT
     
     const imgs =[
@@ -68,11 +118,11 @@ const ProductPage = () => {
         {id:5, value:ExtraPhotoLaptop06},
     ];
 
-  const [sliderData, setSliderData] = useState(imgs[0])
-    const HandleClick = (index) =>{
-        const slider=imgs[index];
-        setSliderData(slider);
-    }
+//   const [sliderData, setSliderData] = useState(data[0])
+//     const HandleClick = (id) =>{
+//         const slider=mediaList[id];
+//         setSliderData(slider);
+//     }
 
 
 
@@ -97,7 +147,7 @@ const ProductPage = () => {
   // add color to heart
   const [colorStar, setColorStar] = useState(starEmptyUno);   
 
-  let id = null;
+  
 
   const changeColorStar =()=> {
     toggle=!toggle;
@@ -206,20 +256,64 @@ const ProductPage = () => {
    
         setComments((comments)=> [...comments, comment]);
     }
+
+
+    // ADD Answer
        
+    const [showField, setshowField]= useState(1);
+
+    const handleshow = (e)=> {
+     setshowField(e);
+    }
+//ADD AXIOUS
+
+    // const [data, setData]= useState();  
+
+    
+
+    //     useEffect(() => {
+    //       const fetchData = async () => {
+    //         try {
+    //           const response = await axios.get('http://localhost:8080/api/product/id=1');
+    //           setData(response.data); // Зберігаємо лише потрібні дані
+    //           console.log(data);
+              
+    //         } catch (error) {
+    //           console.error('Помилка запиту:', error);
+    //         }
+    //       };
+      
+    //       fetchData();
+    //     }, []);
+
+
+       
+        // add comment to reviews
+
+    
+      
        
     
 
 
 
     return (
+
+        <>
+            <Header />            
+            <Aftermenu/>
+            <Dropdown/>
+            <LanguageDropdown/>
+            <CurrencyDropdown/>
+
+      
         <div className="main-product-page">
 
             <div className='top-product-page'>
                 <img src={Arrow} alt=''/>
-                <div className=''> Home </div>
+                <div className='' onClick={returnMainPage}> Home </div>
                 <div> / </div>
-                <div className=''> Category </div>
+                <div className='' onClick= {navCategory}> Category </div>
                 <div> / </div>
                 <div className=''> Section </div>
                 <div> / </div>
@@ -246,30 +340,32 @@ const ProductPage = () => {
                             <div className='fifth-colour'></div>
                         </div>
                         <div className='heart' > <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
-                         
+                           
                        <div className="photo-view"> 
-                        <img   src= { sliderData.value} height='450' width='500' />
-                        </div> 
+                       {/* <img className='thumbnail' src={sliderData.mediaUrl}> </img> */}
+                       </div>
                         <div className='extra-photo'>
-                             
-                            {
+                          
+                           {/* { 
 
 
-                                imgs.map ((data,i) => 
-                                    <div className='thumbnail'> 
-                                        <img className={sliderData.id===i? "clicked" : ""} key={data.id} src={data.value} onClick={()=>HandleClick(i)} height="70" width="100"/>
-                                     </div>
+                                   mediaList.map ((image,number) =>   
+                                     <div className='thumbnail'> 
+                                         <img className={sliderData.id===number? "clicked" : ""} 
+                                          key={image.id}
+                                          src={image.mediaUrl} 
+                                          onClick={()=>HandleClick(number)} height="70" width="100"/>
+                                      </div>
                                 
                             )
-                            }
+                            }  */}
                           
                         
-                        </ div> 
-                                            
+                        </ div>                                             
                      </div>
 
                      <div className='back-panel'>
-                          <div className='name-product'> Galaxy Book 3 Pro 14" </div>
+                          {/* <div className='name-product'> {data.title} </div> */}
 
                           <div className='star-product'>
 
@@ -301,10 +397,11 @@ const ProductPage = () => {
                            
                             <label className='numberStar'>(125)</label>
                             </div>
+                           
                           <div className='stock'> In Stock </div>
-                          <div className='price-product'> $ 1449,99</div>
-                          <button className='btn-buy-now'> Buy Now </button>
-                          <button className='btn-add-to-cart'> Add to Card</button>
+                          {/* <div className='price-product'> $ {data.price}</div> */}
+                          <button className='btn-buy-now' > Buy Now </button>
+                          <button className='btn-add-to-cart' onClick={navCart}> Add to Card</button>
 
                           <div className='choose'>
                             <lable> <strong >Choose Display</strong></lable>
@@ -636,9 +733,10 @@ const ProductPage = () => {
                     <img src={PhotoProduct} alt = '' className='' />
                    </div>
 
-                   <div className='lover-panel'>
-                    <button className='answer-panel'> <img  src={ArrowBack} alt=''/></button>
-                    
+                   <div className='lover-panel'>                    
+                    <button className='answer-panel' onClick={()=>handleshow(2)}> <img  src={ArrowBack} alt=''/></button>
+
+                   
                     <div className='thumb-panel'>
                     <div className='thumb-up' onClick={plusCounter}><img  src={ThumbUp} alt=''/></div>
                     <div className='love-number' > {counter} </div>
@@ -646,6 +744,7 @@ const ProductPage = () => {
                     <div className='unlove-number' > {counterMinus} </div>
                     </div>
                    </div>
+                   <div className={ showField===2 ?  'input-comment-answer-show' : 'input-comment-answer'} onClick={()=>handleshow(1)}></div>
               </div>
 
               <div className='view-more'>
@@ -688,8 +787,12 @@ const ProductPage = () => {
               
 
 
-            
+             
         </div>
+
+        <Footer/>
+        </>
+     
     )
 }
 

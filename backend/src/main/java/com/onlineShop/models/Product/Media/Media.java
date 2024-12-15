@@ -36,3 +36,4 @@ public class Media {
     private MediaType type;
 
 }
+

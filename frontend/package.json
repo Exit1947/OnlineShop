@@ -8,6 +8,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
+    "express": "^4.21.1",
+    "https": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
@@ -21,9 +23,9 @@
     "react-simple-star-rating": "^5.1.7",
     "react-slick": "^0.30.2",
     "react-slideshow-image": "^4.3.2",
+    "react-step-builder": "^3.0.6",
     "react-use-measure": "^2.0.4",
     "slick-carousel": "^1.8.1",
-    "react-step-builder": "^3.0.6",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {

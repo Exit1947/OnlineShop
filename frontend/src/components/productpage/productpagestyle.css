@@ -538,6 +538,36 @@ th {
 
     
 }
+.input-comment-answer {
+    width: 100%;
+    height: 10%;
+    border-radius: 10px; 
+    border: 1px solid gray;
+    padding: 20px;
+    background-color: white;
+    cursor: pointer; 
+    text-align: left;
+    color: gray;
+    display: none
+    
+    
+   
+}
+
+.input-comment-answer-show {
+    width: 100%;
+    height: 10%;
+    border-radius: 10px; 
+    border: 1px solid gray;
+    padding: 20px;
+    background-color: white;
+    cursor: pointer; 
+    text-align: left;
+    color: gray;
+    
+    
+   
+}
 
 .comment-container {
     width: 100%;
@@ -842,14 +872,14 @@ th {
 }
 
 
-.card {
+.card1 {
     width: 250px;
     height: 100%;    
     margin-left: 10px;
     background-color: white;
     text-align: center;
     justify-content: center;   
-    border: 1px solid gray;
+  
     
    
 }
@@ -873,7 +903,7 @@ th {
     
 }
 
-.image-card {
+.image-card1 {
     width: 100%;
     height: 45%;
    

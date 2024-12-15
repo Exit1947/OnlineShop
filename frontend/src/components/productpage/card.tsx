@@ -9,7 +9,7 @@ import { useState, useEffect} from "react";
 
 const Card =(props) => {
 
-    
+   
  
 // Add color to heart 
    
@@ -36,14 +36,16 @@ const [colorStar, setColorStar] = useState(starEmptyUno);
     toggle? setColorStar (starEmptyUno) : setColorStar (starOrangeUno);    
     
 } 
+
+
     return (
-<div className='card'>
+<div className='card1'>
 <div className='top-card'>
 <div className='title-card'> Asus TUF Gaming A15 (2023)</div>
 <div className='heart-card'> <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
 </div>
 
-<div className='image-card'> 
+<div className='image-card1'> 
     <img src={PictureProduct} alt='' className='image-product'/>
 </div>
 

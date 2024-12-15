@@ -1,0 +1,85 @@
+
+
+
+
+ [
+    {
+       "id" :1,
+      "src": "src/img/id1.png",
+      "title": "MacBook Air Pro 13-inch",
+      "price": "1,299.99 $", 
+      "oldPrice": "1,499.99 $", 
+      "rating": "4.5" ,
+      "url": "auth/product/1"
+      },
+
+    { 
+     "id": 2,
+     "src": "./../../img/id2.png",
+     "title": "Samsung Galaxy s23 Ultra (Black)",
+     "price": "1,100.00 $",
+     "oldPrice": "1,300.00 $", 
+     "rating": 5,
+     "url": "auth/product/2"
+    },
+
+    {
+       "id":3, 
+       "src": "id3.png", 
+       "title": "Apple Watch Series 8 (Sport Band)",
+       "price": "399.99 $",
+       "oldPrice": "499.99 $", 
+      "rating": 4, 
+       "url": "auth/product/3" 
+    },
+   
+    { 
+    "id":4, 
+    "src": "./../../img/id4.png", 
+    "title": "JBL Headphones Wireless E45", 
+    "price": "59.99 $", 
+    "oldPrice": "99.99 $", 
+    "rating": "4.5",
+    "url": "auth/product/4"
+    },
+    
+    { 
+      "id":5,
+      "src" : "./../../img/id5.png",
+      "title": "Multi-function printer Epson L380", 
+       "price": "399.99 $",
+       "oldPrice": "499.99 $", 
+       "rating": 2.5, 
+       "url": "auth/product/5"
+      },
+
+    { 
+      "id":6, 
+      "src": "./../../img/id6.png",
+      "title": "PlayStation 5 (Blu-ray) 825 gb", 
+      "price": "449.99 $",
+      "oldPrice": "499.99 $",
+      "rating": 5,
+      "url": "auth/product/6"
+        },
+
+    { 
+      "id":7,
+      "src": "./../../img/id7.png",
+      "title": "box Wireless Controller",
+      "price": "79.99 $",
+      "oldPrice": "89.99 $", 
+      "rating": 3.5 , 
+      "url": "auth/product/7"
+      },
+
+    {
+      "id":8, 
+      "src": "./../../img/id8.png", 
+      "title": "JBL Boombox 2 (Black)", 
+      "price": "499.99 $", 
+      "oldPrice": "599.99 $",
+      "rating": 4.5 ,
+      "url": "auth/product/8"
+    }
+  ]

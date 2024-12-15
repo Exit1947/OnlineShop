@@ -41,8 +41,14 @@ const LoginPage = () => {
             });
     }
 
-    function onClick() {
-        navigate('/');
+    function onClick(event) {
+        event.preventDefault();
+        navigate('/', { replace: true });
+    }
+
+    function onClickCreateAccount(event) {
+        event.preventDefault();
+        navigate('/auth/registration', { replace: true });
     }
 
     return (
@@ -62,17 +68,17 @@ const LoginPage = () => {
                         <div className='box-input'>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <label htmlFor="email"><strong>Email</strong></label>
-                                <input type="text" id='email' placeholder="" className="input-email"
+                                <input type="text" id='email' placeholder="" className="input-email10"
                                        {...register('email', {required: 'Enter your email'})}
                                 />
-                                <div className='between'></div>
+                                <div className='between10'></div>
                                 <label htmlFor="password"><strong>Password</strong></label>
-                                <input type="password" id='password' placeholder="" className="input-password"
+                                <input type="password" id='password' placeholder="" className="input-password10"
                                        {...register('password', {required: 'Enter your password'})}
                                 />
-                                <div className='between'></div>
+                                <div className='between10'></div>
 
-                                <button type='submit' className="btn-confirm"><strong>Login</strong></button>
+                                <button type='submit' onClick={onClick} className="btn-confirm10"><strong>Login</strong></button>
                             </form>
                         </div>
                     </div>
@@ -83,7 +89,7 @@ const LoginPage = () => {
                         <hr className='line-after'></hr>
                     </div>
 
-                    <button type="submit" onClick={onClick} className="btn-create-account"><strong>Create your Omnify account</strong></button>
+                    <button type="submit"  onClick={onClickCreateAccount} className="btn-create-account"><strong>Create your Omnify account</strong></button>
                 </div>
             </div>
         </div>

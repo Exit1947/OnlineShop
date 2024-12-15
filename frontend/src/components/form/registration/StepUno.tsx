@@ -1,4 +1,4 @@
-
+import React from 'react';
 import {useSteps} from 'react-step-builder';
 import '../cssForm/StepUno.css';
 import paint from '../image/Questions-rafiki 1.png'
@@ -11,7 +11,7 @@ import paint from '../image/Questions-rafiki 1.png'
 
 const StepUno=(props) =>{
 
-    const { next, prev } = useSteps();
+    const { next, prev, jump } = useSteps();
    
         
         return (
@@ -19,7 +19,7 @@ const StepUno=(props) =>{
 
                 <div className="sidepanel">
                      <div className="top-side"> 
-                        <div className="name-side">Create account</div>                      
+                        <div className="name-side"><strong>Create account</strong></div>                      
                      </div>
                      
                     
@@ -32,10 +32,10 @@ const StepUno=(props) =>{
                            </div>
 
                             <div className="spusok">
-                                <div><strong>User Profile</strong></div>
-                                <div>Residential Address</div>
-                                <div>Bank Information</div>
-                                <div>Finish</div>
+                                <div onClick={() =>jump(1)}><strong>User Profile</strong></div>
+                                <div onClick={()=> jump(2)}>Residential Address</div>
+                                <div onClick={()=>jump(3)}>Bank Information</div>
+                                <div onClick={()=>jump(4)}>Finish</div>
                             </div>
 
                             </div>
@@ -47,7 +47,7 @@ const StepUno=(props) =>{
                 <div className="main-panel">
 
                  <div className="top-top">
-                 <div className="main-top">  User Profile </div>
+                 <div className="main-top">  <strong>User Profile</strong> </div>
                 
                  <div className='line-sign'>
                     <div className='number-percent'>

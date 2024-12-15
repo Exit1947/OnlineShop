@@ -17,11 +17,18 @@ import LanguageDropdown from '../languagedrop/LanguageDropdown.tsx';
 import CurrencyDropdown from '../currencydropdown/CurrencyDropdown.tsx';
 import Header from '../header/Header.tsx'; 
 import Footer from '../footer/Footer.tsx';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 const CartPage = () => {
+
+    
+       
+
+
+
     const [quantity, setQuantity] = useState(1);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [isChecked, setIsChecked] = useState(true);

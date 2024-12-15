@@ -1,6 +1,5 @@
 import { Outlet } from "react-router";
 import Aftermenu from "../components/aftermenu/Aftermenu.tsx";
-
 import React from "react";
 import Banner from "../components/banner/Banner.tsx";
 import Dropdown from "../components/dropmenu/Dropdown.tsx";
@@ -19,7 +18,7 @@ import PosterSlider from "../components/posterslider/PosterSlider.tsx";
 const HomePage = () => {
     return (
         <>
-
+         
             <Header/>
             <Aftermenu/>
             <Dropdown/>
@@ -33,6 +32,7 @@ const HomePage = () => {
             <SingleRowProductList/>
             <Subscriptions/>
             <Footer/>
+            
         </>
     );
 }
