@@ -14,7 +14,7 @@ import FirstSection from '../../img/left first section.png';
 import FirstSectionRight from '../../img/right first section.png';
 import SecondsectionLeft from '../../img/left second section .png';
 import SecondsectionRight from '../../img/right second section.png';
-import  ThirdSectionLeft  from '../../img/left  third section .png';
+import ThirdSectionLeft  from '../../img/left  third section .png';
 import ThirdSectionRight from '../../img/right third section.png'  ;
 import FourthSection from '../../img/Group 1501.png';
 import FifthSection from '../../img/Group 1502.png';
@@ -59,22 +59,24 @@ const ProductPage = (props) => {
 
     const {id} = useParams()
 
-//   const [data, setData]= useState([])
-//   const [mediaList, setMediaList] = useState([]);
-//     useEffect (()=> {
-//     axios.get(`http://localhost:8080/api/product/id=${id}`).
-//     then((response) => {
-//         setData(response.data)
-//     setMediaList(response.data.mediaList)}
-//     )
+  const [data, setData]= useState([])
+  const [mediaList, setMediaList] = useState([]);
+
+    useEffect (()=> {
+    axios.get(`http://localhost:8080/api/product/id=${id}`).
+    then((response) => {
+        setData(response.data)
+        setMediaList(response.data.mediaList)}
+    )
      
      
       
      
-//       }, [id])
+      }, [])
     
   
-    
+      console.log(data);
+      
 
 
      // NAVIGATED
@@ -118,11 +120,12 @@ const ProductPage = (props) => {
         {id:5, value:ExtraPhotoLaptop06},
     ];
 
-//   const [sliderData, setSliderData] = useState(data[0])
-//     const HandleClick = (id) =>{
-//         const slider=mediaList[id];
-//         setSliderData(slider);
-//     }
+  const [sliderData, setSliderData] = useState(mediaList[0])
+
+    const HandleClick = (id) =>{
+        const slider=mediaList[id];
+        setSliderData(slider);
+    }
 
 
 
@@ -342,30 +345,38 @@ const ProductPage = (props) => {
                         <div className='heart' > <img  src= {colorHeart}  onClick={changeColor} alt=''  /> </div>
                            
                        <div className="photo-view"> 
-                       {/* <img className='thumbnail' src={sliderData.mediaUrl}> </img> */}
+                       {/* <img className='thumbnail' src={mediaList.mediaUrl} /> */}
                        </div>
                         <div className='extra-photo'>
                           
-                           {/* { 
+                           { 
 
-
-                                   mediaList.map ((image,number) =>   
-                                     <div className='thumbnail'> 
-                                         <img className={sliderData.id===number? "clicked" : ""} 
-                                          key={image.id}
-                                          src={image.mediaUrl} 
-                                          onClick={()=>HandleClick(number)} height="70" width="100"/>
-                                      </div>
+                                      mediaList.map((media,j) => {
+                                                 return (
+                                  
+                                   <img  src={media.mediaUrl} alt="..."  />
+                                                    )
+                                              })
+                            //        mediaList.map ((image,number) => {
+                            //         return (  
+                            //          <div className='thumbnail'> 
+                            //              <img className={sliderData.id===number? "clicked" : ""} 
+                            //               key={image.id}
+                            //               src={image.mediaUrl} 
+                            //               onClick={()=>HandleClick(number)} height="70" width="100"/>
+                            //           </div>
+                            //         )
+                            //     }
                                 
-                            )
-                            }  */}
+                            // )
+                            } 
                           
                         
                         </ div>                                             
                      </div>
 
                      <div className='back-panel'>
-                          {/* <div className='name-product'> {data.title} </div> */}
+                          <div className='name-product'> {data.title} </div>
 
                           <div className='star-product'>
 
@@ -399,7 +410,7 @@ const ProductPage = (props) => {
                             </div>
                            
                           <div className='stock'> In Stock </div>
-                          {/* <div className='price-product'> $ {data.price}</div> */}
+                          <div className='price-product'> $ {data.price}</div>
                           <button className='btn-buy-now' > Buy Now </button>
                           <button className='btn-add-to-cart' onClick={navCart}> Add to Card</button>
 
