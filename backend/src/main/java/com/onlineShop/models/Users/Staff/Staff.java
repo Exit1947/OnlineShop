@@ -4,10 +4,7 @@ import com.onlineShop.models.Shop.Shop;
 import com.onlineShop.models.Users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import java.util.List;
 import java.util.ArrayList;
@@ -30,12 +27,7 @@ public class Staff extends UserEntity {
     @Length(min = 3, max = 50, message = "Lastname must be between 3 and 50 characters")
     private String lastName;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "staff_list",
-            joinColumns = {@JoinColumn(name = "id_staff")},
-            inverseJoinColumns = {@JoinColumn(name = "id_shop")}
-    )
-    private List<Shop> shops = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "staff")
+    private List<StaffList> shops;
 
 }

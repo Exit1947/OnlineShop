@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-// @ts-ignore
 import styles from './auth.module.css';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
@@ -87,7 +86,7 @@ const Login = () => {
             </div>
 
             <div className={styles['link-wrapper']}>
-                <Link to='/auth/sign-up'>Create your Amazon account</Link>
+                <Link to='/auth/registration'>Create your Amazon account</Link>
             </div>
         </div>
     )

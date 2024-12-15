@@ -98,7 +98,9 @@
    justify-content: center;
    cursor: pointer;
 }
-
+.header_icon:hover {
+   opacity: 0.5;
+}
 
 .icon_history img {
    width: 40px;
@@ -116,22 +118,30 @@
    margin-top: -2px;
    margin-right: -11px;
 }
+.icon_profile:hover {
+   opacity: 0.5;
+}
+.img:hover {
+   opacity: 0.5;
+}
 
 .icon_cart img {
    width: 20px;  
    height: 20px;
+   cursor: help;
 }
-
+.icon_cart:hover {
+   opacity: 0.5;
+}
 
 .text_signin {
    font-size: 12px; 
    color: white;
-  
    height: 100%;
 }
-
 
 .text_cart {
    font-size: 14px; 
    color: white;
+   cursor: help;
 }

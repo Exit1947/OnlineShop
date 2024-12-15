@@ -1,6 +1,7 @@
 package com.onlineShop.models.Shop;
 
 import com.onlineShop.models.Users.Staff.Staff;
+import com.onlineShop.models.Users.Staff.StaffList;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Shop {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +32,7 @@ public class Shop {
     @Column(name = "street")
     private String street;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "shops")
-    private List<Staff> staff = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shop")
+    private List<StaffList> staff;
+
 }

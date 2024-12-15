@@ -23,19 +23,19 @@ public class ProductCharacteristic {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "id_product", nullable = false)
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "characteristic_id", nullable = false)
+    @JoinColumn(name = "id_characteristic", nullable = false)
     private Characteristic characteristic;
 
     @NotBlank(message = "Value must not be blank")
-    @Size(min = 1, max = 30, message = "Value must be between 1 and 30 characters")
+    @Size(min = 1, max = 1000, message = "Value must be between 1 and 2000 characters")
     @Column(name = "characteristic_value", nullable = false)
     private String value;
 
-    @Positive(message = "Number must not be blank")
+    @Positive(message = "Number must not be empty")
     private int number;
 
 }

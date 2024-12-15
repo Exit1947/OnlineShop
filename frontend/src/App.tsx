@@ -1,17 +1,4 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Aftermenu from "./components/aftermenu/Aftermenu.js";
-import Header from "./components/header/Header.tsx";
-import Dropdown from "./components/dropmenu/Dropdown.js";
-import LanguageDropdown from './components/languagedrop/LanguageDropdown.js'
-import CurrencyDropdown from './components/currencydropdown/CurrencyDropdown.js'
-import PosterSlider from "./components/posterslider/PosterSlider.js";
-import Carousel from "./components/сarousel/Carousel.js";
-import CustomPoster from "./components/customposter/CustomPoster.js";
-import ProductList from "./components/productlist/ProductList.js";
-import Banner from "./components/banner/Banner.js";
-import SingleRowProductList from './components/singlerowproductlist/SingleRowProductList.js'
-import Subscriptions from './components/subscriptions/Subscriptions.js'
-import Footer from './components/footer/Footer.tsx'
 import HomePage from './pages/HomePage.tsx';
 import Login from './components/auth/Login.tsx';
 import AuthPage from './pages/AuthPage.tsx';
@@ -33,7 +20,6 @@ const router = createBrowserRouter([
         path: '/',
         element: <HomePage />
     },
-
     {
       path: '/auth',
       element: <AuthPage />,
@@ -89,9 +75,7 @@ const router = createBrowserRouter([
         path: '/product/:id',
         element:<ProductPage/>,
        
-      },
-
-
+      }
   ]);
 
   function App() {
@@ -105,4 +89,4 @@ const router = createBrowserRouter([
     );
   }
 
-  export default App;
+export default App;

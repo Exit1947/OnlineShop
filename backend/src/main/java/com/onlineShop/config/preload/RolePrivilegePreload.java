@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class RolePrivilegePreload {
@@ -33,6 +34,20 @@ public class RolePrivilegePreload {
         MODERATOR = findByTypeOfRole(RoleType.MODERATOR);
         SALES_REP = findByTypeOfRole(RoleType.SALES_REP);
         END_USER = findByTypeOfRole(RoleType.END_USER);
+    }
+
+    public Optional<Role> getRole(int id){
+        return listOfAllRoles
+                .stream()
+                .filter(role -> role.getId() == id)
+                .findFirst();
+    }
+
+    public Optional<Privilege> getPrivilege(int id){
+        return listOfAllPrivileges
+                .stream()
+                .filter(role -> role.getId() == id)
+                .findFirst();
     }
 
     private Role findByTypeOfRole(RoleType type){
